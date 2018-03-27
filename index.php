@@ -6,7 +6,7 @@
 			header("Location: adminhome.php");
 		}
 		elseif ($_SESSION['u_r'] == "agent") {
-			header("Location: student/summary.php");
+			header("Location: student/");
 		}
 	}
 	else {

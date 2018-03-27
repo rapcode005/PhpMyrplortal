@@ -1,5 +1,8 @@
 <?php
 	include_once '../header.php';
+	if (isset($_SESSION['uid']) == false) {
+		header("Location: ../index.php");
+	}
 ?>
 
 	<form class="newuser-form" 
