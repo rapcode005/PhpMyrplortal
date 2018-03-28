@@ -23,12 +23,12 @@
 				echo "<form action='../data/logout.php' method='POST' >
 				<button type='submit' name='submitlogout'
 				class='w3-bar-item w3-button w3-button w3-blueh w3-hover-green'>
-				<i class='fa fa-sign-out'></i></button>
+				Logout</button>
 				</form>";
-				echo "<form action='../data/logout.php' method='POST' >
+				echo "<form action='../data/' method='POST' >
 				<input type='text' 
 				class='w3-bar-item w3-input w4-grayh' placeholder='Search Student..'>
-				<button type='submit' name='submitlogout'
+				<button type='submit' name='submitsearch'
 				class='w3-bar-item w3-button w3-blueh w3-hover-green'>
 				Go</button>
 				</form>";

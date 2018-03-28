@@ -1,18 +1,19 @@
 <?php 
 	include_once '../header.php';
 	include_once 'menu.php';
+	include_once '../data/dbh.php';
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
 	}
 ?>
-
 <div class="w3-main" style="width:25%">
 	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 
 	onclick="w3_open()">&#9776;</button>
 </div>
-
+	
 <div style="margin-left:220px; margin-top:16px;">
-	<form action="data/" method="POST">
+	<form action="data/save.php" method="POST">
+	
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%;">
 			<header class="w3-container w3-blueh w3-tea">
@@ -20,46 +21,55 @@
 			</header>
 			<p style="margin-top:20px;">
 				<select class="w3-select w3-select-input"
-				style="width:400px;" name="optcourse">
-					 <option value="" disabled selected>Choose your unit/course</option>
-				</select>
+				style="width:500px;" name="optcourse">
+					<option value="" disabled selected>Choose your unit/course</option>
+					<?php
+						$sql = "SELECT code,descrp FROM courselist";
+						$result = mysqli_query($conn,$sql);
+						while($row = mysqli_fetch_assoc($result)) {
+							echo "<option value='".$row['code']."'
+							>".$row['descrp']."</option>";
+						}
+					?>
+			</select>
 			</p>
 			<p style="margin-top:20px;">
 			<label>Student Code</label><input type="text" 
 			class="w3-input w3-border w3-animate-input"
-			style="width:200px;"		
+			style="width:500px;"		
 			name="stdcode" /></p>
 			<p style="margin-top:20px;">
 			<label>Family Name</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
-			style="width:200px"		
+			style="width:500px"		
 			name="stdfname" /></p>
 			<p style="margin-top:20px;">
 			<label>Given Name</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
-			style="width:200px"		
+			style="width:500px"		
 			name="stdgname" /></p>
 			<p style="margin-top:20px;">
 			<label>Preffered Name</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
-			style="width:200px"		
-			name="stdprename" /></p>
+			style="width:500px"		
+			name="stdpname" /></p>
 			<p style="margin-top:20px;">
 			<label>Birthday</label><input type="date"
 			class="w3-input w3-border 
 			w3-animate-input"
-			style="width:200px"		
+			style="width:500px"		
 			name="stdbth" /></p>
 			<p style="margin-top:20px;">
 			<label>Age</label><input type="number"
 			class="w3-input w3-border 
 			w3-animate-input"
-			style="width:200px"		
+			style="width:500px"		
 			name="stdage" /></p>
 		</div>
+		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;" >
 			<header class="w3-container w3-blueh w3-tea">
@@ -102,6 +112,7 @@
 			style="width:200px"		
 			name="stdptlr" /></p>
 		</div>
+		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;" >
 			<header class="w3-container w3-blueh w3-tea">
@@ -144,6 +155,7 @@
 			style="width:200px"		
 			name="stdptlp" /></p>
 		</div>
+		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
@@ -174,6 +186,7 @@
 			style="width:200px"		
 			name="stdemail" /></p>
 		</div>
+		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;" >
 			<header class="w3-container w3-blueh w3-tea">
@@ -200,6 +213,7 @@
 			style="width:200px"		
 			name="stdemaile" /></p>
 		</div>
+		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
@@ -333,6 +347,7 @@
 				id="stdotherplsspecify"/></p>
 			</div>
 		</div>
+		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
@@ -734,6 +749,14 @@
 				style="width:200px"		
 				name="vetnum" /></p>
 			</div>
+		</div>
+		
+		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
+			style="width:98%; margin-top:20px;">
+			<button type="submit" name="submitsave" 
+			class="w3-blueh w3-hover-green w3-padding-large
+			w3-border w3-large"
+			style="float:right;">Save</button>
 		</div>
 		
 	</form>
