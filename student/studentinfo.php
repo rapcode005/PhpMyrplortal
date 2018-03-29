@@ -34,11 +34,6 @@
 			</select>
 			</p>
 			<p style="margin-top:20px;">
-			<label>Student Code</label><input type="text" 
-			class="w3-input w3-border w3-animate-input"
-			style="width:500px;"		
-			name="stdcode" /></p>
-			<p style="margin-top:20px;">
 			<label>Family Name</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
@@ -343,8 +338,8 @@
 				<input type="text" class="w3-input w3-border 
 				w3-animate-input "
 				style="width:200px;"		
-				name="stdotherplsspecify"
-				id="stdotherplsspecify"/></p>
+				name="stdadjustment"
+				id="stdadjustment"/></p>
 			</div>
 		</div>
 		
@@ -383,9 +378,9 @@
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>Have you successfully completed any of the following qualification?<label>
-				<p><input class="w3-radio" type="radio" name="stdyearcomp" value="Yes" onclick="w3_showqualcomp()"/>
+				<p><input class="w3-radio" type="radio" name="stdsuccessqual" value="Yes" onclick="w3_showqualcomp()"/>
 				<label>Yes</label></p>
-				<p><input class="w3-radio" type="radio" name="stdyearcomp" value="No" checked onclick="w3_hidequalcomp()" />
+				<p><input class="w3-radio" type="radio" name="stdsuccessqual" value="No" checked onclick="w3_hidequalcomp()" />
 				<label>No</label></p>
 			</div>
 			<div id="qualsuccomp" class="w3-container w3-white w3-card-4 w3-padding-large"
@@ -565,7 +560,7 @@
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>Part of apprenticeships and traineeships</label>
-				<p><input class="w3-radio" type="radio" name="apprentrain" value="Yes"  checked />
+				<p><input class="w3-radio" type="radio" name="apprentrain" value="Yes"  />
 				<label>Yes</label></p>
 				<p><input class="w3-radio" type="radio" name="apprentrain" value="No"  />
 				<label>No</label></p>
@@ -595,7 +590,7 @@
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>RPL or credit transfer</label>
-				<p><input class="w3-radio" type="radio" name="recgprlrcr" value="Yes"  checked />
+				<p><input class="w3-radio" type="radio" name="recgprlrcr" value="Yes"  />
 				<label>Yes</label></p>
 				<p><input class="w3-radio" type="radio" name="recgprlrcr" value="No"  />
 				<label>No</label></p>
