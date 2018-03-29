@@ -31,6 +31,9 @@
 		VALUES('$stfname','$stgname','$stpname','$stbth','$stage');";
 		
 		if(mysqli_query($GLOBALS['conn'],$insert)){
+			//Insert into studentinfo table
+			$insertstd = "INSERT INTO studentinfo(stdcode)
+			VALUES('".$GLOBALS['maxidper']."')";
 			residence();
 		}
 	}
@@ -423,16 +426,88 @@
 	}
 	
 	function jobseekers() {
+		$jobsrchagen = mysqli_real_escape_string($GLOBALS['conn'], $_POST['jobsrchagen']);
+		$emocorname= mysqli_real_escape_string($GLOBALS['conn'], $_POST['emocorname']);
+		$jobskrsuburb = mysqli_real_escape_string($GLOBALS['conn'], $_POST['jobskrsuburb']);
+		$jobskrlandline = mysqli_real_escape_string($GLOBALS['conn'], $_POST['jobskrlandline']);
+		$jobskrmobile = mysqli_real_escape_string($GLOBALS['conn'], $_POST['jobskrmobile']);
+		$jobskremail = mysqli_real_escape_string($GLOBALS['conn'],$_POST['jobskremail']);
+		$jbaclient = mysqli_real_escape_string($GLOBALS['conn'],$_POST['jbaclient']);
 		
-	}
-	
-	function studentinfo() {
-		$insertstud ="INSERT INTO studentinfo(stdcode,stdcourse,rid) 
-		VALUES(".$maxidper.",'$course',".$maxidre.");";
+		if ($_POST['jbsrcagencypart'] == "Yes") {
+			$jbsrcagencypart = 1; 
+		}
+		elseif ($_POST['jbsrcagencypart'] == "No") {
+			$jbsrcagencypart = 0;
+		}
+		else {
+			$jbsrcagencypart=$_POST['jbsrcagencypart'];
+		}
 		
-		if (mysqli_query($GLOBALS['conn'],$insertstud)) {
-			header("Location: ../index.php");
+		//Check if all fields are empty
+		if(empty($jobsrchagen) && empty($emocorname) && empty($jobskrsuburb)
+			empty($jobskrlandline) && empty($jobskrmobile ) && empty($jobskremail )
+		    && empty($jbaclient) && empty($jbsrcagencypart)) {
+			centrelink();
+		}
+		else {
+			$insert = "INSERT INTO jobseekers(jbseekagen,empcoorname,jobseeksur,
+					landline,jobseeknobile,jobseekstrdte,jsaclient,jobsearchfee)
+			VALUES('$jobsrchagen','$emocorname','$jobskrsuburb','$jobskrlandline',
+			'$jobskrmobile','$jobskremail','$jbaclient','$jbsrcagencypart');";
+			if(mysqli_query($GLOBALS['conn'],$insert)){
+				if ($jbsrcagencypart == "Yes") {
+					coursefee();
+				}
+				else {
+					centrelink();
+				}
+			}
 		}
 	}
+	
+	function coursefee() {
+		$paymenttype = mysqli_real_escape_string($GLOBALS['conn'], $_POST['paymenttype']);
+		$stdnamefee= mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdnamefee']);
+		$thrdpartrep = mysqli_real_escape_string($GLOBALS['conn'], $_POST['thrdpartrep']);
+		$thrdparinv = mysqli_real_escape_string($GLOBALS['conn'], $_POST['thrdparinv']);
+		$crdtype = mysqli_real_escape_string($GLOBALS['conn'], $_POST['crdtype']);
+		$crdnum = mysqli_real_escape_string($GLOBALS['conn'], $_POST['crdnum']);
+		if (empty($paymenttype) && empty($stdnamefee) && empty($thrdpartrep)
+			empty($thrdparinv) && empty($crdtype) && empty($crdnum)) {
+			centrelink();
+		}
+		else {
+			$insert = "INSERT INTO coursefee(paytype,stdname,thrdrepname,
+					thrdinvoice,crdtype,crdnum)
+			VALUES('$paymenttype','$stdnamefee','$thrdpartrep','$thrdparinv'
+			,'$crdtype','$crdnum');";
+			if(mysqli_query($GLOBALS['conn'],$insert)){
+				centrelink();
+			}
+		}
+	}
+	
+	function centrelink() {
+		if ($_POST['regcenallow'] == "Yes") {
+			$regcenallow = 1; 
+		}
+		elseif ($_POST['regcenallow'] == "No") {
+			$regcenallow= 0;
+		}
+		else {
+			$regcenallow=$_POST['regcenallow'];
+		}
+		$allowyes = mysqli_real_escape_string($GLOBALS['conn'], $_POST['allowyes']);
+		$refnum= mysqli_real_escape_string($GLOBALS['conn'], $_POST['refnum']);
+		$vetnum= mysqli_real_escape_string($GLOBALS['conn'], $_POST['vetnum']);
+		if (!empty($regcenallow ) && !empty($allowyes) && !empty($refnum)
+			!empty($vetnum)) {
+			$insert = "INSERT INTO centrelink(cntrallow,allowances,refnum,vetnum)
+			VALUES('$regcenallow','$allowyes','$refnum','$vetnum');";
+			mysqli_query($GLOBALS['conn'],$insert){
+		}
+	}
+	
 	
 ?>

@@ -665,7 +665,7 @@
 				<p><input class="w3-radio" type="radio" name="paymenttype" value="Student - Full Payment"
 				/>
 				<label>Student - Full Payment</label></p>
-				<p><input class="w3-radio" type="radio" name="jbsrcagencypart" value="Third Party - Full Payment"  />
+				<p><input class="w3-radio" type="radio" name="paymenttype" value="Third Party - Full Payment"  />
 				<label>Third Party - Full Payment</label></p>
 			</div>
 			<p style="margin-top:20px;">
