@@ -1,12 +1,12 @@
 <?php
 	include_once '../../data/dbh.php';
-	
+	session_start();
 	if (isset($_POST['submitsave'])) {
 		
 		
 		//Personal
 		personaldt();
-		//coursefee();
+		header("Location: ../evidence.php");
 	}
 	
 	function personaldt() {
@@ -16,6 +16,7 @@
 		$stbth = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdbth']);
 		$stage = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdage']);
 		$course = mysqli_real_escape_string($GLOBALS['conn'],$_POST['optcourse']);
+		$stdcode = mysqli_real_escape_string($GLOBALS['conn'],$_POST['stdcode']);
 		
 		$sql = "SELECT IFNULL(max(id),0) as maxid FROM personaldt;";
 		$result = mysqli_query($GLOBALS['conn'],$sql);
@@ -26,14 +27,27 @@
 		
 		$GLOBALS['stdnum'] += 1;
 		
-		$insert = "INSERT INTO personaldt(fname,gname,pname,brhday,age)
-		VALUES('$stfname','$stgname','$stpname','$stbth','$stage');";
+		$insert = "INSERT INTO personaldt(fname,gname,pname,brhday,age,code)
+		VALUES('$stfname','$stgname','$stpname','$stbth','$stage','".$stdcode."');";
 		
 		if(mysqli_query($GLOBALS['conn'],$insert)){
 			//Insert into studentinfo table
 			$insertstd = "INSERT INTO studentinfo(stdcode,stdcourse)
 			VALUES('".$GLOBALS['stdnum']."','".$course."');";
 			mysqli_query($GLOBALS['conn'],$insertstd);
+			
+			//Save studid, familyname, givenname, studcode
+			$sql = "SELECT IFNULL(max(id),0) as maxid FROM studentinfo;";
+			$result = mysqli_query($GLOBALS['conn'],$sql);
+			
+			if ($row = mysqli_fetch_assoc($result)) {
+				$_SESSION['stdid']  = $row['maxid'];
+			}
+			
+			$_SESSION['stdcode'] = $stdcode;
+			$_SESSION['stdfname'] = $stfname;
+			$_SESSION['stdgname'] = $stgname;
+			
 			residence();
 		}
 	}
@@ -653,7 +667,6 @@
 		
 		if ($regcenallow == "NULL" && $allowyes == "NULL" && empty($refnum) ||
 			empty($vetnum)) {
-			exit();
 		}
 		else {
 			$insert = "INSERT INTO centrelink(cntrallow,allowances,refnum,vetnum)
@@ -672,6 +685,8 @@
 			" where stdcode=".$GLOBALS['stdnum'].";";
 			mysqli_query($GLOBALS['conn'],$insertstd);
 		}
+		
+		header("Location: ../evidence.php");
 	}
 	
 ?>

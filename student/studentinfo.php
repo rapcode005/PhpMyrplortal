@@ -31,8 +31,14 @@
 							>".$row['descrp']."</option>";
 						}
 					?>
-			</select>
+				</select>
 			</p>
+			<p style="margin-top:20px;">
+			<label>Student Code</label><input type="text" 
+			class="w3-input w3-border 
+			w3-animate-input"
+			style="width:500px"		
+			name="stdcode" /></p>
 			<p style="margin-top:20px;">
 			<label>Family Name</label><input type="text" 
 			class="w3-input w3-border 
@@ -753,9 +759,6 @@
 			class="w3-blueh w3-hover-green w3-padding-large
 			w3-border w3-large"
 			style="float:right;">Save</button>
-			
-			
-			
 		</div>
 		
 		
