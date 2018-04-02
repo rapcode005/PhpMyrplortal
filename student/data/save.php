@@ -5,9 +5,8 @@
 		
 		
 		//Personal
-		//personaldt();
-		reastud();
-
+		personaldt();
+		//coursefee();
 	}
 	
 	function personaldt() {
@@ -18,22 +17,23 @@
 		$stage = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdage']);
 		$course = mysqli_real_escape_string($GLOBALS['conn'],$_POST['optcourse']);
 		
-		$sql = "SELECT IFNULL(max(id),0) as maxid FROM personaldt";
+		$sql = "SELECT IFNULL(max(id),0) as maxid FROM personaldt;";
 		$result = mysqli_query($GLOBALS['conn'],$sql);
 		
 		if ($row = mysqli_fetch_assoc($result)) {
-			$GLOBALS['maxidper'] = $row['maxid'];
+			$GLOBALS['stdnum']  = $row['maxid'];
 		}
 		
-		$GLOBALS['maxidper'] += 1;
+		$GLOBALS['stdnum'] += 1;
 		
 		$insert = "INSERT INTO personaldt(fname,gname,pname,brhday,age)
 		VALUES('$stfname','$stgname','$stpname','$stbth','$stage');";
 		
 		if(mysqli_query($GLOBALS['conn'],$insert)){
 			//Insert into studentinfo table
-			$insertstd = "INSERT INTO studentinfo(stdcode)
-			VALUES('".$GLOBALS['maxidper']."')";
+			$insertstd = "INSERT INTO studentinfo(stdcode,stdcourse)
+			VALUES('".$GLOBALS['stdnum']."','".$course."');";
+			mysqli_query($GLOBALS['conn'],$insertstd);
 			residence();
 		}
 	}
@@ -45,21 +45,24 @@
 		$stdsltr = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdsltr']);
 		$stdstater = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdstater']);
 		$stdptlr = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdptlr']);
-		
-		$sql = "SELECT IFNULL(max(id),0) as maxid FROM residence";
-		$result = mysqli_query($GLOBALS['conn'],$sql);
-		
-		if ($row = mysqli_fetch_assoc($result)) {
-			$GLOBALS['maxidre'] = $row['maxid'];
-		}
-		
-		$GLOBALS['maxidre'] += 1;
-		
+	
+				
 		$insert = "INSERT INTO residence(building,flat,street,suburb,state,postalcode)
 		VALUES('$stdbuildr','$stdflastr','$stdstrnumr','$stdsltr',
 		'$stdstater','$stdptlr');";
 		
 		if(mysqli_query($GLOBALS['conn'],$insert)) {
+			
+			$sql = "SELECT IFNULL(max(id),0) as maxid FROM residence;";
+			$result = mysqli_query($GLOBALS['conn'],$sql);
+			
+			if ($row = mysqli_fetch_assoc($result)) {
+				$num = $row['maxid'];
+			}
+				
+			$insertstd = "Update studentinfo set rid = ".$num.
+			" where stdcode=".$GLOBALS['stdnum'].";";
+			mysqli_query($GLOBALS['conn'],$insertstd);
 			postaladd();
 		}
 	}
@@ -72,19 +75,22 @@
 		$stdstatep = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdstatep']);
 		$stdptlp = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdptlp']);
 		
-		$sql = "SELECT IFNULL(max(id),0) as maxid FROM postaladdress";
+		$sql = "SELECT IFNULL(max(id),0) as maxid FROM postaladdress;";
 		$result = mysqli_query($GLOBALS['conn'],$sql);
 		
 		if ($row = mysqli_fetch_assoc($result)) {
-			$GLOBALS['maxidpa'] = $row['maxid'];
+			$num  = $row['maxid'];
 		}
 		
-		$GLOBALS['maxidpa'] += 1;
+		$num  += 1;
 		
 		$insert = "INSERT INTO postaladdress(building,flat,street,suburb,state,postalcode)
 		VALUES('$stdbuildp','$stdflastp','$stdstrnump','$stdsltp','$stdstatep','$stdptlp');";
 		
 		if(mysqli_query($GLOBALS['conn'],$insert)) {
+			$insertstd = "Update studentinfo set paddid = ".$num.
+			" where stdcode=".$GLOBALS['stdnum'].";";
+			mysqli_query($GLOBALS['conn'],$insertstd);
 			phonecontact();
 		}
 	}
@@ -95,19 +101,22 @@
 		$stdmobile = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdmobile']);
 		$stdemail = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdemail']);
 		
-		$sql = "SELECT IFNULL(max(id),0) as maxid FROM phonecontact";
+		$sql = "SELECT IFNULL(max(id),0) as maxid FROM phonecontact;";
 		$result = mysqli_query($GLOBALS['conn'],$sql);
 		
 		if ($row = mysqli_fetch_assoc($result)) {
-			$GLOBALS['maxidpc'] = $row['maxid'];
+			$num = $row['maxid'];
 		}
 		
-		$GLOBALS['maxidpc'] += 1;
+		$num += 1;
 		
 		$insert = "INSERT INTO phonecontact(homeph,workph,mobile,email)
 		VALUES('$stdhome','$stdwork','$stdmobile','$stdemail');";
 		
 		if(mysqli_query($GLOBALS['conn'],$insert)) {
+			$insertstd = "Update studentinfo set phocnt = ".$num.
+			" where stdcode=".$GLOBALS['stdnum'].";";
+			mysqli_query($GLOBALS['conn'],$insertstd);
 			emergency();
 		}
 	}
@@ -118,19 +127,22 @@
 		$stdmobilee = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdmobilee']);
 		$stdemaile = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdemaile']);
 		
-		$sql = "SELECT IFNULL(max(id),0) as maxid FROM emergency";
+		$sql = "SELECT IFNULL(max(id),0) as maxid FROM emergency;";
 		$result = mysqli_query($GLOBALS['conn'],$sql);
 		
 		if ($row = mysqli_fetch_assoc($result)) {
-			$GLOBALS['maxide'] = $row['maxid'];
+			$num = $row['maxid'];
 		}
 		
-		$GLOBALS['maxide'] += 1;
+		$num += 1;
 		
 		$insert = "INSERT INTO emergency(homeph,workph,mobile,email)
 		VALUES('$stdhomee','$stdworke','$stdmobilee','$stdemaile');";
 		
 		if(mysqli_query($GLOBALS['conn'],$insert)) {
+			$insertstd = "Update studentinfo set emerid = ".$num.
+			" where stdcode=".$GLOBALS['stdnum'].";";
+			mysqli_query($GLOBALS['conn'],$insertstd);
 			languages();
 		}
 	}
@@ -145,14 +157,14 @@
 		$stdwelleng = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdwelleng']);
 		$stdabotors = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdabotors']);
 		
-		$sql = "SELECT IFNULL(max(id),0) as maxid FROM languages";
+		$sql = "SELECT IFNULL(max(id),0) as maxid FROM languages;";
 		$result = mysqli_query($GLOBALS['conn'],$sql);
 		
 		if ($row = mysqli_fetch_assoc($result)) {
-			$GLOBALS['maxidl'] = $row['maxid'];
+			$num = $row['maxid'];
 		}
 		
-		$GLOBALS['maxidl'] += 1;
+		$num += 1;
 		
 		$insert = "INSERT INTO languages(cntbrn,cntbrnother,rsdnttype,rsdnttypeother,
 		languages,languagesother,engwell,abtor)
@@ -160,39 +172,68 @@
 		'$stdspecify','$stdwelleng','$stdabotors');";
 		
 		if(mysqli_query($GLOBALS['conn'],$insert)) {
+			$insertstd = "Update studentinfo set langid = ".$num.
+			" where stdcode=".$GLOBALS['stdnum'].";";
+			mysqli_query($GLOBALS['conn'],$insertstd);
 			indlearnneeds();
 		}
 	}
 	
 	function indlearnneeds() {
-		if ($_POST['stddisabi'] == "Yes") {
-			$stddisabi = 1;
-			$stdindicate = mysqli_real_escape_string($GLOBALS['conn'],$_POST['stdindicate']);
-			$stdotherdis = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdotherdis']);
-			$stdadjustment= mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdadjustment']);
+		if(isset($_POST['stddisabi'])) {
+			if ($_POST['stddisabi'] == "Yes") {
+				$stddisabi = 1;
+				$stdindicate = mysqli_real_escape_string($GLOBALS['conn'],$_POST['stdindicate']);
+				$stdotherdis = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdotherdis']);
+				$stdadjustment= mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdadjustment']);
+				
+				$sql = "SELECT IFNULL(max(id),0) as maxid FROM indlearnneeds;";
+				$result = mysqli_query($GLOBALS['conn'],$sql);
+				
+				if ($row = mysqli_fetch_assoc($result)) {
+					$num = $row['maxid'];
+				}
+				
+				$num += 1;
+				
+				$insert = "INSERT INTO indlearnneeds(disabimpr,disyes,disother,disadjust)
+				VALUES('$stddisabi','$stdindicate','$stdotherdis','$stdadjustment');";
+				
+				if(mysqli_query($GLOBALS['conn'],$insert)) {
+					$insertstd = "Update studentinfo set indlearid = ".$num.
+					" where stdcode=".$GLOBALS['stdnum'].";";
+					mysqli_query($GLOBALS['conn'],$insertstd);
+					education();
+				}
+				
+			}
+			elseif ($_POST['stddisabi'] == "No") {
+				$stddisabi = 0;
+				
+				$sql = "SELECT IFNULL(max(id),0) as maxid FROM indlearnneeds;";
+				$result = mysqli_query($GLOBALS['conn'],$sql);
+				
+				if ($row = mysqli_fetch_assoc($result)) {
+					$num = $row['maxid'];
+				}
+				
+				$num += 1;
+				
+				$insert = "INSERT INTO indlearnneeds(disabimpr)
+				VALUES('".$stddisabi."');";
+				
+				if(mysqli_query($GLOBALS['conn'],$insert)) {
+					$insertstd = "Update studentinfo set indlearid = ".$num.
+					" where stdcode=".$GLOBALS['stdnum'].";";
+					mysqli_query($GLOBALS['conn'],$insertstd);
+					education();
+				}
+			}
+			else {
+				education();
+			}
 		}
-		elseif ($_POST['stddisabi'] == "No") {
-			$stddisabi = 0;
-			$stdindicate = "NULL";
-			$stdotherdis = "NULL";
-			$stdadjustment= "NULL";
-		}
 		
-		$sql = "SELECT IFNULL(max(id),0) as maxid FROM indlearnneeds";
-		$result = mysqli_query($GLOBALS['conn'],$sql);
-		
-		if ($row = mysqli_fetch_assoc($result)) {
-			$GLOBALS['maxidin'] = $row['maxid'];
-		}
-		
-		$GLOBALS['maxidin'] += 1;
-		
-		$insert = "INSERT INTO indlearnneeds(disabimpr,disyes,disother,disadjust)
-		VALUES('$stddisabi','$stdindicate','$stdotherdis','$stdadjustment');";
-		
-		if(mysqli_query($GLOBALS['conn'],$insert)) {
-			education();
-		}
 	}
 	
 	function education() {
@@ -223,20 +264,26 @@
 			$stdqualsuccomp = "NULL";
 		}
 		
-		$sql = "SELECT IFNULL(max(id),0) as maxid FROM education";
+		$sql = "SELECT IFNULL(max(id),0) as maxid FROM education;";
 		$result = mysqli_query($GLOBALS['conn'],$sql);
 		
 		if ($row = mysqli_fetch_assoc($result)) {
-			$GLOBALS['maxide'] = $row['maxid'];
+			$num = $row['maxid'];
 		}
 		
-		$GLOBALS['maxide'] += 1;
+		$num += 1;
 		
 		$insert = "INSERT INTO education(highschool,year,snd,success,successyes)
-		VALUES('$stdhgcomschlvl','$stdyearcomp','$stdseclvl','$stdsuccessqual','$stdqualsuccomp');";
+		VALUES('".$stdhgcomschlvl."','".$stdyearcomp."','".$stdseclvl."','".$stdsuccessqual."','".$stdqualsuccomp."');";
 		
 		if(mysqli_query($GLOBALS['conn'],$insert)) {
+			$insertstd = "Update studentinfo set educaid = ".$num.
+			" where stdcode=".$GLOBALS['stdnum'].";";
+			mysqli_query($GLOBALS['conn'],$insertstd);
 			reastud();
+		}
+		else {
+			mysqli_query(error);
 		}
 	}
 	
@@ -271,61 +318,81 @@
 			$other = "NULL";
 		}
 		
-		$sql = "SELECT IFNULL(max(id),0) as maxid FROM reastud";
+		$sql = "SELECT IFNULL(max(id),0) as maxid FROM reastud;";
 		$result = mysqli_query($GLOBALS['conn'],$sql);
 		
 		if ($row = mysqli_fetch_assoc($result)) {
-			$GLOBALS['maxidrs'] = $row['maxid'];
+			$num = $row['maxid'];
 		}
 		
-		$GLOBALS['maxidrs'] += 1;
+		$num += 1;
 		
 		$insert = "INSERT INTO reastud(hearabout,other,hearaboutv) 
-		VALUES('$hearaboutcou','$otherreasonstate','$other');";
+		VALUES('".$hearaboutcou."','".$otherreasonstate."','".$other."');";
 		
 		if(mysqli_query($GLOBALS['conn'],$insert)) {
 			//Save List
 			foreach($reasonqual as $val) {
 				$inserts ="INSERT INTO reastudlist(descrp,reasid)
-				VALUES('$val','".$GLOBALS['maxidrs']."');";
+				VALUES('$val','".$num."');";
 				mysqli_query($GLOBALS['conn'],$inserts);
 			}
+			$insertstd = "Update studentinfo set reastudid = ".$num.
+			" where stdcode=".$GLOBALS['stdnum'].";";
+			mysqli_query($GLOBALS['conn'],$insertstd);
 			curempstatus();
 		}
 	}
 	
 	function curempstatus() {
-		$stdbencen = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdbencen']);
-		if ($_POST['stdseclvl'] == "Yes") {
-			$stdbencen = 1;
-			curremp();
+		if (isset($_POST['stdcurempsts'])) {
+			$stdcurempsts = mysqli_real_escape_string($GLOBALS['conn'], 
+			$_POST['stdcurempsts']);
 		}
-		elseif ($_POST['stdseclvl'] == "No") {
-			$stdbencen = 0;
-			curremp();
+		else {
+			$stdcurempsts = "NULL";
+		}
+		
+		if (isset($_POST['stdbencen'])) {
+			if ($_POST['stdbencen'] == "Yes") {
+				$stdbencen = 1;
+			}
+			elseif ($_POST['stdbencen'] == "No") {
+				$stdbencen = 0;
+			}
+			else {
+				$stdbencen = "NULL";
+			}
 		}
 		else {
 			$stdbencen = "NULL";
+		}
+		
+		if($stdcurempsts == "NULL" && $stdbencen == "NULL") {
 			employerdt();
 		}
-	}
-	
-	function curremp() {
-		$sql = "SELECT IFNULL(max(id),0) as maxid FROM curempstatus";
-		$result = mysqli_query($GLOBALS['conn'],$sql);
-		
-		if ($row = mysqli_fetch_assoc($result)) {
-			$GLOBALS['maxidcs'] = $row['maxid'];
+		else {
+			$insert = "INSERT INTO curempstatus(empstatus,regs) 
+			VALUES('".$stdcurempsts."','".$stdbencen."');";
+			
+			if(mysqli_query($GLOBALS['conn'],$insert)) {
+				//Add to studentinfo table
+				$sql = "SELECT IFNULL(max(id),0) as maxid FROM curempstatus;";
+				$result = mysqli_query($GLOBALS['conn'],$sql);
+				
+				if ($row = mysqli_fetch_assoc($result)) {
+					$num = $row['maxid'];
+				}
+
+				
+				$insertstd = "Update studentinfo set curempid = ".$num.
+				" where stdcode=".$GLOBALS['stdnum'].";";
+				mysqli_query($GLOBALS['conn'],$insertstd);
+				
+				employerdt();
+			}
 		}
 		
-		$GLOBALS['maxidcs'] += 1;
-		
-		$insert = "INSERT INTO curempstatus(hearabout,other) 
-		VALUES('$hearaboutcou','$otherreasonstate');";
-		
-		if(mysqli_query($GLOBALS['conn'],$insert)) {
-			employerdt();
-		}
 	}
 	
 	function employerdt() {
@@ -336,22 +403,32 @@
 		$empphone = mysqli_real_escape_string($GLOBALS['conn'], $_POST['empphone']);
 		$empemail = mysqli_real_escape_string($GLOBALS['conn'],$_POST['empemail']);
 		
-		$sql = "SELECT IFNULL(max(id),0) as maxid FROM employerdt";
-		$result = mysqli_query($GLOBALS['conn'],$sql);
-		
-		if ($row = mysqli_fetch_assoc($result)) {
-			$GLOBALS['maxidpedt'] = $row['maxid'];
-		}
-		
-		$GLOBALS['maxidpedt'] += 1;
-		
-		$insert = "INSERT INTO employerdt(empcomname,empcntname,empaddress,
-		empsub,emphone,empemail)
-		VALUES('$empcomname','$empcntname','$empaddr','$empsuburb','$empphone'
-		,'$empemail ');";
-		
-		if(mysqli_query($GLOBALS['conn'],$insert)){
+		if (empty($empcomname) && empty($empcntname) && empty($empaddr) &&
+		empty($empsuburb) && empty($empphone) && empty($empemail)) {
 			apprentrn();
+		}
+		else {
+			$insert = "INSERT INTO employerdt(empcomname,empcntname,empaddress,
+			empsub,emphone,empemail)
+			VALUES('".$empcomname."','".$empcntname."','".$empaddr."','".$empsuburb."','".$empphone."'
+			,'".$empemail."');";
+			
+			if(mysqli_query($GLOBALS['conn'],$insert)){
+				//Add to studentinfo table
+				$sql = "SELECT IFNULL(max(id),0) as maxid FROM employerdt;";
+				$result = mysqli_query($GLOBALS['conn'],$sql);
+				
+				if ($row = mysqli_fetch_assoc($result)) {
+					$num = $row['maxid'];
+				}
+				
+				
+				$insertstd = "Update studentinfo set empid = ".$num.
+				" where stdcode=".$GLOBALS['stdnum'].";";
+				mysqli_query($GLOBALS['conn'],$insertstd);
+				
+				apprentrn();
+			}
 		}
 	}
 	
@@ -379,50 +456,67 @@
 			$empjobtitle= mysqli_real_escape_string($GLOBALS['conn'], $_POST['empjobtitle']);
 			$emphrperweek = mysqli_real_escape_string($GLOBALS['conn'], $_POST['emphrperweek']);
 			
-			$sql = "SELECT IFNULL(max(id),0) as maxid FROM apprentrn";
+			$sql = "SELECT IFNULL(max(id),0) as maxid FROM apprentrn;";
 			$result = mysqli_query($GLOBALS['conn'],$sql);
 		
 			if ($row = mysqli_fetch_assoc($result)) {
-				$GLOBALS['maxidpedt'] = $row['maxid'];
+				$num = $row['maxid'];
 			}
 			
-			$GLOBALS['maxidpedt'] += 1;
+			$num += 1;
 			
 			$insert = "INSERT INTO apprentrn(appres,appresdate,
 			appretitle,hrsperweek)
-			VALUES('$apprentrain','$strdateemp','$empjobtitle',
-			,'$emphrperweek');";
+			VALUES('".$apprentrain."','".$strdateemp."','".$empjobtitle."'
+			,'".$emphrperweek."');";
 			
 			if(mysqli_query($GLOBALS['conn'],$insert)){
+				//Add to studentinfo table
+				$insertstd = "Update studentinfo set appid = ".$num.
+				" where stdcode=".$GLOBALS['stdnum'].";";
+				mysqli_query($GLOBALS['conn'],$insertstd);
 				recogprior();
 			}
+			
 		}
 	}
 	
 	function recogprior() {
-		$recgprlrcr = mysqli_real_escape_string($GLOBALS['conn'], $_POST['recgprlrcr']);
-		
-		if (empty($recgprlrcr)) {
-			jobseekers();
-		}
-		else {
-			$sql = "SELECT IFNULL(max(id),0) as maxid FROM recogprior";
-				$result = mysqli_query($GLOBALS['conn'],$sql);
+		if (isset($_POST['recgprlrcr'])) {
 			
-			if ($row = mysqli_fetch_assoc($result)) {
-				$GLOBALS['maxidrp'] = $row['maxid'];
+			if ($_POST['recgprlrcr'] == "Yes") {
+				$recgprlrcr = 1;
 			}
-			
-			$GLOBALS['maxidrp'] += 1;
+			elseif ($_POST['recgprlrcr'] == "No") {
+				$recgprlrcr = 0;
+			}
+			else {
+				$recgprlrcr = "NULL";
+			}
 			
 			$insert = "INSERT INTO recogprior(recog)
-			VALUES('$recgprlrcr');";
+			VALUES('".$recgprlrcr."');";
 			
 			if(mysqli_query($GLOBALS['conn'],$insert)){
-				recogprior();
+				//Add to studentinfo table
+				$sql = "SELECT IFNULL(max(id),0) as maxid FROM recogprior;";
+				$result = mysqli_query($GLOBALS['conn'],$sql);
+			
+				if ($row = mysqli_fetch_assoc($result)) {
+					$num = $row['maxid'];
+				}
+				
+				$insertstd = "Update studentinfo set recogid = ".$num.
+				" where stdcode=".$GLOBALS['stdnum'].";";
+				mysqli_query($GLOBALS['conn'],$insertstd);
+				
+				jobseekers();
 			}
 		}
-		
+		else {
+			jobseekers();
+		}
+				
 	}
 	
 	function jobseekers() {
@@ -432,31 +526,55 @@
 		$jobskrlandline = mysqli_real_escape_string($GLOBALS['conn'], $_POST['jobskrlandline']);
 		$jobskrmobile = mysqli_real_escape_string($GLOBALS['conn'], $_POST['jobskrmobile']);
 		$jobskremail = mysqli_real_escape_string($GLOBALS['conn'],$_POST['jobskremail']);
-		$jbaclient = mysqli_real_escape_string($GLOBALS['conn'],$_POST['jbaclient']);
 		
-		if ($_POST['jbsrcagencypart'] == "Yes") {
-			$jbsrcagencypart = 1; 
-		}
-		elseif ($_POST['jbsrcagencypart'] == "No") {
-			$jbsrcagencypart = 0;
+		if (isset($_POST['jbaclient'])) {
+			$jbaclient = mysqli_real_escape_string($GLOBALS['conn'],$_POST['jbaclient']);
 		}
 		else {
-			$jbsrcagencypart=$_POST['jbsrcagencypart'];
+			$jbaclient = "NULL";
+		}
+		
+		if (isset($_POST['jbsrcagencypart'])) {
+			if ($_POST['jbsrcagencypart'] == "Yes") {
+				$jbsrcagencypart = 1; 
+			}
+			elseif ($_POST['jbsrcagencypart'] == "No") {
+				$jbsrcagencypart = 0;
+			}
+			else {
+				$jbsrcagencypart = "NULL";
+			}
+		}
+		else {
+			$jbsrcagencypart = "NULL";
 		}
 		
 		//Check if all fields are empty
-		if(empty($jobsrchagen) && empty($emocorname) && empty($jobskrsuburb)
-			empty($jobskrlandline) && empty($jobskrmobile ) && empty($jobskremail )
-		    && empty($jbaclient) && empty($jbsrcagencypart)) {
+		if(empty($jobsrchagen) && empty($emocorname) && empty($jobskrsuburb) &&
+			empty($jobskrlandline) && empty($jobskrmobile) && empty($jobskremail)
+		    && ($jbaclient == "NULL") && ($jbsrcagencypart == "NULL")) {
 			centrelink();
 		}
 		else {
 			$insert = "INSERT INTO jobseekers(jbseekagen,empcoorname,jobseeksur,
 					landline,jobseeknobile,jobseekstrdte,jsaclient,jobsearchfee)
-			VALUES('$jobsrchagen','$emocorname','$jobskrsuburb','$jobskrlandline',
-			'$jobskrmobile','$jobskremail','$jbaclient','$jbsrcagencypart');";
+			VALUES('".$jobsrchagen."','".$emocorname."','".$jobskrsuburb."','".$jobskrlandline."',
+			'".$jobskrmobile."','".$jobskremail."','".$jbaclient."','".$jbsrcagencypart."');";
+			
 			if(mysqli_query($GLOBALS['conn'],$insert)){
-				if ($jbsrcagencypart == "Yes") {
+				//Add to studentinfo table
+				$sql = "SELECT IFNULL(max(id),0) as maxid FROM jobseekers;";
+				$result = mysqli_query($GLOBALS['conn'],$sql);
+			
+				if ($row = mysqli_fetch_assoc($result)) {
+					$num = $row['maxid'];
+				}
+				
+				$insertstd = "Update studentinfo set jobid = ".$num.
+				" where stdcode=".$GLOBALS['stdnum'].";";
+				mysqli_query($GLOBALS['conn'],$insertstd);
+				
+				if ($jbsrcagencypart == 1) {
 					coursefee();
 				}
 				else {
@@ -467,47 +585,93 @@
 	}
 	
 	function coursefee() {
-		$paymenttype = mysqli_real_escape_string($GLOBALS['conn'], $_POST['paymenttype']);
-		$stdnamefee= mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdnamefee']);
-		$thrdpartrep = mysqli_real_escape_string($GLOBALS['conn'], $_POST['thrdpartrep']);
-		$thrdparinv = mysqli_real_escape_string($GLOBALS['conn'], $_POST['thrdparinv']);
-		$crdtype = mysqli_real_escape_string($GLOBALS['conn'], $_POST['crdtype']);
-		$crdnum = mysqli_real_escape_string($GLOBALS['conn'], $_POST['crdnum']);
-		if (empty($paymenttype) && empty($stdnamefee) && empty($thrdpartrep)
-			empty($thrdparinv) && empty($crdtype) && empty($crdnum)) {
-			centrelink();
-		}
-		else {
-			$insert = "INSERT INTO coursefee(paytype,stdname,thrdrepname,
-					thrdinvoice,crdtype,crdnum)
-			VALUES('$paymenttype','$stdnamefee','$thrdpartrep','$thrdparinv'
-			,'$crdtype','$crdnum');";
-			if(mysqli_query($GLOBALS['conn'],$insert)){
+		if (isset($_POST['paymenttype'])) {
+			$paymenttype = mysqli_real_escape_string($GLOBALS['conn'], $_POST['paymenttype']);
+			$stdnamefee= mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdnamefee']);
+			$thrdpartrep = mysqli_real_escape_string($GLOBALS['conn'], $_POST['thrdpartrep']);
+			$thrdparinv = mysqli_real_escape_string($GLOBALS['conn'], $_POST['thrdparinv']);
+			$crdtype = mysqli_real_escape_string($GLOBALS['conn'], $_POST['crdtype']);
+			$crdnum = mysqli_real_escape_string($GLOBALS['conn'], $_POST['crdnum']);
+		
+			if ($paymenttype == "NULL" && empty($stdnamefee) && empty($thrdpartrep) &&
+				empty($thrdparinv) && empty($crdtype) && empty($crdnum)) {
 				centrelink();
 			}
+			else {
+				$insert = "INSERT INTO coursefee(paytype,stdname,thrdrepname,
+						thrdinvoice,crdtype,crdnum)
+				VALUES('".$paymenttype."','".$stdnamefee."','".$thrdpartrep."','".$thrdparinv."'
+				,'".$crdtype."','".$crdnum."');";
+				if(mysqli_query($GLOBALS['conn'],$insert)){
+					//Add to studentinfo table
+					$sql = "SELECT IFNULL(max(id),0) as maxid FROM coursefee;";
+					$result = mysqli_query($GLOBALS['conn'],$sql);
+				
+					if ($row = mysqli_fetch_assoc($result)) {
+						$num = $row['maxid'];
+					}
+					
+					$insertstd = "Update studentinfo set courseid = ".$num.
+					" where stdcode=".$GLOBALS['stdnum'].";";
+					mysqli_query($GLOBALS['conn'],$insertstd);
+					
+					centrelink();
+				}
+			}
+		}
+		else {
+			$paymenttype = "NULL";
+			centrelink();
 		}
 	}
 	
 	function centrelink() {
-		if ($_POST['regcenallow'] == "Yes") {
-			$regcenallow = 1; 
-		}
-		elseif ($_POST['regcenallow'] == "No") {
-			$regcenallow= 0;
+		if (isset($_POST['regcenallow'])) { 
+			if ($_POST['regcenallow'] == "Yes") {
+				$regcenallow = 1; 
+			}
+			elseif ($_POST['regcenallow'] == "No") {
+				$regcenallow= 0;
+			}
+			else {
+				$regcenallow="NULL";
+			}
 		}
 		else {
-			$regcenallow=$_POST['regcenallow'];
+			$regcenallow="NULL";
 		}
-		$allowyes = mysqli_real_escape_string($GLOBALS['conn'], $_POST['allowyes']);
+		
+		if(isset($_POST['allowyes'])) {
+			$allowyes = mysqli_real_escape_string($GLOBALS['conn'], $_POST['allowyes']);
+		}
+		else {
+			$allowyes = "NULL";
+		}
+		
 		$refnum= mysqli_real_escape_string($GLOBALS['conn'], $_POST['refnum']);
 		$vetnum= mysqli_real_escape_string($GLOBALS['conn'], $_POST['vetnum']);
-		if (!empty($regcenallow ) && !empty($allowyes) && !empty($refnum)
-			!empty($vetnum)) {
+		
+		if ($regcenallow == "NULL" && $allowyes == "NULL" && empty($refnum) ||
+			empty($vetnum)) {
+			exit();
+		}
+		else {
 			$insert = "INSERT INTO centrelink(cntrallow,allowances,refnum,vetnum)
-			VALUES('$regcenallow','$allowyes','$refnum','$vetnum');";
-			mysqli_query($GLOBALS['conn'],$insert){
+			VALUES('".$regcenallow."','".$allowyes."','".$refnum."','".$vetnum."');";
+			mysqli_query($GLOBALS['conn'],$insert);
+			
+			//Add to studentinfo table
+			$sql = "SELECT IFNULL(max(id),0) as maxid FROM centrelink;";
+			$result = mysqli_query($GLOBALS['conn'],$sql);
+		
+			if ($row = mysqli_fetch_assoc($result)) {
+				$num = $row['maxid'];
+			}
+			
+			$insertstd = "Update studentinfo set centid = ".$num.
+			" where stdcode=".$GLOBALS['stdnum'].";";
+			mysqli_query($GLOBALS['conn'],$insertstd);
 		}
 	}
-	
 	
 ?>

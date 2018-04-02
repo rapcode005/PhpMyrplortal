@@ -217,8 +217,8 @@
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="margin-top:20px;">
 				<label>In which country were you born?<label>
-				<p><input class="w3-radio" type="radio" name="stdlang" value="Australia" checked 
-				onclick="w3_hideother()" />
+				<p><input class="w3-radio" type="radio" name="stdlang" value="Australia"  
+				onclick="w3_hideother()" checked />
 				<label>Australia</label></p>
 				<p><input class="w3-radio" type="radio" name="stdlang" value="Other"
 				onclick="w3_showother()" />
@@ -232,8 +232,8 @@
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="margin-top:20px;">
 				<label>Resident Type</label>
-				<p><input class="w3-radio" type="radio" name="stdrsttype" value="Australian Citizen" checked 
-				onclick="w3_hideothervisa()" />
+				<p><input class="w3-radio" type="radio" name="stdrsttype" value="Australian Citizen"  
+				onclick="w3_hideothervisa()" checked />
 				<label>Australian Citizen</label></p>
 				<p><input class="w3-radio" type="radio" name="stdrsttype" value="Permament Australia Resident" 
 				onclick="w3_hideothervisa()" />
@@ -253,8 +253,8 @@
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="margin-top:20px;">
 				<label>Languages</label>
-				<p><input class="w3-radio" type="radio" name="stdenghome" value="No, English Only" checked 
-				onclick="w3_hideotherlang()" />
+				<p><input class="w3-radio" type="radio" name="stdenghome" value="No, English Only"  
+				onclick="w3_hideotherlang()" checked />
 				<label>No, English only</label></p>
 				<p><input class="w3-radio" type="radio" name="stdenghome" value="Yes, Specify" 
 				onclick="w3_showotherlang()" />
@@ -268,7 +268,8 @@
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="margin-top:20px;">
 				<label>How well do you speak in English?<label>
-				<p><input class="w3-radio" type="radio" name="stdwelleng" value="Very Well" checked  />
+				<p><input class="w3-radio" type="radio" name="stdwelleng" 
+				value="Very Well"  checked />
 				<label>Very Well</label></p>
 				<p><input class="w3-radio" type="radio" name="stdwelleng" value="Well"  />
 				<label>Well</label></p>
@@ -280,7 +281,7 @@
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>Are you of Aboriginal or Torres Strait Islander origin?<label>
-				<p><input class="w3-radio" type="radio" name="stdabotors" value="No" checked 
+				<p><input class="w3-radio" type="radio" name="stdabotors" value="No" checked
 				 />
 				<label>No</label></p>
 				<p><input class="w3-radio" type="radio" name="stdabotors" value="Yes - Aboriginal" 
@@ -301,7 +302,7 @@
 				<label>Do you consider yourself to have a disability, Impairment or long-term condition?<label>
 				<p><input class="w3-radio" type="radio" name="stddisabi" value="Yes"  onclick="w3_showdisability()"  />
 				<label>Yes</label></p>
-				<p><input class="w3-radio" type="radio" name="stddisabi" value="No" checked onclick="w3_hidedisability()"  />
+				<p><input class="w3-radio" type="radio" name="stddisabi" value="No"  onclick="w3_hidedisability()"  />
 				<label>No</label></p>
 			</div>
 			<div id="disabilityYes" style="display:none; margin-top:20px;" >
@@ -351,7 +352,7 @@
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>Highest Completed School Level<label>
-				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Year 12 or Equivalent"  checked />
+				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Year 12 or Equivalent"   />
 				<label>Year 12 or Equivalent</label></p>
 				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Year 11 or Equivalent"  />
 				<label>Year 11 or Equivalent</label></p>
@@ -370,7 +371,7 @@
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>Are you still attending secondary level?</label>
-				<p><input class="w3-radio" type="radio" name="stdseclvl" value="Yes" checked />
+				<p><input class="w3-radio" type="radio" name="stdseclvl" value="Yes"  />
 				<label>Yes</label></p>
 				<p><input class="w3-radio" type="radio" name="stdseclvl" value="No"  />
 				<label>No</label></p>
@@ -380,7 +381,7 @@
 				<label>Have you successfully completed any of the following qualification?<label>
 				<p><input class="w3-radio" type="radio" name="stdsuccessqual" value="Yes" onclick="w3_showqualcomp()"/>
 				<label>Yes</label></p>
-				<p><input class="w3-radio" type="radio" name="stdsuccessqual" value="No" checked onclick="w3_hidequalcomp()" />
+				<p><input class="w3-radio" type="radio" name="stdsuccessqual" value="No"  onclick="w3_hidequalcomp()" />
 				<label>No</label></p>
 			</div>
 			<div id="qualsuccomp" class="w3-container w3-white w3-card-4 w3-padding-large"
@@ -454,7 +455,7 @@
 				style="margin-top:20px;">
 				<label>How did you hear about this course?</label>
 				<p><input class="w3-radio" type="radio" name="hearaboutcou" value="Advertisement - where" 
-				onclick="w3_showadvertisemen()" />
+				onclick="w3_showadvertisemen()"  />
 				<label>Advertisement - where</label></p>
 				<input type="text"
 				class="w3-input w3-border w3-animate-input w3-light-grey" style="width:200px; Display:none;"		
@@ -467,7 +468,7 @@
 				class="w3-input w3-border w3-animate-input w3-light-grey" style="width:200px; Display:none;"		
 				name="wordofmout"
 				id="wordofmout" />
-				<p><input class="w3-radio" type="radio" name="hearaboutcou" value="Website" onclick="w3_showwebsite()"  />
+				<p><input class="w3-radio" type="radio" name="hearaboutcou" checked value="Website" onclick="w3_showwebsite()"  />
 				<label>Website</label></p>
 				<p><input class="w3-radio" type="radio" name="hearaboutcou" value="Other"  
 				onclick="w3_showotherhear()"/>
@@ -487,7 +488,7 @@
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>Employment Status</label>
-				<p><input class="w3-radio" type="radio" name="stdcurempsts" value="Full Time"  checked />
+				<p><input class="w3-radio" type="radio" name="stdcurempsts" value="Full Time"   />
 				<label>Full Time</label></p>
 				<p><input class="w3-radio" type="radio" name="stdcurempsts" value="Part Time"  />
 				<label>Part Time</label></p>
@@ -509,7 +510,7 @@
 				<label>Registered for unemployment benefits with centrelink</label>
 				<p><input class="w3-radio" type="radio" name="stdbencen" value="Yes" />
 				<label>Yes</label></p>
-				<p><input class="w3-radio" type="radio" name="stdbencen" value="No" checked />
+				<p><input class="w3-radio" type="radio" name="stdbencen" value="No"  />
 				<label>No</label></p>
 			</div>
 		</div>
@@ -628,7 +629,7 @@
 			style="width:200px"		
 			name="jobskrmobile" /></p>
 			<p style="margin-top:20px;">
-			<label>Start Date</label><input type="email" 
+			<label>Start Date</label><input type="date" 
 			class="w3-input w3-border w3-animate-input "
 			style="width:200px"		
 			name="jobskremail" /></p>
@@ -752,7 +753,12 @@
 			class="w3-blueh w3-hover-green w3-padding-large
 			w3-border w3-large"
 			style="float:right;">Save</button>
+			
+			
+			
 		</div>
+		
+		
 		
 	</form>
 		
