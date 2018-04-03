@@ -788,14 +788,16 @@
 				<label>Do you consider yourself to have a disability, Impairment or long-term condition?<label>
 				<p><input class="w3-radio" type="radio" name="stddisabi" value="Yes" onclick="w3_showdisability()" 
 				<?php 
-					if ($rowindln['disabimpr']== 1) {
+					if (isset($rowindln['disabimpr']) && 
+					$rowindln['disabimpr'] == 1) {
 							echo "Checked";
 					}
 				?>  />
 				<label>Yes</label></p>
 				<p><input class="w3-radio" type="radio" name="stddisabi" value="No"  onclick="w3_hidedisability()" 
 				<?php 
-					if ($rowindln['disabimpr'] == 0) {
+					if (isset($rowindln['disabimpr']) && 
+					$rowindln['disabimpr'] == 0) {
 							echo "Checked";
 					}
 				?> />
@@ -804,7 +806,7 @@
 			
 			<div id="disabilityYes" 
 					<?php 
-						if ($rowindln['disabimpr']== 1) {
+						if (!empty($rowindln) && $rowindln['disabimpr']== 1) {
 							echo "style='margin-top:20px;'";
 						}
 						else {
@@ -815,63 +817,63 @@
 					<label>If yes, please indicate(You may indicate more than one)?<label>
 					<p><input class="w3-radio" type="radio" name="stdindicate" value="Vision" onclick="w3_hideotherdisability()"
 					<?php 
-						if ($rowindln['disyes']== "Vision") {
+						if (!empty($rowindln) && $rowindln['disyes']== "Vision") {
 							echo "Checked";
 						}
 					?> />
 					<label>Vision</label></p>
 					<p><input class="w3-radio" type="radio" name="stdindicate" value="Physical" onclick="w3_hideotherdisability()" 
 					<?php 
-						if ($rowindln['disyes']== "Physical") {
+						if (!empty($rowindln) && $rowindln['disyes']== "Physical") {
 							echo "Checked";
 						}
 					?>/>
 					<label>Physical</label></p>
 					<p><input class="w3-radio" type="radio" name="stdindicate" value="Learning" onclick="w3_hideotherdisability()" 
 					<?php 
-						if ($rowindln['disyes']== "Learning") {
+						if (!empty($rowindln) && $rowindln['disyes']== "Learning") {
 							echo "Checked";
 						}
 					?>/>
 					<label>Learning</label></p>
 					<p><input class="w3-radio" type="radio" name="stdindicate" value="Intellectual" onclick="w3_hideotherdisability()" 
 					<?php 
-						if ($rowindln['disyes']== "Intellectual") {
+						if (!empty($rowindln) && $rowindln['disyes']== "Intellectual") {
 							echo "Checked";
 						}
 					?>/>
 					<label>Intellectual</label></p>
 					<p><input class="w3-radio" type="radio" name="stdindicate" value="Hearing/Def" onclick="w3_hideotherdisability()" 
 					<?php 
-						if ($rowindln['disyes']== "Hearing/Def") {
+						if (!empty($rowindln) && $rowindln['disyes']== "Hearing/Def") {
 							echo "Checked";
 						}
 					?>/>
 					<label>Hearing/Def</label></p>
 					<p><input class="w3-radio" type="radio" name="stdindicate" value="Mental illness" onclick="w3_hideotherdisability()" 
 					<?php 
-						if ($rowindln['disyes']== "Mental illness") {
+						if (!empty($rowindln) && $rowindln['disyes']== "Mental illness") {
 							echo "Checked";
 						}
 					?>/>
 					<label>Mental illness</label></p>
 					<p><input class="w3-radio" type="radio" name="stdindicate" value="Medical condition" onclick="w3_hideotherdisability()"
 					<?php 
-						if ($rowindln['disyes']== "Medical condition") {
+						if (!empty($rowindln) && $rowindln['disyes']== "Medical condition") {
 							echo "Checked";
 						}
 					?>/>
 					<label>Medical condition</label></p>
 					<p><input class="w3-radio" type="radio" name="stdindicate" value="Acquired brain impairment" onclick="w3_hideotherdisability()" 
 					<?php 
-						if ($rowindln['disyes']== "Acquired brain impairment") {
+						if (!empty($rowindln) && $rowindln['disyes']== "Acquired brain impairment") {
 							echo "Checked";
 						}
 					?>/>
 					<label>Acquired brain impairment</label></p>
 					<p><input class="w3-radio" type="radio" name="stdindicate" value="Other" onclick="w3_showotherdisability()" 
 					<?php 
-						if ($rowindln['disyes']== "Other") {
+						if (!empty($rowindln) && $rowindln['disyes']== "Other") {
 							echo "Checked";
 						}
 					?>/>
@@ -906,58 +908,185 @@
 			<header class="w3-container w3-blueh w3-tea">
 				<h2>Education</h2>
 			</header>
+			
+			<?php 
+				if (isset($_GET['ptid'])) {
+					$sqldata = "SELECT 
+									b.highschool,
+									b.year,
+									b.snd,
+									b.success,
+									b.successyes
+								FROM studentinfo a 
+					INNER JOIN education b on a.educaid = b.id 
+					WHERE a.id = ".$_GET['ptid'];
+					
+					$result = mysqli_query($conn, $sqldata);
+					$resultCheck = mysqli_num_rows($result);
+					
+					
+					if ($resultCheck > 0) {
+						
+						$rowedu = mysqli_fetch_assoc($result);
+						
+					}
+				}
+			?>
+			
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>Highest Completed School Level<label>
-				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Year 12 or Equivalent"   />
+				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Year 12 or Equivalent" 
+				<?php 
+					if (!empty($rowedu) && $rowedu['highschool']== "Year 12 or Equivalent") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Year 12 or Equivalent</label></p>
-				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Year 11 or Equivalent"  />
+				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Year 11 or Equivalent"  
+				<?php 
+					if (!empty($rowedu) && $rowedu['highschool']== "Year 11 or Equivalent") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Year 11 or Equivalent</label></p>
-				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Year 10 or Equivalent"  />
+				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Year 10 or Equivalent"  
+				<?php 
+					if (!empty($rowedu) && $rowedu['highschool']== "Year 10 or Equivalent") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Year 10 or Equivalent</label></p>
-				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Year 9 or Equivalent"  />
+				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Year 9 or Equivalent"  
+				<?php 
+					if (!empty($rowedu) && $rowedu['highschool']== "Year 9 or Equivalent") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Year 9 or Equivalent</label></p>
-				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Year 8 or Below"  />
+				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Year 8 or Below"  
+				<?php 
+					if (!empty($rowedu) && $rowedu['highschool']== "Year 8 or Below") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Year 8 or Below</label></p>
-				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Never Attended School"  />
+				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Never Attended School"  
+				<?php 
+					if (!empty($rowedu) && $rowedu['highschool']== "Never Attended School") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Never Attended School</label></p>
 			</div>
 			<p style="margin-top:20px;"><label>In which Year did you complete that level</label>
 			<input type="number"class="w3-input w3-border w3-animate-input" 
-			style="width:200px"	name="stdyearcomp" /></p>
+			style="width:200px"	name="stdyearcomp" 
+			<?php 
+				if (!empty($rowedu['year'])) {
+						echo "Value='".$rowedu['year']."'";
+				}
+			?>/> </p>
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>Are you still attending secondary level?</label>
-				<p><input class="w3-radio" type="radio" name="stdseclvl" value="Yes"  />
+				<p><input class="w3-radio" type="radio" name="stdseclvl" value="Yes" 
+				<?php 
+					if (!empty($rowedu) && $rowedu['snd'] == 1) {
+						echo "Checked";
+					}
+				?> />
 				<label>Yes</label></p>
-				<p><input class="w3-radio" type="radio" name="stdseclvl" value="No"  />
+				<p><input class="w3-radio" type="radio" name="stdseclvl" value="No"  
+				<?php 
+					if (!empty($rowedu) && $rowedu['snd'] == 0) {
+						echo "Checked";
+					}
+				?> />
 				<label>No</label></p>
 			</div>
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>Have you successfully completed any of the following qualification?<label>
-				<p><input class="w3-radio" type="radio" name="stdsuccessqual" value="Yes" onclick="w3_showqualcomp()"/>
+				<p><input class="w3-radio" type="radio" name="stdsuccessqual" value="Yes" onclick="w3_showqualcomp()"
+				<?php 
+					if (!empty($rowedu) && $rowedu['success'] == 1) {
+						echo "Checked";
+					}
+				?>/>
 				<label>Yes</label></p>
-				<p><input class="w3-radio" type="radio" name="stdsuccessqual" value="No"  onclick="w3_hidequalcomp()" />
+				<p><input class="w3-radio" type="radio" name="stdsuccessqual" value="No"  onclick="w3_hidequalcomp()" 
+				<?php 
+					if (!empty($rowedu) && $rowedu['success'] == 0) {
+						echo "Checked";
+					}
+				?>/>
 				<label>No</label></p>
 			</div>
 			<div id="qualsuccomp" class="w3-container w3-white w3-card-4 w3-padding-large"
-			style="display:none; margin-top:20px;" >
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Bachelor Degree or Higher Degree Level" />
+				<?php 
+					if (!empty($rowedu) && $rowedu['success'] == 1) {
+						echo "style='margin-top:20px;'";
+					}
+					else {
+						echo "style='display:none; margin-top:20px;'";
+					}
+				?> >
+				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Bachelor Degree or Higher Degree Level" 
+				<?php 
+					if (!empty($rowedu) && $rowedu['successyes']== "Bachelor Degree or Higher Degree Level") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Bachelor Degree or Higher Degree Level</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Advanced Diploma or Assiociate Degree Level"  />
+				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Advanced Diploma or Assiociate Degree Level"  
+				<?php 
+					if (!empty($rowedu) && $rowedu['successyes']== "Advanced Diploma or Assiociate Degree Level") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Advanced Diploma or Assiociate Degree Level</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Diploma (or associate diploma)"  />
+				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Diploma (or associate diploma)"  
+				<?php 
+					if (!empty($rowedu) && $rowedu['successyes']== "Diploma (or associate diploma)") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Diploma (or associate diploma)</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate IV"  />
+				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate IV"  
+				<?php 
+					if (!empty($rowedu) && $rowedu['successyes']== "Certificate IV") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Certificate IV</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate III"  />
+				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate III"  
+				<?php 
+					if (!empty($rowedu) && $rowedu['successyes']== "Certificate III") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Certificate III</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate II"  />
+				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate II"  
+				<?php 
+					if (!empty($rowedu) && $rowedu['successyes']== "Certificate II") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Certificate II</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate I"  />
+				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate I"  
+				<?php 
+					if (!empty($rowedu) && $rowedu['successyes']== "Certificate I") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Certificate I</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificates other than the above"  />
+				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificates other than the above"  
+				<?php 
+					if (!empty($rowedu) && $rowedu['successyes']== "Certificates other than the above") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Certificates other than the above</label></p>
 			</div>
 		</div>
@@ -967,73 +1096,205 @@
 			<header class="w3-container w3-blueh w3-tea">
 				<h2>Reason for study</h2>
 			</header>
+			
+			<?php 
+				if (isset($_GET['ptid'])) {
+					$sqldata = "SELECT 
+									b.id,
+									b.hearabout,
+									b.other,
+									b.hearaboutv
+								FROM studentinfo a 
+					INNER JOIN reastud b on a.reastudid = b.id 
+					WHERE a.id = ".$_GET['ptid'];
+					
+					$result = mysqli_query($conn, $sqldata);
+					$resultCheck = mysqli_num_rows($result);
+					
+					
+					if ($resultCheck > 0) {
+						
+						$rowreastud = mysqli_fetch_assoc($result);
+						
+						$sqllist = "SELECT 
+										a.descrp
+									FROM reastudlist a 
+						INNER JOIN reastud b on a.reasid  = b.id  
+						WHERE a.reasid = ".$rowreastud['id'];
+						
+						$resultlist = mysqli_query($conn, $sqllist);
+						$rowrealist = array();
+						while ($rowreastudlist = mysqli_fetch_assoc($resultlist)) {
+							array_push($rowrealist,$rowreastudlist['descrp']);
+						}
+						
+					}
+				}
+			?>
+			
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>Which best describes your reasons for enrolling in the qualification?<label>
-				<p><input class="w3-check" type="checkbox" checked="checked" name="reasonqual[]" value="To get a Job"
-				>
+				<p><input class="w3-check" type="checkbox"  name="reasonqual[]" value="To get a Job"
+				<?php 
+					if (!empty($rowrealist) && in_array("To get a Job",$rowrealist)) {
+						echo "checked";
+					}
+				?>/>
 				<label>To get a Job</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="To develop my existing business"
-				>
+				<?php 
+					if (!empty($rowrealist) && in_array("To develop my existing business",$rowrealist)) {
+						echo "checked";
+					}
+				?>/>
 				<label>To develop my existing business</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="To start my own business"
-				>
+				<?php 
+					if (!empty($rowrealist) && in_array("To start my own business",$rowrealist)) {
+						echo "checked";
+					}
+				?>/>
 				<label>To start my own business</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="To try a different career"
-				>
+				<?php 
+					if (!empty($rowrealist) && in_array("To try a different career",$rowrealist)) {
+						echo "checked";
+					}
+				?>/>
 				<label>To try a different career</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="To get a better job or promotion"
-				>
+				<?php 
+					if (!empty($rowrealist) && in_array("To get a better job or promotion",$rowrealist)) {
+						echo "checked";
+					}
+				?>/>
 				<label>To get a better job or promotion</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="It is requirement of my job"
-				>
+				<?php 
+					if (!empty($rowrealist) && in_array("It is requirement of my job",$rowrealist)) {
+						echo "checked";
+					}
+				?>/>
 				<label>It is requirement of my job</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="To start my own business"
-				>
+				<?php 
+					if (!empty($rowrealist) && in_array("To start my own business",$rowrealist)) {
+						echo "checked";
+					}
+				?>/>
 				<label>To start my own business</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="I want extra skills for my job"
-				>
+				<?php 
+					if (!empty($rowrealist) && in_array("I want extra skills for my job",$rowrealist)) {
+						echo "checked";
+					}
+				?>/>
 				<label>I want extra skills for my job</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="To get into another course of study"
-				>
+				<?php 
+					if (!empty($rowrealist) && in_array("To get into another course of study",$rowrealist)) {
+						echo "checked";
+					}
+				?>/>
 				<label>To get into another course of study</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="For personal interest or self-development"
-				>
+				<?php 
+					if (!empty($rowrealist) && in_array("For personal interest or self-development",$rowrealist)) {
+						echo "checked";
+					}
+				?>/>
 				<label>For personal interest or self-development</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" id="otherreason" value="Other reason"
-				onclick="w3_showotherreason()">
+				onclick="w3_showotherreason()"
+				<?php 
+					if (!empty($rowrealist) && in_array("Other reason",$rowrealist)) {
+						echo "checked";
+					}
+				?>/>
 				<label>Other reason</label></p>
 				<input type="text"
-				class="w3-input w3-border w3-animate-input w3-light-grey" style="width:200px; Display:none;"		
+				class="w3-input w3-border w3-animate-input w3-light-grey" 		
 				name="otherreasonstate"
-				id="otherreasonstate" />
+				id="otherreasonstate" 
+				<?php 
+					if (!empty($rowrealist) && in_array("Other reason",$rowrealist)) {
+						echo "style='width:200px;' value='".$rowreastud['other']."'";
+					}
+					else {
+						echo "style='width:200px; Display:none;'";
+					}
+				?>/>
 			</div>
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>How did you hear about this course?</label>
 				<p><input class="w3-radio" type="radio" name="hearaboutcou" value="Advertisement - where" 
-				onclick="w3_showadvertisemen()"  />
+				onclick="w3_showadvertisemen()" 
+				<?php 
+					if (!empty($rowreastud) && $rowreastud['hearabout']== "Advertisement - where") {
+						echo "Checked";
+					}
+				?>	/>
 				<label>Advertisement - where</label></p>
 				<input type="text"
-				class="w3-input w3-border w3-animate-input w3-light-grey" style="width:200px; Display:none;"		
+				class="w3-input w3-border w3-animate-input w3-light-grey" 		
 				name="advertisementwhe"
-				id="advertisementwhe" />
+				id="advertisementwhe" 
+				<?php 
+					if (!empty($rowreastud) && $rowreastud['hearabout']== "Advertisement - where") {
+						echo "style='width:200px;' value='".$rowreastud['hearaboutv']."'";
+					}
+					else {
+						echo "style='width:200px; Display:none;'";
+					}
+				?>/>
 				<p><input class="w3-radio" type="radio" name="hearaboutcou" value="Word of mouth - who" 
-				onclick="w3_showwordof()" />
+				onclick="w3_showwordof()" 
+				<?php 
+					if (!empty($rowreastud) && $rowreastud['hearabout']== "Word of mouth - who") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Word of mouth - who</label></p>
 				<input type="text"
-				class="w3-input w3-border w3-animate-input w3-light-grey" style="width:200px; Display:none;"		
+				class="w3-input w3-border w3-animate-input w3-light-grey" 		
 				name="wordofmout"
-				id="wordofmout" />
-				<p><input class="w3-radio" type="radio" name="hearaboutcou" checked value="Website" onclick="w3_showwebsite()"  />
+				id="wordofmout" 
+				<?php 
+					if (!empty($rowreastud) && $rowreastud['hearabout']== "Word of mouth - who") {
+						echo "style='width:200px;' value='".$rowreastud['hearaboutv']."'";
+					}
+					else {
+						echo "style='width:200px; Display:none;'";
+					}
+				?>/>
+				<p><input class="w3-radio" type="radio" name="hearaboutcou" value="Website" onclick="w3_showwebsite()"  
+				<?php 
+					if(!empty($rowreastud) && $rowreastud['hearabout']== "Website") {
+						echo "Checked";
+					}
+				?> />
 				<label>Website</label></p>
 				<p><input class="w3-radio" type="radio" name="hearaboutcou" value="Other"  
-				onclick="w3_showotherhear()"/>
+				onclick="w3_showotherhear()"
+				<?php 
+					if(!empty($rowreastud) && $rowreastud['hearabout']== "Other") {
+						echo "Checked";
+					}
+				?>/>
 				<label>Other</label></p>
 				<input type="text"
-				class="w3-input w3-border w3-animate-input w3-light-grey" style="width:200px; Display:none;"		
-				name="otherhear"
-				id="otherhear" />
+				class="w3-input w3-border w3-animate-input w3-light-grey" 		
+				name="otherhear" id="otherhear" 
+				<?php 
+					if (!empty($rowreastud) && $rowreastud['hearabout']== "Other") {
+						echo "style='width:200px;' value='".$rowreastud['hearaboutv']."'";
+					}
+					else {
+						echo "style='width:200px; Display:none;'";
+					}
+				?>/>
 			</div>
 		</div>
 		

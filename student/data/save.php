@@ -247,7 +247,7 @@
 				education();
 			}
 		}
-		
+		education();
 	}
 	
 	function education() {
@@ -296,9 +296,7 @@
 			mysqli_query($GLOBALS['conn'],$insertstd);
 			reastud();
 		}
-		else {
-			mysqli_query(error);
-		}
+		reastud();
 	}
 	
 	function reastud() {
@@ -348,7 +346,7 @@
 			//Save List
 			foreach($reasonqual as $val) {
 				$inserts ="INSERT INTO reastudlist(descrp,reasid)
-				VALUES('$val','".$num."');";
+				VALUES('".$val."','".$num."');";
 				mysqli_query($GLOBALS['conn'],$inserts);
 			}
 			$insertstd = "Update studentinfo set reastudid = ".$num.

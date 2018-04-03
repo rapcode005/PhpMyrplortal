@@ -419,38 +419,38 @@
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>Which best describes your reasons for enrolling in the qualification?<label>
-				<p><input class="w3-check" type="checkbox" checked="checked" name="reasonqual[]" value="To get a Job"
-				>
+				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="To get a Job"
+				/>
 				<label>To get a Job</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="To develop my existing business"
-				>
+				/>
 				<label>To develop my existing business</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="To start my own business"
-				>
+				/>
 				<label>To start my own business</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="To try a different career"
-				>
+				/>
 				<label>To try a different career</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="To get a better job or promotion"
-				>
+				/>
 				<label>To get a better job or promotion</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="It is requirement of my job"
-				>
+				/>
 				<label>It is requirement of my job</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="To start my own business"
-				>
+				/>
 				<label>To start my own business</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="I want extra skills for my job"
-				>
+				/>
 				<label>I want extra skills for my job</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="To get into another course of study"
-				>
+				/>
 				<label>To get into another course of study</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="For personal interest or self-development"
-				>
+				/>
 				<label>For personal interest or self-development</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" id="otherreason" value="Other reason"
-				onclick="w3_showotherreason()">
+				onclick="w3_showotherreason()"/>
 				<label>Other reason</label></p>
 				<input type="text"
 				class="w3-input w3-border w3-animate-input w3-light-grey" style="width:200px; Display:none;"		
