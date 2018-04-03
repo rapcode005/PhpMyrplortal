@@ -18,7 +18,7 @@
 				<th>Course</th>
 				<th>Birthday</th>
 				<th>Age</th>
-				<th>Edit Infomration</th>
+				<th>Show Details</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -26,7 +26,7 @@
 				include_once '../data/dbh.php';
 			
 				$sql = "SELECT b.fname as fname,b.gname as gname,c.descrp as descrp,
-				b.brhday as brhday,b.age as age FROM studentinfo a 
+				b.brhday as brhday,b.age as age,a.id as id FROM studentinfo a 
 				LEFT JOIN personaldt b on a.stdcode = b.id 
 				LEFT JOIN courselist c on a.stdcourse = c.code";
 				
@@ -36,9 +36,10 @@
 					echo "<tr>";
 					echo "<td>".$row['fname']."</td><td>".$row['gname']."</td><td>"
 					.$row['descrp']."</td><td>".$row['brhday']."</td><td>"
-					.$row['age']."</td><td><a href='#' class='w3-bar-item w3-button 
-					w3-blueh w3-hover-green'>Edit</a></td>";
-					echo "</tr>";
+					.$row['age']."</td><td><a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='studentdt.php?ptid=".$row['id']."'>Summary</a></td>
+					</tr>";
 				}
 			?>
 		</tbody>

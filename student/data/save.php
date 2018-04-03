@@ -86,7 +86,7 @@
 		$stdflastp = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdflastp']);
 		$stdstrnump= mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdstrnump']);
 		$stdsltp = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdsltp']);
-		$stdstatep = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdstatep']);
+		$statept = mysqli_real_escape_string($GLOBALS['conn'], $_POST['statept']);
 		$stdptlp = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdptlp']);
 		
 		$sql = "SELECT IFNULL(max(id),0) as maxid FROM postaladdress;";
@@ -99,7 +99,7 @@
 		$num  += 1;
 		
 		$insert = "INSERT INTO postaladdress(building,flat,street,suburb,state,postalcode)
-		VALUES('$stdbuildp','$stdflastp','$stdstrnump','$stdsltp','$stdstatep','$stdptlp');";
+		VALUES('$stdbuildp','$stdflastp','$stdstrnump','$stdsltp','$statept','$stdptlp');";
 		
 		if(mysqli_query($GLOBALS['conn'],$insert)) {
 			$insertstd = "Update studentinfo set paddid = ".$num.

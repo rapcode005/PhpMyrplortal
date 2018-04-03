@@ -148,7 +148,7 @@
 			class="w3-input w3-border 
 			w3-animate-input"
 			style="width:200px"		
-			name="stdstatep" /></p>
+			name="statept" /></p>
 			<p style="margin-top:20px;">
 			<label>Postal Code</label><input type="text" 
 			class="w3-input w3-border 

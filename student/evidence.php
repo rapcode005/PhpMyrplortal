@@ -28,32 +28,32 @@
 		style="width:50%; margin-top:20px;">
 			<table class="w3-table">
 				<?php
-					echo "<form action='data/removefile.php' method='POST'><tr>
+					echo "<tr>
 							<th>File Name</th>
 							<th>File Type</th>
 							<th>Remove</th>
 						</tr>";
 						
-					include_once '../data/dbh.php';
-							
-					$sql = "SELECT filename,filetype,id FROM evidence
-					WHERE stuid='".$_SESSION['stdid']."'";
-							
-					$result = mysqli_query($conn, $sql);
-					
-					while ($row = mysqli_fetch_assoc($result)) {
-						echo "<tr>";
-						echo "<td>".$row['filename']."
-						<input type='hidden' name='filename' value='".$row['filename']."'/>
-						</td><td>".$row['filetype']."</td><td>
-						<button type='submit' name='submit' 
-						class='w3-blueh w3-hover-green w3-padding-large
-						w3-border w3-large' value=".$row['id'].">Remove
-						</button></td>";
-						echo "</tr></form>";
+					if(isset($_SESSION['stdid'])) {
+						include_once '../data/dbh.php';
+								
+						$sql = "SELECT filename,filetype,id FROM evidence
+						WHERE stuid='".$_SESSION['stdid']."'";
+								
+						$result = mysqli_query($conn, $sql);
+						
+						while ($row = mysqli_fetch_assoc($result)) {
+							echo "<form action='data/removefile.php' method='POST'><tr>";
+							echo "<td>".$row['filename']."
+							<input type='hidden' name='filename' value='".$row['filename']."'/>
+							</td><td>".$row['filetype']."</td><td>
+							<button type='submit' name='submit' 
+							class='w3-blueh w3-hover-green w3-padding-large
+							w3-border w3-large' value=".$row['id'].">Remove
+							</button></td>";
+							echo "</tr></form>";
+						}
 					}
-
-					echo "</form>";
 				?>
 			</table>
 		</div>
