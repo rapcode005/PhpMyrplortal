@@ -12,7 +12,7 @@
 </div>
 	
 <div style="margin-left:220px; margin-top:16px;">
-	<form action="data/save.php" method="POST">
+	<form action="data/update.php" method="POST">
 	
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%;">
@@ -22,7 +22,8 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
-					$sqldata = "SELECT 
+					$sqldata = "SELECT
+									b.id as perid,
 									b.code as code,
 									b.fname as fname,
 									b.gname as gname,
@@ -34,7 +35,10 @@
 					INNER JOIN personaldt b on a.stdcode = b.id 
 					WHERE a.id = ".$_GET['ptid'];
 					
+					
+					//Session value for personaldt
 					$_SESSION['stdid'] = $_GET['ptid'];
+					
 					
 					$result = mysqli_query($conn, $sqldata);
 					
@@ -90,6 +94,13 @@
 						class='w3-input w3-border w3-animate-input'
 						style='width:500px'	name='stdage' 
 						value='".$row['age']."' /></p>";
+						
+						//Session value for personaldt
+						$_SESSION['stdcode'] = $row['code'];
+						$_SESSION['stdfname'] = $row['fname'];
+						$_SESSION['stdgname'] = $row['gname'];
+						$_SESSION['perid'] = $row['perid'];
+						
 					}
 				}
 			?>
@@ -105,129 +116,84 @@
 			<?php 
 				if (isset($_GET['ptid'])) {
 					$sqldata = "SELECT 
-									b.building as building,
-									b.flat as flat,
-									b.Street as Street,
-									b.Suburb as Suburb,
-									b.State as State,
-									b.postalcode as postalcode
+									b.id as resdid, 
+									b.building,
+									b.flat,
+									b.Street,
+									b.Suburb,
+									b.State,
+									b.postalcode
 								FROM studentinfo a 
 					INNER JOIN residence b on a.rid = b.id 
 					WHERE a.id = ".$_GET['ptid'];
 					
 					$result = mysqli_query($conn, $sqldata);
 					$resultCheck = mysqli_num_rows($result);
-					
-					 if($resultCheck > 0) {
-						$row = mysqli_fetch_assoc($result);
-						echo "<p style='margin-top:20px;'>
-						<label>Building/Property Name</label><input type='text' 
-						class='w3-input w3-border w3-animate-input'
-						style='width:200px'	name='stdbuildr' 
-						value='".$row['building']."' /></p>
-						<p style='margin-top:20px;'>
-						<label>Flat/Unit details</label><input type='text' 
-						class='w3-input w3-border w3-animate-input'
-						style='width:200px'	name='stdflastr' 
-						value='".$row['flat']."'/></p>
-						<p style='margin-top:20px;'>
-						<label>Street/Lot number</label><input type='text' 
-						class='w3-input w3-border w3-animate-input'
-						style='width:200px'	name='stdstrnumr' 
-						value='".$row['Street']."' /></p>
-						<p style='margin-top:20px;'>
-						<label>Suburb/Locality/Town</label><input type='text' 
-						class='w3-input w3-border w3-animate-input'
-						style='width:200px'	name='stdsltr'
-						value='".$row['Suburb']."' /></p>
-						<p style='margin-top:20px;'>
-						<label>State</label><input type='text' 
-						class='w3-input w3-border w3-animate-input'
-						style='width:200px'	name='stdstater' 
-						value='".$row['State']."' /></p>
-						<p style='margin-top:20px;'>
-						<label>Postal Code</label><input type='text' 
-						class='w3-input w3-border w3-animate-input'
-						style='width:200px'	name='stdptlr' 
-						value='".$row['postalcode']."' /></p>";
+						
+					if ($resultCheck > 0) {
+							
+						$rowresd = mysqli_fetch_assoc($result);
+						//For Saving Residence
+						$_SESSION['resdid'] = $rowresd['resdid'];	
 					}
-					else {
-						echo "<p style='margin-top:20px;'>
-						<label>Building/Property Name</label><input type='text' 
-						class='w3-input w3-border w3-animate-input'
-						style='width:200px'		
-						name='stdbuildr'/></p>
-						<p style='margin-top:20px;'>
-						<label>Flat/Unit details</label><input type='text' 
-						class='w3-input w3-border 
-						w3-animate-input'
-						style='width:200px'		
-						name='stdflastr' /></p>
-						<p style='margin-top:20px;'>
-						<label>Street/Lot number</label><input type='text' 
-						class='w3-input w3-border 
-						w3-animate-input'
-						style='width:200px'		
-						name='stdstrnumr' /></p>
-						<p style='margin-top:20px;'>
-						<label>Suburb/Locality/Town</label><input type='text' 
-						class='w3-input w3-border 
-						w3-animate-input'
-						style='width:200px'		
-						name='stdsltr' /></p>
-						<p style='margin-top:20px;'>
-						<label>State</label><input type='text' 
-						class='w3-input w3-border 
-						w3-animate-input'
-						style='width:200px'		
-						name='stdstater' /></p>
-						<p style='margin-top:20px;'>
-						<label>Postal Code</label><input type='text' 
-						class='w3-input w3-border 
-						w3-animate-input'
-						style='width:200px'		
-						name='stdptlr' /></p>";
-					}
-					
-				}
-				else {
-					echo "<p style='margin-top:20px;'>
-					<label>Building/Property Name</label><input type='text' 
-					class='w3-input w3-border w3-animate-input'
-					style='width:200px'		
-					name='stdbuildr'/></p>
-					<p style='margin-top:20px;'>
-					<label>Flat/Unit details</label><input type='text' 
-					class='w3-input w3-border 
-					w3-animate-input'
-					style='width:200px'		
-					name='stdflastr' /></p>
-					<p style='margin-top:20px;'>
-					<label>Street/Lot number</label><input type='text' 
-					class='w3-input w3-border 
-					w3-animate-input'
-					style='width:200px'		
-					name='stdstrnumr' /></p>
-					<p style='margin-top:20px;'>
-					<label>Suburb/Locality/Town</label><input type='text' 
-					class='w3-input w3-border 
-					w3-animate-input'
-					style='width:200px'		
-					name='stdsltr' /></p>
-					<p style='margin-top:20px;'>
-					<label>State</label><input type='text' 
-					class='w3-input w3-border 
-					w3-animate-input'
-					style='width:200px'		
-					name='stdstater' /></p>
-					<p style='margin-top:20px;'>
-					<label>Postal Code</label><input type='text' 
-					class='w3-input w3-border 
-					w3-animate-input'
-					style='width:200px'		
-					name='stdptlr' /></p>";
-				}
+				}	
 			?>
+			
+			<p style="margin-top:20px;">
+			<label>Building/Property Name</label><input type="text" 
+			class="w3-input w3-border w3-animate-input"
+			style="width:200px"	name="stdbuildr" 
+			<?php
+				if (!empty($rowresd)) {
+					echo "value='".$rowresd['building']."'";
+				}
+			?>/></p>
+			<p style="margin-top:20px;">
+			<label>Flat/Unit details</label><input type="text" 
+			class="w3-input w3-border w3-animate-input"
+			style="width:200px"	name="stdflastr" 
+			<?php
+				if (!empty($rowresd)) {
+					echo "value='".$rowresd['flat']."'";
+				}
+			?>/></p>
+			<p style="margin-top:20px;">
+			<label>Street/Lot number</label><input type="text" 
+			class="w3-input w3-border w3-animate-input"
+			style="width:200px"	name="stdstrnumr"
+			<?php
+				if (!empty($rowresd)) {
+					echo "value='".$rowresd['Street']."'";
+				}
+			?>			/></p>
+			<p style="margin-top:20px;">
+			<label>Suburb/Locality/Town</label><input type="text" 
+			class="w3-input w3-border w3-animate-input"
+			style="width:200px"	name="stdsltr" 
+			<?php
+				if (!empty($rowresd)) {
+					echo "value='".$rowresd['Suburb']."'";
+				}
+			?>/></p>
+			<p style="margin-top:20px;">
+			<label>State</label><input type="text" 
+			class="w3-input w3-border w3-animate-input"
+			style="width:200px"	name="stdstater" 
+			<?php
+				if (!empty($rowresd)) {
+					echo "value='".$rowresd['State']."'";
+				}
+			?>/></p>
+			<p style="margin-top:20px;">
+			<label>Postal Code</label><input type="text" 
+			class="w3-input w3-border w3-animate-input"
+			style="width:200px"	name="stdptlr" 
+			<?php
+				if (!empty($rowresd)) {
+					echo "value='".$rowresd['postalcode']."'";
+				}
+			?>/></p>
+			
 			
 		</div>
 		
@@ -240,6 +206,7 @@
 				<?php 
 					if (isset($_GET['ptid'])) {
 						$sqldata = "SELECT 
+										b.id as postid,
 										b.building as building,
 										b.flat as flat,
 										b.Street as Street,
@@ -285,6 +252,9 @@
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdptlp' 
 							value='".$row['postalcode']."' /></p>";
+							
+							//For Saving Residence
+							$_SESSION['postid'] = $row['postid'];
 						}
 						else {
 							echo "<p style='margin-top:20px;'>
@@ -376,6 +346,7 @@
 				<?php 
 					if (isset($_GET['ptid'])) {
 						$sqldata = "SELECT 
+										b.id as pntid,
 										b.homeph as homeph,
 										b.workph as workph,
 										b.mobile as mobile,
@@ -411,6 +382,9 @@
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdemail' 
 							value='".$row['email']."' /></p>";
+							
+							//For Saving Residence
+							$_SESSION['pntid'] = $row['pntid'];
 							
 						}
 						else {
@@ -466,7 +440,8 @@
 			
 				<?php 
 					if (isset($_GET['ptid'])) {
-						$sqldata = "SELECT 
+						$sqldata = "SELECT
+										b.id as emegid,
 										b.homeph as homeph,
 										b.workph as workph,
 										b.mobile as mobile,
@@ -503,6 +478,9 @@
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px' name='stdemaile' 
 							value='".$row['email']."' /></p>";
+							
+							//For Saving Residence
+							$_SESSION['emegid'] = $row['emegid'];
 							
 						}
 						else {
@@ -558,7 +536,8 @@
 			
 				<?php 
 					if (isset($_GET['ptid'])) {
-						$sqldata = "SELECT 
+						$sqldata = "SELECT
+										b.id as langid,
 										b.cntbrn,
 										b.cntbrnother,
 										b.rsdnttype,
@@ -578,7 +557,8 @@
 						if ($resultCheck > 0) {
 							
 							$rowlang = mysqli_fetch_assoc($result);
-							
+							//For Saving Residence
+							$_SESSION['langid'] = $rowlang['langid'];
 						}
 					}
 				?>
@@ -762,7 +742,8 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
-					$sqldata = "SELECT 
+					$sqldata = "SELECT
+									b.id as indleid,
 									b.disabimpr,
 									b.disyes,
 									b.disother,
@@ -778,7 +759,8 @@
 					if ($resultCheck > 0) {
 						
 						$rowindln = mysqli_fetch_assoc($result);
-						
+						//For Saving Residence
+						$_SESSION['indleid'] = $rowindln['indleid'];
 					}
 				}
 			?>
@@ -911,7 +893,8 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
-					$sqldata = "SELECT 
+					$sqldata = "SELECT
+									b.id as eduid,
 									b.highschool,
 									b.year,
 									b.snd,
@@ -928,7 +911,8 @@
 					if ($resultCheck > 0) {
 						
 						$rowedu = mysqli_fetch_assoc($result);
-						
+						//For Saving Residence
+						$_SESSION['eduid'] = $rowedu['eduid'];
 					}
 				}
 			?>
@@ -1115,6 +1099,8 @@
 					if ($resultCheck > 0) {
 						
 						$rowreastud = mysqli_fetch_assoc($result);
+						//For Saving
+						$_SESSION['reasid'] = $rowreastud['id'];
 						
 						$sqllist = "SELECT 
 										a.descrp
@@ -1307,6 +1293,7 @@
 			<?php 
 				if (isset($_GET['ptid'])) {
 					$sqldata = "SELECT 
+									b.id as curempid, 
 									b.empstatus,
 									b.regs
 								FROM studentinfo a 
@@ -1316,11 +1303,12 @@
 					$result = mysqli_query($conn, $sqldata);
 					$resultCheck = mysqli_num_rows($result);
 					
-					
 					if ($resultCheck > 0) {
 						
 						$rowrstatus = mysqli_fetch_assoc($result);
-					
+						//For Saving
+						$_SESSION['curempid'] = $rowrstatus['curempid'];
+						
 					}
 				}
 			?>
@@ -1995,7 +1983,7 @@
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
-			<button type="submit" name="submitsave" 
+			<button type="submit" name="submitupdate" 
 			class="w3-blueh w3-hover-green w3-padding-large
 			w3-border w3-large"
 			style="float:right;">Save</button>
