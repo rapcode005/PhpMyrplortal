@@ -12,7 +12,7 @@
 </div>
 	
 <div style="margin-left:220px; margin-top:16px;">
-	<form action="data/update.php" method="POST">
+	<form action="data/update.php" method="GET">
 	
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%;">
@@ -1016,56 +1016,56 @@
 						echo "style='display:none; margin-top:20px;'";
 					}
 				?> >
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Bachelor Degree or Higher Degree Level" 
+				<p><input class="w3-radio" type="radio" id="scsscomp1"  name="scsscomp" value="Bachelor Degree or Higher Degree Level" 
 				<?php 
 					if (!empty($rowedu) && $rowedu['successyes']== "Bachelor Degree or Higher Degree Level") {
 						echo "Checked";
 					}
 				?>/>
 				<label>Bachelor Degree or Higher Degree Level</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Advanced Diploma or Assiociate Degree Level"  
+				<p><input class="w3-radio" type="radio" id="scsscomp2"  name="scsscomp" value="Advanced Diploma or Assiociate Degree Level"  
 				<?php 
 					if (!empty($rowedu) && $rowedu['successyes']== "Advanced Diploma or Assiociate Degree Level") {
 						echo "Checked";
 					}
 				?>/>
 				<label>Advanced Diploma or Assiociate Degree Level</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Diploma (or associate diploma)"  
+				<p><input class="w3-radio" type="radio" id="scsscomp3"  name="scsscomp" value="Diploma (or associate diploma)"  
 				<?php 
 					if (!empty($rowedu) && $rowedu['successyes']== "Diploma (or associate diploma)") {
 						echo "Checked";
 					}
 				?>/>
 				<label>Diploma (or associate diploma)</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate IV"  
+				<p><input class="w3-radio" type="radio" id="scsscomp4"  name="scsscomp" value="Certificate IV"  
 				<?php 
 					if (!empty($rowedu) && $rowedu['successyes']== "Certificate IV") {
 						echo "Checked";
 					}
 				?>/>
 				<label>Certificate IV</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate III"  
+				<p><input class="w3-radio" type="radio" id="scsscomp5"  name="scsscomp" value="Certificate III"  
 				<?php 
 					if (!empty($rowedu) && $rowedu['successyes']== "Certificate III") {
 						echo "Checked";
 					}
 				?>/>
 				<label>Certificate III</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate II"  
+				<p><input class="w3-radio" type="radio" id="scsscomp6"  name="scsscomp" value="Certificate II"  
 				<?php 
 					if (!empty($rowedu) && $rowedu['successyes']== "Certificate II") {
 						echo "Checked";
 					}
 				?>/>
 				<label>Certificate II</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate I"  
+				<p><input class="w3-radio" type="radio" id="scsscomp7"  name="scsscomp" value="Certificate I"  
 				<?php 
 					if (!empty($rowedu) && $rowedu['successyes']== "Certificate I") {
 						echo "Checked";
 					}
 				?>/>
 				<label>Certificate I</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificates other than the above"  
+				<p><input class="w3-radio" type="radio" id="scsscomp8"  name="scsscomp" value="Certificates other than the above"  
 				<?php 
 					if (!empty($rowedu) && $rowedu['successyes']== "Certificates other than the above") {
 						echo "Checked";
@@ -1100,7 +1100,7 @@
 						
 						$rowreastud = mysqli_fetch_assoc($result);
 						//For Saving
-						$_SESSION['reasid'] = $rowreastud['id'];
+						$_SESSION["reasid"] = $rowreastud['id'];
 						
 						$sqllist = "SELECT 
 										a.descrp
@@ -1163,13 +1163,6 @@
 					}
 				?>/>
 				<label>It is requirement of my job</label></p>
-				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="To start my own business"
-				<?php 
-					if (!empty($rowrealist) && in_array("To start my own business",$rowrealist)) {
-						echo "checked";
-					}
-				?>/>
-				<label>To start my own business</label></p>
 				<p><input class="w3-check" type="checkbox" name="reasonqual[]" value="I want extra skills for my job"
 				<?php 
 					if (!empty($rowrealist) && in_array("I want extra skills for my job",$rowrealist)) {
@@ -1293,7 +1286,7 @@
 			<?php 
 				if (isset($_GET['ptid'])) {
 					$sqldata = "SELECT 
-									b.id as curempid, 
+									b.id as curempidc, 
 									b.empstatus,
 									b.regs
 								FROM studentinfo a 
@@ -1307,7 +1300,7 @@
 						
 						$rowrstatus = mysqli_fetch_assoc($result);
 						//For Saving
-						$_SESSION['curempid'] = $rowrstatus['curempid'];
+						$_SESSION['curempidc'] = $rowrstatus['curempidc'];
 						
 					}
 				}
@@ -1402,7 +1395,8 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
-					$sqldata = "SELECT 
+					$sqldata = "SELECT
+									b.id as empdtid,
 									b.empcomname,
 									b.empcntname,
 									b.empaddress,
@@ -1420,7 +1414,8 @@
 					if ($resultCheck > 0) {
 						
 						$rowempdt = mysqli_fetch_assoc($result);
-					
+						//For Saving
+						$_SESSION['empdtid'] = $rowempdt['empdtid'];
 					}
 				}
 			?>
@@ -1496,6 +1491,7 @@
 			<?php 
 				if (isset($_GET['ptid'])) {
 					$sqldata = "SELECT 
+									b.id as apptid,
 									b.appres,
 									b.appresdate,
 									b.appretitle,
@@ -1511,7 +1507,8 @@
 					if ($resultCheck > 0) {
 						
 						$rowappren = mysqli_fetch_assoc($result);
-					
+						//For Saving
+						$_SESSION['apptid'] = $rowappren['apptid'];
 					}
 				}
 			?>
@@ -1573,6 +1570,7 @@
 			<?php 
 				if (isset($_GET['ptid'])) {
 					$sqldata = "SELECT 
+									b.id as recogid,
 									b.recog
 								FROM studentinfo a 
 					INNER JOIN recogprior b on a.recogid = b.id 
@@ -1585,7 +1583,8 @@
 					if ($resultCheck > 0) {
 						
 						$rowrecogpr = mysqli_fetch_assoc($result);
-					
+						//For Saving
+						$_SESSION['recogid'] = $rowrecogpr['recogid'];
 					}
 				}
 			?>
@@ -1619,6 +1618,7 @@
 			<?php 
 				if (isset($_GET['ptid'])) {
 					$sqldata = "SELECT 
+									b.id as jobid,
 									b.jbseekagen,
 									b.empcoorname,
 									b.jobseeksur,
@@ -1638,7 +1638,8 @@
 					if ($resultCheck > 0) {
 						
 						$rowjobseekers = mysqli_fetch_assoc($result);
-					
+						//For Saving
+						$_SESSION['jobid'] = $rowjobseekers['jobid'];
 					}
 				}
 			?>
@@ -1757,7 +1758,8 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
-					$sqldata = "SELECT 
+					$sqldata = "SELECT
+									b.id as coursefid,
 									b.paytype,
 									b.stdname,
 									b.thrdrepname,
@@ -1775,7 +1777,8 @@
 					if ($resultCheck > 0) {
 						
 						$rowcoursefee = mysqli_fetch_assoc($result);
-					
+						//For Saving
+						$_SESSION['coursefid'] = $rowcoursefee['coursefid'];
 					}
 				}
 			?>
@@ -1868,6 +1871,7 @@
 			<?php 
 				if (isset($_GET['ptid'])) {
 					$sqldata = "SELECT 
+									b.id as centid,
 									b.cntrallow,
 									b.allowances,
 									b.refnum,
@@ -1883,7 +1887,8 @@
 					if ($resultCheck > 0) {
 						
 						$rowcentrelink = mysqli_fetch_assoc($result);
-					
+						//For Saving
+						$_SESSION['centid'] = $rowcentrelink['centid'];
 					}
 				}
 			?>

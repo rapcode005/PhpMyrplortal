@@ -1,14 +1,12 @@
 <?php
 	include_once '../../data/dbh.php';
 	session_start();
-	if (isset($_POST['submitupdate'])) {
+	if (isset($_GET['submitupdate'])) {
 		
 		
 		//Personal
 		personaldt();
-		//Studentinfo ID
-		$id = $_SESSION['stdid'];
-		header("Location: ../studentdt.php?ptid=".$id."&success");
+		curempstatus();
 	}
 	
 	function yesorno($var) {
@@ -16,7 +14,7 @@
 		if ($var == "Yes") {
 			$return = "1";
 		}
-		elseif ($stddisabi == "No") {
+		elseif ($var == "No") {
 			$return = "0";
 		}
 		else {
@@ -27,13 +25,13 @@
 	}
 	
 	function personaldt() {
-		$stfname = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdfname']);
-		$stgname = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdgname']);
-		$stpname = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdpname']);
-		$stbth = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdbth']);
-		$stage = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdage']);
-		$course = mysqli_real_escape_string($GLOBALS['conn'],$_POST['optcourse']);
-		$stdcode = mysqli_real_escape_string($GLOBALS['conn'],$_POST['stdcode']);
+		$stfname = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdfname']);
+		$stgname = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdgname']);
+		$stpname = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdpname']);
+		$stbth = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdbth']);
+		$stage = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdage']);
+		$course = mysqli_real_escape_string($GLOBALS['conn'],$_GET['optcourse']);
+		$stdcode = mysqli_real_escape_string($GLOBALS['conn'],$_GET['stdcode']);
 				
 		if (isset($_SESSION['perid'])) {
 			
@@ -49,12 +47,12 @@
 	}
 	
 	function residence() {
-		$stdbuildr = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdbuildr']);
-		$stdflastr = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdflastr']);
-		$stdstrnumr = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdstrnumr']);
-		$stdsltr = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdsltr']);
-		$stdstater = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdstater']);
-		$stdptlr = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdptlr']);
+		$stdbuildr = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdbuildr']);
+		$stdflastr = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdflastr']);
+		$stdstrnumr = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdstrnumr']);
+		$stdsltr = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdsltr']);
+		$stdstater = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdstater']);
+		$stdptlr = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdptlr']);
 		
 		//Check if values are empty
 		if (empty($stdbuildr) && empty($stdflastr) && empty($stdstrnumr) &&
@@ -66,11 +64,13 @@
 		else {
 			
 			//Check if there is no record yet
-			$sqlcheck = "SELECT count(*) as cnt FROM residence WHERE id='".$_SESSION['resdid']."'";
-			$resultcheck = mysqli_query($GLOBALS['conn'],$sqlcheck);
-		
-			if ($row = mysqli_fetch_assoc($resultcheck)) {
-				$count =  $row['cnt'];
+			if (isset($_SESSION['resdid'])) {
+				$id = $_SESSION['resdid'];
+				$count = 1;
+			}
+			else {
+				$id = 0;
+				$count = 0;
 			}
 			
 			if ($count == 0) {
@@ -100,7 +100,7 @@
 				
 				$update = "UPDATE residence SET building='$stdbuildr',flat='$stdflastr',
 				street='$stdstrnumr',suburb='$stdsltr',state='$stdstater'
-				,postalcode='$stdptlr' WHERE id=".$_SESSION['resdid'].";";
+				,postalcode='$stdptlr' WHERE id=".$id.";";
 				
 				if(mysqli_query($GLOBALS['conn'],$update)) {
 					postaladd();
@@ -111,12 +111,12 @@
 	}
 	
 	function postaladd() {
-		$stdbuildp = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdbuildp']);
-		$stdflastp = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdflastp']);
-		$stdstrnump= mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdstrnump']);
-		$stdsltp = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdsltp']);
-		$statept = mysqli_real_escape_string($GLOBALS['conn'], $_POST['statept']);
-		$stdptlp = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdptlp']);
+		$stdbuildp = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdbuildp']);
+		$stdflastp = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdflastp']);
+		$stdstrnump= mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdstrnump']);
+		$stdsltp = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdsltp']);
+		$statept = mysqli_real_escape_string($GLOBALS['conn'], $_GET['statept']);
+		$stdptlp = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdptlp']);
 		
 		//Check if values are empty
 		if (empty($stdbuildp) && empty($stdflastp) && empty($stdstrnump) &&
@@ -128,11 +128,13 @@
 		else {
 			
 			//Check if there is no record yet
-			$sqlcheck = "SELECT count(*) as cnt FROM postaladdress WHERE id='".$_SESSION['postid']."'";
-			$resultcheck = mysqli_query($GLOBALS['conn'],$sqlcheck);
-		
-			if ($row = mysqli_fetch_assoc($resultcheck)) {
-				$count =  $row['cnt'];
+			if (isset($_SESSION['postid'])) {
+				$id = $_SESSION['postid'];
+				$count = 1;
+			}
+			else {
+				$id = 0;
+				$count = 0;
 			}
 			
 			if ($count == 0) {
@@ -161,7 +163,7 @@
 				
 				$update = "UPDATE postaladdress SET building='$stdbuildp',flat='$stdflastp',
 				street='$stdstrnump',suburb='$stdsltp',state='$statept'
-				,postalcode='$stdptlp' WHERE id=".$_SESSION['postid'].";";
+				,postalcode='$stdptlp' WHERE id=".$id.";";
 				
 				if(mysqli_query($GLOBALS['conn'],$update)) {
 					phonecontact();
@@ -172,10 +174,10 @@
 	}
 	
 	function phonecontact() {
-		$stdhome = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdhome']);
-		$stdwork = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdwork']);
-		$stdmobile = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdmobile']);
-		$stdemail = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdemail']);
+		$stdhome = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdhome']);
+		$stdwork = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdwork']);
+		$stdmobile = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdmobile']);
+		$stdemail = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdemail']);
 		
 		//Check if values are empty
 		if (empty($stdhome) && empty($stdwork) && empty($stdmobile) &&
@@ -187,11 +189,13 @@
 		else {
 			
 			//Check if there is no record yet
-			$sqlcheck = "SELECT count(*) as cnt FROM phonecontact WHERE id='".$_SESSION['pntid']."'";
-			$resultcheck = mysqli_query($GLOBALS['conn'],$sqlcheck);
-		
-			if ($row = mysqli_fetch_assoc($resultcheck)) {
-				$count =  $row['cnt'];
+			if (isset($_SESSION['pntid'])) {
+				$id = $_SESSION['pntid'];
+				$count = 1;
+			}
+			else {
+				$id = 0;
+				$count = 0;
 			}
 			
 			if ($count == 0) {
@@ -220,7 +224,7 @@
 				
 				$update = "UPDATE phonecontact SET homeph='$stdhome',workph='$stdwork',
 				mobile='$stdmobile',email='$stdemail'
-				WHERE id=".$_SESSION['pntid'].";";
+				WHERE id=".$id.";";
 				
 				if(mysqli_query($GLOBALS['conn'],$update)) {
 					emergency();
@@ -232,10 +236,10 @@
 	}
 	
 	function emergency() {
-		$stdhomee = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdhomee']);
-		$stdworke = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdworke']);
-		$stdmobilee = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdmobilee']);
-		$stdemaile = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdemaile']);
+		$stdhomee = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdhomee']);
+		$stdworke = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdworke']);
+		$stdmobilee = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdmobilee']);
+		$stdemaile = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdemaile']);
 		
 		//Check if values are empty
 		if (empty($stdhomee) && empty($stdworke) && empty($stdmobilee) &&
@@ -247,11 +251,13 @@
 		else {
 			
 			//Check if there is no record yet
-			$sqlcheck = "SELECT count(*) as cnt FROM emergency WHERE id='".$_SESSION['emegid']."'";
-			$resultcheck = mysqli_query($GLOBALS['conn'],$sqlcheck);
-		
-			if ($row = mysqli_fetch_assoc($resultcheck)) {
-				$count =  $row['cnt'];
+			if (isset($_SESSION['emegid'])) {
+				$id = $_SESSION['emegid'];
+				$count = 1;
+			}
+			else {
+				$id = 0;
+				$count = 0;
 			}
 			
 			if ($count == 0) {
@@ -280,7 +286,7 @@
 				
 				$update = "UPDATE emergency SET homeph='$stdhomee',workph='$stdworke',
 				mobile='$stdmobilee',email='$stdemaile'
-				WHERE id=".$_SESSION['emegid'].";";
+				WHERE id=".$id.";";
 				
 				if(mysqli_query($GLOBALS['conn'],$update)) {
 					languages();
@@ -294,14 +300,14 @@
 	}
 	
 	function languages() {
-		$stdlang = mysqli_real_escape_string($GLOBALS['conn'],$_POST['stdlang']);
-		$stdstatep = mysqli_real_escape_string($GLOBALS['conn'],$_POST['stdstatep']);
-		$stdrsttype = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdrsttype']);
-		$stdvisatype= mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdvisatype']);
-		$stdenghome = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdenghome']);
-		$stdspecify = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdspecify']);
-		$stdwelleng = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdwelleng']);
-		$stdabotors = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdabotors']);
+		$stdlang = mysqli_real_escape_string($GLOBALS['conn'],$_GET['stdlang']);
+		$stdstatep = mysqli_real_escape_string($GLOBALS['conn'],$_GET['stdstatep']);
+		$stdrsttype = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdrsttype']);
+		$stdvisatype= mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdvisatype']);
+		$stdenghome = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdenghome']);
+		$stdspecify = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdspecify']);
+		$stdwelleng = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdwelleng']);
+		$stdabotors = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdabotors']);
 		
 		//Check if values are empty
 		if (empty($stdlang) && empty($stdstatep) && empty($stdrsttype) &&
@@ -314,11 +320,13 @@
 		else {
 			
 			//Check if there is no record yet
-			$sqlcheck = "SELECT count(*) as cnt FROM languages WHERE id='".$_SESSION['langid']."'";
-			$resultcheck = mysqli_query($GLOBALS['conn'],$sqlcheck);
-		
-			if ($row = mysqli_fetch_assoc($resultcheck)) {
-				$count =  $row['cnt'];
+			if (isset($_SESSION['langid'])) {
+				$id = $_SESSION['langid'];
+				$count = 1;
+			}
+			else {
+				$id = 0;
+				$count = 0;
 			}
 			
 			if($count == 0) {
@@ -350,7 +358,7 @@
 				$update = "UPDATE languages SET cntbrn='$stdlang',cntbrnother='$stdstatep',
 				rsdnttype='$stdrsttype',rsdnttypeother='$stdvisatype',languages='$stdenghome',
 				abtor='$stdabotors',engwell='$stdwelleng',languagesother='$stdspecify'
-				WHERE id=".$_SESSION['emegid'].";";
+				WHERE id=".$id.";";
 				
 				if(mysqli_query($GLOBALS['conn'],$update)) {
 					indlearnneeds();
@@ -364,10 +372,10 @@
 	}
 	
 	function indlearnneeds() {
-		$stdindicate = mysqli_real_escape_string($GLOBALS['conn'],$_POST['stdindicate']);
-		$stdotherdis = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdotherdis']);
-		$stdadjustment= mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdadjustment']);
-		$stddisabi = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stddisabi']);
+		$stdindicate = mysqli_real_escape_string($GLOBALS['conn'],$_GET['stdindicate']);
+		$stdotherdis = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdotherdis']);
+		$stdadjustment= mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdadjustment']);
+		$stddisabi = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stddisabi']);
 		
 		//Check if values are empty
 		if (empty($stdindicate) && empty($stdotherdis) && empty($stdadjustment) &&
@@ -379,15 +387,17 @@
 		else {
 		
 			//Check if there is no record yet
-			$sqlcheck = "SELECT count(*) as cnt FROM indlearnneeds WHERE id='".$_SESSION['indleid']."'";
-			$resultcheck = mysqli_query($GLOBALS['conn'],$sqlcheck);
-		
-			if ($row = mysqli_fetch_assoc($resultcheck)) {
-				$count =  $row['cnt'];
+			if (isset($_SESSION['indleid'])) {
+				$id = $_SESSION['indleid'];
+				$count = 1;
+			}
+			else {
+				$id = 0;
+				$count = 0;
 			}
 			
 			$stddisabiint = yesorno($stddisabi);
-
+						
 			if($count == 0) {
 				
 				$sql = "SELECT IFNULL(max(id),0) as maxid FROM indlearnneeds;";
@@ -414,7 +424,7 @@
 			
 				$update = "UPDATE indlearnneeds SET disabimpr=".$stddisabiint.",disyes='$stdindicate',
 				disother='$stdotherdis',disadjust='$stdadjustment'
-				WHERE id=".$_SESSION['emegid'].";";
+				WHERE id=".$id.";";
 				
 				if(mysqli_query($GLOBALS['conn'],$update)) {
 					education();
@@ -427,34 +437,37 @@
 	}
 	
 	function education() {
-		$stdhgcomschlvl = mysqli_real_escape_string($GLOBALS['conn'],$_POST['stdhgcomschlvl']);
-		$stdyearcomp = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdyearcomp']);
-		$stdseclvl = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdseclvl']);
-		$stdsuccessqual = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdsuccessqual']);
-		$stdqualsuccomp = mysqli_real_escape_string($GLOBALS['conn'], $_POST['$stdqualsuccomp']);
+		$stdhgcomschlvl = mysqli_real_escape_string($GLOBALS['conn'],$_GET['stdhgcomschlvl']);
+		$stdyearcomp = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdyearcomp']);
+		$stdseclvl = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdseclvl']);
+		$stdsuccessqual = mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdsuccessqual']);
+		if (isset($_GET["scsscomp"]))
+			$scsscomp = mysqli_real_escape_string($GLOBALS['conn'], $_GET["scsscomp"]);
+		else
+			$scsscomp = "NULL";
 		
 		//Check if values are empty
 		if (empty($stdhgcomschlvl) && empty($stdyearcomp) && empty($stdseclvl) &&
-			empty($stdsuccessqual) && empty($stdqualsuccomp)) {
+			empty($stdsuccessqual) && empty($scsscomp)) {
 			
 			reastud();
-			
 		}
 		else {
 		
 			//Check if there is no record yet
-			$sqlcheck = "SELECT count(*) as cnt FROM education WHERE id='".$_SESSION['eduid']."'";
-			$resultcheck = mysqli_query($GLOBALS['conn'],$sqlcheck);
-		
-			if ($row = mysqli_fetch_assoc($resultcheck)) {
-				$count =  $row['cnt'];
+			if (isset($_SESSION['eduid'])) {
+				$id = $_SESSION['eduid'];
+				$count = 1;
+			}
+			else {
+				$id = 0;
+				$count = 0;
 			}
 			
 			$stdseclvlint = yesorno($stdseclvl);
 			$stdsuccessqualint = yesorno($stdsuccessqual);
 			
 			if($count == 0) {
-				
 				$sql = "SELECT IFNULL(max(id),0) as maxid FROM education;";
 				$result = mysqli_query($GLOBALS['conn'],$sql);
 				
@@ -465,7 +478,7 @@
 				$num += 1;
 				
 				$insert = "INSERT INTO education(highschool,year,snd,success,successyes)
-				VALUES('$stdhgcomschlvl','".$stdyearcomp."', ".$stdseclvlint.",".$stdsuccessqualint.",'".$stdqualsuccomp."');";
+				VALUES('$stdhgcomschlvl','".$stdyearcomp."', ".$stdseclvlint.",".$stdsuccessqualint.",'".$scsscomp."');";
 				
 				if(mysqli_query($GLOBALS['conn'],$insert)) {
 					$insertstd = "Update studentinfo set educaid = ".$num.
@@ -477,45 +490,58 @@
 			else {
 				
 				$update = "UPDATE education SET highschool='$stdhgcomschlvl',year='$stdyearcomp',
-				snd=".$stdseclvlint.",success=".$stdsuccessqualint.",successyes='$stdqualsuccomp'
-				WHERE id=".$_SESSION['eduid'].";";
+				snd=".$stdseclvlint.",success=".$stdsuccessqualint.",successyes='".$scsscomp."'
+				WHERE id=".$id.";";
 				
 				if(mysqli_query($GLOBALS['conn'],$update)) {
 					reastud();
 				}
+				
 			}
 		
 		}
 	}
 	
 	function reastud() {
-
-		$reasonqual = mysqli_real_escape_string($GLOBALS['conn'],
-		$_POST['reasonqual']); 
+		if (isset($_GET["reasonqual"]))
+			$reasonqual = $_GET["reasonqual"]; 
+		else
+			$reasonqual = array();
 		
 		$otherreasonstate = mysqli_real_escape_string($GLOBALS['conn'],
-		$_POST['otherreasonstate']);
+		$_GET['otherreasonstate']);
 		
-		$hearaboutcou = mysqli_real_escape_string($GLOBALS['conn'],
-		$_POST['hearaboutcou']);
+		if (isset($_GET["hearaboutcou"]))
+			$hearaboutcou = mysqli_real_escape_string($GLOBALS['conn'],$_GET["hearaboutcou"]);
+		else
+			$hearaboutcou = "NULL";
 		
 		$advertisementwhe= mysqli_real_escape_string($GLOBALS['conn'],
-		$_POST['advertisementwhe']);
+		$_GET['advertisementwhe']);
 		
 		$wordofmout = mysqli_real_escape_string($GLOBALS['conn'],
-		$_POST['wordofmout']);
+		$_GET['wordofmout']);
 		
 		$otherhear = mysqli_real_escape_string($GLOBALS['conn'],
-		$_POST['otherhear']);
+		$_GET['otherhear']);
 		
 		//Check if values are empty
 		if (empty($reasonqual) && empty($otherreasonstate) && empty($wordofmout) &&
 			empty($hearaboutcou) && empty($advertisementwhe) && empty($otherhear)) {
 			
-			//curempstatus();
 			
 		}
 		else {
+			
+			//Check if there is no record yet
+			if (isset($_SESSION['reasid'])) {
+				$id = $_SESSION['reasid'];
+				$count = 1;
+			}
+			else {
+				$id = 0;
+				$count = 0;
+			}
 			
 			//Others
 			if(!empty($advertisementwhe)) {
@@ -531,13 +557,6 @@
 				$other = "NULL";
 			}
 			
-			//Check if there is no record yet
-			$sqlcheck = "SELECT count(*) as cnt FROM reastud WHERE id='".$_SESSION['reasid']."'";
-			$resultcheck = mysqli_query($GLOBALS['conn'],$sqlcheck);
-		
-			if ($row = mysqli_fetch_assoc($resultcheck)) {
-				$count =  $row['cnt'];
-			}
 			
 			if ($count == 0) {
 					
@@ -563,222 +582,271 @@
 					$insertstd = "Update studentinfo set reastudid = ".$num.
 					" where id=".$_SESSION['stdid'].";";
 					mysqli_query($GLOBALS['conn'],$insertstd);
-					//curempstatus();
 				}
 			
 			}
 			//Exist already
 			else {
-				
-				//Others
-				if(!empty($advertisementwhe)) {
-					$other = $advertisementwhe;
-				}
-				elseif (!empty($wordofmout)) {
-					$other =$wordofmout;
-				}
-				elseif (!empty($otherhear)) {
-					$other = $otherhear;
-				}
-				
-				$update = "UPDATE reastud SET hearabout='$stdseclvlint',
+						
+				$update = "UPDATE reastud SET hearabout='$hearaboutcou',
 				other='$otherreasonstate',
 				hearaboutv='$other'
-				WHERE id=".$_SESSION['reasid'].";";
+				WHERE id=".$id.";";
 				
 				if(mysqli_query($GLOBALS['conn'],$update)) {
-					
-					$delete = "DELETE FROM reastudlist 
-					WHERE reasid = ".$_SESSION['reasid'].";";
+
+					$delete = "DELETE FROM reastudlist WHERE reasid=".$id.";";
 					
 					if(mysqli_query($GLOBALS['conn'],$delete)) {
 					
 						foreach($reasonqual as $val) {
-							$inserts ="INSERT INTO reastudlist(descrp,reasid)
-							VALUES('".$val."','".$_SESSION['reasid']."');";
+		
+							$inserts ="INSERT INTO reastudlist(descrp,reasid) VALUES('".$val."','".$id."');";
 							mysqli_query($GLOBALS['conn'],$inserts);
 						}
-						
-					}
 					
-					//curempstatus();
-				}
+					}
 				
-			
+				}		
 			}	
 		}
 	}
 	
 	function curempstatus() {
-		
-		
-		
-		if (isset($_POST['stdcurempsts'])) {
+	
+		if (isset($_GET['stdcurempsts'])) {
 			$stdcurempsts = mysqli_real_escape_string($GLOBALS['conn'], 
-			$_POST['stdcurempsts']);
+			$_GET['stdcurempsts']);
 		}
 		else {
 			$stdcurempsts = "NULL";
 		}
 		
-		if (isset($_POST['stdbencen'])) {
-			if ($_POST['stdbencen'] == "Yes") {
-				$stdbencen = 1;
-			}
-			elseif ($_POST['stdbencen'] == "No") {
-				$stdbencen = 0;
-			}
-			else {
-				$stdbencen = "NULL";
-			}
+		
+		if (isset($_GET['stdbencen'])) {
+			$stdbencen = yesorno($_GET['stdbencen']);
 		}
 		else {
 			$stdbencen = "NULL";
 		}
 		
+		//Check if values are empty
 		if($stdcurempsts == "NULL" && $stdbencen == "NULL") {
 			employerdt();
 		}
 		else {
-			$insert = "INSERT INTO curempstatus(empstatus,regs) 
-			VALUES('".$stdcurempsts."','".$stdbencen."');";
 			
-			if(mysqli_query($GLOBALS['conn'],$insert)) {
-				//Add to studentinfo table
-				$sql = "SELECT IFNULL(max(id),0) as maxid FROM curempstatus;";
-				$result = mysqli_query($GLOBALS['conn'],$sql);
+			//Check if there is no record yet
+			if (isset($_SESSION['curempidc'])) {
+				$idc = $_SESSION['curempidc'];
+				$count = 1;
+			}
+			else {
+				$idc = 0;
+				$count = 0;
+			}
+			
+			if ($count == 0) {
 				
-				if ($row = mysqli_fetch_assoc($result)) {
-					$num = $row['maxid'];
-				}
+				$insert = "INSERT INTO curempstatus(empstatus,regs) VALUES(".$stdcurempsts.",".$stdbencen.");";
+				
+				if(mysqli_query($GLOBALS['conn'],$insert)) {
+					//Add to studentinfo table
+					$sql = "SELECT IFNULL(max(id),0) as maxid FROM curempstatus;";
+					$result = mysqli_query($GLOBALS['conn'],$sql);
+					
+					if ($row = mysqli_fetch_assoc($result)) {
+						$num = $row['maxid'];
+					}
 
+					$insertstd = "Update studentinfo set curempid = ".$num." where stdcode=".$GLOBALS['stdnum'].";";
+					mysqli_query($GLOBALS['conn'],$insertstd);
+					
+					employerdt();
+				}
 				
-				$insertstd = "Update studentinfo set curempid = ".$num.
-				" where stdcode=".$GLOBALS['stdnum'].";";
-				mysqli_query($GLOBALS['conn'],$insertstd);
+			}
+			else {
 				
-				employerdt();
+				$update = "UPDATE curempstatus SET empstatus='".$stdcurempsts."',
+				regs=".$stdbencen." WHERE id=".$idc.";";
+				
+				if(mysqli_query($GLOBALS['conn'],$update)) {
+					employerdt();
+				}
 			}
 		}
 		
 	}
 	
 	function employerdt() {
-		$empcomname = mysqli_real_escape_string($GLOBALS['conn'], $_POST['empcomname']);
-		$empcntname= mysqli_real_escape_string($GLOBALS['conn'], $_POST['empcntname']);
-		$empaddr = mysqli_real_escape_string($GLOBALS['conn'], $_POST['empaddr']);
-		$empsuburb = mysqli_real_escape_string($GLOBALS['conn'], $_POST['empsuburb']);
-		$empphone = mysqli_real_escape_string($GLOBALS['conn'], $_POST['empphone']);
-		$empemail = mysqli_real_escape_string($GLOBALS['conn'],$_POST['empemail']);
+		$empcomname = mysqli_real_escape_string($GLOBALS['conn'], $_GET['empcomname']);
+		$empcntname= mysqli_real_escape_string($GLOBALS['conn'], $_GET['empcntname']);
+		$empaddr = mysqli_real_escape_string($GLOBALS['conn'], $_GET['empaddr']);
+		$empsuburb = mysqli_real_escape_string($GLOBALS['conn'], $_GET['empsuburb']);
+		$empphone = mysqli_real_escape_string($GLOBALS['conn'], $_GET['empphone']);
+		$empemail = mysqli_real_escape_string($GLOBALS['conn'],$_GET['empemail']);
 		
 		if (empty($empcomname) && empty($empcntname) && empty($empaddr) &&
 		empty($empsuburb) && empty($empphone) && empty($empemail)) {
 			apprentrn();
 		}
 		else {
-			$insert = "INSERT INTO employerdt(empcomname,empcntname,empaddress,
-			empsub,emphone,empemail)
-			VALUES('".$empcomname."','".$empcntname."','".$empaddr."','".$empsuburb."','".$empphone."'
-			,'".$empemail."');";
 			
-			if(mysqli_query($GLOBALS['conn'],$insert)){
-				//Add to studentinfo table
-				$sql = "SELECT IFNULL(max(id),0) as maxid FROM employerdt;";
-				$result = mysqli_query($GLOBALS['conn'],$sql);
+			//Check if there is no record yet
+			if (isset($_SESSION['empdtid'])) {
+				$id = $_SESSION['empdtid'];
+				$count = 1;
+			}
+			else {
+				$id = 0;
+				$count = 0;
+			}
+			
+			if ($count == 0) {
 				
-				if ($row = mysqli_fetch_assoc($result)) {
-					$num = $row['maxid'];
+				$insert = "INSERT INTO employerdt(empcomname,empcntname,empaddress,
+				empsub,emphone,empemail)
+				VALUES('".$empcomname."','".$empcntname."','".$empaddr."','".$empsuburb."','".$empphone."'
+				,'".$empemail."');";
+				
+				if(mysqli_query($GLOBALS['conn'],$insert)){
+					//Add to studentinfo table
+					$sql = "SELECT IFNULL(max(id),0) as maxid FROM employerdt;";
+					$result = mysqli_query($GLOBALS['conn'],$sql);
+					
+					if ($row = mysqli_fetch_assoc($result)) {
+						$num = $row['maxid'];
+					}
+					
+					$insertstd = "Update studentinfo set empid = ".$num.
+					" where stdcode=".$GLOBALS['stdnum'].";";
+					mysqli_query($GLOBALS['conn'],$insertstd);
+					
+					apprentrn();
+				}
+			}
+			else {
+				
+				$update = "UPDATE employerdt SET empcomname='".$empcomname."',
+				empcntname='".$empcntname."',empaddress='".$empaddr."',
+				empsub='".$empsuburb."',emphone='".$empphone."',empemail='".$empemail."' WHERE id=".$id.";";
+				
+				if(mysqli_query($GLOBALS['conn'],$update)) {
+					apprentrn();
 				}
 				
-				
-				$insertstd = "Update studentinfo set empid = ".$num.
-				" where stdcode=".$GLOBALS['stdnum'].";";
-				mysqli_query($GLOBALS['conn'],$insertstd);
-				
-				apprentrn();
 			}
+			
 		}
 	}
 	
 	function apprentrn() {
 		
-		if(empty($_POST['apprentrain']) && empty($_POST['strdateemp']) &&
-		empty($_POST['empjobtitle']) &&  empty($_POST['emphrperweek'])) {
+		$strdateemp = mysqli_real_escape_string($GLOBALS['conn'], $_GET['strdateemp']);
+		$empjobtitle= mysqli_real_escape_string($GLOBALS['conn'], $_GET['empjobtitle']);
+		$emphrperweek = mysqli_real_escape_string($GLOBALS['conn'], $_GET['emphrperweek']);
+		$apprentrain = mysqli_real_escape_string($GLOBALS['conn'], $_GET['apprentrain']);
+		
+		if(empty($apprentrain) && empty($strdateemp) &&
+		empty($empjobtitle) &&  empty($emphrperweek)) {
 			
 			recogprior();
 			
 		}
 		else {
 			
-			if ($_POST['apprentrain'] == "Yes") {
-				$apprentrain = 1;
-			}
-			elseif ($_POST['apprentrain'] == "No") {
-				$apprentrain = 0;
-			}
-			else {
-				$apprentrain = "NULL";
-			}
-			
-			$strdateemp = mysqli_real_escape_string($GLOBALS['conn'], $_POST['strdateemp']);
-			$empjobtitle= mysqli_real_escape_string($GLOBALS['conn'], $_POST['empjobtitle']);
-			$emphrperweek = mysqli_real_escape_string($GLOBALS['conn'], $_POST['emphrperweek']);
-			
-			$sql = "SELECT IFNULL(max(id),0) as maxid FROM apprentrn;";
-			$result = mysqli_query($GLOBALS['conn'],$sql);
-		
-			if ($row = mysqli_fetch_assoc($result)) {
-				$num = $row['maxid'];
-			}
-			
-			$num += 1;
-			
-			$insert = "INSERT INTO apprentrn(appres,appresdate,
-			appretitle,hrsperweek)
-			VALUES('".$apprentrain."','".$strdateemp."','".$empjobtitle."'
-			,'".$emphrperweek."');";
-			
-			if(mysqli_query($GLOBALS['conn'],$insert)){
-				//Add to studentinfo table
-				$insertstd = "Update studentinfo set appid = ".$num.
-				" where stdcode=".$GLOBALS['stdnum'].";";
-				mysqli_query($GLOBALS['conn'],$insertstd);
-				recogprior();
-			}
-			
-		}
-	}
-	
-	function recogprior() {
-		if (isset($_POST['recgprlrcr'])) {
-			
-			if ($_POST['recgprlrcr'] == "Yes") {
-				$recgprlrcr = 1;
-			}
-			elseif ($_POST['recgprlrcr'] == "No") {
-				$recgprlrcr = 0;
+			//Check if there is no record yet
+			if (isset($_SESSION['apptid'])) {
+				$id = $_SESSION['apptid'];
+				$count = 1;
 			}
 			else {
-				$recgprlrcr = "NULL";
+				$id = 0;
+				$count = 0;
 			}
 			
-			$insert = "INSERT INTO recogprior(recog)
-			VALUES('".$recgprlrcr."');";
+			$apprentrainint = yesorno($apprentrain);
 			
-			if(mysqli_query($GLOBALS['conn'],$insert)){
-				//Add to studentinfo table
-				$sql = "SELECT IFNULL(max(id),0) as maxid FROM recogprior;";
+			if ($count == 0) {
+				$sql = "SELECT IFNULL(max(id),0) as maxid FROM apprentrn;";
 				$result = mysqli_query($GLOBALS['conn'],$sql);
 			
 				if ($row = mysqli_fetch_assoc($result)) {
 					$num = $row['maxid'];
 				}
 				
-				$insertstd = "Update studentinfo set recogid = ".$num.
-				" where stdcode=".$GLOBALS['stdnum'].";";
-				mysqli_query($GLOBALS['conn'],$insertstd);
+				$num += 1;
 				
-				jobseekers();
+				$insert = "INSERT INTO apprentrn(appres,appresdate,
+				appretitle,hrsperweek)
+				VALUES('".$apprentrainin."','".$strdateemp."','".$empjobtitle."'
+				,'".$emphrperweek."');";
+				
+				if(mysqli_query($GLOBALS['conn'],$insert)){
+					//Add to studentinfo table
+					$insertstd = "Update studentinfo set appid = ".$num.
+					" where stdcode=".$GLOBALS['stdnum'].";";
+					mysqli_query($GLOBALS['conn'],$insertstd);
+					recogprior();
+				}
+			}
+			else {
+				
+				$update = "UPDATE apprentrn SET appres=".$apprentrainint.",
+				appresdate='".$strdateemp."',appretitle='".$empjobtitle."',
+				hrsperweek='".$emphrperweek."' WHERE id=".$id.";";
+				
+				if(mysqli_query($GLOBALS['conn'],$update)) {
+					recogprior();
+				}
+			
+			}
+			
+		}
+	}
+	
+	function recogprior() {
+		if (isset($_GET['recgprlrcr'])) {
+			
+			$recgprlrcr = yesorno($_GET['recgprlrcr']);
+			
+			//Check if there is no record yet
+			if (isset($_SESSION['recogid'])) {
+				$id = $_SESSION['recogid'];
+				$count = 1;
+			}
+			else {
+				$id = 0;
+				$count = 0;
+			}
+			
+			if ($count == 0) {
+				$insert = "INSERT INTO recogprior(recog)
+				VALUES(".$recgprlrcr.");";
+				
+				if(mysqli_query($GLOBALS['conn'],$insert)){
+					//Add to studentinfo table
+					$sql = "SELECT IFNULL(max(id),0) as maxid FROM recogprior;";
+					$result = mysqli_query($GLOBALS['conn'],$sql);
+				
+					if ($row = mysqli_fetch_assoc($result)) {
+						$num = $row['maxid'];
+					}
+					
+					$insertstd = "Update studentinfo set recogid = ".$num.
+					" where stdcode=".$GLOBALS['stdnum'].";";
+					mysqli_query($GLOBALS['conn'],$insertstd);
+					
+					jobseekers();
+				}
+			}
+			else {
+				$update = "UPDATE recogprior SET recog=".$recgprlrcr." WHERE id='".$id."';";
+				
+				if(mysqli_query($GLOBALS['conn'],$update)) {
+					jobseekers();
+				}
 			}
 		}
 		else {
@@ -788,86 +856,111 @@
 	}
 	
 	function jobseekers() {
-		$jobsrchagen = mysqli_real_escape_string($GLOBALS['conn'], $_POST['jobsrchagen']);
-		$emocorname= mysqli_real_escape_string($GLOBALS['conn'], $_POST['emocorname']);
-		$jobskrsuburb = mysqli_real_escape_string($GLOBALS['conn'], $_POST['jobskrsuburb']);
-		$jobskrlandline = mysqli_real_escape_string($GLOBALS['conn'], $_POST['jobskrlandline']);
-		$jobskrmobile = mysqli_real_escape_string($GLOBALS['conn'], $_POST['jobskrmobile']);
-		$jobskremail = mysqli_real_escape_string($GLOBALS['conn'],$_POST['jobskremail']);
-		
-		if (isset($_POST['jbaclient'])) {
-			$jbaclient = mysqli_real_escape_string($GLOBALS['conn'],$_POST['jbaclient']);
-		}
-		else {
-			$jbaclient = "NULL";
-		}
-		
-		if (isset($_POST['jbsrcagencypart'])) {
-			if ($_POST['jbsrcagencypart'] == "Yes") {
-				$jbsrcagencypart = 1; 
-			}
-			elseif ($_POST['jbsrcagencypart'] == "No") {
-				$jbsrcagencypart = 0;
-			}
-			else {
-				$jbsrcagencypart = "NULL";
-			}
-		}
-		else {
-			$jbsrcagencypart = "NULL";
-		}
-		
+		$jobsrchagen = mysqli_real_escape_string($GLOBALS['conn'], $_GET['jobsrchagen']);
+		$emocorname= mysqli_real_escape_string($GLOBALS['conn'], $_GET['emocorname']);
+		$jobskrsuburb = mysqli_real_escape_string($GLOBALS['conn'], $_GET['jobskrsuburb']);
+		$jobskrlandline = mysqli_real_escape_string($GLOBALS['conn'], $_GET['jobskrlandline']);
+		$jobskrmobile = mysqli_real_escape_string($GLOBALS['conn'], $_GET['jobskrmobile']);
+		$jobskremail = mysqli_real_escape_string($GLOBALS['conn'],$_GET['jobskremail']);
+		$jbaclient = mysqli_real_escape_string($GLOBALS['conn'],$_GET['jbaclient']);
+		$jbsrcagencypart = mysqli_real_escape_string($GLOBALS['conn'],$_GET['jbsrcagencypart']);
+			
 		//Check if all fields are empty
 		if(empty($jobsrchagen) && empty($emocorname) && empty($jobskrsuburb) &&
 			empty($jobskrlandline) && empty($jobskrmobile) && empty($jobskremail)
-		    && ($jbaclient == "NULL") && ($jbsrcagencypart == "NULL")) {
+		    && empty($jbaclient) && empty($jbsrcagencypart)) {
 			centrelink();
 		}
 		else {
-			$insert = "INSERT INTO jobseekers(jbseekagen,empcoorname,jobseeksur,
+			
+			//Check if there is no record yet
+			if (isset($_SESSION['jobid'])) {
+				$id = $_SESSION['jobid'];
+				$count = 1;
+			}
+			else {
+				$id = 0;
+				$count = 0;
+			}
+			
+			$jbsrcagencypartint = yesorno($jbsrcagencypart);
+			
+			if ($count == 0) {
+				$insert = "INSERT INTO jobseekers(jbseekagen,empcoorname,jobseeksur,
 					landline,jobseeknobile,jobseekstrdte,jsaclient,jobsearchfee)
-			VALUES('".$jobsrchagen."','".$emocorname."','".$jobskrsuburb."','".$jobskrlandline."',
-			'".$jobskrmobile."','".$jobskremail."','".$jbaclient."','".$jbsrcagencypart."');";
-			
-			if(mysqli_query($GLOBALS['conn'],$insert)){
-				//Add to studentinfo table
-				$sql = "SELECT IFNULL(max(id),0) as maxid FROM jobseekers;";
-				$result = mysqli_query($GLOBALS['conn'],$sql);
-			
-				if ($row = mysqli_fetch_assoc($result)) {
-					$num = $row['maxid'];
-				}
+				VALUES('".$jobsrchagen."','".$emocorname."','".$jobskrsuburb."','".$jobskrlandline."',
+				'".$jobskrmobile."','".$jobskremail."','".$jbaclient."',".$jbsrcagencypartint.");";
 				
-				$insertstd = "Update studentinfo set jobid = ".$num.
-				" where stdcode=".$GLOBALS['stdnum'].";";
-				mysqli_query($GLOBALS['conn'],$insertstd);
+				if(mysqli_query($GLOBALS['conn'],$insert)){
+					//Add to studentinfo table
+					$sql = "SELECT IFNULL(max(id),0) as maxid FROM jobseekers;";
+					$result = mysqli_query($GLOBALS['conn'],$sql);
 				
-				if ($jbsrcagencypart == 1) {
-					coursefee();
+					if ($row = mysqli_fetch_assoc($result)) {
+						$num = $row['maxid'];
+					}
+					
+					$insertstd = "Update studentinfo set jobid = ".$num.
+					" where stdcode=".$GLOBALS['stdnum'].";";
+					mysqli_query($GLOBALS['conn'],$insertstd);
+					
+					if ($jbsrcagencypartint == "1") {
+						coursefee();
+					}
+					else {
+						centrelink();
+					}
 				}
-				else {
-					centrelink();
+			}
+			else {
+				$update = "UPDATE jobseekers SET jbseekagen='".$jobsrchagen."',empcoorname='".$emocorname."',
+				jobseeksur='".$jobskrsuburb."',landline='".$jobskrlandline."',jobseeknobile='".$jobskrmobile."',
+				jobseekstrdte='".$jobskremail."',jsaclient='".$jbaclient."',
+				jobsearchfee=".$jbsrcagencypartint." WHERE id=".$id.";";
+				
+				if(mysqli_query($GLOBALS['conn'],$update)) {
+					if ($jbsrcagencypartint == "1") {
+						coursefee();
+					}
+					else {
+						centrelink();
+					}
 				}
+				else 
+					echo $update;
 			}
 		}
 	}
 	
 	function coursefee() {
-		if (isset($_POST['paymenttype'])) {
-			$paymenttype = mysqli_real_escape_string($GLOBALS['conn'], $_POST['paymenttype']);
-			$stdnamefee= mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdnamefee']);
-			$thrdpartrep = mysqli_real_escape_string($GLOBALS['conn'], $_POST['thrdpartrep']);
-			$thrdparinv = mysqli_real_escape_string($GLOBALS['conn'], $_POST['thrdparinv']);
-			$crdtype = mysqli_real_escape_string($GLOBALS['conn'], $_POST['crdtype']);
-			$crdnum = mysqli_real_escape_string($GLOBALS['conn'], $_POST['crdnum']);
 		
-			if ($paymenttype == "NULL" && empty($stdnamefee) && empty($thrdpartrep) &&
-				empty($thrdparinv) && empty($crdtype) && empty($crdnum)) {
-				centrelink();
+		$paymenttype = mysqli_real_escape_string($GLOBALS['conn'], $_GET['paymenttype']);
+		$stdnamefee= mysqli_real_escape_string($GLOBALS['conn'], $_GET['stdnamefee']);
+		$thrdpartrep = mysqli_real_escape_string($GLOBALS['conn'], $_GET['thrdpartrep']);
+		$thrdparinv = mysqli_real_escape_string($GLOBALS['conn'], $_GET['thrdparinv']);
+		$crdtype = mysqli_real_escape_string($GLOBALS['conn'], $_GET['crdtype']);
+		$crdnum = mysqli_real_escape_string($GLOBALS['conn'], $_GET['crdnum']);
+	
+		if (empty($paymenttype) && empty($stdnamefee) && empty($thrdpartrep) &&
+			empty($thrdparinv) && empty($crdtype) && empty($crdnum)) {
+			centrelink();
+		}
+		else {
+			
+			//Check if there is no record yet
+			if (isset($_SESSION['coursefid'])) {
+				$id = $_SESSION['coursefid'];
+				$count = 1;
 			}
 			else {
+				$id = 0;
+				$count = 0;
+			}
+			
+			if ($count == 0) {
+				
 				$insert = "INSERT INTO coursefee(paytype,stdname,thrdrepname,
-						thrdinvoice,crdtype,crdnum)
+					thrdinvoice,crdtype,crdnum)
 				VALUES('".$paymenttype."','".$stdnamefee."','".$thrdpartrep."','".$thrdparinv."'
 				,'".$crdtype."','".$crdnum."');";
 				if(mysqli_query($GLOBALS['conn'],$insert)){
@@ -886,19 +979,26 @@
 					centrelink();
 				}
 			}
-		}
-		else {
-			$paymenttype = "NULL";
-			centrelink();
+			else {
+				$update = "UPDATE coursefee SET paytype='".$paymenttype."'
+				,stdname='".$stdnamefee."',thrdrepname='".$thrdpartrep."',
+				thrdinvoice='".$thrdparinv."',crdtype='".$crdtype."',
+				crdnum='".$crdnum."' WHERE id=".$id.";";
+				
+				if(mysqli_query($GLOBALS['conn'],$update)) {
+					centrelink();
+				}
+			}
 		}
 	}
 	
 	function centrelink() {
-		if (isset($_POST['regcenallow'])) { 
-			if ($_POST['regcenallow'] == "Yes") {
+		/*
+		if (isset($_GET['regcenallow'])) { 
+			if ($_GET['regcenallow'] == "Yes") {
 				$regcenallow = 1; 
 			}
-			elseif ($_POST['regcenallow'] == "No") {
+			elseif ($_GET['regcenallow'] == "No") {
 				$regcenallow= 0;
 			}
 			else {
@@ -909,38 +1009,63 @@
 			$regcenallow="NULL";
 		}
 		
-		if(isset($_POST['allowyes'])) {
-			$allowyes = mysqli_real_escape_string($GLOBALS['conn'], $_POST['allowyes']);
+		if(isset($_GET['allowyes'])) {
+			$allowyes = mysqli_real_escape_string($GLOBALS['conn'], $_GET['allowyes']);
 		}
 		else {
 			$allowyes = "NULL";
 		}
+		*/
 		
-		$refnum= mysqli_real_escape_string($GLOBALS['conn'], $_POST['refnum']);
-		$vetnum= mysqli_real_escape_string($GLOBALS['conn'], $_POST['vetnum']);
+		$allowyes = mysqli_real_escape_string($GLOBALS['conn'], $_GET['allowyes']);
+		$regcenallow = mysqli_real_escape_string($GLOBALS['conn'], $_GET['regcenallow']);
+		$refnum= mysqli_real_escape_string($GLOBALS['conn'], $_GET['refnum']);
+		$vetnum= mysqli_real_escape_string($GLOBALS['conn'], $_GET['vetnum']);
 		
-		if ($regcenallow == "NULL" && $allowyes == "NULL" && empty($refnum) ||
+		if (empty($regcenallow) && empty($allowyes) && empty($refnum) ||
 			empty($vetnum)) {
 		}
 		else {
-			$insert = "INSERT INTO centrelink(cntrallow,allowances,refnum,vetnum)
-			VALUES('".$regcenallow."','".$allowyes."','".$refnum."','".$vetnum."');";
-			mysqli_query($GLOBALS['conn'],$insert);
 			
-			//Add to studentinfo table
-			$sql = "SELECT IFNULL(max(id),0) as maxid FROM centrelink;";
-			$result = mysqli_query($GLOBALS['conn'],$sql);
-		
-			if ($row = mysqli_fetch_assoc($result)) {
-				$num = $row['maxid'];
+			//Check if there is no record yet
+			if (isset($_SESSION['centid'])) {
+				$id = $_SESSION['centid'];
+				$count = 1;
+			}
+			else {
+				$id = 0;
+				$count = 0;
 			}
 			
-			$insertstd = "Update studentinfo set centid = ".$num.
-			" where stdcode=".$GLOBALS['stdnum'].";";
-			mysqli_query($GLOBALS['conn'],$insertstd);
+			if ($count == 0) {
+				$insert = "INSERT INTO centrelink(cntrallow,allowances,refnum,vetnum)
+				VALUES('".$regcenallow."','".$allowyes."','".$refnum."','".$vetnum."');";
+				mysqli_query($GLOBALS['conn'],$insert);
+				
+				//Add to studentinfo table
+				$sql = "SELECT IFNULL(max(id),0) as maxid FROM centrelink;";
+				$result = mysqli_query($GLOBALS['conn'],$sql);
+			
+				if ($row = mysqli_fetch_assoc($result)) {
+					$num = $row['maxid'];
+				}
+				
+				$insertstd = "Update studentinfo set centid = ".$num.
+				" where stdcode=".$GLOBALS['stdnum'].";";
+				mysqli_query($GLOBALS['conn'],$insertstd);
+			}
+			else {
+				$update = "UPDATE centrelink SET cntrallow='".$regcenallow."'
+				,allowances='".$allowyes."',refnum=".$refnum.",
+				vetnum='".$vetnum."' WHERE id=".$id.";";
+					
+				if(mysqli_query($GLOBALS['conn'],$update)) {
+				}
+			}
 		}
-		
-		header("Location: ../evidence.php");
+		//Studentinfo ID
+		$id = $_SESSION['stdid'];
+		header("Location: ../studentdt.php?ptid=".$id."&success");
 	}
 	
 ?>
