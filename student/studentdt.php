@@ -1,6 +1,6 @@
 <?php 
 	include_once 'headerwithoutsearch.php';
-	include_once 'menu.php';
+	include_once 'menuwithquerystr.php';
 	include_once '../data/dbh.php';
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
@@ -22,6 +22,9 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
+					
+					$ptid = base64_decode(urldecode($_GET['ptid']));
+					
 					$sqldata = "SELECT
 									b.id as perid,
 									b.code as code,
@@ -33,11 +36,11 @@
 									a.stdcourse as stdcourse
 								FROM studentinfo a 
 					INNER JOIN personaldt b on a.stdcode = b.id 
-					WHERE a.id = ".$_GET['ptid'];
+					WHERE a.id = ".$ptid;
 					
 					
 					//Session value for personaldt
-					$_SESSION['stdid'] = $_GET['ptid'];
+					$_SESSION['stdid'] = $ptid;
 					
 					
 					$result = mysqli_query($conn, $sqldata);
@@ -115,6 +118,9 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
+					
+					$ptid = base64_decode(urldecode($_GET['ptid']));
+					
 					$sqldata = "SELECT 
 									b.id as resdid, 
 									b.building,
@@ -125,7 +131,7 @@
 									b.postalcode
 								FROM studentinfo a 
 					INNER JOIN residence b on a.rid = b.id 
-					WHERE a.id = ".$_GET['ptid'];
+					WHERE a.id = ".$ptid;
 					
 					$result = mysqli_query($conn, $sqldata);
 					$resultCheck = mysqli_num_rows($result);
@@ -205,6 +211,9 @@
 			
 				<?php 
 					if (isset($_GET['ptid'])) {
+						
+						$ptid = base64_decode(urldecode($_GET['ptid']));
+						
 						$sqldata = "SELECT 
 										b.id as postid,
 										b.building as building,
@@ -215,7 +224,7 @@
 										b.postalcode as postalcode
 									FROM studentinfo a 
 						INNER JOIN postaladdress b on a.paddid = b.id 
-						WHERE a.id = ".$_GET['ptid'];
+						WHERE a.id = ".$ptid;
 						
 						$result = mysqli_query($conn, $sqldata);
 						$resultCheck = mysqli_num_rows($result);
@@ -345,6 +354,9 @@
 			
 				<?php 
 					if (isset($_GET['ptid'])) {
+						
+						$ptid = base64_decode(urldecode($_GET['ptid']));
+						
 						$sqldata = "SELECT 
 										b.id as pntid,
 										b.homeph as homeph,
@@ -353,7 +365,7 @@
 										b.email as email
 									FROM studentinfo a 
 						INNER JOIN phonecontact b on a.phocnt = b.id 
-						WHERE a.id = ".$_GET['ptid'];
+						WHERE a.id = ".$ptid;
 						
 						$result = mysqli_query($conn, $sqldata);
 						$resultCheck = mysqli_num_rows($result);
@@ -440,6 +452,9 @@
 			
 				<?php 
 					if (isset($_GET['ptid'])) {
+						
+						$ptid = base64_decode(urldecode($_GET['ptid']));
+						
 						$sqldata = "SELECT
 										b.id as emegid,
 										b.homeph as homeph,
@@ -448,7 +463,7 @@
 										b.email as email
 									FROM studentinfo a 
 						INNER JOIN emergency b on a.emerid = b.id 
-						WHERE a.id = ".$_GET['ptid'];
+						WHERE a.id = ".$ptid;
 						
 						$result = mysqli_query($conn, $sqldata);
 						$resultCheck = mysqli_num_rows($result);
@@ -536,6 +551,9 @@
 			
 				<?php 
 					if (isset($_GET['ptid'])) {
+						
+						$ptid = base64_decode(urldecode($_GET['ptid']));
+						
 						$sqldata = "SELECT
 										b.id as langid,
 										b.cntbrn,
@@ -548,7 +566,7 @@
 										b.abtor
 									FROM studentinfo a 
 						INNER JOIN languages b on a.langid = b.id 
-						WHERE a.id = ".$_GET['ptid'];
+						WHERE a.id = ".$ptid;
 						
 						$result = mysqli_query($conn, $sqldata);
 						$resultCheck = mysqli_num_rows($result);
@@ -742,6 +760,9 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
+					
+					$ptid = base64_decode(urldecode($_GET['ptid']));
+					
 					$sqldata = "SELECT
 									b.id as indleid,
 									b.disabimpr,
@@ -750,7 +771,7 @@
 									b.disadjust
 								FROM studentinfo a 
 					INNER JOIN indlearnneeds b on a.indlearid = b.id 
-					WHERE a.id = ".$_GET['ptid'];
+					WHERE a.id = ".$ptid;
 					
 					$result = mysqli_query($conn, $sqldata);
 					$resultCheck = mysqli_num_rows($result);
@@ -893,6 +914,9 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
+					
+					$ptid = base64_decode(urldecode($_GET['ptid']));
+					
 					$sqldata = "SELECT
 									b.id as eduid,
 									b.highschool,
@@ -902,7 +926,7 @@
 									b.successyes
 								FROM studentinfo a 
 					INNER JOIN education b on a.educaid = b.id 
-					WHERE a.id = ".$_GET['ptid'];
+					WHERE a.id = ".$ptid;
 					
 					$result = mysqli_query($conn, $sqldata);
 					$resultCheck = mysqli_num_rows($result);
@@ -1083,6 +1107,9 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
+					
+					$ptid = base64_decode(urldecode($_GET['ptid']));
+					
 					$sqldata = "SELECT 
 									b.id,
 									b.hearabout,
@@ -1090,7 +1117,7 @@
 									b.hearaboutv
 								FROM studentinfo a 
 					INNER JOIN reastud b on a.reastudid = b.id 
-					WHERE a.id = ".$_GET['ptid'];
+					WHERE a.id = ".$ptid;
 					
 					$result = mysqli_query($conn, $sqldata);
 					$resultCheck = mysqli_num_rows($result);
@@ -1285,13 +1312,16 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
+					
+					$ptid = base64_decode(urldecode($_GET['ptid']));
+					
 					$sqldata = "SELECT 
 									b.id as curempidc, 
 									b.empstatus,
 									b.regs
 								FROM studentinfo a 
 					INNER JOIN curempstatus b on a.curempid = b.id 
-					WHERE a.id = ".$_GET['ptid'];
+					WHERE a.id = ".$ptid;
 					
 					$result = mysqli_query($conn, $sqldata);
 					$resultCheck = mysqli_num_rows($result);
@@ -1395,6 +1425,9 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
+					
+					$ptid = base64_decode(urldecode($_GET['ptid']));
+					
 					$sqldata = "SELECT
 									b.id as empdtid,
 									b.empcomname,
@@ -1405,7 +1438,7 @@
 									b.empemail
 								FROM studentinfo a 
 					INNER JOIN employerdt b on a.empid = b.id 
-					WHERE a.id = ".$_GET['ptid'];
+					WHERE a.id = ".$ptid;
 					
 					$result = mysqli_query($conn, $sqldata);
 					$resultCheck = mysqli_num_rows($result);
@@ -1490,6 +1523,9 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
+					
+					$ptid = base64_decode(urldecode($_GET['ptid']));
+					
 					$sqldata = "SELECT 
 									b.id as apptid,
 									b.appres,
@@ -1498,7 +1534,7 @@
 									b.hrsperweek
 								FROM studentinfo a 
 					INNER JOIN apprentrn b on a.appid = b.id 
-					WHERE a.id = ".$_GET['ptid'];
+					WHERE a.id = ".$ptid;
 					
 					$result = mysqli_query($conn, $sqldata);
 					$resultCheck = mysqli_num_rows($result);
@@ -1569,12 +1605,15 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
+					
+					$ptid = base64_decode(urldecode($_GET['ptid']));
+					
 					$sqldata = "SELECT 
 									b.id as recogid,
 									b.recog
 								FROM studentinfo a 
 					INNER JOIN recogprior b on a.recogid = b.id 
-					WHERE a.id = ".$_GET['ptid'];
+					WHERE a.id = ".$ptid;
 					
 					$result = mysqli_query($conn, $sqldata);
 					$resultCheck = mysqli_num_rows($result);
@@ -1617,6 +1656,9 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
+					
+					$ptid = base64_decode(urldecode($_GET['ptid']));
+					
 					$sqldata = "SELECT 
 									b.id as jobid,
 									b.jbseekagen,
@@ -1629,7 +1671,7 @@
 									b.jobsearchfee
 								FROM studentinfo a 
 					INNER JOIN jobseekers b on a.jobid = b.id 
-					WHERE a.id = ".$_GET['ptid'];
+					WHERE a.id = ".$ptid;
 					
 					$result = mysqli_query($conn, $sqldata);
 					$resultCheck = mysqli_num_rows($result);
@@ -1758,6 +1800,9 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
+					
+					$ptid = base64_decode(urldecode($_GET['ptid']));
+					
 					$sqldata = "SELECT
 									b.id as coursefid,
 									b.paytype,
@@ -1768,7 +1813,7 @@
 									b.crdnum
 								FROM studentinfo a 
 					INNER JOIN coursefee b on a.courseid = b.id 
-					WHERE a.id = ".$_GET['ptid'];
+					WHERE a.id = ".$ptid;
 					
 					$result = mysqli_query($conn, $sqldata);
 					$resultCheck = mysqli_num_rows($result);
@@ -1870,6 +1915,9 @@
 			
 			<?php 
 				if (isset($_GET['ptid'])) {
+					
+					$ptid = base64_decode(urldecode($_GET['ptid']));
+					
 					$sqldata = "SELECT 
 									b.id as centid,
 									b.cntrallow,
@@ -1878,7 +1926,7 @@
 									b.vetnum
 								FROM studentinfo a 
 					INNER JOIN centrelink b on a.centid = b.id 
-					WHERE a.id = ".$_GET['ptid'];
+					WHERE a.id = ".$ptid;
 					
 					$result = mysqli_query($conn, $sqldata);
 					$resultCheck = mysqli_num_rows($result);

@@ -1,10 +1,11 @@
 <?php 
-	include_once '../header.php';
+	include_once 'headerwithoutsearch.php';
 	include_once 'menu.php';
 	include_once '../data/dbh.php';
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
 	}
+	unset($_SESSION['stdid']);
 ?>
 <div class="w3-main" style="width:25%">
 	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 

@@ -1,5 +1,5 @@
 <?php
-	include_once '../header.php';
+	include_once 'headerwithsearch.php';
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
 	}
@@ -23,22 +23,29 @@
 		</thead>
 		<tbody>
 			<?php
+						
 				include_once '../data/dbh.php';
 			
 				$sql = "SELECT b.fname as fname,b.gname as gname,c.descrp as descrp,
-				b.brhday as brhday,b.age as age,a.id as id FROM studentinfo a 
+				b.brhday as brhday,b.age as age,a.id FROM studentinfo a 
 				LEFT JOIN personaldt b on a.stdcode = b.id 
 				LEFT JOIN courselist c on a.stdcourse = c.code";
 				
 				$result = mysqli_query($conn, $sql);
 				
 				while ($row = mysqli_fetch_assoc($result)) {
+					
+					//Encrypt ID
+					$linkid = urlencode(base64_encode($row['id']));
+					$linkfn = urlencode(base64_encode($row['fname']));
+					$linkgn = urlencode(base64_encode($row['gname']));
+					
 					echo "<tr>";
 					echo "<td>".$row['fname']."</td><td>".$row['gname']."</td><td>"
 					.$row['descrp']."</td><td>".$row['brhday']."</td><td>"
 					.$row['age']."</td><td><a 
 					class='w3-blueh w3-hover-green w3-padding-large
-					w3-border' href='studentdt.php?ptid=".$row['id']."'>Summary</a></td>
+					w3-border' href='studentdt.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."'>Summary</a></td>
 					</tr>";
 				}
 			?>
