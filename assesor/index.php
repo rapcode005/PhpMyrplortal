@@ -49,9 +49,12 @@
 					$linkfn = urlencode(base64_encode($row['fname']));
 					$linkgn = urlencode(base64_encode($row['gname']));
 					
+					//Format Date
+					$date=date_create($row['brhday']);
+					
 					echo "<tr>";
 					echo "<td>".$row['fname']."</td><td>".$row['gname']."</td><td>"
-					.$row['descrp']."</td><td>".$row['brhday']."</td><td>"
+					.$row['descrp']."</td><td>".date_format($date,"F d, Y")."</td><td>"
 					.$row['age']."</td><td><a 
 					class='w3-blueh w3-hover-green w3-padding-large
 					w3-border' href='studentinfo.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."'>Summary</a></td>

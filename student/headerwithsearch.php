@@ -23,13 +23,36 @@
 				class='w3-bar-item w3-button w3-button w3-blueh w3-hover-green'>
 				Logout</button>
 				</form>";
-				echo "<form action='data/searchstudent.php' method='POST' >
-				<input type='text' 
-				class='w3-bar-item w3-input w4-grayh' placeholder='Search Student..'>
-				<button type='submit' name='submitsearch'
-				class='w3-bar-item w3-button w3-blueh w3-hover-green'>
-				Go</button>
-				</form>";
+				
+				//Search
+				if (isset($_GET['st']) && !empty($_GET['st'])) {
+					
+					$search = $_GET['st'];
+					
+					echo "<form action='../student/' method='GET' >
+					<input type='text' name='st'
+					class='w3-bar-item w3-input w4-grayh'
+					value='".$search."'
+					placeholder='Search Student..'>
+					<button type='submit' name='submitsearch'
+					class='w3-bar-item w3-button w3-blueh w3-hover-green'
+					value='search'>
+					Go</button>
+					</form>";
+					
+				}
+				else {
+					
+					echo "<form action='../student/' method='GET' >
+					<input type='text' name='st'
+					class='w3-bar-item w3-input w4-grayh' placeholder='Search Student..'>
+					<button type='submit' name='submitsearch'
+					class='w3-bar-item w3-button w3-blueh w3-hover-green'
+					value='search'>
+					Go</button>
+					</form>";
+					
+				}
 			}
 		?>
 	</nav>
