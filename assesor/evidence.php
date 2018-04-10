@@ -57,13 +57,18 @@
 					
 					while ($row = mysqli_fetch_assoc($result)) {
 						echo "<tr>";
+						
+						$fln = urlencode(base64_encode($row['filename']));
+						$ft = urlencode(base64_encode($row['filetype']));
+						
+						
 						echo "<td>".$row['filename']."
 						<input type='hidden' name='filename' value='".$row['filename']."'/>
 						</td><td>".$row['filetype']."</td><td>
-						<button type='submit' name='submit' 
-						class='w3-blueh w3-hover-green w3-padding-large
-						w3-border w3-large' value=".$row['id'].">Show
-						</button>";
+						<a href='evidence.php?ptid=".$_GET['ptid']."&fnm=".$_GET['fnm']."&gnm=".$_GET['gnm']." 
+						&v=".$fln."&ft=".$ft."' class='w3-blueh w3-hover-green w3-padding-large
+						w3-border w3-large'>Show
+						</a>";
 						
 						//Student ID
 						echo "<input type='hidden' value='".$_GET['ptid']."' name='ptid'/>"; 	
@@ -85,6 +90,37 @@
 			?>
 		</table>
 	</div>
+</div>
+
+<div class="w3-container w3-white w3-card-4 w3-padding-large" style="margin-left:220px; margin-top:16px; width:40%;" >
+	<?php
+		if(isset($_GET['v']) && isset($_GET['fnm']) && 
+			isset($_GET['gnm']) && isset($_GET['ptid']) && 
+			isset($_GET['ft'])) {
+			//decode
+			$v = base64_decode(urldecode($_GET['v']));
+			$id = base64_decode(urldecode($_GET['ptid']));
+			$fn = base64_decode(urldecode($_GET['fnm']));
+			$gn = base64_decode(urldecode($_GET['gnm']));
+			$ft = base64_decode(urldecode($_GET['ft']));
+			
+			$folder =  $fn.$gn.$id;
+			if ($ft == "audio") {
+				echo "<audio controls> <source ";
+				echo "src='../evidence/".$folder."/".$v."'";
+				echo ">Your browser does not support the audio element.</audio>";
+			}
+			elseif ($ft == "image") {
+				echo "<embed src='../evidence/".$folder."/".$v."'>";
+			}
+			elseif ($ft == "video") {
+				echo "<video   controls> <source ";
+				echo "src='../evidence/".$folder."/".$v."'";
+				echo ">Your browser does not support the audio element.</video>";
+			}
+			
+		}
+	?>   
 </div>
 
 <?php

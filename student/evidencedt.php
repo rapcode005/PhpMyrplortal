@@ -15,7 +15,7 @@
 
 <div style="margin-left:220px; margin-top:16px;" >
 	<form action="data/uploadevidencedt.php" method="POST" enctype="multipart/form-data">
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
+		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 		style="width:26.5%; margin-top:20px;">
 			<input type='file' id='file' name='file' class="w3-blueh w3-hover-green 
 				w3-border" />
@@ -45,7 +45,7 @@
 			/>
 		</div>
 	</form>	
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
+		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 		style="width:50%; margin-top:20px;">
 			<table class="w3-table">
 				<?php

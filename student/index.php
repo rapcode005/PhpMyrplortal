@@ -63,7 +63,7 @@
 					.$row['descrp']."</td><td>".date_format($date,"F d, Y")."</td><td>"
 					.$row['age']."</td><td><a 
 					class='w3-blueh w3-hover-green w3-padding-large
-					w3-border' href='studentdt.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."'>Summary</a></td>
+					w3-border' href='studentdt.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st'>Summary</a></td>
 					</tr>";
 				}
 			?>

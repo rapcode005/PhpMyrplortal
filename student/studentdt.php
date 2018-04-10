@@ -1,23 +1,46 @@
 <?php 
 	include_once 'headerwithoutsearch.php';
-	include_once 'menuwithquerystr.php';
 	include_once '../data/dbh.php';
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
 	}
 ?>
+
 <div class="w3-main" style="width:25%">
 	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 
 	onclick="w3_open()">&#9776;</button>
+	<?php 
+		include_once 'menuwithquerystr.php';
+	?>
 </div>
-	
+
+<div class="w3-sidebar w3-bar-block w3-card-4" style="width:17%;right:0;
+	;margin-right:30px;height:665px;">
+	<h3 class="w3-bar-item">Content</h3>
+	<a href="#perdt" class="w3-bar-item w3-button w3-hover-green">Personal Details</a>
+    <a href="#resd" class="w3-bar-item w3-button w3-hover-green">Residence</a>
+    <a href="#ptadd" class="w3-bar-item w3-button w3-hover-green">Postal Address</a>
+    <a href="#phncntdt" class="w3-bar-item w3-button w3-hover-green">Phone and Contact details</a>
+	<a href="#emgcnt" class="w3-bar-item w3-button w3-hover-green">Emegency Contact</a>
+	<a href="#lngnculdv" class="w3-bar-item w3-button w3-hover-green">Language and Cultural Diversity</a>
+	<a href="#indlnneeds" class="w3-bar-item w3-button w3-hover-green">Individual Learning Needs</a>
+	<a href="#edu" class="w3-bar-item w3-button w3-hover-green">Education</a>
+	<a href="#refstudy" class="w3-bar-item w3-button w3-hover-green">Reason for study</a>
+	<a href="#currempst" class="w3-bar-item w3-button w3-hover-green">Current Employment Status</a>
+	<a href="#empdt" class="w3-bar-item w3-button w3-hover-green">Employer Details</a>
+	<a href="#appntr" class="w3-bar-item w3-button w3-hover-green">Apprenticeships and Traineeships</a>
+	<a href="#recogpr" class="w3-bar-item w3-button w3-hover-green">Recognition of Prior Learning/Credit</a>
+	<a href="#jobseek" class="w3-bar-item w3-button w3-hover-green">Jobseekers Seeking Concession</a>
+	<a href="#centdt" class="w3-bar-item w3-button w3-hover-green">Centrelink Details</a>
+</div>
+
 <div style="margin-left:220px; margin-top:16px;">
 	<form action="data/update.php" method="GET">
 	
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Personal Details</h2>
+				<span id="perdt"><h2>Personal Details</h2></span>
 			</header>
 			
 			<?php 
@@ -113,7 +136,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;" >
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Residence</h2>
+				<span id="resd"><h2>Residence</h2></span>
 			</header>
 			
 			<?php 
@@ -206,7 +229,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;" >
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Postal Address</h2>
+				<span id="ptadd"><h2>Postal Address</h2></span>
 			</header>
 			
 				<?php 
@@ -349,7 +372,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Phone and Contact details</h2>
+				<span id="phncntdt"><h2>Phone and Contact details</h2></span>
 			</header>
 			
 				<?php 
@@ -447,7 +470,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;" >
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Emegency Contact</h2>
+				<span id="emgcnt"><h2>Emegency Contact</h2></span>
 			</header>
 			
 				<?php 
@@ -546,7 +569,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Language and Cultural Diversity</h2>
+				<span id="lngnculdv"><h2>Language and Cultural Diversity</h2></span>
 			</header>
 			
 				<?php 
@@ -600,7 +623,7 @@
 					}
 				?> />
 				<label>Other</label></p>
-				<input type="text" class="w3-input w3-border 
+				<p><input type="text" class="w3-input w3-border 
 				w3-animate-input w3-light-grey"	
 				name="stdstatep"
 				id="stdstatep"
@@ -612,7 +635,7 @@
 					else {
 						echo "style='width:200px; display: none;'";	
 					}
-				?> />
+				?> /></p>
 			</div>
 			
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
@@ -646,7 +669,7 @@
 					}
 				?>/>
 				<label>Visa Type</label></p>
-				<input type="text" class="w3-input w3-border 
+				<p><input type="text" class="w3-input w3-border 
 				w3-animate-input w3-light-grey"	
 				name="stdvisatype"
 				id="stdvisatype"
@@ -658,7 +681,7 @@
 					else {
 						echo "style='width:200px; display: none;'";	
 					}
-				?>/>
+				?>/></p>
 			</div>
 			
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
@@ -690,7 +713,7 @@
 					else {
 						echo "style='width:200px; display: none;'";	
 					}
-				?> />
+				?>></input>
 			</div>
 			
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
@@ -725,6 +748,7 @@
 				?>/>
 				<label>Not at all</label></p>
 			</div>
+			
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>Are you of Aboriginal or Torres Strait Islander origin?<label>
@@ -750,12 +774,13 @@
 				?>/>
 				<label>Yes - Torres Strait Islander</label></p>
 			</div>
+			
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Individual Learning Needs</h2>
+				<span id="indlnneeds"><h2>Individual Learning Needs</h2></span>
 			</header>
 			
 			<?php 
@@ -815,7 +840,7 @@
 						else {
 							echo "style='display:none; margin-top:20px;'";
 						}
-					?>  >
+					?>>
 				<div class="w3-container w3-white w3-card-4 w3-padding-large">
 					<label>If yes, please indicate(You may indicate more than one)?<label>
 					<p><input class="w3-radio" type="radio" name="stdindicate" value="Vision" onclick="w3_hideotherdisability()"
@@ -881,7 +906,7 @@
 						}
 					?>/>
 					<label>Other</label></p>
-						<input type="text" class="w3-input w3-border w3-animate-input"
+					<p><input type="text" class="w3-input w3-border w3-animate-input"
 						 name="stdotherdis" 
 						id="stdotherdis" 
 						<?php
@@ -892,7 +917,7 @@
 						else {
 							echo "style='width:200px; display: none;'";	
 						}
-						?>	/>
+						?>	/></p>
 				</div>
 				<p style="margin-top:20px;">
 				<label>Adjustment<label>
@@ -904,12 +929,13 @@
 					}
 				?> /></p>
 			</div>
+			
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Education</h2>
+				<span id="edu"><h2>Education</h2></span>
 			</header>
 			
 			<?php 
@@ -1031,6 +1057,7 @@
 				?>/>
 				<label>No</label></p>
 			</div>
+			
 			<div id="qualsuccomp" class="w3-container w3-white w3-card-4 w3-padding-large"
 				<?php 
 					if (!empty($rowedu) && $rowedu['success'] == 1) {
@@ -1102,7 +1129,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Reason for study</h2>
+				<span id="refstudy"><h2>Reason for study</h2></span>
 			</header>
 			
 			<?php 
@@ -1147,7 +1174,7 @@
 			
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
-				<label>Which best describes your reasons for enrolling in the qualification?<label>
+				<p><label>Which best describes your reasons for enrolling in the qualification?<label></p>
 				<p><input class="w3-check" type="checkbox"  name="reasonqual[]" value="To get a Job"
 				<?php 
 					if (!empty($rowrealist) && in_array("To get a Job",$rowrealist)) {
@@ -1219,7 +1246,7 @@
 					}
 				?>/>
 				<label>Other reason</label></p>
-				<input type="text"
+				<p><input type="text"
 				class="w3-input w3-border w3-animate-input w3-light-grey" 		
 				name="otherreasonstate"
 				id="otherreasonstate" 
@@ -1230,8 +1257,10 @@
 					else {
 						echo "style='width:200px; Display:none;'";
 					}
-				?>/>
+				?>></input></p>
+			
 			</div>
+			
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>How did you hear about this course?</label>
@@ -1302,12 +1331,13 @@
 					}
 				?>/>
 			</div>
+			
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Current Employment Status</h2>
+				<span id="currempst"><h2>Current Employment Status</h2></span>
 			</header>
 			
 			<?php 
@@ -1420,7 +1450,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Employer Details</h2>
+				<span id="empdt"><h2>Employer Details</h2></span>
 			</header>
 			
 			<?php 
@@ -1518,7 +1548,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Apprenticeships and Traineeships</h2>
+				<span id="appntr"><h2>Apprenticeships and Traineeships</h2></span>
 			</header>
 			
 			<?php 
@@ -1600,7 +1630,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Recognition of Prior Learning/Credit</h2>
+				<span id="recogpr"><h2>Recognition of Prior Learning/Credit</h2></span>
 			</header>
 			
 			<?php 
@@ -1651,7 +1681,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Jobseekers Seeking Concession</h2>
+				<span id="jobseek"><h2>Jobseekers Seeking Concession</h2></span>
 			</header>
 			
 			<?php 
@@ -1910,7 +1940,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Centrelink Details</h2>
+				<span id="centdt"><h2>Centrelink Details</h2></span>
 			</header>
 			
 			<?php 
@@ -2034,7 +2064,7 @@
 			</div>
 		</div>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
+		<div class="w3-container w3-white  w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<button type="submit" name="submitupdate" 
 			class="w3-blueh w3-hover-green w3-padding-large

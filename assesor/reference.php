@@ -55,37 +55,46 @@
 					$result = mysqli_query($conn, $sql);
 
 					while ($row = mysqli_fetch_assoc($result)) {
-						echo "<form action='data/removerefdt.php' method='POST'><tr>";
+						
+						$fln = urlencode(base64_encode($row['filename']));
+						
+						echo "<tr>";
 						
 						echo "<td><label>".$row['filename']."</label>
 						<input type='hidden' name='fileref' value='".$row['filename']."'/>
-						</td><td><button type='submit' name='submit' 
-						class='w3-blueh w3-hover-green w3-padding-large
-						w3-border w3-large' value=".$row['id'].">Show
-						</button>";
+						</td><td><a href='reference.php?ptid=".$_GET['ptid']."&fnm=".$_GET['fnm']."&gnm=".$_GET['gnm']." 
+						&v=".$fln."' class='w3-blueh w3-hover-green w3-padding-large
+						w3-border w3-large'>Show
+						</a>";
 						
-						//Student ID
-						echo "<input type='hidden' value='".$_GET['ptid']."' name='ptid'/>"; 	
-						
-						//Family name
-						if(isset($_GET['fnm'])) {
-							echo "<input type='hidden' value='".$_GET['fnm']."' name='fnm'/>"; 	
-						}
-						
-						//Given name
-						if(isset($_GET['gnm'])) {
-							echo "<input type='hidden' value='".$_GET['gnm']."' name='gnm'/>"; 	
-						}
 						
 						echo "</td>";
 						
-						echo "</tr></form>";
+						echo "</tr>";
 					}
 				}
 			?>
 		</table>
 	</div>
 </div>
+
+<div class="w3-container w3-white w3-card-4 w3-padding-large" style="margin-left:220px; margin-top:16px;" >
+	<embed width="100%" <?php
+							if(isset($_GET['v']) && isset($_GET['fnm']) && 
+								isset($_GET['gnm']) && isset($_GET['ptid'])) {
+								//decode
+								$v = base64_decode(urldecode($_GET['v']));
+								$id = base64_decode(urldecode($_GET['ptid']));
+								$fn = base64_decode(urldecode($_GET['fnm']));
+								$gn = base64_decode(urldecode($_GET['gnm']));
+								
+								$folder =  $fn.$gn.$id;
+								
+								echo "src='../reference/".$folder."/".$v."'";
+							}
+							?>	height="2100px" name="viewfile" />
+</div>
+
 
 <?php
 	include_once '../footer.php';
