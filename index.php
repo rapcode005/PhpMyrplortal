@@ -1,12 +1,15 @@
 <?php
 	include_once 'headerhomeadmin.php';
-
+	
 	if(isset($_SESSION['u_r'])) {
 		if ($_SESSION['u_r'] == "admin") {
 			header("Location: adminhome.php");
 		}
 		elseif ($_SESSION['u_r'] == "agent") {
 			header("Location: student/");
+		}
+		elseif ($_SESSION['u_r'] == "aser") {
+			header("Location: assessor/");
 		}
 	}
 	else {

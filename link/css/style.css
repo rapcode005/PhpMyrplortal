@@ -158,20 +158,19 @@ body {
 	width: 10%;
 }
 
-
 /*table
 Generic Styling, for Desktops/Laptops 
-*/
+*//* 
 table { 
 	width: 70%; 
 	border-collapse: collapse; 
 }
-/* Zebra striping */
+Zebra striping 
 tr:nth-of-type(odd) { 
-	background: #eee; 
+	background: #09519c; 
 }
 th { 
-	background: #09519c; 
+	background: #eee; 
 	color: white; 
 	font-weight: bold; 
 }
@@ -181,3 +180,7 @@ td, th {
 	text-align: left; 
 }
 
+h2 {
+  margin-top:20px;
+}
+*/

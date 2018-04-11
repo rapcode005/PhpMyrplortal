@@ -42,8 +42,11 @@
 							header("Location: ../adminhome.php");
 						}
 						elseif ($row['userrole'] == "agent") {
-							header("Location: ../student/index.php");
-						}	
+							header("Location: ../student/");
+						}
+						elseif  ($row['userrole'] == "aser") {
+							header("Location: ../assessor/");
+						}
 						exit();
 					}
 				}
