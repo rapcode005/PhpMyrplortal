@@ -36,8 +36,8 @@
 			}
 			
 			echo "<a href='studentdt.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=st' class='w3-bar-item ".$st." w3-button w3-hover-green'>Application Form</a>
-				<a href='referencedt.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=ev' class='w3-bar-item ".$ev." w3-button w3-hover-green'>Reference</a>
-				<a href='evidencedt.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=rf' class='w3-bar-item ".$rf." w3-button w3-hover-green'>Evidence</a>";
+				<a href='referencedt.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=rf' class='w3-bar-item ".$rf." w3-button w3-hover-green'>Reference</a>
+				<a href='evidencedt.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=ev' class='w3-bar-item ".$ev." w3-button w3-hover-green'>Evidence</a>";
 		}
 	?>
 </div>

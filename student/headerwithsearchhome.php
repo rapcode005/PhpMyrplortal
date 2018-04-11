@@ -16,6 +16,8 @@
 
 <header>
 	<nav class="w3-bar w3-blueh w3-border w3-small">
+		<a href='../student/' class="w3-bar-item w3-button w3-blueh w3-hover-green">
+		<i class="fa fa-home"></i></a>
 		<?php 
 			if (isset($_SESSION['u_r'])) {
 				//Logout

@@ -1,5 +1,5 @@
 <?php 
-	include_once 'headerwithoutsearch.php';
+	include_once 'headerwithsearchhome.php';
 	include_once 'menuwithquerystr.php';
 	include_once '../data/dbh.php';
 	if (isset($_SESSION['uid']) == false) {
@@ -14,7 +14,7 @@
 
 <div style="margin-left:220px; margin-top:16px;" >
 	<form action="data/uploadrefdt.php" method="POST" enctype="multipart/form-data">
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
+		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 		style="width:26.5%; margin-top:20px;">
 			<input type='file' id='file' name='file' class="w3-blueh w3-hover-green 
 			w3-border" />
@@ -42,6 +42,13 @@
 				}
 			?>
 			/>
+			<input type="hidden" name="h" 
+			<?php 
+				if(isset($_GET['h'])) {
+					echo "Value='".$_GET['h']."'";	
+				}
+			?>
+			/>
 		</div>
 	</form>	
 	<div class="w3-container w3-white w3-card-4 w3-padding-large"
@@ -55,7 +62,8 @@
 
 				include_once '../data/dbh.php';
 				
-				if (isset($_GET['ptid']))
+				if (isset($_GET['ptid']) && isset($_GET['fnm']) &&
+				isset($_GET['gnm']) && isset($_GET['h']))
 				{	
 					//decode
 					$ptid = base64_decode(urldecode($_GET['ptid']));
@@ -79,15 +87,14 @@
 						echo "<input type='hidden' value='".$_GET['ptid']."' name='ptid'/>"; 	
 						
 						//Family name
-						if(isset($_GET['fnm'])) {
-							echo "<input type='hidden' value='".$_GET['fnm']."' name='fnm'/>"; 	
-						}
+						echo "<input type='hidden' value='".$_GET['fnm']."' name='fnm'/>"; 	
 						
 						//Given name
-						if(isset($_GET['gnm'])) {
-							echo "<input type='hidden' value='".$_GET['gnm']."' name='gnm'/>"; 	
-						}
+						echo "<input type='hidden' value='".$_GET['gnm']."' name='gnm'/>"; 	
 						
+						//Higlight
+						echo "<input type='hidden' value='".$_GET['h']."' name='h'/>"; 
+							
 						echo "</td>";
 						
 						echo "</tr></form>";

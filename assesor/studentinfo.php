@@ -1,29 +1,12 @@
 <?php 
-	include_once 'headerwithoutsearch.php';
+	include_once 'headerwithsearchhome.php';
 	include_once '../data/dbh.php';
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
 	}
 ?>
-<div class="w3-top">
-	<header>
-		<nav class="w3-bar w3-blueh w3-border w3-small">
-		<a href='../assesor/' class="w3-bar-item w3-button w3-blueh w3-hover-green">
-		<i class="fa fa-home"></i></a>
-		<?php 
-			if (isset($_SESSION['u_r'])) {
-				echo "<form action='../data/logout.php' method='POST' >
-				<button type='submit' name='submitlogout'
-				class='w3-bar-item w3-button w3-button w3-blueh w3-hover-green'>
-				Logout</button>
-				</form>";
-			}
-		?>
-		</nav>
-	</header>
-</div>
 
-<div style="width:25%;margin-top:40px;">
+<div style="width:25%;">
 	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 
 	onclick="w3_open()">&#9776;</button>
 	<?php
@@ -56,7 +39,7 @@
 									c.descrp
 								FROM studentinfo a 
 					INNER JOIN personaldt b on a.stdcode = b.id 
-					INNER JOIN courselist c on a.stdcourse = c.code
+					left JOIN courselist c on a.stdcourse = c.code
 					WHERE a.id = ".$ptid;
 					
 					
@@ -77,9 +60,8 @@
 						$_SESSION['stdgname'] = $rowrpd['gname'];
 						$_SESSION['perid'] = $rowrpd['perid'];
 						
-					}
-		
-					
+					}		
+			
 				}
 			?>
 			
@@ -89,7 +71,7 @@
 					<th>Value</th>
 				</tr>
 				<tr class="w3-white">
-					<td><?php echo "Student Code"; ?></td>
+					<td><?php echo "USI"; ?></td>
 					<td><?php if (isset($rowrpd['code'])) { echo $rowrpd['code']; } ?></td>
 				</tr>
 				<tr>

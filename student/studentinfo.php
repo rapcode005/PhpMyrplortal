@@ -35,7 +35,7 @@
 				</select>
 			</p>
 			<p style="margin-top:20px;">
-			<label>Student Code</label><input type="text" 
+			<label>USI</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
 			style="width:500px"		
@@ -754,7 +754,7 @@
 			</div>
 		</div>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
+		<div class="w3-container w3-white w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<button type="submit" name="submitsave" 
 			class="w3-blueh w3-hover-green w3-padding-large

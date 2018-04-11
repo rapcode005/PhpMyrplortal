@@ -18,6 +18,7 @@
 	<nav class="w3-bar w3-blueh w3-border w3-small">
 		<?php 
 			if (isset($_SESSION['u_r'])) {
+				//Logout
 				echo "<form action='../data/logout.php' method='POST' >
 				<button type='submit' name='submitlogout'
 				class='w3-bar-item w3-button w3-button w3-blueh w3-hover-green'>
@@ -25,7 +26,7 @@
 				</form>";
 				
 				//Search
-				if (isset($_GET['st']) && !empty($_GET['st'])) {
+				if (isset($_GET['st'])) {
 					
 					$search = $_GET['st'];
 					

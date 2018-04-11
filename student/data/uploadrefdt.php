@@ -21,7 +21,8 @@
 		$iden = $_POST['ptid'];
 		$fnen = $_POST['fnm'];
 		$gnen = $_POST['gnm'];
-		$urlquery = "ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen;
+		$h = $_POST['h'];
+		$urlquery = "ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=".$h;
 		
 		if (in_array($fileActualExt, $allowed)) {
 			if($fileError === 0) {

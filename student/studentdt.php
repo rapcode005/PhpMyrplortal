@@ -1,5 +1,5 @@
 <?php 
-	include_once 'headerwithoutsearch.php';
+	include_once 'headerwithsearchhome.php';
 	include_once '../data/dbh.php';
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
@@ -91,7 +91,7 @@
 						echo "</select></p>";
 						
 						echo "<p style='margin-top:20px;'>
-						<label>Student Code</label><input type='text'
+						<label>USI</label><input type='text'
 						class='w3-input w3-border w3-animate-input'
 						style='width:500px'name='stdcode' 
 						value='".$row['code']."'></input></p>

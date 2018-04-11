@@ -1,5 +1,5 @@
 <?php 
-	include_once 'headerwithoutsearch.php';
+	include_once 'headerwithsearchhome.php';
 	include_once 'menuwithquerystr.php';
 	include_once '../data/dbh.php';
 	if (isset($_SESSION['uid']) == false) {
@@ -43,6 +43,13 @@
 				}
 			?>
 			/>
+			<input type="hidden" name="h" 
+			<?php 
+				if(isset($_GET['h'])) {
+					echo "Value='".$_GET['h']."'";	
+				}
+			?>
+			/>
 		</div>
 	</form>	
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
@@ -55,7 +62,8 @@
 							<th>Remove</th>
 						</tr>";
 						
-					if(isset($_GET['ptid'])) {
+					if(isset($_GET['ptid']) && isset($_GET['fnm']) &&
+					isset($_GET['gnm']) && isset($_GET['h']) ) {
 						include_once '../data/dbh.php';
 						
 						//decode
@@ -80,14 +88,13 @@
 							echo "<input type='hidden' value='".$_GET['ptid']."' name='ptid'/>"; 	
 							
 							//Family name
-							if(isset($_GET['fnm'])) {
-								echo "<input type='hidden' value='".$_GET['fnm']."' name='fnm'/>"; 	
-							}
+							echo "<input type='hidden' value='".$_GET['fnm']."' name='fnm'/>"; 	
 							
 							//Given name
-							if(isset($_GET['gnm'])) {
-								echo "<input type='hidden' value='".$_GET['gnm']."' name='gnm'/>"; 	
-							}
+							echo "<input type='hidden' value='".$_GET['gnm']."' name='gnm'/>"; 	
+							
+							//Higlight
+							echo "<input type='hidden' value='".$_GET['h']."' name='h'/>"; 
 							
 							echo "</td>";
 							echo "</tr></form>";

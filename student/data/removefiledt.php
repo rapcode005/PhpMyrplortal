@@ -8,7 +8,8 @@
 		$iden = $_POST['ptid'];
 		$fnen = $_POST['fnm'];
 		$gnen = $_POST['gnm'];
-		$urlquery = "ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen;
+		$h = $_POST['h'];
+		$urlquery = "ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=".$h;
 		
 		//Decode
 		$idp = base64_decode(urldecode($iden));
