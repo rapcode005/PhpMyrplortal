@@ -20,7 +20,7 @@
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Personal Details</h2>
+				<span id="perdt"><h2>Personal Details</h2></span>
 			</header>
 			
 			<?php 
@@ -102,12 +102,36 @@
 				</tr>
 			</table>
 			
+			<?php
+			
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['id']) &&
+					$_GET['nv'] == "perdt") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					
+					$linkid = urlencode(base64_encode($ptid));
+					$linkfn = urlencode(base64_encode($_SESSION['stdfname']));
+					$linkgn = urlencode(base64_encode($_SESSION['stdgname']));
+					
+					$notifyid = $_GET['nid'];
+					
+					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					//button update
+					echo "<a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st
+					&nid=".$notifyid."'>
+					Done</a>";
+				}
+				
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;" >
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Residence</h2>
+				<span id="resd"><h2>Residence</h2></span>
 			</header>
 			
 			<?php 
@@ -172,6 +196,27 @@
 				</tr>
 			</table>
 			
+			<?php
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['nid']) &&
+					$_GET['nv'] == "resd") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					
+					$linkid = urlencode(base64_encode($ptid));
+					$linkfn = urlencode(base64_encode($_SESSION['stdfname']));
+					$linkgn = urlencode(base64_encode($_SESSION['stdgname']));
+					
+					$notifyid = $_GET['nid'];
+					
+					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					//button update
+					echo "<a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st
+					&nid=".$notifyid."'>
+					Done</a>";
+				}
+			?>
 		</div>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"

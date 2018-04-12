@@ -45,6 +45,12 @@
 					//Session value for personaldt
 					$_SESSION['stdid'] = $ptid;
 					
+					//Comment
+					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+						$_GET['nv'] == "perdt") {
+						$cnt = base64_decode(urldecode($_GET['cnt']));
+						echo "<Label style='color:red'>".$cnt."</Label>";
+					}
 					
 					$result = mysqli_query($conn, $sqldata);
 					
@@ -107,6 +113,15 @@
 						$_SESSION['stdgname'] = $row['gname'];
 						$_SESSION['perid'] = $row['perid'];
 						
+						//Saving
+						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+							$_GET['nv'] == "perdt") {
+							echo "<button type='submit' name='submitupdate' 
+								class='w3-blueh w3-hover-green w3-padding-large
+								w3-border w3-large'
+								>Save</button>";
+						}
+						
 					}
 				}
 			?>
@@ -145,7 +160,14 @@
 						//For Saving Residence
 						$_SESSION['resdid'] = $rowresd['resdid'];	
 					}
-				}	
+				}
+				
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+					$_GET['nv'] == "resd") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					echo "<Label style='color:red'>".$cnt."</Label>";
+				}
 			?>
 			
 			<p style="margin-top:20px;">
@@ -203,6 +225,15 @@
 				}
 			?>/></p>
 			
+			<?php
+				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+					$_GET['nv'] == "resd") {
+					echo "<button type='submit' name='submitupdate' 
+						class='w3-blueh w3-hover-green w3-padding-large
+						w3-border w3-large'
+						>Save</button>";
+				}
+			?>
 			
 		</div>
 		
@@ -231,6 +262,12 @@
 						
 						$result = mysqli_query($conn, $sqldata);
 						$resultCheck = mysqli_num_rows($result);
+						
+						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+							$_GET['nv'] == "ptadd") {
+							$cnt = base64_decode(urldecode($_GET['cnt']));
+							echo "<Label style='color:red'>".$cnt."</Label>";
+						}
 						
 						if($resultCheck > 0) {
 							$row = mysqli_fetch_assoc($result);
@@ -267,6 +304,7 @@
 							
 							//For Saving Residence
 							$_SESSION['postid'] = $row['postid'];
+							
 						}
 						else {
 							echo "<p style='margin-top:20px;'>
@@ -345,6 +383,15 @@
 						style='width:200px'		
 						name='stdptlp' /></p>";
 					}
+					
+					//Saving update
+					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+						$_GET['nv'] == "ptadd") {
+						echo "<button type='submit' name='submitupdate' 
+							class='w3-blueh w3-hover-green w3-padding-large
+							w3-border w3-large'
+							>Save</button>";
+					}
 				?>
 			
 		</div>
@@ -372,6 +419,13 @@
 						
 						$result = mysqli_query($conn, $sqldata);
 						$resultCheck = mysqli_num_rows($result);
+						
+						//Comment
+						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+							$_GET['nv'] == "phncntdt") {
+							$cnt = base64_decode(urldecode($_GET['cnt']));
+							echo "<Label style='color:red'>".$cnt."</Label>";
+						}
 						
 						if($resultCheck > 0) {
 							
@@ -443,6 +497,15 @@
 						style='width:200px'	name='stdemail' /></p>";
 						
 					}
+					
+					//Saving update
+					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+						$_GET['nv'] == "phncntdt") {
+						echo "<button type='submit' name='submitupdate' 
+							class='w3-blueh w3-hover-green w3-padding-large
+							w3-border w3-large'
+							>Save</button>";
+					}
 				?>
 			
 		</div>
@@ -471,6 +534,12 @@
 						$result = mysqli_query($conn, $sqldata);
 						$resultCheck = mysqli_num_rows($result);
 						
+						//Comment
+						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+							$_GET['nv'] == "emgcnt") {
+							$cnt = base64_decode(urldecode($_GET['cnt']));
+							echo "<Label style='color:red'>".$cnt."</Label>";
+						}
 						
 						if ($resultCheck > 0) {
 							
@@ -542,6 +611,16 @@
 						style='width:200px' name='stdemaile' /></p>";
 						
 					}
+					
+					//Saving update
+					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+						$_GET['nv'] == "emgcnt") {
+						echo "<button type='submit' name='submitupdate' 
+							class='w3-blueh w3-hover-green w3-padding-large
+							w3-border w3-large'
+							>Save</button>";
+					}
+					
 				?>
 				
 		</div>
@@ -574,6 +653,12 @@
 						$result = mysqli_query($conn, $sqldata);
 						$resultCheck = mysqli_num_rows($result);
 						
+						//Comment
+						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+							$_GET['nv'] == "lngnculdv") {
+							$cnt = base64_decode(urldecode($_GET['cnt']));
+							echo "<Label style='color:red'>".$cnt."</Label>";
+						}
 						
 						if ($resultCheck > 0) {
 							
@@ -755,6 +840,17 @@
 				<label>Yes - Torres Strait Islander</label></p>
 			</div>
 			
+			<?php
+				//Saving update
+				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+					$_GET['nv'] == "lngnculdv") {
+					echo "<button type='submit' name='submitupdate' 
+						class='w3-blueh w3-hover-green w3-padding-large
+						w3-border w3-large'
+						>Save</button>";
+				}
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
@@ -787,6 +883,13 @@
 						$rowindln = mysqli_fetch_assoc($result);
 						//For Saving Residence
 						$_SESSION['indleid'] = $rowindln['indleid'];
+					}
+					
+					//Comment
+					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+						$_GET['nv'] == "indlnneeds") {
+						$cnt = base64_decode(urldecode($_GET['cnt']));
+						echo "<Label style='color:red'>".$cnt."</Label>";
 					}
 				}
 			?>
@@ -908,6 +1011,17 @@
 						echo "Value='".$rowindln['disadjust']."'";
 					}
 				?> /></p>
+				
+				<?php
+					//Saving update
+					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+						$_GET['nv'] == "indlnneeds") {
+						echo "<button type='submit' name='submitupdate' 
+							class='w3-blueh w3-hover-green w3-padding-large
+							w3-border w3-large'
+							>Save</button>";
+					}
+				?>
 			</div>
 			
 		</div>
@@ -944,6 +1058,14 @@
 						//For Saving Residence
 						$_SESSION['eduid'] = $rowedu['eduid'];
 					}
+					
+					//Comment
+					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+						$_GET['nv'] == "edu") {
+						$cnt = base64_decode(urldecode($_GET['cnt']));
+						echo "<Label style='color:red'>".$cnt."</Label>";
+					}
+					
 				}
 			?>
 			
@@ -1104,6 +1226,18 @@
 				?>/>
 				<label>Certificates other than the above</label></p>
 			</div>
+			
+			<?php
+				//Saving update
+				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+					$_GET['nv'] == "edu") {
+					echo "<button type='submit' name='submitupdate' 
+						class='w3-blueh w3-hover-green w3-padding-large
+						w3-border w3-large'
+						>Save</button>";
+				}
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
@@ -1148,6 +1282,13 @@
 							array_push($rowrealist,$rowreastudlist['descrp']);
 						}
 						
+					}
+					
+					//Comment
+					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+						$_GET['nv'] == "refstudy") {
+						$cnt = base64_decode(urldecode($_GET['cnt']));
+						echo "<Label style='color:red'>".$cnt."</Label>";
 					}
 				}
 			?>
@@ -1312,6 +1453,17 @@
 				?>/>
 			</div>
 			
+			<?php
+				//Saving update
+				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+					$_GET['nv'] == "refstudy") {
+					echo "<button type='submit' name='submitupdate' 
+						class='w3-blueh w3-hover-green w3-padding-large
+						w3-border w3-large'
+						>Save</button>";
+				}
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
@@ -1343,6 +1495,14 @@
 						$_SESSION['curempidc'] = $rowrstatus['curempidc'];
 						
 					}
+					
+					//Comment
+					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+						$_GET['nv'] == "currempst") {
+						$cnt = base64_decode(urldecode($_GET['cnt']));
+						echo "<Label style='color:red'>".$cnt."</Label>";
+					}
+					
 				}
 			?>
 			
@@ -1424,6 +1584,18 @@
 				?>/>
 				<label>No</label></p>
 			</div>
+			
+			<?php
+				//Saving update
+				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+					$_GET['nv'] == "currempst") {
+					echo "<button type='submit' name='submitupdate' 
+						class='w3-blueh w3-hover-green w3-padding-large
+						w3-border w3-large'
+						>Save</button>";
+				}
+			?>
+			
 		</div>
 		
 		
@@ -1460,6 +1632,14 @@
 						//For Saving
 						$_SESSION['empdtid'] = $rowempdt['empdtid'];
 					}
+					
+					//Comment
+					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+						$_GET['nv'] == "empdt") {
+						$cnt = base64_decode(urldecode($_GET['cnt']));
+						echo "<Label style='color:red'>".$cnt."</Label>";
+					}
+					
 				}
 			?>
 			
@@ -1523,6 +1703,18 @@
 					echo "Value='".$rowempdt['empemail']."'";
 				}
 			?>/></p>
+			
+			<?php
+				//Saving update
+				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+					$_GET['nv'] == "empdt") {
+					echo "<button type='submit' name='submitupdate' 
+						class='w3-blueh w3-hover-green w3-padding-large
+						w3-border w3-large'
+						>Save</button>";
+				}
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
@@ -1555,6 +1747,13 @@
 						$rowappren = mysqli_fetch_assoc($result);
 						//For Saving
 						$_SESSION['apptid'] = $rowappren['apptid'];
+					}
+					
+					//Comment
+					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+						$_GET['nv'] == "appntr") {
+						$cnt = base64_decode(urldecode($_GET['cnt']));
+						echo "<Label style='color:red'>".$cnt."</Label>";
 					}
 				}
 			?>
@@ -1605,6 +1804,18 @@
 					echo "Value='".$rowappren['hrsperweek']."'";
 				}
 			?>/></p>
+			
+			<?php
+				//Saving update
+				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+					$_GET['nv'] == "appntr") {
+					echo "<button type='submit' name='submitupdate' 
+						class='w3-blueh w3-hover-green w3-padding-large
+						w3-border w3-large'
+						>Save</button>";
+				}
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
@@ -1635,6 +1846,13 @@
 						//For Saving
 						$_SESSION['recogid'] = $rowrecogpr['recogid'];
 					}
+					
+					//Comment
+					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+						$_GET['nv'] == "recogpr") {
+						$cnt = base64_decode(urldecode($_GET['cnt']));
+						echo "<Label style='color:red'>".$cnt."</Label>";
+					}
 				}
 			?>
 			
@@ -1656,6 +1874,18 @@
 				?>/>
 				<label>No</label></p>
 			</div>
+			
+			<?php
+				//Saving update
+				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+					$_GET['nv'] == "recogpr") {
+					echo "<button type='submit' name='submitupdate' 
+						class='w3-blueh w3-hover-green w3-padding-large
+						w3-border w3-large'
+						>Save</button>";
+				}
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
@@ -1693,6 +1923,14 @@
 						//For Saving
 						$_SESSION['jobid'] = $rowjobseekers['jobid'];
 					}
+					
+					//Comment
+					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+						$_GET['nv'] == "jobseek") {
+						$cnt = base64_decode(urldecode($_GET['cnt']));
+						echo "<Label style='color:red'>".$cnt."</Label>";
+					}
+					
 				}
 			?>
 			
@@ -1793,6 +2031,18 @@
 				?>/>
 				<label>No</label></p>
 			</div>
+			
+			<?php
+				//Saving update
+				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+					$_GET['nv'] == "jobseek") {
+					echo "<button type='submit' name='submitupdate' 
+						class='w3-blueh w3-hover-green w3-padding-large
+						w3-border w3-large'
+						>Save</button>";
+				}
+			?>
+			
 		</div>
 		
 		<div id="coursefee" class="w3-container w3-greyb w3-card-4 w3-padding-large"
@@ -1835,6 +2085,7 @@
 						//For Saving
 						$_SESSION['coursefid'] = $rowcoursefee['coursefid'];
 					}
+					
 				}
 			?>
 			
@@ -1948,6 +2199,14 @@
 						//For Saving
 						$_SESSION['centid'] = $rowcentrelink['centid'];
 					}
+					
+					//Comment
+					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
+						$_GET['nv'] == "centdt") {
+						$cnt = base64_decode(urldecode($_GET['cnt']));
+						echo "<Label style='color:red'>".$cnt."</Label>";
+					}
+					
 				}
 			?>
 			

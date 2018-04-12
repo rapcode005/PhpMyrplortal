@@ -1,4 +1,5 @@
 <?php
+
 	include_once '../../data/dbh.php';
 		/*
 		if ($_POST['view'] != "") {
@@ -8,7 +9,8 @@
 		*/	
 	$query = "SELECT a.id,a.subject,a.type,a.typeapp,a.comment,a.stuid,c.fname,c.gname 
 			FROM notification a LEFT JOIN studentinfo b on a.stuid = b.id
-			INNER JOIN personaldt c on b.stdcode = c.id WHERE a.status=0";
+			INNER JOIN personaldt c on b.stdcode = c.id WHERE a.status=0 and 
+			(a.updateduserid is not null)";
 			
 	$result = mysqli_query($conn, $query);
 	$output = (string) NULL;
@@ -49,17 +51,17 @@
 				$nv = $navigate[$row['typeapp']];
 				
 				$types = $type[$row['type']]." - ".$typeapp[$row['typeapp']];
-				$href = "studentdt.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st&n=nt&nid="
+				$href = "studentinfo.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st&n=nt&nid="
 				.$notifyid."&cnt=".$linkcnt."&nv=".$nv."#".$navigate[$row['typeapp']];
 			}
 			elseif ($row['type'] == 1) {
 				$types = $type[$row['type']];
-				$href = "evidencedt.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=ev&n=nt&nid="
+				$href = "evidence.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=ev&n=nt&nid="
 				.$notifyid."&cnt=".$linkcnt;
 			}
 			else {
 				$types = $type[$row['type']];
-				$href = "referencedt.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=rf&n=nt&nid="
+				$href = "reference.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=rf&n=nt&nid="
 				.$notifyid."&cnt=".$linkcnt;
 			}
 			
@@ -82,7 +84,3 @@
 	echo json_encode($data);
 
 ?>
-
-	
-	
-	

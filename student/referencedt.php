@@ -51,6 +51,16 @@
 			/>
 		</div>
 	</form>	
+	
+	<?php
+		//Comment
+		if (isset($_GET['cnt'])) {
+			$cnt = base64_decode(urldecode($_GET['cnt']));
+			echo "<div class='w3-container w3-card-4 w3-padding-large'
+					style='width:50%; margin-top:20px;'><Label style='color:red'>".$cnt."</Label></div>";
+		}
+	?>
+	
 	<div class="w3-container w3-card-4 w3-padding-large"
 	style="width:50%; margin-top:20px;">
 		<table class="w3-table-all">
