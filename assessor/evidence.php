@@ -19,14 +19,15 @@
 <div class="w3-main" style="margin-left:220px; margin-top:16px;" >	
 	<div class="w3-container w3-white w3-card-4 w3-padding-large"
 	style="width:40%; margin-top:20px;">
-		<table class="w3-table">
-			<?php
-				echo "<tr>
-						<th>File Name</th>
-						<th>File Type</th>
-						<th>Display</th>
-					</tr>";
-					
+		<table class="w3-table-all">
+			<thead>
+				<tr class="w3-blueh">
+					<th>File Name</th>
+					<th>File Type</th>
+					<th>Display</th>
+				</tr>
+			</thead>
+			<?php					
 				if(isset($_GET['ptid']) && isset($_GET['h']) && 
 					isset($_GET['fnm']) && isset($_GET['gnm'])) {
 					include_once '../data/dbh.php';

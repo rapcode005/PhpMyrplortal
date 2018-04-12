@@ -51,15 +51,17 @@
 			/>
 		</div>
 	</form>	
-	<div class="w3-container w3-white w3-card-4 w3-padding-large"
+	<div class="w3-container w3-card-4 w3-padding-large"
 	style="width:50%; margin-top:20px;">
-		<table class="w3-table">
-			<?php
-				echo "<tr>
+		<table class="w3-table-all">
+			<thead>
+				<tr class="w3-blueh">
 					<th>File Name</th>
 					<th>Remove</th>
-				</tr>";
-
+				</tr>
+			</thead>
+			<form action='data/removerefdt.php' method='POST'>
+			<?php
 				include_once '../data/dbh.php';
 				
 				if (isset($_GET['ptid']) && isset($_GET['fnm']) &&
@@ -74,7 +76,7 @@
 					$result = mysqli_query($conn, $sql);
 
 					while ($row = mysqli_fetch_assoc($result)) {
-						echo "<form action='data/removerefdt.php' method='POST'><tr>";
+						echo "<tr>";
 						
 						echo "<td><label>".$row['filename']."</label>
 						<input type='hidden' name='fileref' value='".$row['filename']."'/>
@@ -97,10 +99,11 @@
 							
 						echo "</td>";
 						
-						echo "</tr></form>";
+						echo "</tr>";
 					}
 				}
 			?>
+			</form>
 		</table>
 	</div>
 </div>

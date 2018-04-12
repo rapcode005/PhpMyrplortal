@@ -25,13 +25,15 @@
 	</form>	
 	<div class="w3-container w3-white w3-card-4 w3-padding-large"
 	style="width:50%; margin-top:20px;">
-		<table class="w3-table">
-			<?php
-				echo "<tr>
+		<table class="w3-table-all">
+			<thead>
+				<tr class="w3-blueh">
 					<th>File Name</th>
 					<th>Remove</th>
-				</tr>";
-
+				</tr>
+			</thead>
+			<form action='data/removeref.php' method='POST'>
+			<?php
 				include_once '../data/dbh.php';
 				
 				if (isset($_SESSION['stdid']))
@@ -42,17 +44,18 @@
 					$result = mysqli_query($conn, $sql);
 
 					while ($row = mysqli_fetch_assoc($result)) {
-						echo "<form action='data/removeref.php' method='POST'><tr>";
+						echo "<tr>";
 						echo "<td><label>".$row['filename']."</label>
 						<input type='hidden' name='fileref' value='".$row['filename']."'/>
 						</td><td><button type='submit' name='submit' 
 						class='w3-blueh w3-hover-green w3-padding-large
 						w3-border w3-large' value=".$row['id'].">Remove
 						</button></td>";
-						echo "</tr></form>";
+						echo "</tr>";
 					}
 				}
 			?>
+			</form>
 		</table>
 	</div>
 </div>

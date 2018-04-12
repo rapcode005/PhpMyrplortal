@@ -4,9 +4,9 @@
 		header("Location: ../");
 	}
 ?>
-	<table style="margin-top:20px;" class="w3-table">
+	<table style="margin-top:20px;" class="w3-table-all">
 		<thead>
-			<tr>
+			<tr class="w3-blueh">
 				<th>USI</th>
 				<th>Family Name</th>
 				<th>Given Name</th>

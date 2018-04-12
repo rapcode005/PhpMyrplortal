@@ -6,6 +6,11 @@
 	if (isset($_POST['send'])) {
 		$comment = mysqli_real_escape_string($conn, $_POST['comment']);
 		$moduletype = mysqli_real_escape_string($conn, $_POST['moduletype']);
+		$subject = mysqli_real_escape_string($conn, $_POST['subject']);
+		if (isset($_POST['apptype']))
+			$apptype = mysqli_real_escape_string($conn, $_POST['apptype']);
+		else
+			$apptype = "NULL";
 		
 		//Original Value
 		$iden = $_POST['ptid'];
@@ -21,15 +26,17 @@
 		
 		$userid = $_SESSION['u_id'];
 		
-		$insert = "Insert into notification(comment,date,stuid,type,
-										createduserid,status)
-								values('$comment',NOW(),'$idp','$moduletype',
-								'$userid',0);";
+		$insert = "Insert into notification(comment,date,stuid,type,typeapp,
+										createduserid,status,subject)
+								values('$comment',NOW(),'$idp','$moduletype',".$apptype.",
+								'$userid',0,'$subject');";
 								
 		if(mysqli_query($conn,$insert)){
 		
 			header("Location: ../request.php?success=success&".$urlquery);
 		
 		}
+		else
+			echo $insert;
 		
 	}

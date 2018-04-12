@@ -14,26 +14,6 @@
 	?>
 </div>
 
-<div class="w3-sidebar w3-bar-block w3-card-4" style="width:17%;right:0;
-	;margin-right:30px;height:665px;">
-	<h3 class="w3-bar-item">Content</h3>
-	<a href="#perdt" class="w3-bar-item w3-button w3-hover-green">Personal Details</a>
-    <a href="#resd" class="w3-bar-item w3-button w3-hover-green">Residence</a>
-    <a href="#ptadd" class="w3-bar-item w3-button w3-hover-green">Postal Address</a>
-    <a href="#phncntdt" class="w3-bar-item w3-button w3-hover-green">Phone and Contact details</a>
-	<a href="#emgcnt" class="w3-bar-item w3-button w3-hover-green">Emegency Contact</a>
-	<a href="#lngnculdv" class="w3-bar-item w3-button w3-hover-green">Language and Cultural Diversity</a>
-	<a href="#indlnneeds" class="w3-bar-item w3-button w3-hover-green">Individual Learning Needs</a>
-	<a href="#edu" class="w3-bar-item w3-button w3-hover-green">Education</a>
-	<a href="#refstudy" class="w3-bar-item w3-button w3-hover-green">Reason for study</a>
-	<a href="#currempst" class="w3-bar-item w3-button w3-hover-green">Current Employment Status</a>
-	<a href="#empdt" class="w3-bar-item w3-button w3-hover-green">Employer Details</a>
-	<a href="#appntr" class="w3-bar-item w3-button w3-hover-green">Apprenticeships and Traineeships</a>
-	<a href="#recogpr" class="w3-bar-item w3-button w3-hover-green">Recognition of Prior Learning/Credit</a>
-	<a href="#jobseek" class="w3-bar-item w3-button w3-hover-green">Jobseekers Seeking Concession</a>
-	<a href="#centdt" class="w3-bar-item w3-button w3-hover-green">Centrelink Details</a>
-</div>
-
 <div style="margin-left:220px; margin-top:16px;">
 	<form action="data/update.php" method="GET">
 	
@@ -2072,7 +2052,13 @@
 			style="float:right;">Save</button>
 		</div>
 		
-		
+		<?php
+			//Notification
+			if (isset($_GET['n']) && isset($_GET['nid'])) {
+				echo "<input type='hidden' value='".$_GET['n']."' name='n' />";
+				echo "<input type='hidden' value='".$_GET['nid']."' name='nid' />";
+			}
+		?>
 		
 	</form>
 		

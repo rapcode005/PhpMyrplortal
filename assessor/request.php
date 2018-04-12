@@ -21,15 +21,44 @@
 			<header class="w3-container w3-blueh w3-tea">
 				<h2>New Request</h2>
 			</header>
-			<p style="margin-top:20px;">
+			<p style="margin-top:20px;"  onchange="leaveChange()">
 				<select class="w3-select w3-select-input"
-				style="width:500px;" name="moduletype">
+				style="width:500px;" id="moduletype" name="moduletype">
 					<option value="" disabled selected>Choose your module</option>
 					<option value="0">Application Form</option>
 					<option value="1">Evidence</option>
 					<option value="2">Reference</option>
 				</select>
 			</p>
+			<div id="apptypep" style="margin-top:20px; display:none;">
+				<p>
+					<select class="w3-select w3-select-input"
+					style="width:500px;" name="apptype">
+						<option value="" disabled selected>Choose your tab</option>
+						<option value="0">Personal Details</option>
+						<option value="1">Residence</option>
+						<option value="2">Postal Address</option>
+						<option value="3">Phone and Contact details</option>
+						<option value="4">Emegency Contact</option>
+						<option value="5">Language and Cultural Diversity</option>
+						<option value="6">Individual Learning Needs</option>
+						<option value="7">Education</option>
+						<option value="8">Reason for study</option>
+						<option value="9">Current Employment Status</option>
+						<option value="10">Employer Details</option>
+						<option value="11">Apprenticeships and Traineeships</option>
+						<option value="12">Recognition of Prior Learning/Credit</option>
+						<option value="13">Jobseekers Seeking Concession</option>
+						<option value="14">Centrelink Details</option>
+					</select>
+				</p>
+			</div>
+			<p style="margin-top:20px;">
+			<label>Subject</label><input type="text" 
+			class="w3-input w3-border 
+			w3-animate-input"
+			style="width:500px"		
+			name="subject" /></p>
 			<p style="margin-top:20px;">
 			<label>Comment</label><input type="text" 
 			class="w3-input w3-border 
@@ -74,15 +103,17 @@
 	<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			
-		<table class="w3-table">
-			<tr>
-				<th>Module</th>
-				<th>Comment</th>
-				<th>Date</th>
-				<th>Status</th>
-				<th>Created By</th>
-				<th>Updated By</th>
-			</tr>
+		<table class="w3-table-all">
+			<thead>
+				<tr class="w3-blueh">
+					<th>Module</th>
+					<th>Comment</th>
+					<th>Date</th>
+					<th>Status</th>
+					<th>Created By</th>
+					<th>Updated By</th>
+				</tr>
+			</thead>
 			<?php
 				
 				include_once '../data/dbh.php';
@@ -136,5 +167,13 @@
 		</table>
 			
 	</div>
-	
+	<script>
+		function leaveChange() {
+			var v = document.getElementById("moduletype").value;
+			if (v == "0") 
+				document.getElementById("apptypep").style.display = "block";
+			else
+				document.getElementById("apptypep").style.display = "none";
+		}
+	</script>
 </div>

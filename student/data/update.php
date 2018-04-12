@@ -7,6 +7,25 @@
 		//Personal
 		personaldt();
 		curempstatus();
+		
+		//Notification
+		$linkid = urlencode(base64_encode($_SESSION['stdid']));
+		$linkfn = urlencode(base64_encode($_GET['stdfname']));
+		$linkgn = urlencode(base64_encode($_GET['stdgname']));
+		$querystr = "ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st";
+		
+		if (isset($_GET['n']) && isset($_GET['nid'])) {
+			$userid = $_SESSION['u_id'];
+			$notifyid =$_GET['nid'];
+			$updatenotify = "UPDATE notification SET updateduserid=".$userid." 
+			WHERE id = ".$notifyid;
+			if(mysqli_query($GLOBALS['conn'],$updatenotify)) {
+				header("Location: ../studentdt.php?".$querystr."&success");
+			}
+		}
+		else {
+			header("Location: ../studentdt.php?".$querystr."&success");
+		}
 	}
 	
 	function yesorno($var) {
@@ -1063,9 +1082,6 @@
 				}
 			}
 		}
-		//Studentinfo ID
-		$id = $_SESSION['stdid'];
-		header("Location: ../studentdt.php?ptid=".$id."&success");
 	}
 	
 ?>

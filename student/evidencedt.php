@@ -54,14 +54,16 @@
 	</form>	
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 		style="width:50%; margin-top:20px;">
-			<table class="w3-table">
-				<?php
-					echo "<tr>
-							<th>File Name</th>
-							<th>File Type</th>
-							<th>Remove</th>
-						</tr>";
-						
+			<table class="w3-table-all">
+				<thead>
+					<tr class="w3-blueh">
+						<th>File Name</th>
+						<th>File Type</th>
+						<th>Remove</th>
+					</tr>
+				</thead>
+				<form action='data/removefiledt.php' method='POST'>
+				<?php				
 					if(isset($_GET['ptid']) && isset($_GET['fnm']) &&
 					isset($_GET['gnm']) && isset($_GET['h']) ) {
 						include_once '../data/dbh.php';
@@ -75,7 +77,7 @@
 						$result = mysqli_query($conn, $sql);
 						
 						while ($row = mysqli_fetch_assoc($result)) {
-							echo "<form action='data/removefiledt.php' method='POST'><tr>";
+							echo "<tr>";
 							echo "<td>".$row['filename']."
 							<input type='hidden' name='filename' value='".$row['filename']."'/>
 							</td><td>".$row['filetype']."</td><td>
@@ -97,10 +99,11 @@
 							echo "<input type='hidden' value='".$_GET['h']."' name='h'/>"; 
 							
 							echo "</td>";
-							echo "</tr></form>";
+							echo "</tr>";
 						}
 					}
 				?>
+				</form>
 			</table>
 		</div>
 </div>
