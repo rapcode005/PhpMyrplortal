@@ -48,8 +48,19 @@
 				VALUES('".$fileName."','".$id."')";
 				mysqli_query($conn,$insert);
 				
-				header("Location: ../referencedt.php?".$urlquery);
-				
+						
+				if (isset($_POST['n']) && isset($_POST['nid'])) {
+					$userid = $_SESSION['u_id'];
+					$notifyid =$_POST['nid'];
+					$updatenotify = "UPDATE notification SET updateduserid=".$userid." 
+					WHERE id = ".$notifyid;
+					if(mysqli_query($GLOBALS['conn'],$updatenotify)) {
+						header("Location: ../referencedt.php?".$urlquery."&success");
+					}
+				}
+				else {
+					header("Location: ../referencedt.php?".$urlquery);
+				}
 				
 			}
 			else {

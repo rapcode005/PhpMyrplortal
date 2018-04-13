@@ -49,6 +49,20 @@
 				}
 			?>
 			/>
+			<input type="hidden" name="n" 
+			<?php 
+				if(isset($_GET['n'])) {
+					echo "Value='".$_GET['n']."'";	
+				}
+			?>
+			/>
+			<input type="hidden" name="nid" 
+			<?php 
+				if(isset($_GET['nid'])) {
+					echo "Value='".$_GET['nid']."'";	
+				}
+			?>
+			/>
 		</div>
 	</form>	
 	

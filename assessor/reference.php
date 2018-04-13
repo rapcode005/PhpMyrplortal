@@ -39,17 +39,28 @@
 					WHERE stuid='".$ptid."'";
 						
 					$result = mysqli_query($conn, $sql);
-
+					
 					while ($row = mysqli_fetch_assoc($result)) {
 						
 						$fln = urlencode(base64_encode($row['filename']));
+						
+						//href
+						if (isset($_GET['n']) && isset($_GET['nid'])) {
+							$n = $_GET['n'];
+							$nid = $_GET['nid'];
+							$link =  "reference.php?ptid=".$_GET['ptid']."&fnm=".$_GET['fnm']."&gnm=".$_GET['gnm']." 
+							&v=".$fln."&h=".$h."&nid=".$nid."&n=".$n;
+						}
+						else {
+							$link = "reference.php?ptid=".$_GET['ptid']."&fnm=".$_GET['fnm']."&gnm=".$_GET['gnm']." 
+							&v=".$fln."&h=".$h;
+						}
 						
 						echo "<tr>";
 						
 						echo "<td><label>".$row['filename']."</label>
 						<input type='hidden' name='fileref' value='".$row['filename']."'/>
-						</td><td><a href='reference.php?ptid=".$_GET['ptid']."&fnm=".$_GET['fnm']."&gnm=".$_GET['gnm']." 
-						&v=".$fln."&h=".$h."' class='w3-blueh w3-hover-green w3-padding-large
+						</td><td><a href='".$link."' class='w3-blueh w3-hover-green w3-padding-large
 						w3-border w3-large'>Show
 						</a>";
 						
@@ -61,6 +72,29 @@
 			?>
 		</table>
 	</div>
+	<?php
+		//Comment
+		if (isset($_GET['cnt']) && isset($_GET['fnm']) &&
+		isset($_GET['gnm']) && isset($_GET['nid'])) {
+			$cnt = base64_decode(urldecode($_GET['cnt']));
+			
+			$linkid = $_GET['ptid'];
+			$linkfn = $_GET['fnm'];
+			$linkgn = $_GET['gnm'];
+			
+			$notifyid = $_GET['nid'];
+			
+			echo "<div class='w3-container w3-card-4 w3-padding-large'
+					style='width:50%; margin-top:20px;'><p><Label style='color:red'>".$cnt."</Label><p>";
+			//button update
+			echo "<a 
+			class='w3-blueh w3-hover-green w3-padding-large
+			w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=rf
+			&nid=".$notifyid."'>
+			Done</a></div>";
+		}
+			
+	?>
 	
 	<div class="w3-container w3-white w3-card-4 w3-padding-large" 
 	style="margin-top:16px; width:98%; height:100%;" >

@@ -18,7 +18,7 @@
 
 <div class="w3-main" style="margin-left:220px; margin-top:16px;" >	
 	<div class="w3-container w3-white w3-card-4 w3-padding-large"
-	style="width:40%; margin-top:20px;">
+	style="width:60%; margin-top:20px;">
 		<table class="w3-table-all">
 			<thead>
 				<tr class="w3-blueh">
@@ -48,12 +48,23 @@
 						$fln = urlencode(base64_encode($row['filename']));
 						$ft = urlencode(base64_encode($row['filetype']));
 						
+						//href
+						if (isset($_GET['n']) && isset($_GET['nid'])) {
+							$n = $_GET['n'];
+							$nid = $_GET['nid'];
+							$link =  "evidence.php?ptid=".$_GET['ptid']."&fnm=".$_GET['fnm']."&gnm=".$_GET['gnm']." 
+							&v=".$fln."&h=".$h."&nid=".$nid."&n=".$n;
+						}
+						else {
+							$link = "evidence.php?ptid=".$_GET['ptid']."&fnm=".$_GET['fnm']."&gnm=".$_GET['gnm']." 
+							&v=".$fln."&h=".$h;
+						}
+						
 						
 						echo "<td>".$row['filename']."
 						<input type='hidden' name='filename' value='".$row['filename']."'/>
 						</td><td>".$row['filetype']."</td><td>
-						<a href='evidence.php?ptid=".$_GET['ptid']."&fnm=".$_GET['fnm']."&gnm=".$_GET['gnm']." 
-						&v=".$fln."&ft=".$ft."&h=".$h."' class='w3-blueh w3-hover-green w3-padding-large
+						<a href='".$link."' class='w3-blueh w3-hover-green w3-padding-large
 						w3-border w3-large'>Show
 						</a>";
 						
@@ -72,7 +83,34 @@
 			?>
 		</table>
 	</div>
+	
+	<?php
+		//Comment
+		if (isset($_GET['cnt']) && isset($_GET['fnm']) &&
+		isset($_GET['gnm']) && isset($_GET['nid'])) {
+			$cnt = base64_decode(urldecode($_GET['cnt']));
+			
+			$linkid = $_GET['ptid'];
+			$linkfn = $_GET['fnm'];
+			$linkgn = $_GET['gnm'];
+			
+			$notifyid = $_GET['nid'];
+			
+			echo "<div class='w3-container w3-card-4 w3-padding-large'
+					style='width:50%; margin-top:20px;'><p><Label style='color:red'>".$cnt."</Label><p>";
+			//button update
+			echo "<a 
+			class='w3-blueh w3-hover-green w3-padding-large
+			w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=rf
+			&nid=".$notifyid."'>
+			Done</a></div>";
+		}
+			
+	?>
+	
 </div>
+
+
 
 <div class="w3-container w3-white w3-card-4 w3-padding-large" style="margin-left:220px; margin-top:16px; width:40%;" >
 	<?php

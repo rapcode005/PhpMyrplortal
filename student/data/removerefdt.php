@@ -25,20 +25,23 @@
 			
 			$filepath = "../../reference/".$foldername."/".$filename;
 			
-			if (unlink($filepath)) {
-				echo "File was deleted";
-				$delete = "DELETE FROM reference WHERE id='".$id."'";
-				if(mysqli_query($conn,$delete)){
-					
-					header("Location: ../referencedt.php?".$urlquery);
+			if (file_exists($filepath)) {
+				if (unlink($filepath)) {
+					$delete = "DELETE FROM reference WHERE id='".$id."'";
+					if(mysqli_query($conn,$delete)){
+						
+						header("Location: ../referencedt.php?".$urlquery);
+					}
 				}
 			}
 			else {
-				echo "File was not deleted";
+			
+				$delete = "DELETE FROM reference WHERE id='".$id."'";
+					if(mysqli_query($conn,$delete)){
+						
+						header("Location: ../referencedt.php?".$urlquery);
+					}
+			
 			}
-		
 		}
-		else
-			echo "Rap";
-		
 	}

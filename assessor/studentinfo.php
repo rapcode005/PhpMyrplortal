@@ -105,7 +105,7 @@
 			<?php
 			
 				//Comment
-				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['id']) &&
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['nid']) &&
 					$_GET['nv'] == "perdt") {
 					$cnt = base64_decode(urldecode($_GET['cnt']));
 					
@@ -222,7 +222,7 @@
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;" >
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Postal Address</h2>
+				<span id="ptadd"><h2>Postal Address</h2></span>
 			</header>
 			
 				<?php 
@@ -285,14 +285,35 @@
 					<td><?php if (isset($rowposadd['postalcode'])) { echo $rowposadd['postalcode']; } ?></td>
 				</tr>
 			</table>
-
+			
+			<?php
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['nid']) &&
+					$_GET['nv'] == "ptadd") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					
+					$linkid = urlencode(base64_encode($ptid));
+					$linkfn = urlencode(base64_encode($_SESSION['stdfname']));
+					$linkgn = urlencode(base64_encode($_SESSION['stdgname']));
+					
+					$notifyid = $_GET['nid'];
+					
+					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					//button update
+					echo "<a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st
+					&nid=".$notifyid."'>
+					Done</a>";
+				}
+			?>
 			
 		</div>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Phone and Contact details</h2>
+				<span id="phncntdt"><h2>Phone and Contact details</h2></span>
 			</header>
 			
 				<?php 
@@ -349,12 +370,34 @@
 				</tr>
 			</table>
 			
+			<?php
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['nid']) &&
+					$_GET['nv'] == "phncntdt") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					
+					$linkid = urlencode(base64_encode($ptid));
+					$linkfn = urlencode(base64_encode($_SESSION['stdfname']));
+					$linkgn = urlencode(base64_encode($_SESSION['stdgname']));
+					
+					$notifyid = $_GET['nid'];
+					
+					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					//button update
+					echo "<a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st
+					&nid=".$notifyid."'>
+					Done</a>";
+				}
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;" >
 			<header class="w3-container w3-blueh w3-tea w3-card-4">
-				<h2>Emergency Contact</h2>
+				<span id="emgcnt"><h2>Emergency Contact</h2></span>
 			</header>
 				<?php 
 					if (isset($_GET['ptid'])) {
@@ -409,13 +452,35 @@
 					<td><?php if (isset($rowemeg['email'])) { echo $rowemeg['email']; } ?></td>
 				</tr>
 			</table>
-				
+			
+			<?php
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['nid']) &&
+					$_GET['nv'] == "emgcnt") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					
+					$linkid = urlencode(base64_encode($ptid));
+					$linkfn = urlencode(base64_encode($_SESSION['stdfname']));
+					$linkgn = urlencode(base64_encode($_SESSION['stdgname']));
+					
+					$notifyid = $_GET['nid'];
+					
+					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					//button update
+					echo "<a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st
+					&nid=".$notifyid."'>
+					Done</a>";
+				}
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Language and Cultural Diversity</h2>
+				<span id="lngnculdv"><h2>Language and Cultural Diversity</h2></span>
 			</header>
 			
 				<?php 
@@ -494,12 +559,34 @@
 				</tr>
 			</table>
 			
+			<?php
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['nid']) &&
+					$_GET['nv'] == "lngnculdv") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					
+					$linkid = urlencode(base64_encode($ptid));
+					$linkfn = urlencode(base64_encode($_SESSION['stdfname']));
+					$linkgn = urlencode(base64_encode($_SESSION['stdgname']));
+					
+					$notifyid = $_GET['nid'];
+					
+					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					//button update
+					echo "<a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st
+					&nid=".$notifyid."'>
+					Done</a>";
+				}
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Individual Learning Needs</h2>
+				<span id="indlnneeds"><h2>Individual Learning Needs</h2></span>
 			</header>
 			
 			<?php 
@@ -559,12 +646,34 @@
 				</tr>
 			</table>
 			
+			<?php
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['nid']) &&
+					$_GET['nv'] == "indlnneeds") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					
+					$linkid = urlencode(base64_encode($ptid));
+					$linkfn = urlencode(base64_encode($_SESSION['stdfname']));
+					$linkgn = urlencode(base64_encode($_SESSION['stdgname']));
+					
+					$notifyid = $_GET['nid'];
+					
+					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					//button update
+					echo "<a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st
+					&nid=".$notifyid."'>
+					Done</a>";
+				}
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Education</h2>
+				<span id="edu"><h2>Education</h2></span>
 			</header>
 			
 			<?php 
@@ -634,12 +743,34 @@
 				</tr>
 			</table>
 			
+			<?php
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['nid']) &&
+					$_GET['nv'] == "edu") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					
+					$linkid = urlencode(base64_encode($ptid));
+					$linkfn = urlencode(base64_encode($_SESSION['stdfname']));
+					$linkgn = urlencode(base64_encode($_SESSION['stdgname']));
+					
+					$notifyid = $_GET['nid'];
+					
+					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					//button update
+					echo "<a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st
+					&nid=".$notifyid."'>
+					Done</a>";
+				}
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Reason for study</h2>
+				<span id="refstudy"><h2>Reason for study</h2></span>
 			</header>
 			
 			<?php 
@@ -721,12 +852,34 @@
 				</tr>
 			</table>
 			
+			<?php
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['nid']) &&
+					$_GET['nv'] == "refstudy") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					
+					$linkid = urlencode(base64_encode($ptid));
+					$linkfn = urlencode(base64_encode($_SESSION['stdfname']));
+					$linkgn = urlencode(base64_encode($_SESSION['stdgname']));
+					
+					$notifyid = $_GET['nid'];
+					
+					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					//button update
+					echo "<a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st
+					&nid=".$notifyid."'>
+					Done</a>";
+				}
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Current Employment Status</h2>
+				<span id="currempst"><<h2>Current Employment Status</h2></span>
 			</header>
 			
 			<?php 
@@ -777,13 +930,35 @@
 				</tr>
 			</table>
 			
+			<?php
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['nid']) &&
+					$_GET['nv'] == "currempst") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					
+					$linkid = urlencode(base64_encode($ptid));
+					$linkfn = urlencode(base64_encode($_SESSION['stdfname']));
+					$linkgn = urlencode(base64_encode($_SESSION['stdgname']));
+					
+					$notifyid = $_GET['nid'];
+					
+					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					//button update
+					echo "<a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st
+					&nid=".$notifyid."'>
+					Done</a>";
+				}
+			?>
+			
 		</div>
 		
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Employer Details</h2>
+				<span id="empdt"><<h2>Employer Details</h2></span>
 			</header>
 			
 			<?php 
@@ -849,12 +1024,34 @@
 				</tr>
 			</table>
 			
+			<?php
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['nid']) &&
+					$_GET['nv'] == "empdt") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					
+					$linkid = urlencode(base64_encode($ptid));
+					$linkfn = urlencode(base64_encode($_SESSION['stdfname']));
+					$linkgn = urlencode(base64_encode($_SESSION['stdgname']));
+					
+					$notifyid = $_GET['nid'];
+					
+					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					//button update
+					echo "<a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st
+					&nid=".$notifyid."'>
+					Done</a>";
+				}
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Apprenticeships and Traineeships</h2>
+				<span id="appntr"><h2>Apprenticeships and Traineeships</h2></span>
 			</header>
 			
 			<?php 
@@ -916,12 +1113,34 @@
 				</tr>
 			</table>
 			
+			<?php
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['nid']) &&
+					$_GET['nv'] == "appntr") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					
+					$linkid = urlencode(base64_encode($ptid));
+					$linkfn = urlencode(base64_encode($_SESSION['stdfname']));
+					$linkgn = urlencode(base64_encode($_SESSION['stdgname']));
+					
+					$notifyid = $_GET['nid'];
+					
+					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					//button update
+					echo "<a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st
+					&nid=".$notifyid."'>
+					Done</a>";
+				}
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Recognition of Prior Learning/Credit</h2>
+				<span id="recogpr"><h2>Recognition of Prior Learning/Credit</h2></span>
 			</header>
 			
 			<?php 
@@ -967,12 +1186,34 @@
 				</tr>
 			</table>
 			
+			<?php
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['nid']) &&
+					$_GET['nv'] == "recogpr") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					
+					$linkid = urlencode(base64_encode($ptid));
+					$linkfn = urlencode(base64_encode($_SESSION['stdfname']));
+					$linkgn = urlencode(base64_encode($_SESSION['stdgname']));
+					
+					$notifyid = $_GET['nid'];
+					
+					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					//button update
+					echo "<a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st
+					&nid=".$notifyid."'>
+					Done</a>";
+				}
+			?>
+			
 		</div>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Jobseekers Seeking Concession</h2>
+				<span id="jobseek"><h2>Jobseekers Seeking Concession</h2></span>
 			</header>
 			
 			<?php 
@@ -1052,6 +1293,28 @@
 					} ?></td>
 				</tr>
 			</table>
+			
+			<?php
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['nid']) &&
+					$_GET['nv'] == "jobseek") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					
+					$linkid = urlencode(base64_encode($ptid));
+					$linkfn = urlencode(base64_encode($_SESSION['stdfname']));
+					$linkgn = urlencode(base64_encode($_SESSION['stdgname']));
+					
+					$notifyid = $_GET['nid'];
+					
+					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					//button update
+					echo "<a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st
+					&nid=".$notifyid."'>
+					Done</a>";
+				}
+			?>
 			
 		</div>
 		
@@ -1157,7 +1420,7 @@
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Centrelink Details</h2>
+				<span id="centdt"><h2>Centrelink Details</h2></span>
 			</header>
 			
 			<?php 
@@ -1217,6 +1480,28 @@
 					<td><?php if (isset($rowcentrelink['vetnum']) && $rowcentrelink['cntrallow'] == 1) { echo $rowcentrelink['vetnum']; } ?></td>
 				</tr>
 			</table>	
+			
+			<?php
+				//Comment
+				if (isset($_GET['nv']) && isset($_GET['cnt']) && isset($_GET['nid']) &&
+					$_GET['nv'] == "centdt") {
+					$cnt = base64_decode(urldecode($_GET['cnt']));
+					
+					$linkid = urlencode(base64_encode($ptid));
+					$linkfn = urlencode(base64_encode($_SESSION['stdfname']));
+					$linkgn = urlencode(base64_encode($_SESSION['stdgname']));
+					
+					$notifyid = $_GET['nid'];
+					
+					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					//button update
+					echo "<a 
+					class='w3-blueh w3-hover-green w3-padding-large
+					w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st
+					&nid=".$notifyid."'>
+					Done</a>";
+				}
+			?>
 			
 		</div>
 
