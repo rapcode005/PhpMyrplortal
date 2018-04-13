@@ -21,7 +21,9 @@
 		$resultallow  = mysqli_query($conn,$sqlallow);
 		
 		$resultCheck = mysqli_num_rows($resultallow);
-				
+		
+		$h = $_POST['h'];
+		
 		if ($resultCheck > 0) {
 			if($fileError === 0) {
 				
@@ -45,16 +47,16 @@
 				VALUES('".$fileName."','".$filetypes."','".$_SESSION['stdid']."')";
 				mysqli_query($conn,$insert);
 				
-				header("Location: ../evidence.php");
+				header("Location: ../evidence.php?h=".$h);
 				
 				
 			}
 			else {
-				header("Location: ../evidence.php?error_upload");;
+				header("Location: ../evidence.php?error=upload&h=".$h);;
 			}
 		}
 		else {
-			header("Location: ../evidence.php?cannot_upload_file_not_supported");
+			header("Location: ../evidence.php?selecterror=please_select&h=".$h);
 		}
 					
 	}

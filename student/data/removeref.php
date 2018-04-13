@@ -4,7 +4,7 @@
 	session_start();
 	if(isset($_POST['submit'])) {
 		$id = $_POST['submit'];
-		
+		$h = $_POST['h'];
 		$foldername = $_SESSION['stdfname'].$_SESSION['stdgname'].$_SESSION['stdid'];
 		
 		if (isset($_POST['fileref'])) {
@@ -18,15 +18,9 @@
 				$delete = "DELETE FROM reference WHERE id='".$id."'";
 				if(mysqli_query($conn,$delete)){
 					
-					header("Location: ../reference.php");
+					header("Location: ../reference.php?h=".$h);
 				}
 			}
-			else {
-				echo "File was not deleted";
-			}
-		
 		}
-		else
-			echo "Rap";
 		
 	}

@@ -1,6 +1,5 @@
 <?php 
 	include_once 'headerwithoutsearch.php';
-	include_once 'menu.php';
 	include_once '../data/dbh.php';
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
@@ -10,19 +9,22 @@
 <div class="w3-main" style="width:25%">
 	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 
 	onclick="w3_open()">&#9776;</button>
+	<?php 
+		include_once 'menu.php';
+	?>
 </div>
 	
 <div style="margin-left:220px; margin-top:16px;">
-	<form action="data/save.php" method="POST">
+	<form action="data/save.php" method="POST" onsubmit="return checkform();">
 	
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
+		<div id="pt" class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Personal Details</h2>
+				<span id="perdt"><h2>Personal Details</h2></span>
 			</header>
 			<p style="margin-top:20px;">
 				<select class="w3-select w3-select-input"
-				style="width:500px;" name="optcourse">
+				style="width:500px;" name="optcourse" id="optcourse">
 					<option value="" disabled selected>Choose your unit/course</option>
 					<?php
 						$sql = "SELECT code,descrp FROM courselist";
@@ -33,43 +35,50 @@
 						}
 					?>
 				</select>
+				<Label id="loptcourse" style="color:red; display:none;" for="optcourse">Course is required.</Label></p>
 			</p>
 			<p style="margin-top:20px;">
 			<label>USI</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
 			style="width:500px"		
-			name="stdcode" /></p>
+			name="stdcode" id="stdcode" />
+			<Label id="lstdcode" style="color:red; display:none;">USI is required.</Label></p>
 			<p style="margin-top:20px;">
 			<label>Family Name</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
 			style="width:500px"		
-			name="stdfname" /></p>
+			name="stdfname" id="stdfname" />
+			<Label id="lstdfname" style="color:red; display:none;">Family Name is required.</Label></p>
 			<p style="margin-top:20px;">
 			<label>Given Name</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
 			style="width:500px"		
-			name="stdgname" /></p>
+			name="stdgname" id="stdgname"  />
+			<Label id="lstdgname" style="color:red; display:none;">Given Name is required.</Label></p>
 			<p style="margin-top:20px;">
 			<label>Preffered Name</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
 			style="width:500px"		
-			name="stdpname" /></p>
+			name="stdpname" id="stdpname" />
+			<Label id="lstdpname" style="color:red; display:none;">Preffered Name is required.</Label></p></p>
 			<p style="margin-top:20px;">
 			<label>Birthday</label><input type="date"
 			class="w3-input w3-border 
 			w3-animate-input"
 			style="width:500px"		
-			name="stdbth" /></p>
+			name="stdbth" id="stdbth"  />
+			<Label id="lstdbth" style="color:red; display:none;">Birthday is required.</Label></p>
 			<p style="margin-top:20px;">
 			<label>Age</label><input type="number"
 			class="w3-input w3-border 
 			w3-animate-input"
 			style="width:500px"		
-			name="stdage" /></p>
+			name="stdage" id="stdage"  />
+			<Label id="lstdage" style="color:red; display:none;">Age is required.</Label></p>
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
@@ -857,4 +866,80 @@
 	function w3_hidereg() {
 		document.getElementById("regiscentre").style.display = "none";
 	}
+	
+	function checkform() {
+		var r = 0;
+		
+		if (document.getElementById("stdage").value == "") {
+			document.getElementById("lstdage").style.display = "block";
+			document.getElementById("stdage").focus();
+			r += 1;
+		}
+		else {
+			document.getElementById("lstdage").style.display = "none";
+		}
+		
+		if (document.getElementById("stdbth").value == "") {
+			document.getElementById("lstdbth").style.display = "block";
+			document.getElementById("stdbth").focus();
+			r += 1;
+		}
+		else {
+			document.getElementById("lstdbth").style.display = "none";
+		}
+		
+		if (document.getElementById("stdpname").value == "") {
+			document.getElementById("lstdpname").style.display = "block";
+			document.getElementById("stdpname").focus();
+			r += 1;
+		}
+		else {
+			document.getElementById("lstdpname").style.display = "none";
+		}
+		
+		if (document.getElementById("stdgname").value == "") {
+			document.getElementById("lstdgname").style.display = "block";
+			document.getElementById("stdgname").focus();
+			r += 1;
+		}
+		else {
+			document.getElementById("lstdgname").style.display = "none";
+		}
+		
+		if (document.getElementById("stdfname").value == "") {
+			document.getElementById("lstdfname").style.display = "block";
+			document.getElementById("stdfname").focus();
+			r += 1;
+		}
+		else {
+			document.getElementById("lstdfname").style.display = "none";
+		}
+		
+		if (document.getElementById("stdcode").value == "") {
+			document.getElementById("lstdcode").style.display = "block";
+			document.getElementById("stdcode").focus();
+			r += 1;
+		}
+		else {
+			document.getElementById("lstdcode").style.display = "none";
+		}
+		
+		
+		if (document.getElementById("optcourse").value == "") {
+			document.getElementById("loptcourse").style.display = "block";
+			document.getElementById("optcourse").focus();
+			r += 1;
+		}
+		else {
+			document.getElementById("loptcourse").style.display = "none";
+		}
+		
+		if(r > 0) {
+			return false;
+		}
+		else 
+			return true;
+		
+	}
+	
 </script>

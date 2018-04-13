@@ -19,7 +19,7 @@
 		<?php 
 			if (isset($_SESSION['u_r'])) {			
 				//New Student
-				echo "<a href='studentinfo.php'
+				echo "<a href='studentinfo.php?h=st'
 				class='w3-bar-item w3-button w3-blueh w3-hover-green'>
 				New Student</a>";
 				
@@ -33,7 +33,7 @@
 					class='w3-bar-item w3-input w4-grayh'
 					value='".$search."'
 					placeholder='Search Student..'>
-					<button type='submit' name='submitsearch'
+					<button type='submit' 
 					class='w3-bar-item w3-button w3-blueh w3-hover-green'
 					value='search'>
 					Go</button>
@@ -45,7 +45,7 @@
 					echo "<form action='../student/' method='GET' >
 					<input type='text' name='st'
 					class='w3-bar-item w3-input w4-grayh' placeholder='Search Student..'>
-					<button type='submit' name='submitsearch'
+					<button type='submit' 
 					class='w3-bar-item w3-button w3-blueh w3-hover-green'
 					value='search'>
 					Go</button>

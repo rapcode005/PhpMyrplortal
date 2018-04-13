@@ -30,7 +30,7 @@
 				LEFT JOIN personaldt b on a.stdcode = b.id 
 				LEFT JOIN courselist c on a.stdcourse = c.code
 				WHERE MATCH(fname, gname,b.code) 
-				AGAINST('".$search."' IN NATURAL LANGUAGE MODE)";
+				AGAINST('".$search."' IN NATURAL LANGUAGE MODE) Order by a.id";
 				
 			}
 			else {
@@ -38,10 +38,30 @@
 				$sql = "SELECT b.code,b.fname as fname,b.gname as gname,c.descrp as descrp,
 				b.brhday as brhday,b.age as age,a.id FROM studentinfo a 
 				LEFT JOIN personaldt b on a.stdcode = b.id 
-				LEFT JOIN courselist c on a.stdcourse = c.code";
+				LEFT JOIN courselist c on a.stdcourse = c.code Order by a.id";
 				
 			}
+			
+			//Paging
+			if (isset($_GET['p'])) {
+				$p = $_GET['p'];
+				if (empty($_GET['p']))
+					$pagenum = 0;
+				else {
+					$pagenum = ($_GET['p'] * 20) - 20;
+				}
+			}
+			else {
+				$p = 0;
+				$pagenum = 0;
+			}
+			
+			$limit = " LIMIT ".$pagenum.",20";
+			
+			$sql .= $limit;
+			
 			$result = mysqli_query($conn, $sql);
+
 			$resultCheck = mysqli_num_rows($result);
 			
 			if ($resultCheck == 1) {
@@ -80,6 +100,31 @@
 			}
 		?>
 	</table>
+	<?php
+		if (isset($_GET['st']) && !empty($_GET['st'])) {
+			
+			$sqlcount = "SELECT COUNT(a.id) as count FROM studentinfo a
+				LEFT JOIN personaldt b on a.stdcode = b.id WHERE MATCH(fname,gname,b.code) 
+				AGAINST('".$search."' IN NATURAL LANGUAGE MODE)";
+		}
+		else {
+			$sqlcount = "SELECT COUNT(id) as count FROM studentinfo";
+		}
+		$result = mysqli_query($conn, $sqlcount);
+		$row = mysqli_fetch_assoc($result);
+		$totalrecords = $row['count']; 
+		if ($row['count'] >= 6) {
+			$totalpages = ceil($totalrecords / 20); 
+			$pagelink = "<div class='w3-bar'>";
+			for ($i=1; $i<=$totalpages; $i++) {
+				if($p == $i) 
+					$pagelink .= "<a href='../student/?p=".$i."' class='w3-button w3-hover-green w3-green'>".$i."</a>";  
+				else
+					$pagelink .= "<a href='../student/?p=".$i."' class='w3-button w3-hover-green'>".$i."</a>";
+			}
+			echo $pagelink."</div>";
+		}
+	?>
 <?php
 	include_once '../footer.php';
 ?>

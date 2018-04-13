@@ -17,6 +17,8 @@
 		$allowed = array('pdf','doc','dot','wbk','docx','docm','dotx',
 		'dotm','docb','txt');
 		
+		$h = $_POST['h'];
+		
 		if (in_array($fileActualExt, $allowed)) {
 			if($fileError === 0) {
 				
@@ -36,16 +38,16 @@
 				VALUES('".$fileName."','".$_SESSION['stdid']."')";
 				mysqli_query($conn,$insert);
 				
-				header("Location: ../reference.php");
+				header("Location: ../reference.php?h=".$h);
 				
 				
 			}
 			else {
-				header("Location: ../reference.php?error_upload");;
+				header("Location: ../reference.php?h=".$h."&error=upload");;
 			}
 		}
 		else {
-			header("Location: ../reference.php?cannot_upload_file_not_supported");
+			header("Location: ../reference.php?selecterror=please_select&h=".$h);
 		}
 					
 	}

@@ -6,7 +6,11 @@
 		
 		//Personal
 		personaldt();
-		header("Location: ../evidence.php");
+		$linkid = urlencode(base64_encode($GLOBALS['stdnum']));
+		$linkfn = urlencode(base64_encode($_POST['stdfname']));
+		$linkgn = urlencode(base64_encode($_POST['stdgname']));
+		$querystr = "h=ev";
+		header("Location: ../evidence.php?".$querystr);
 	}
 	
 	function personaldt() {
@@ -17,7 +21,7 @@
 		$stage = mysqli_real_escape_string($GLOBALS['conn'], $_POST['stdage']);
 		$course = mysqli_real_escape_string($GLOBALS['conn'],$_POST['optcourse']);
 		$stdcode = mysqli_real_escape_string($GLOBALS['conn'],$_POST['stdcode']);
-		
+				
 		$sql = "SELECT IFNULL(max(id),0) as maxid FROM personaldt;";
 		$result = mysqli_query($GLOBALS['conn'],$sql);
 		
