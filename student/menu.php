@@ -3,33 +3,29 @@
 	<button class="w3-bar-item w3-button w3-hide-large" onclick="w3_close()">Close &times;</button>
 	<?php
 		if(isset($_GET['h']) ) {
+
+				$st = "<a class='w3-bar-item w3-button w3-hover-white w3-disabled'>Application Form</a>";
+				$rf = "<a class='w3-bar-item w3-button w3-hover-white w3-disabled'>Reference</a>";
+				$ev = "<a class='w3-bar-item  w3-button w3-hover-white w3-disabled'>Evidence</a>";
 				
 				//highlight
 				$h = $_GET['h'];
 				if ($h == "st") {
-					$st = "w3-green";
-					$ev = "";
-					$rf = "";
+					$st = "<a class='w3-bar-item w3-button w3-green w3-hover-green w3-disabled'>Application Form</a>";
 				}
 				elseif($h == "ev") {
-					$ev = "w3-green";
-					$st = "";
-					$rf = "";
+					$ev = "<a class='w3-bar-item w3-button w3-green w3-hover-green w3-disabled'>Evidence</a>";
 				}
 				elseif($h == "rf") {
-					$rf = "w3-green";
-					$st = "";
-					$ev = "";
+					$rf = "<a class='w3-bar-item w3-button w3-green w3-hover-green w3-disabled'>Reference</a>";
 				}
 				
-				echo "<a href='#' class='w3-bar-item ".$st." w3-button w3-hover-green'>Application Form</a>
-				<a href='#' class='w3-bar-item ".$rf." w3-button w3-hover-green'>Reference</a>
-				<a href='#' class='w3-bar-item ".$ev." w3-button w3-hover-green'>Evidence</a>";
+				echo $st.$ev.$rf;
 		}
 		else {
-			echo "<a href='#' class='w3-bar-item w3-button w3-hover-green'>Application Form</a>
-			<a href='#' class='w3-bar-item w3-button w3-hover-green'>Reference</a>
-			<a href='#' class='w3-bar-item w3-button w3-hover-green'>Evidence</a>";
+			echo "<a class='w3-btn w3-hover-white w3-disabled'>Application Form</a>
+			<a class='w3-btn w3-hover-white w3-disabled'>Evidence</a>
+			<a class='w3-btn  w3-hover-white w3-disabled'>Reference</a>";
 		}
 	 ?>
 </div>

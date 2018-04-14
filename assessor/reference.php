@@ -14,7 +14,7 @@
 	?>
 </div>
 
-<div class="w3-main" style="margin-left:220px; margin-top:16px;" >	
+<div class="w3-main" style="margin-left:220px; margin-top:16px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;" >	
 	<div class="w3-container w3-white w3-card-4 w3-padding-large"
 	style="width:50%; margin-top:20px;">
 		<table class="w3-table-all">
@@ -24,6 +24,7 @@
 					<th>Display</th>
 				</tr>
 			</thead>
+			<tbody class="w3-small">
 			<?php
 				include_once '../data/dbh.php';
 				
@@ -60,8 +61,8 @@
 						
 						echo "<td><label>".$row['filename']."</label>
 						<input type='hidden' name='fileref' value='".$row['filename']."'/>
-						</td><td><a href='".$link."' class='w3-blueh w3-hover-green w3-padding-large
-						w3-border w3-large'>Show
+						</td><td><a href='".$link."' class='w3-blueh w3-hover-green w3-padding-small
+						w3-border'>Show
 						</a>";
 						
 						
@@ -70,6 +71,7 @@
 					}
 				}
 			?>
+			</tbody>
 		</table>
 	</div>
 	<?php

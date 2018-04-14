@@ -57,17 +57,19 @@
 				VALUES('".$fileName."','".$filetypes."','".$id."')";
 				mysqli_query($conn,$insert);
 				
-				if (isset($_POST['n']) && isset($_POST['nid'])) {
+				//Check if for notification	
+				if (isset($_POST['n']) && isset($_POST['nid']) &&
+					 !empty($_POST['n']) && !empty($_POST['nid'])) {
 					$userid = $_SESSION['u_id'];
 					$notifyid =$_POST['nid'];
 					$updatenotify = "UPDATE notification SET updateduserid=".$userid." 
 					WHERE id = ".$notifyid;
 					if(mysqli_query($GLOBALS['conn'],$updatenotify)) {
-						header("Location: ../evidencedt.php?".$urlquery."&success");
+						header("Location: ../evidencedt.php?".$urlquery."&s=success");
 					}
 				}
 				else {
-					header("Location: ../evidencedt.php?".$urlquery);
+					header("Location: ../evidencedt.php?".$urlquery."&s=success");
 				}
 				
 				

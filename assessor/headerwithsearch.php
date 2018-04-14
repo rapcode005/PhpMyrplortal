@@ -15,7 +15,7 @@
 <body>
 
 <header>
-	<nav class="w3-bar w3-blueh w3-border w3-small">
+	<nav class="w3-bar w3-blueh w3-border w3-large" style="font-family: Arial, Helvetica, sans-serif;">
 		<?php 
 			if (isset($_SESSION['u_r'])) {
 				//Search

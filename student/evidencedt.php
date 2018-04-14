@@ -1,6 +1,5 @@
 <?php 
 	include_once 'headerwithsearchhome.php';
-	include_once 'menuwithquerystr.php';
 	include_once '../data/dbh.php';
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
@@ -10,10 +9,13 @@
 <div class="w3-main" style="width:25%">
 	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 
 	onclick="w3_open()">&#9776;</button>
+	<?php 
+		include_once 'menuwithquerystr.php';
+	?>
 </div>
 
 
-<div style="margin-left:220px; margin-top:16px;" >
+<div style="margin-left:220px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;" >
 	<form action="data/uploadevidencedt.php" method="POST" enctype="multipart/form-data">
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 		style="width:26.5%; margin-top:20px;">
@@ -87,48 +89,50 @@
 						<th>Remove</th>
 					</tr>
 				</thead>
-				<form action='data/removefiledt.php' method='POST'>
-				<?php				
-					if(isset($_GET['ptid']) && isset($_GET['fnm']) &&
-					isset($_GET['gnm']) && isset($_GET['h']) ) {
-						include_once '../data/dbh.php';
-						
-						//decode
-						$ptid = base64_decode(urldecode($_GET['ptid']));
-						
-						$sql = "SELECT filename,filetype,id FROM evidence
-						WHERE stuid='".$ptid."'";
+				<tbody class="w3-small"> 
+					<form action='data/removefiledt.php' method='POST'>
+					<?php				
+						if(isset($_GET['ptid']) && isset($_GET['fnm']) &&
+						isset($_GET['gnm']) && isset($_GET['h']) ) {
+							include_once '../data/dbh.php';
+							
+							//decode
+							$ptid = base64_decode(urldecode($_GET['ptid']));
+							
+							$sql = "SELECT filename,filetype,id FROM evidence
+							WHERE stuid='".$ptid."'";
+									
+							$result = mysqli_query($conn, $sql);
+							
+							while ($row = mysqli_fetch_assoc($result)) {
+								echo "<tr>";
+								echo "<td>".$row['filename']."
+								<input type='hidden' name='filename' value='".$row['filename']."'/>
+								</td><td>".$row['filetype']."</td><td>
+								<button type='submit' name='submit' 
+								class='w3-blueh w3-hover-green w3-padding-small
+								w3-border' value=".$row['id'].">Remove
+								</button>";
 								
-						$result = mysqli_query($conn, $sql);
-						
-						while ($row = mysqli_fetch_assoc($result)) {
-							echo "<tr>";
-							echo "<td>".$row['filename']."
-							<input type='hidden' name='filename' value='".$row['filename']."'/>
-							</td><td>".$row['filetype']."</td><td>
-							<button type='submit' name='submit' 
-							class='w3-blueh w3-hover-green w3-padding-large
-							w3-border w3-large' value=".$row['id'].">Remove
-							</button>";
-							
-							//Student ID
-							echo "<input type='hidden' value='".$_GET['ptid']."' name='ptid'/>"; 	
-							
-							//Family name
-							echo "<input type='hidden' value='".$_GET['fnm']."' name='fnm'/>"; 	
-							
-							//Given name
-							echo "<input type='hidden' value='".$_GET['gnm']."' name='gnm'/>"; 	
-							
-							//Higlight
-							echo "<input type='hidden' value='".$_GET['h']."' name='h'/>"; 
-							
-							echo "</td>";
-							echo "</tr>";
+								//Student ID
+								echo "<input type='hidden' value='".$_GET['ptid']."' name='ptid'/>"; 	
+								
+								//Family name
+								echo "<input type='hidden' value='".$_GET['fnm']."' name='fnm'/>"; 	
+								
+								//Given name
+								echo "<input type='hidden' value='".$_GET['gnm']."' name='gnm'/>"; 	
+								
+								//Higlight
+								echo "<input type='hidden' value='".$_GET['h']."' name='h'/>"; 
+								
+								echo "</td>";
+								echo "</tr>";
+							}
 						}
-					}
-				?>
-				</form>
+					?>
+					</form>
+				</tbody>
 			</table>
 		</div>
 </div>

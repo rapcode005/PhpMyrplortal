@@ -1,5 +1,5 @@
-<div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-greyb" 
-	style="width:200px;" id="mySidebar">
+<div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-greyb w3-large" 
+	style="width:200px; font-family: Arial, Helvetica, sans-serif;" id="mySidebar">
 	<button class="w3-bar-item w3-button w3-hide-large" onclick="w3_close()">Close &times;</button>
 	<?php
 		if(isset($_GET['ptid']) && isset($_GET['fnm'])
@@ -19,28 +19,25 @@
 			
 			//highlight
 			$h = $_GET['h'];
-			$hselect["rf"] = "";
-			$hselect["st"] = "";
-			$hselect["ev"] = "";
-			$hselect["rq"] = "";
+			$st = "<a href='studentinfo.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=st' class='w3-bar-item w3-button w3-hover-green'>Application Form</a>";
+			$rf = "<a href='reference.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=rf' class='w3-bar-item w3-button w3-hover-green'>Reference</a>";
+			$ev = "<a href='evidence.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=ev' class='w3-bar-item w3-button w3-hover-green'>Evidence</a>";
+			$rq = "<a href='request.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=rq' class='w3-bar-item w3-button w3-hover-green'>Request</a>";
 			
 			if ($h == "st") {
-				$hselect["st"] = "w3-green";
+				$st = "<a class='w3-bar-item w3-button w3-hover-green w3-green w3-disabled'>Application Form</a>";
 			}
 			elseif($h == "ev") {
-				$hselect["ev"] = "w3-green";
+				$ev = "<a class='w3-bar-item w3-button w3-hover-green w3-green w3-disabled'>Evidence</a>";
 			}
 			elseif($h == "rf") {
-				$hselect["rf"] = "w3-green";
+				$rf = "<a class='w3-bar-item w3-button w3-hover-green w3-green w3-disabled'>Reference</a>";
 			}
 			elseif($h == "rq") {
-				$hselect["rq"] = "w3-green";
+				$rq = "<a class='w3-bar-item w3-button w3-hover-green w3-green w3-disabled'>Request</a>";
 			}
 			
-			echo "<a href='studentinfo.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=st' class='w3-bar-item ".$hselect["st"]." w3-button w3-hover-green'>Application Form</a>
-			<a href='reference.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=rf' class='w3-bar-item ".$hselect["rf"]." w3-button w3-hover-green'>Reference</a>
-			<a href='evidence.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=ev' class='w3-bar-item ".$hselect["ev"]." w3-button w3-hover-green'>Evidence</a>
-			<a href='request.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=rq' class='w3-bar-item ".$hselect["rq"]." w3-button w3-hover-green'>Request</a>";
+			echo $st.$ev.$rf.$rq;
 		}
 	?>
 </div>

@@ -16,7 +16,7 @@
 </div>
 
 
-<div class="w3-main" style="margin-left:220px; margin-top:16px;" >	
+<div class="w3-main" style="margin-left:220px; margin-top:16px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;" >	
 	<div class="w3-container w3-white w3-card-4 w3-padding-large"
 	style="width:60%; margin-top:20px;">
 		<table class="w3-table-all">
@@ -27,6 +27,7 @@
 					<th>Display</th>
 				</tr>
 			</thead>
+			<tbody class="w3-small">
 			<?php					
 				if(isset($_GET['ptid']) && isset($_GET['h']) && 
 					isset($_GET['fnm']) && isset($_GET['gnm'])) {
@@ -64,8 +65,8 @@
 						echo "<td>".$row['filename']."
 						<input type='hidden' name='filename' value='".$row['filename']."'/>
 						</td><td>".$row['filetype']."</td><td>
-						<a href='".$link."' class='w3-blueh w3-hover-green w3-padding-large
-						w3-border w3-large'>Show
+						<a href='".$link."' class='w3-blueh w3-hover-green w3-padding-small
+						w3-border'>Show
 						</a>";
 						
 						//Student ID
@@ -81,6 +82,7 @@
 					}
 				}
 			?>
+			</tbody>
 		</table>
 	</div>
 	

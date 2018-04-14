@@ -14,13 +14,13 @@
 	?>
 </div>
 
-<div style="margin-left:220px; margin-top:16px;">
+<div class="w3-small" style="margin-left:220px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;">
 	<form action="data/update.php" method="GET">
 	
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%;">
+			style="width:99%;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="perdt"><h2>Personal Details</h2></span>
+				<span id="perdt"><h3>Personal Details</h3></span>
 			</header>
 			
 			<?php 
@@ -129,9 +129,9 @@
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%; margin-top:20px;" >
+			style="width:99%; margin-top:20px;" >
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="resd"><h2>Residence</h2></span>
+				<span id="resd"><h3>Residence</h3></span>
 			</header>
 			
 			<?php 
@@ -238,9 +238,9 @@
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%; margin-top:20px;" >
+			style="width:99%; margin-top:20px;" >
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="ptadd"><h2>Postal Address</h2></span>
+				<span id="ptadd"><h3>Postal Address</h3></span>
 			</header>
 			
 				<?php 
@@ -397,9 +397,9 @@
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%; margin-top:20px;">
+			style="width:99%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="phncntdt"><h2>Phone and Contact details</h2></span>
+				<span id="phncntdt"><h3>Phone and Contact details</h3></span>
 			</header>
 			
 				<?php 
@@ -511,9 +511,9 @@
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%; margin-top:20px;" >
+			style="width:99%; margin-top:20px;" >
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="emgcnt"><h2>Emegency Contact</h2></span>
+				<span id="emgcnt"><h3>Emegency Contact</h3></span>
 			</header>
 			
 				<?php 
@@ -626,9 +626,9 @@
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%; margin-top:20px;">
+			style="width:99%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="lngnculdv"><h2>Language and Cultural Diversity</h2></span>
+				<span id="lngnculdv"><h3>Language and Cultural Diversity</h3></span>
 			</header>
 			
 				<?php 
@@ -854,9 +854,9 @@
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%; margin-top:20px;">
+			style="width:99%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="indlnneeds"><h2>Individual Learning Needs</h2></span>
+				<span id="indlnneeds"><h3>Individual Learning Needs</h3></span>
 			</header>
 			
 			<?php 
@@ -1027,9 +1027,9 @@
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%; margin-top:20px;">
+			style="width:99%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="edu"><h2>Education</h2></span>
+				<span id="edu"><h3>Education</h3></span>
 			</header>
 			
 			<?php 
@@ -1241,9 +1241,9 @@
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%; margin-top:20px;">
+			style="width:99%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="refstudy"><h2>Reason for study</h2></span>
+				<span id="refstudy"><h3>Reason for study</h3></span>
 			</header>
 			
 			<?php 
@@ -1467,9 +1467,9 @@
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%; margin-top:20px;">
+			style="width:99%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="currempst"><h2>Current Employment Status</h2></span>
+				<span id="currempst"><h3>Current Employment Status</h3></span>
 			</header>
 			
 			<?php 
@@ -1600,9 +1600,9 @@
 		
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%; margin-top:20px;">
+			style="width:99%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="empdt"><h2>Employer Details</h2></span>
+				<span id="empdt"><h3>Employer Details</h3></span>
 			</header>
 			
 			<?php 
@@ -1718,9 +1718,9 @@
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%; margin-top:20px;">
+			style="width:99%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="appntr"><h2>Apprenticeships and Traineeships</h2></span>
+				<span id="appntr"><h3>Apprenticeships and Traineeships</h3></span>
 			</header>
 			
 			<?php 
@@ -1819,9 +1819,9 @@
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%; margin-top:20px;">
+			style="width:99%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="recogpr"><h2>Recognition of Prior Learning/Credit</h2></span>
+				<span id="recogpr"><h3>Recognition of Prior Learning/Credit</h3></span>
 			</header>
 			
 			<?php 
@@ -1889,9 +1889,9 @@
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%; margin-top:20px;">
+			style="width:99%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="jobseek"><h2>Jobseekers Seeking Concession</h2></span>
+				<span id="jobseek"><h3>Jobseekers Seeking Concession</h3></span>
 			</header>
 			
 			<?php 
@@ -2048,14 +2048,14 @@
 		<div id="coursefee" class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			<?php 
 				if(!empty($rowjobseekers) && $rowjobseekers['jobsearchfee']== 1) {
-					echo "style='width:98%; margin-top:20px;'";
+					echo "style='width:99%; margin-top:20px;'";
 				}
 				else {
-					echo "style='width:98%; margin-top:20px; display:none;'";
+					echo "style='width:99%; margin-top:20px; display:none;'";
 				}
 			?>>
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Course Fee</h2>
+				<h3>Course Fee</h3>
 			</header>
 			
 			<?php 
@@ -2139,14 +2139,14 @@
 		<div id="creditcard" class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			<?php 
 				if(!empty($rowjobseekers) && $rowjobseekers['jobsearchfee']== 1) {
-					echo "style='width:98%; margin-top:20px;'";
+					echo "style='width:99%; margin-top:20px;'";
 				}
 				else {
-					echo "style='width:98%; margin-top:20px; display:none;'";
+					echo "style='width:99%; margin-top:20px; display:none;'";
 				}
 			?>>
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Credit Card</h2>
+				<h3>Credit Card</h3>
 			</header>
 			<p style="margin-top:20px;">
 			<label>Card Type</label><input type="text" 
@@ -2169,9 +2169,9 @@
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%; margin-top:20px;">
+			style="width:99%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="centdt"><h2>Centrelink Details</h2></span>
+				<span id="centdt"><h3>Centrelink Details</h3></span>
 			</header>
 			
 			<?php 
@@ -2303,8 +2303,8 @@
 			</div>
 		</div>
 		
-		<div class="w3-container w3-white  w3-padding-large"
-			style="width:98%; margin-top:20px;">
+		<div class="w3-container w3-white w3-padding-large"
+			style="width:99%; margin-top:20px; font-family: Arial, Helvetica, sans-serif;">
 			<button type="submit" name="submitupdate" 
 			class="w3-blueh w3-hover-green w3-padding-large
 			w3-border w3-large"

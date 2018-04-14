@@ -15,7 +15,7 @@
 </div>
 
 
-<div style="margin-left:220px; margin-top:16px;" >
+<div style="margin-left:220px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;" >
 	<form action="data/uploadevidence.php" method="POST" enctype="multipart/form-data">
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 		style="width:26.5%; margin-top:20px;">
@@ -48,40 +48,42 @@
 						<th>Remove</th>
 					</tr>
 				</thead>
-				<form action='data/removefile.php' method='POST'>
-				<?php
-					if(isset($_SESSION['stdid'])) {
-						include_once '../data/dbh.php';
-								
-						$sql = "SELECT filename,filetype,id FROM evidence
-						WHERE stuid='".$_SESSION['stdid']."'";
-								
-						$result = mysqli_query($conn, $sql);
-						
-						while ($row = mysqli_fetch_assoc($result)) {
-							echo "<tr>";
-							echo "<td>".$row['filename']."
-							<input type='hidden' name='filename' value='".$row['filename']."'/>
-							</td><td>".$row['filetype']."</td><td>
-							<button type='submit' name='submit' 
-							class='w3-blueh w3-hover-green w3-padding-large
-							w3-border w3-large' value=".$row['id'].">Remove
-							</button>";
+				<tbody class="w3-small"> 
+					<form action='data/removefile.php' method='POST'>
+					<?php
+						if(isset($_SESSION['stdid'])) {
+							include_once '../data/dbh.php';
+									
+							$sql = "SELECT filename,filetype,id FROM evidence
+							WHERE stuid='".$_SESSION['stdid']."'";
+									
+							$result = mysqli_query($conn, $sql);
 							
-							//Higlight
-							echo "<input type='hidden' value='".$_GET['h']."' name='h'/>"; 
-							
-							echo "</td></tr>";
+							while ($row = mysqli_fetch_assoc($result)) {
+								echo "<tr>";
+								echo "<td>".$row['filename']."
+								<input type='hidden' name='filename' value='".$row['filename']."'/>
+								</td><td>".$row['filetype']."</td><td>
+								<button type='submit' name='submit' 
+								class='w3-blueh w3-hover-green w3-padding-small
+								w3-border' value=".$row['id'].">Remove
+								</button>";
+								
+								//Higlight
+								echo "<input type='hidden' value='".$_GET['h']."' name='h'/>"; 
+								
+								echo "</td></tr>";
+							}
 						}
-					}
-				?>
-				</form>
+					?>
+					</form>
+				</tbody>
 			</table>
 		</div>
 		
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
-		style="width:50%; margin-top:20px;">
+		style="width:50%; margin-top:20px; font-family: Arial, Helvetica, sans-serif;">
 			<a href="reference.php?&h=rf" class="w3-bar-item w3-button w3-blueh w3-hover-green">Next</a>
 		</div>
 </div>

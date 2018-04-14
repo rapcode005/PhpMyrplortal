@@ -14,12 +14,12 @@
 	?>
 </div>
 
-<div class="w3-main" style="margin-left:220px; margin-top:16px;">
+<div class="w3-main" style="margin-left:220px; margin-top:16px; margin-top:16px;">
 	<form action="data/send.php" method="POST">
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:98%;">
+		<div class="w3-container w3-greyb w3-card-4 w3-padding-large w3-small"
+			style="width:98%; font-family: Arial, Helvetica, sans-serif;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>New Request</h2>
+				<h3>New Request</h3>
 			</header>
 			<p style="margin-top:20px;"  onchange="leaveChange()">
 				<select class="w3-select w3-select-input"
@@ -101,7 +101,7 @@
 	</form>
 	
 	<div class="w3-container w3-white w3-card-4 w3-padding-large"
-			style="width:98%; margin-top:20px;">
+			style="width:98%; margin-top:20px; font-family: Arial, Helvetica, sans-serif">
 			
 		<table class="w3-table-all">
 			<thead>
@@ -114,6 +114,7 @@
 					<th>Updated By</th>
 				</tr>
 			</thead>
+			<tbody class="w3-small">
 			<?php
 				
 				include_once '../data/dbh.php';
@@ -164,6 +165,7 @@
 				}
 				
 			?>
+			</tbody>
 		</table>
 			
 	</div>

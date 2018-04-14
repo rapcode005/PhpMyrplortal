@@ -14,13 +14,13 @@
 	?>
 </div>
 	
-<div style="margin-left:220px; margin-top:16px;">
+<div class="w3-small" style="margin-left:220px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;">
 	<form action="data/save.php" method="POST" onsubmit="return checkform();">
 	
 		<div id="pt" class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="perdt"><h2>Personal Details</h2></span>
+				<span id="perdt"><h3>Personal Details</h3></span>
 			</header>
 			<p style="margin-top:20px;">
 				<select class="w3-select w3-select-input"
@@ -36,7 +36,6 @@
 					?>
 				</select>
 				<Label id="loptcourse" style="color:red; display:none;" for="optcourse">Course is required.</Label></p>
-			</p>
 			<p style="margin-top:20px;">
 			<label>USI</label><input type="text" 
 			class="w3-input w3-border 
@@ -64,7 +63,7 @@
 			w3-animate-input"
 			style="width:500px"		
 			name="stdpname" id="stdpname" />
-			<Label id="lstdpname" style="color:red; display:none;">Preffered Name is required.</Label></p></p>
+			<Label id="lstdpname" style="color:red; display:none;">Preffered Name is required.</Label></p>
 			<p style="margin-top:20px;">
 			<label>Birthday</label><input type="date"
 			class="w3-input w3-border 
@@ -84,7 +83,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;" >
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Residence</h2>
+				<h3>Residence</h3>
 			</header>
 			<p style="margin-top:20px;">
 			<label>Building/Property Name</label><input type="text" 
@@ -127,7 +126,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;" >
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Postal Address</h2>
+				<h3>Postal Address</h3>
 			</header>
 			<p style="margin-top:20px;">
 			<label>Building/Property Name</label><input type="text" 
@@ -170,7 +169,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Phone and Contact details</h2>
+				<h3>Phone and Contact details</h3>
 			</header>
 			<p style="margin-top:20px;">
 			<label>Home</label><input type="number"
@@ -201,7 +200,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;" >
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Emegency Contact</h2>
+				<h3>Emegency Contact</h3>
 			</header>
 			<p style="margin-top:20px;">
 			<label>Home</label><input type="number"
@@ -228,7 +227,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Language and Cultural Diversity</h2>
+				<h3>Language and Cultural Diversity</h3>
 			</header>
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="margin-top:20px;">
@@ -311,7 +310,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Individual Learning Needs</h2>
+				<h3>Individual Learning Needs</h3>
 			</header>
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
@@ -363,7 +362,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Education</h2>
+				<h3>Education</h3>
 			</header>
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
@@ -424,7 +423,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Reason for study</h2>
+				<h3>Reason for study</h3>
 			</header>
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
@@ -499,7 +498,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Current Employment Status</h2>
+				<h3>Current Employment Status</h3>
 			</header>
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
@@ -535,7 +534,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Employer Details</h2>
+				<h3>Employer Details</h3>
 			</header>
 			<p style="margin-top:20px;">
 			<label>Company Name</label><input type="text" 
@@ -572,7 +571,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Apprenticeships and Traineeships</h2>
+				<h3>Apprenticeships and Traineeships</h3>
 			</header>
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
@@ -602,7 +601,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Recognition of Prior Learning/Credit</h2>
+				<h3>Recognition of Prior Learning/Credit</h3>
 			</header>
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
@@ -617,7 +616,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Jobseekers Seeking Concession</h2>
+				<h3>Jobseekers Seeking Concession</h3>
 			</header>
 			<p style="margin-top:20px;">
 			<label>Job Search Agency</label><input type="text" 
@@ -674,7 +673,7 @@
 		<div id="coursefee" class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px; display:none;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Course Fee</h2>
+				<h3>Course Fee</h3>
 			</header>
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
@@ -705,7 +704,7 @@
 		<div id="creditcard" class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px; display:none;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Credit Card</h2>
+				<h3>Credit Card</h3>
 			</header>
 			<p style="margin-top:20px;">
 			<label>Card Type</label><input type="text" 
@@ -722,7 +721,7 @@
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:98%; margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<h2>Centrelink Details</h2>
+				<h3>Centrelink Details</h3>
 			</header>
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 			style="margin-top:20px;">
@@ -764,7 +763,7 @@
 		</div>
 		
 		<div class="w3-container w3-white w3-padding-large"
-			style="width:98%; margin-top:20px;">
+			style="width:98%; margin-top:20px; font-family: Arial, Helvetica, sans-serif;">
 			<button type="submit" name="submitsave" 
 			class="w3-blueh w3-hover-green w3-padding-large
 			w3-border w3-large"
