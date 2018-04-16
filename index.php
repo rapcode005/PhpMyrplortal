@@ -1,6 +1,4 @@
-<?php
-	include_once 'headerhomeadmin.php';
-	
+<?php	
 	if(isset($_SESSION['u_r'])) {
 		if ($_SESSION['u_r'] == "admin") {
 			header("Location: adminhome.php");
@@ -13,6 +11,8 @@
 		}
 	}
 	else {
+		include 'headerhomeadmin.php';
+		
 		echo "
 			<div class='main-wrapper'>
 			<form class='login-form' action='data/login.php' method='POST'>

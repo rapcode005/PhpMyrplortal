@@ -54,19 +54,18 @@
 							$n = $_GET['n'];
 							$nid = $_GET['nid'];
 							$link =  "evidence.php?ptid=".$_GET['ptid']."&fnm=".$_GET['fnm']."&gnm=".$_GET['gnm']." 
-							&v=".$fln."&h=".$h."&nid=".$nid."&n=".$n;
+							&v=".$fln."&h=".$h."&nid=".$nid."&n=".$n."&ft=".$ft;
 						}
 						else {
 							$link = "evidence.php?ptid=".$_GET['ptid']."&fnm=".$_GET['fnm']."&gnm=".$_GET['gnm']." 
-							&v=".$fln."&h=".$h;
+							&v=".$fln."&h=".$h."&ft=".$ft;
 						}
 						
 						
 						echo "<td>".$row['filename']."
 						<input type='hidden' name='filename' value='".$row['filename']."'/>
 						</td><td>".$row['filetype']."</td><td>
-						<a href='".$link."' class='w3-blueh w3-hover-green w3-padding-small
-						w3-border'>Show
+						<a href='".$link."' class='w3-blueh w3-hover-green w3-padding-large w3-border'>Show
 						</a>";
 						
 						//Student ID
@@ -99,7 +98,7 @@
 			$notifyid = $_GET['nid'];
 			
 			echo "<div class='w3-container w3-card-4 w3-padding-large'
-					style='width:50%; margin-top:20px;'><p><Label style='color:red'>".$cnt."</Label><p>";
+					style='width:50%; margin-top:20px;'><p><h3>".$cnt."</h3></p>";
 			//button update
 			echo "<a 
 			class='w3-blueh w3-hover-green w3-padding-large
@@ -114,7 +113,8 @@
 
 
 
-<div class="w3-container w3-white w3-card-4 w3-padding-large" style="margin-left:220px; margin-top:16px; width:40%;" >
+<div class="w3-container w3-white w3-card-4 w3-padding-large" 
+style="margin-left:220px; margin-top:16px; width:40%;" >
 	<?php
 		if(isset($_GET['v']) && isset($_GET['fnm']) && 
 			isset($_GET['gnm']) && isset($_GET['ptid']) && 
@@ -126,7 +126,7 @@
 			$gn = base64_decode(urldecode($_GET['gnm']));
 			$ft = base64_decode(urldecode($_GET['ft']));
 			
-			$folder =  $fn.$gn.$id;
+			$folder = $fn.$gn.$id;
 			if ($ft == "audio") {
 				echo "<audio controls> <source ";
 				echo "src='../evidence/".$folder."/".$v."'";
@@ -140,7 +140,6 @@
 				echo "src='../evidence/".$folder."/".$v."'";
 				echo ">Your browser does not support the audio element.</video>";
 			}
-			
 		}
 	?>   
 </div>

@@ -15,24 +15,8 @@
 <body>
 
 <header>
-	<nav class="w3-bar w3-blueh w3-border w3-small">
-		<a href="#" class="w3-bar-item w3-button w3-blueh w3-hover-green">
+	<nav class="w3-bar w3-blueh w3-border w3-large" style="font-family: Arial, Helvetica, sans-serif;">
+		<a class="w3-bar-item w3-button w3-blueh w3-hover-green">
 		<i class="fa fa-home"></i></a>
-		<?php 
-			if (isset($_SESSION['u_r'])) {
-				echo "<form action='data/logout.php' method='POST' >
-				<button type='submit' name='submitlogout'
-				class='w3-bar-item w3-button w3-button w3-blueh w3-hover-green'>
-				<i class='fa fa-sign-out'></i></button>
-				</form>";
-				echo "<form action='data/logout.php' method='POST' >
-				<input type='text' 
-				class='w3-bar-item w3-input w4-grayh' placeholder='Search User..'>
-				<button type='submit' name='submitlogout'
-				class='w3-bar-item w3-button w3-blueh w3-hover-green'>
-				Go</button>
-				</form>";
-			}
-		?>
 	</nav>
 </header>

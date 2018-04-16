@@ -65,11 +65,11 @@
 				
 			}
 			else {
-				header("Location: ../referencedt.php?".$urlquery."&error=error_upload");;
+				header("Location: ../referencedt.php?".$urlquery."&error=upload");;
 			}
 		}
 		else {
-			header("Location: ../referencedt.php?".$urlquery."&error=cannot_upload_file_not_supported");
+			header("Location: ../referencedt.php?".$urlquery."&selecterror=please_select");
 		}
 					
 	}

@@ -9,6 +9,6 @@
 			$foldername = $_SESSION['stdfname'].$_SESSION['stdgname'].$_SESSION['stdid'];
 			$filename = $_POST['filename'];
 			unlink("../../evidence/".$foldername."/".$filename);
-			header("Location: ../evidence.php?h=".$h);
+			header("Location: ../evidence.php?h=".$h."&sr=success");
 		}
 	}

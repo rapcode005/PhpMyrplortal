@@ -23,8 +23,8 @@
 				<span id="perdt"><h3>Personal Details</h3></span>
 			</header>
 			<p style="margin-top:20px;">
-				<select class="w3-select w3-select-input"
-				style="width:500px;" name="optcourse" id="optcourse">
+				<select class="w3-select w3-select-input w3-animate-input"
+				style="width:200px;" name="optcourse" id="optcourse">
 					<option value="" disabled selected>Choose your unit/course</option>
 					<?php
 						$sql = "SELECT code,descrp FROM courselist";
@@ -40,42 +40,42 @@
 			<label>USI</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
-			style="width:500px"		
+			style="width:200px"		
 			name="stdcode" id="stdcode" />
 			<Label id="lstdcode" style="color:red; display:none;">USI is required.</Label></p>
 			<p style="margin-top:20px;">
 			<label>Family Name</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
-			style="width:500px"		
+			style="width:200px"		
 			name="stdfname" id="stdfname" />
 			<Label id="lstdfname" style="color:red; display:none;">Family Name is required.</Label></p>
 			<p style="margin-top:20px;">
 			<label>Given Name</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
-			style="width:500px"		
+			style="width:200px"		
 			name="stdgname" id="stdgname"  />
 			<Label id="lstdgname" style="color:red; display:none;">Given Name is required.</Label></p>
 			<p style="margin-top:20px;">
 			<label>Preffered Name</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
-			style="width:500px"		
+			style="width:200px"		
 			name="stdpname" id="stdpname" />
 			<Label id="lstdpname" style="color:red; display:none;">Preffered Name is required.</Label></p>
 			<p style="margin-top:20px;">
 			<label>Birthday</label><input type="date"
 			class="w3-input w3-border 
 			w3-animate-input"
-			style="width:500px"		
+			style="width:200px"		
 			name="stdbth" id="stdbth"  />
 			<Label id="lstdbth" style="color:red; display:none;">Birthday is required.</Label></p>
 			<p style="margin-top:20px;">
 			<label>Age</label><input type="number"
 			class="w3-input w3-border 
-			w3-animate-input"
-			style="width:500px"		
+			"
+			style="width:70px"		
 			name="stdage" id="stdage"  />
 			<Label id="lstdage" style="color:red; display:none;">Age is required.</Label></p>
 		</div>

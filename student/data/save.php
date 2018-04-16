@@ -11,6 +11,7 @@
 		$linkgn = urlencode(base64_encode($_POST['stdgname']));
 		$querystr = "h=ev";
 		header("Location: ../evidence.php?".$querystr);
+		ob_end_flush();
 	}
 	
 	function personaldt() {
@@ -304,7 +305,11 @@
 	}
 	
 	function reastud() {
-		$reasonqual = $_POST['reasonqual'];
+		
+		if(isset($_POST['reasonqual']))
+			$reasonqual = $_POST['reasonqual'];
+		else
+			$reasonqual = array();
 		
 		$otherreasonstate = mysqli_real_escape_string($GLOBALS['conn'],
 		$_POST['otherreasonstate']);

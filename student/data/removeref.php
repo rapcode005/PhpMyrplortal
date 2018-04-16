@@ -18,7 +18,7 @@
 				$delete = "DELETE FROM reference WHERE id='".$id."'";
 				if(mysqli_query($conn,$delete)){
 					
-					header("Location: ../reference.php?h=".$h);
+					header("Location: ../reference.php?h=".$h."&sr=success");
 				}
 			}
 		}

@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	ob_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -68,7 +69,8 @@
 		?>	
 		<!-- Notification -->
 		<div class="w3-dropdown-hover w3-blueh">
-			<button class="w3-button w3-blueh w3-hover-green"><i class='fa fa-bell'></i></button >
+			<button class="w3-button w3-blueh w3-hover-green"><i class='fa fa-bell'><span id="bdnum" class="w3-badge  
+			w3-red " style="position:absolute;"></i></button >
 			<div id="notify" class="w3-dropdown-content w3-bar-block w3-card-4">
 			</div>
 		</div>
@@ -83,9 +85,9 @@
 					contentType: "application/json; charset=utf-8",
 					success:function(data) {
 						$('#notify').html(data.notification);
-							//if(data.unseen_notification > 0) {
-								//$('.count').html(data.unseen_notification);
-							//}
+							if(data.count > 0) {
+								$('#bdnum').html(data.count);
+							}
 					},
 					 error: function(XMLHttpRequest, textStatus, errorThrown) {
 						alert(textStatus);

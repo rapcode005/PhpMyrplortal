@@ -20,11 +20,11 @@
 			$updatenotify = "UPDATE notification SET updateduserid=".$userid." 
 			WHERE id = ".$notifyid;
 			if(mysqli_query($GLOBALS['conn'],$updatenotify)) {
-				header("Location: ../studentdt.php?".$querystr."&success");
+				header("Location: ../studentdt.php?".$querystr."&s=success");
 			}
 		}
 		else {
-			header("Location: ../studentdt.php?".$querystr."&success");
+			header("Location: ../studentdt.php?".$querystr."&s=success");
 		}
 	}
 	

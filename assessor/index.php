@@ -47,7 +47,7 @@
 					if (empty($_GET['p']))
 						$pagenum = 0;
 					else {
-						$pagenum = ($_GET['p'] * 2) - 2;
+						$pagenum = ($_GET['p'] * 20) - 20;
 					}
 				}
 				else {
@@ -55,7 +55,7 @@
 					$pagenum = 0;
 				}
 			
-			$limit = " LIMIT ".$pagenum.",2";
+			$limit = " LIMIT ".$pagenum.",20";
 			
 			$sql .= $limit;
 				
@@ -72,7 +72,7 @@
 					$linkgn = urlencode(base64_encode($row['gname']));
 					
 					header("Location: studentinfo.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st&st=".$search);
-					
+					ob_end_flush();
 				}
 				else {
 					
@@ -89,8 +89,8 @@
 						echo "<tr>";
 						echo "<td>".$row['code']."</td><td>".$row['fname']."</td><td>".$row['gname']."</td><td>"
 						.$row['descrp']."</td><td>".date_format($date,"F d, Y")."</td><td><a 
-						class='w3-blueh w3-hover-green w3-padding-large
-						w3-border' href='studentinfo.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st'>Summary</a></td>
+						class='w3-blueh w3-hover-green w3-padding-large w3-border' 
+						href='studentinfo.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st'>Summary</a></td>
 						</tr>";
 						
 					}
@@ -114,7 +114,7 @@
 		$totalrecords = $row['count']; 
 		if ($row['count'] >= 2) {
 			
-			$totalpages = ceil($totalrecords / 2); 
+			$totalpages = ceil($totalrecords / 20); 
 			
 			if ($totalpages > 10) {
 				
@@ -136,8 +136,17 @@
 					$totalpagesnum = $totalpages;
 			}
 			else {
-				$previous = "<a href='../student/?p=".($p-1)."' class='w3-button w3-hover-green w3-disabled'>&laquo;</a>";
+				$previous = "<a href='../student/?p=".($p-1)."' class='w3-button w3-hover-green'>&laquo;</a>";
 				$next = "<a href='../student/?p=".($p+1)."' class='w3-button w3-hover-green'>&raquo;</a>";
+				
+				if ($p == 0 || $p == 1) {
+					$previous = "<a class='w3-button w3-hover-green w3-disabled'>&laquo;</a>";
+					$page = 1;
+				}
+				else if ($p == $totalpages) {
+					$next = "<a class='w3-button w3-hover-green w3-disabled'>&raquo;</a>";
+				}
+				
 				$page = 1;
 				$totalpagesnum = $totalpages;
 			}

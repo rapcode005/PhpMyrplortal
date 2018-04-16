@@ -117,7 +117,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					echo "<p><h3>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -212,7 +212,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					echo "<p><h3>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -304,7 +304,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					echo "<p><h3>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -390,7 +390,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					echo "<p><h3>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -475,7 +475,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					echo "<p><h3>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -583,7 +583,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					echo "<p><h3>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -672,7 +672,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					echo "<p><h3>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -771,7 +771,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					echo "<p><h3>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -882,7 +882,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					echo "<p><h3>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -962,7 +962,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					echo "<p><h3>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -1058,7 +1058,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					echo "<p><h3>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -1149,7 +1149,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					echo "<p><h3>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -1224,7 +1224,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					echo "<p><h3>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -1334,7 +1334,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					echo "<p><h3>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -1527,7 +1527,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><Label style='color:red'>".$cnt."</Label><p>";
+					echo "<p><h3>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large

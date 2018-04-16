@@ -21,7 +21,7 @@
 			$foldername = $fn.$gn.$idp;
 			$filename = $_POST['filename'];
 			unlink("../../evidence/".$foldername."/".$filename);
-			header("Location: ../evidencedt.php?".$urlquery);
+			header("Location: ../evidencedt.php?".$urlquery."&sr=success");
 		}
 	}
 	else {

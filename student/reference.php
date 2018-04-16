@@ -18,11 +18,11 @@
 	<form action="data/uploadref.php" method="POST" enctype="multipart/form-data">
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 		style="width:26.5%; margin-top:20px;">
-			<input type='file' id='file' name='file' class="w3-blueh w3-hover-green 
-			w3-border" />
+			<input type='file' id='file' name='file' class="w3-blueh w3-hover-green w3-border"
+            style="height: 32px;" />
 			<button type="submit" name="submitupload" 
 			class="w3-blueh w3-hover-green 
-			w3-border">Upload</button>
+			w3-border w3-padding-small">Upload</button>
 			<input type="hidden" name="h" 
 			<?php 
 				if(isset($_GET['h'])) {
@@ -36,7 +36,13 @@
 	style="width:50%; margin-top:20px; font-family: Arial, Helvetica, sans-serif;">
 		<?php
 			if(isset($_GET['selecterror'])) {
-				echo "<span style='color: red'>Select a file before upload.</span>";
+				echo "<h3 style='color: red'>Select a file before upload.</h3>";
+			}
+			elseif (isset($_GET['s'])) {
+				echo "<h3>The file has been successfully uploaded.</h3>";
+			}
+			elseif (isset($_GET['sr'])) {
+				echo "<h3>The file has been successfully removed.</h3>";
 			}
 		?>
 		<table class="w3-table-all">
@@ -63,8 +69,8 @@
 							echo "<td><label>".$row['filename']."</label>
 							<input type='hidden' name='fileref' value='".$row['filename']."'/>
 							</td><td><button type='submit' name='submit' 
-							class='w3-blueh w3-hover-green w3-padding-small
-							w3-border' value=".$row['id'].">Remove
+							class='w3-blueh w3-hover-green w3-padding-large w3-border' 
+							value=".$row['id'].">Remove
 							</button>";
 						
 							//Higlight

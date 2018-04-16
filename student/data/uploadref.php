@@ -38,7 +38,7 @@
 				VALUES('".$fileName."','".$_SESSION['stdid']."')";
 				mysqli_query($conn,$insert);
 				
-				header("Location: ../reference.php?h=".$h);
+				header("Location: ../reference.php?h=".$h."s=success");
 				
 				
 			}

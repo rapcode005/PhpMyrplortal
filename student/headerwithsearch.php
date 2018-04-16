@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	ob_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,13 +9,11 @@
 		<link rel="stylesheet" type="text/css" href="../link/css/style.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="../link/css/w3.css">
-		<link rel="stylesheet" type="text/css" href="../link/css/font-awesome.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		</script>
 	</head>
 <body>
 
-<header>
 	<nav class="w3-bar w3-blueh w3-border w3-large" style="font-family: Arial, Helvetica, sans-serif;">
 		<?php 
 			if (isset($_SESSION['u_r'])) {			
@@ -64,7 +63,8 @@
 		
 		<!-- Notification -->
 		<div class="w3-dropdown-hover w3-blueh">
-			<button class="w3-button w3-blueh w3-hover-green"><i class='fa fa-bell'></i></button >
+			<button class="w3-button w3-blueh w3-hover-green"><i class='fa fa-bell'><span id="bdnum" class="w3-badge  
+			w3-red " style="position:absolute;"></i></button >
 			<div id="notify" class="w3-dropdown-content w3-bar-block w3-card-4">
 			</div>
 		</div>
@@ -79,9 +79,9 @@
 					contentType: "application/json; charset=utf-8",
 					success:function(data) {
 						$('#notify').html(data.notification);
-							//if(data.unseen_notification > 0) {
-								//$('.count').html(data.unseen_notification);
-							//}
+							if(data.count > 0) {
+								$('#bdnum').html(data.count);
+							}
 					},
 					 error: function(XMLHttpRequest, textStatus, errorThrown) {
 						alert(textStatus);
@@ -108,4 +108,3 @@
 			
 		});
 	</script>
-</header>

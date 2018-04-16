@@ -72,13 +72,18 @@
 		$output = "<a href='#' class='w3-bar-item w3-button w3-hover-green'>No Notification Found</a>";
 	}
 	
-	/*
-	$status_query = "SELECT comment,type FROM notification WHERE status=0";
-	$result_query = mysqli_query($conn, $status_query);
-	$count = mysqli_num_rows($result_query);
-	*/
+	$count = "SELECT count(id) as id FROM notification WHERE status=0";
+	$result_query = mysqli_query($conn, $count);
+
+	if ($tcount = mysqli_fetch_assoc($result_query)) {
+		$rcount  = $tcount['id'];
+	}
+	else 
+		$rcount = 0;
 	
-	$data = array('notification' => $output);
+	$data = array('notification' => $output,
+		'count' => $rcount);
+		
 	echo json_encode($data);
 
 ?>

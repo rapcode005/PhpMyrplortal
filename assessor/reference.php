@@ -61,8 +61,7 @@
 						
 						echo "<td><label>".$row['filename']."</label>
 						<input type='hidden' name='fileref' value='".$row['filename']."'/>
-						</td><td><a href='".$link."' class='w3-blueh w3-hover-green w3-padding-small
-						w3-border'>Show
+						</td><td><a href='".$link."' class='w3-blueh w3-hover-green w3-padding-large w3-border'>Show
 						</a>";
 						
 						
@@ -87,7 +86,7 @@
 			$notifyid = $_GET['nid'];
 			
 			echo "<div class='w3-container w3-card-4 w3-padding-large'
-					style='width:50%; margin-top:20px;'><p><Label style='color:red'>".$cnt."</Label><p>";
+					style='width:50%; margin-top:20px;'><p><h3>".$cnt."</h3></p>";
 			//button update
 			echo "<a 
 			class='w3-blueh w3-hover-green w3-padding-large

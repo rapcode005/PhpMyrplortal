@@ -21,6 +21,11 @@
 			<header class="w3-container w3-blueh w3-tea">
 				<h3>New Request</h3>
 			</header>
+			<?php
+				if (isset($_GET['success'])) {
+					echo "<h3>The request has been successfully processed.</h3>";
+				}
+			?>
 			<p style="margin-top:20px;"  onchange="leaveChange()">
 				<select class="w3-select w3-select-input"
 				style="width:500px;" id="moduletype" name="moduletype">

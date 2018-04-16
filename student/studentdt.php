@@ -16,7 +16,15 @@
 
 <div class="w3-small" style="margin-left:220px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;">
 	<form action="data/update.php" method="GET">
-	
+		
+		<?php
+		
+			if (isset($_GET['s'])) {
+				echo "<h3>The proccess is successfully.</h3>";
+			}
+		
+		?>
+		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
 			style="width:99%;">
 			<header class="w3-container w3-blueh w3-tea">
@@ -49,7 +57,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "perdt") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<Label style='color:red'>".$cnt."</Label>";
+						echo "<h3>".$cnt."</h3>";
 					}
 					
 					$result = mysqli_query($conn, $sqldata);
@@ -57,8 +65,8 @@
 					while ($row = mysqli_fetch_assoc($result)) {
 						
 						echo "<p style='margin-top:20px;'>
-						<select class='w3-select w3-select-input'
-						style='width:500px;' name='optcourse'>";
+						<select class='w3-select w3-select-input w3-animate-input'
+						style='width:200px;' name='optcourse'>";
 						
 						//Load List of Course
 						$sqlcourse = "SELECT code,descrp FROM courselist";
@@ -79,33 +87,33 @@
 						echo "<p style='margin-top:20px;'>
 						<label>USI</label><input type='text'
 						class='w3-input w3-border w3-animate-input'
-						style='width:500px'name='stdcode' 
+						style='width:200px'name='stdcode' 
 						value='".$row['code']."'></input></p>
 						<p style='margin-top:20px;'>
 						<label>Family Name</label><input type='text' 
 						class='w3-input w3-border w3-animate-input' \
-						style='width:500px'	name='stdfname'
+						style='width:200px'	name='stdfname'
 						value='".$row['fname']."'/></p>
 						<p style='margin-top:20px;'>
 						<label>Given Name</label><input type='text' 
 						class='w3-input w3-border w3-animate-input'
-						style='width:500px'	name='stdgname' 
+						style='width:200px'	name='stdgname' 
 						value='".$row['gname']."'/></p>
 						<p style='margin-top:20px;'>
 						<label>Preffered Name</label><input type='text'
 						class='w3-input w3-border w3-animate-input'
-						style='width:500px'	name='stdpname' 
+						style='width:200px'	name='stdpname' 
 						value='".$row['pname']."'/></p>
 						<p style='margin-top:20px;'>
 						<label>Birthday</label><input type='date'
 						class='w3-input w3-border w3-animate-input'
-						style='width:500px'	name='stdbth'		
+						style='width:200px'	name='stdbth'		
 						value=".$row['brhday']." /></p>
 						<p style='margin-top:20px;'>
 						<label>Age</label><input type='number'
-						class='w3-input w3-border w3-animate-input'
-						style='width:500px'	name='stdage' 
-						value='".$row['age']."' /></p>";
+						class='w3-input w3-border'
+						style='width:70px'	name='stdage' 
+						value='".$row['age']."'  /></p>";
 						
 						//Session value for personaldt
 						$_SESSION['stdcode'] = $row['code'];
@@ -166,7 +174,7 @@
 				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 					$_GET['nv'] == "resd") {
 					$cnt = base64_decode(urldecode($_GET['cnt']));
-					echo "<Label style='color:red'>".$cnt."</Label>";
+					echo "<h3>".$cnt."</h3>";
 				}
 			?>
 			
@@ -266,7 +274,7 @@
 						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 							$_GET['nv'] == "ptadd") {
 							$cnt = base64_decode(urldecode($_GET['cnt']));
-							echo "<Label style='color:red'>".$cnt."</Label>";
+							echo "<h3>".$cnt."</h3>";
 						}
 						
 						if($resultCheck > 0) {
@@ -424,7 +432,7 @@
 						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 							$_GET['nv'] == "phncntdt") {
 							$cnt = base64_decode(urldecode($_GET['cnt']));
-							echo "<Label style='color:red'>".$cnt."</Label>";
+							echo "<h3>".$cnt."</h3>";
 						}
 						
 						if($resultCheck > 0) {
@@ -538,7 +546,7 @@
 						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 							$_GET['nv'] == "emgcnt") {
 							$cnt = base64_decode(urldecode($_GET['cnt']));
-							echo "<Label style='color:red'>".$cnt."</Label>";
+							echo "<h3>".$cnt."</h3>";
 						}
 						
 						if ($resultCheck > 0) {
@@ -657,7 +665,7 @@
 						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 							$_GET['nv'] == "lngnculdv") {
 							$cnt = base64_decode(urldecode($_GET['cnt']));
-							echo "<Label style='color:red'>".$cnt."</Label>";
+							echo "<h3>".$cnt."</h3>";
 						}
 						
 						if ($resultCheck > 0) {
@@ -889,7 +897,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "indlnneeds") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<Label style='color:red'>".$cnt."</Label>";
+						echo "<h3>".$cnt."</h3>";
 					}
 				}
 			?>
@@ -1063,7 +1071,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "edu") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<Label style='color:red'>".$cnt."</Label>";
+						echo "<h3>".$cnt."</h3>";
 					}
 					
 				}
@@ -1288,7 +1296,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "refstudy") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<Label style='color:red'>".$cnt."</Label>";
+						echo "<h3>".$cnt."</h3>";
 					}
 				}
 			?>
@@ -1500,7 +1508,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "currempst") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<Label style='color:red'>".$cnt."</Label>";
+						echo "<h3>".$cnt."</h3>";
 					}
 					
 				}
@@ -1637,7 +1645,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "empdt") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<Label style='color:red'>".$cnt."</Label>";
+						echo "<h3>".$cnt."</h3>";
 					}
 					
 				}
@@ -1753,7 +1761,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "appntr") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<Label style='color:red'>".$cnt."</Label>";
+						echo "<h3>".$cnt."</h3>";
 					}
 				}
 			?>
@@ -1851,7 +1859,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "recogpr") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<Label style='color:red'>".$cnt."</Label>";
+						echo "<h3>".$cnt."</h3>";
 					}
 				}
 			?>
@@ -1928,7 +1936,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "jobseek") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<Label style='color:red'>".$cnt."</Label>";
+						echo "<h3>".$cnt."</h3>";
 					}
 					
 				}
@@ -2204,7 +2212,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "centdt") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<Label style='color:red'>".$cnt."</Label>";
+						echo "<h3>".$cnt."</h3>";
 					}
 					
 				}
