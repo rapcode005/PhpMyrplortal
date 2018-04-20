@@ -4,17 +4,16 @@
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
 	}
+	include_once 'menuwithquerystr.php';
 ?>
-
-<div class="w3-main" style="width:25%">
-	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 
-	onclick="w3_open()">&#9776;</button>
-	<?php 
-		include_once 'menuwithquerystr.php';
-	?>
+<div style="width:25%">
+	<button class="w3-button w3-blueh w3-xlarge
+		w3-hover-green w3-hide-large" 
+		onclick="w3_open()">&#9776;</button>
 </div>
 
-<div class="w3-small" style="margin-left:220px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;">
+<div class="w3-main w3-small" style="margin-top:16px; 
+	margin-left:220px; font-family: Arial, Helvetica, sans-serif;">
 	<form action="data/update.php" method="GET">
 		
 		<?php
@@ -57,7 +56,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "perdt") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3>".$cnt."</h3>";
+						echo "<h3><b>Comment:</b>".$cnt."</h3>";
 					}
 					
 					$result = mysqli_query($conn, $sqldata);
@@ -174,7 +173,7 @@
 				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 					$_GET['nv'] == "resd") {
 					$cnt = base64_decode(urldecode($_GET['cnt']));
-					echo "<h3>".$cnt."</h3>";
+					echo "<h3><b>Comment:</b>".$cnt."</h3>";
 				}
 			?>
 			
@@ -274,7 +273,7 @@
 						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 							$_GET['nv'] == "ptadd") {
 							$cnt = base64_decode(urldecode($_GET['cnt']));
-							echo "<h3>".$cnt."</h3>";
+							echo "<h3><b>Comment:</b>".$cnt."</h3>";
 						}
 						
 						if($resultCheck > 0) {
@@ -432,7 +431,7 @@
 						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 							$_GET['nv'] == "phncntdt") {
 							$cnt = base64_decode(urldecode($_GET['cnt']));
-							echo "<h3>".$cnt."</h3>";
+							echo "<h3><b>Comment:</b>".$cnt."</h3>";
 						}
 						
 						if($resultCheck > 0) {
@@ -546,7 +545,7 @@
 						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 							$_GET['nv'] == "emgcnt") {
 							$cnt = base64_decode(urldecode($_GET['cnt']));
-							echo "<h3>".$cnt."</h3>";
+							echo "<h3><b>Comment:</b>".$cnt."</h3>";
 						}
 						
 						if ($resultCheck > 0) {
@@ -665,7 +664,7 @@
 						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 							$_GET['nv'] == "lngnculdv") {
 							$cnt = base64_decode(urldecode($_GET['cnt']));
-							echo "<h3>".$cnt."</h3>";
+							echo "<h3><b>Comment:</b>".$cnt."</h3>";
 						}
 						
 						if ($resultCheck > 0) {
@@ -897,7 +896,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "indlnneeds") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3>".$cnt."</h3>";
+						echo "<h3><b>Comment:</b>".$cnt."</h3>";
 					}
 				}
 			?>
@@ -1071,7 +1070,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "edu") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3>".$cnt."</h3>";
+						echo "<h3><b>Comment:</b>".$cnt."</h3>";
 					}
 					
 				}
@@ -1296,7 +1295,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "refstudy") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3>".$cnt."</h3>";
+						echo "<h3><b>Comment:</b>".$cnt."</h3>";
 					}
 				}
 			?>
@@ -1508,7 +1507,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "currempst") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3>".$cnt."</h3>";
+						echo "<h3><b>Comment:</b>".$cnt."</h3>";
 					}
 					
 				}
@@ -1645,7 +1644,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "empdt") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3>".$cnt."</h3>";
+						echo "<h3><b>Comment:</b>".$cnt."</h3>";
 					}
 					
 				}
@@ -1761,7 +1760,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "appntr") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3>".$cnt."</h3>";
+						echo "<h3><b>Comment:</b>".$cnt."</h3>";
 					}
 				}
 			?>
@@ -1859,7 +1858,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "recogpr") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3>".$cnt."</h3>";
+						echo "<h3><b>Comment:</b>".$cnt."</h3>";
 					}
 				}
 			?>
@@ -1936,7 +1935,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "jobseek") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3>".$cnt."</h3>";
+						echo "<h3><b>Comment:</b>".$cnt."</h3>";
 					}
 					
 				}
@@ -2212,7 +2211,7 @@
 					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
 						$_GET['nv'] == "centdt") {
 						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3>".$cnt."</h3>";
+						echo "<h3><b>Comment:</b>".$cnt."</h3>";
 					}
 					
 				}

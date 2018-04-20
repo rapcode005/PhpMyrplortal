@@ -4,19 +4,18 @@
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
 	}
+	include_once 'menuwithquerystr.php';
 ?>
 
 <div  style="width:25%;">
 	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 
 	onclick="w3_open()">&#9776;</button>
-		<?php
-	 include_once 'menuwithquerystr.php';
-	?>
+
 </div>
 
 <div class="w3-main" style="margin-left:220px; margin-top:16px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;" >	
 	<div class="w3-container w3-white w3-card-4 w3-padding-large"
-	style="width:50%; margin-top:20px;">
+	style="width:50%; margin-top:16px;">
 		<table class="w3-table-all">
 			<thead>
 				<tr class="w3-blueh">
@@ -57,6 +56,12 @@
 							&v=".$fln."&h=".$h;
 						}
 						
+						//Comment
+						if (isset($_GET['cnt']) && !empty($_GET['cnt'])){
+							$cnt = $_GET['cnt'];
+							$link .= "&cnt=".$cnt;
+						}
+						
 						echo "<tr>";
 						
 						echo "<td><label>".$row['filename']."</label>
@@ -85,12 +90,13 @@
 			
 			$notifyid = $_GET['nid'];
 			
-			echo "<div class='w3-container w3-card-4 w3-padding-large'
-					style='width:50%; margin-top:20px;'><p><h3>".$cnt."</h3></p>";
+			echo "<div class=' w3-card-4 w3-padding-large'
+					style='width:50%; margin-top:20px;'>
+					<h3 style='margin-bottom:20px;'><b>Comment: </b>".$cnt."</h3>";
 			//button update
 			echo "<a 
-			class='w3-blueh w3-hover-green w3-padding-large
-			w3-border' href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=rf
+			class='w3-blueh w3-hover-green w3-padding-large w3-border' 
+			href='data/approve.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=rf
 			&nid=".$notifyid."'>
 			Done</a></div>";
 		}
@@ -98,7 +104,7 @@
 	?>
 	
 	<div class="w3-container w3-white w3-card-4 w3-padding-large" 
-	style="margin-top:16px; width:98%; height:100%;" >
+	style="margin-top:20px; width:98%; height:100%;" >
 	<embed width="100%"   <?php
 							if(isset($_GET['v']) && isset($_GET['fnm']) && 
 								isset($_GET['gnm']) && isset($_GET['ptid'])) {

@@ -5,16 +5,14 @@
 		header("Location: ../index.php");
 	}
 	unset($_SESSION['stdid']);
+	include_once 'menu.php';
 ?>
-<div class="w3-main" style="width:25%">
-	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 
+<div style="width:25%">
+	<button class="w3-button w3-blueh w3-hover-green w3-xlarge w3-hide-large" 
 	onclick="w3_open()">&#9776;</button>
-	<?php 
-		include_once 'menu.php';
-	?>
 </div>
 	
-<div class="w3-small" style="margin-left:220px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;">
+<div class="w3-main w3-small" style="margin-left:220px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;">
 	<form action="data/save.php" method="POST" onsubmit="return checkform();">
 	
 		<div id="pt" class="w3-container w3-greyb w3-card-4 w3-padding-large"
@@ -35,49 +33,50 @@
 						}
 					?>
 				</select>
-				<Label id="loptcourse" style="color:red; display:none;" for="optcourse">Course is required.</Label></p>
+				<label id="loptcourse" style="color: red; display:none;" for="optcourse">Course is required.</label></p>
 			<p style="margin-top:20px;">
-			<label>USI</label><input type="text" 
-			class="w3-input w3-border 
-			w3-animate-input"
-			style="width:200px"		
-			name="stdcode" id="stdcode" />
-			<Label id="lstdcode" style="color:red; display:none;">USI is required.</Label></p>
+			<label class="w3-margin-right">USI</label>
+			<a class="w3-hover-green w3-small w3-blueh w3-padding-small w3-margin-right"
+			target="_blank" href="https://portal.usi.gov.au/student/ForgottenUsi">Forgotten USI</a> 
+			<a class="w3-hover-green w3-small w3-blueh w3-padding-small" target="_blank"
+			href="https://www.usi.gov.au/students/create-your-usi">Create USI</a>
+			<input type="text" class="w3-input w3-border w3-animate-input" 
+			style="width:200px"	name="stdcode" id="stdcode" />
+			<label id="lstdcode" style="color: red; display:none;">USI is required.</label></p>
 			<p style="margin-top:20px;">
 			<label>Family Name</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
 			style="width:200px"		
 			name="stdfname" id="stdfname" />
-			<Label id="lstdfname" style="color:red; display:none;">Family Name is required.</Label></p>
+			<label id="lstdfname" style="color: red; display:none;">Family Name is required.</label></p>
 			<p style="margin-top:20px;">
 			<label>Given Name</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
 			style="width:200px"		
 			name="stdgname" id="stdgname"  />
-			<Label id="lstdgname" style="color:red; display:none;">Given Name is required.</Label></p>
+			<label id="lstdgname" style="color: red; display:none;">Given Name is required.</label></p>
 			<p style="margin-top:20px;">
 			<label>Preffered Name</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
 			style="width:200px"		
 			name="stdpname" id="stdpname" />
-			<Label id="lstdpname" style="color:red; display:none;">Preffered Name is required.</Label></p>
+			<label id="lstdpname" style="color: red; display:none;">Preffered Name is required.</label></p>
 			<p style="margin-top:20px;">
 			<label>Birthday</label><input type="date"
 			class="w3-input w3-border 
 			w3-animate-input"
 			style="width:200px"		
 			name="stdbth" id="stdbth"  />
-			<Label id="lstdbth" style="color:red; display:none;">Birthday is required.</Label></p>
+			<label id="lstdbth" style="color: red; display:none;">Birthday is required.</label></p>
 			<p style="margin-top:20px;">
 			<label>Age</label><input type="number"
-			class="w3-input w3-border 
-			"
+			class="w3-input w3-border"
 			style="width:70px"		
 			name="stdage" id="stdage"  />
-			<Label id="lstdage" style="color:red; display:none;">Age is required.</Label></p>
+			<label id="lstdage" style="color: red; display:none;">Age is required.</label></p>
 		</div>
 		
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
@@ -233,7 +232,7 @@
 			style="margin-top:20px;">
 				<label>In which country were you born?<label>
 				<p><input class="w3-radio" type="radio" name="stdlang" value="Australia"  
-				onclick="w3_hideother()" checked />
+				onclick="w3_hideother()"  />
 				<label>Australia</label></p>
 				<p><input class="w3-radio" type="radio" name="stdlang" value="Other"
 				onclick="w3_showother()" />
@@ -248,7 +247,7 @@
 			style="margin-top:20px;">
 				<label>Resident Type</label>
 				<p><input class="w3-radio" type="radio" name="stdrsttype" value="Australian Citizen"  
-				onclick="w3_hideothervisa()" checked />
+				onclick="w3_hideothervisa()"  />
 				<label>Australian Citizen</label></p>
 				<p><input class="w3-radio" type="radio" name="stdrsttype" value="Permament Australia Resident" 
 				onclick="w3_hideothervisa()" />
@@ -269,7 +268,7 @@
 			style="margin-top:20px;">
 				<label>Languages</label>
 				<p><input class="w3-radio" type="radio" name="stdenghome" value="No, English Only"  
-				onclick="w3_hideotherlang()" checked />
+				onclick="w3_hideotherlang()"  />
 				<label>No, English only</label></p>
 				<p><input class="w3-radio" type="radio" name="stdenghome" value="Yes, Specify" 
 				onclick="w3_showotherlang()" />
@@ -284,7 +283,7 @@
 			style="margin-top:20px;">
 				<label>How well do you speak in English?<label>
 				<p><input class="w3-radio" type="radio" name="stdwelleng" 
-				value="Very Well"  checked />
+				value="Very Well"   />
 				<label>Very Well</label></p>
 				<p><input class="w3-radio" type="radio" name="stdwelleng" value="Well"  />
 				<label>Well</label></p>
@@ -296,8 +295,7 @@
 			<div class="w3-container w3-white w3-card-4 w3-padding-large"
 				style="margin-top:20px;">
 				<label>Are you of Aboriginal or Torres Strait Islander origin?<label>
-				<p><input class="w3-radio" type="radio" name="stdabotors" value="No" checked
-				 />
+				<p><input class="w3-radio" type="radio" name="stdabotors" value="No"  />
 				<label>No</label></p>
 				<p><input class="w3-radio" type="radio" name="stdabotors" value="Yes - Aboriginal" 
 				 />
@@ -483,7 +481,7 @@
 				class="w3-input w3-border w3-animate-input w3-light-grey" style="width:200px; Display:none;"		
 				name="wordofmout"
 				id="wordofmout" />
-				<p><input class="w3-radio" type="radio" name="hearaboutcou" checked value="Website" onclick="w3_showwebsite()"  />
+				<p><input class="w3-radio" type="radio" name="hearaboutcou"  value="Website" onclick="w3_showwebsite()"  />
 				<label>Website</label></p>
 				<p><input class="w3-radio" type="radio" name="hearaboutcou" value="Other"  
 				onclick="w3_showotherhear()"/>

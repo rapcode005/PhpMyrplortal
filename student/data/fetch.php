@@ -8,7 +8,8 @@
 		*/	
 	$query = "SELECT a.id,a.subject,a.type,a.typeapp,a.comment,a.stuid,c.fname,c.gname 
 			FROM notification a LEFT JOIN studentinfo b on a.stuid = b.id
-			INNER JOIN personaldt c on b.stdcode = c.id WHERE a.status=0";
+			INNER JOIN personaldt c on b.stdcode = 
+			c.id WHERE a.status=0 and (a.updateduserid IS NULL OR a.updateduserid = '');";
 			
 	$result = mysqli_query($conn, $query);
 	$output = (string) NULL;
@@ -69,10 +70,10 @@
 		}
 	}
 	else {
-		$output = "<a href='#' class='w3-bar-item w3-button w3-hover-green'>No Notification Found</a>";
+		$output = "<a class='w3-bar-item w3-button w3-hover-green'>No Notification Found</a>";
 	}
 	
-	$count = "SELECT count(id) as id FROM notification WHERE status=0";
+	$count = "SELECT count(id) as id FROM notification WHERE status=0 and (updateduserid IS NULL OR updateduserid = '');";
 	$result_query = mysqli_query($conn, $count);
 
 	if ($tcount = mysqli_fetch_assoc($result_query)) {

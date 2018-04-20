@@ -16,7 +16,7 @@
 
 <header>
 	<nav class="w3-bar w3-blueh w3-border w3-large" style="font-family: Arial, Helvetica, sans-serif;">
-		<a class="w3-bar-item w3-button w3-blueh w3-hover-green">
-		<i class="fa fa-home"></i></a>
+		<label class="w3-bar-item w3-blueh">
+		MYRPLPORTAL</label>
 	</nav>
 </header>

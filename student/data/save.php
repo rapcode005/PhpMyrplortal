@@ -276,32 +276,44 @@
 		}
 		elseif ($_POST['stdsuccessqual'] == "No") {
 			$stdsuccessqual = 0;
-			$stdqualsuccomp = "NULL";
+			$stdqualsuccomp = "";
 		}
 		else {
 			$stdsuccessqual = "NULL";
-			$stdqualsuccomp = "NULL";
+			$stdqualsuccomp = "";
 		}
 		
-		$sql = "SELECT IFNULL(max(id),0) as maxid FROM education;";
-		$result = mysqli_query($GLOBALS['conn'],$sql);
+		if (empty($stdyearcomp))
+			$stdyearcomp  = "NULL";
 		
-		if ($row = mysqli_fetch_assoc($result)) {
-			$num = $row['maxid'];
-		}
-		
-		$num += 1;
-		
-		$insert = "INSERT INTO education(highschool,year,snd,success,successyes)
-		VALUES('".$stdhgcomschlvl."','".$stdyearcomp."','".$stdseclvl."','".$stdsuccessqual."','".$stdqualsuccomp."');";
-		
-		if(mysqli_query($GLOBALS['conn'],$insert)) {
-			$insertstd = "Update studentinfo set educaid = ".$num.
-			" where stdcode=".$GLOBALS['stdnum'].";";
-			mysqli_query($GLOBALS['conn'],$insertstd);
+		//Check if empty
+		if (empty($stdhgcomschlvl) && $stdyearcomp == "NULL" && 
+		$stdsuccessqual == "NULL" && $stdqualsuccomp == "" && 
+		$stdseclvl == "NULL") {
 			reastud();
 		}
-		reastud();
+		else {
+			$sql = "SELECT IFNULL(max(id),0) as maxid FROM education;";
+			$result = mysqli_query($GLOBALS['conn'],$sql);
+			
+			if ($row = mysqli_fetch_assoc($result)) {
+				$num = $row['maxid'];
+			}
+			
+			$num += 1;
+			
+			$insert = "INSERT INTO education(highschool,year,snd,success,successyes)
+			VALUES('".$stdhgcomschlvl."',".$stdyearcomp.",".$stdseclvl.",".$stdsuccessqual.",'".$stdqualsuccomp."');";
+			
+			if(mysqli_query($GLOBALS['conn'],$insert)) {
+				$insertstd = "Update studentinfo set educaid = ".$num.
+				" where stdcode=".$GLOBALS['stdnum'].";";
+				mysqli_query($GLOBALS['conn'],$insertstd);
+			}
+			reastud();
+		}
+		
+		
 	}
 	
 	function reastud() {
@@ -336,31 +348,37 @@
 			$other = $otherhear;
 		}
 		else {
-			$other = "NULL";
+			$other = "";
 		}
 		
-		$sql = "SELECT IFNULL(max(id),0) as maxid FROM reastud;";
-		$result = mysqli_query($GLOBALS['conn'],$sql);
-		
-		if ($row = mysqli_fetch_assoc($result)) {
-			$num = $row['maxid'];
+		if (empty($hearaboutcou) && empty($otherreasonstate)
+			&& empty($other) && $reasonqual == array()) {
+			curempstatus();
 		}
-		
-		$num += 1;
-		
-		$insert = "INSERT INTO reastud(hearabout,other,hearaboutv) 
-		VALUES('".$hearaboutcou."','".$otherreasonstate."','".$other."');";
-		
-		if(mysqli_query($GLOBALS['conn'],$insert)) {
-			//Save List
-			foreach($reasonqual as $val) {
-				$inserts ="INSERT INTO reastudlist(descrp,reasid)
-				VALUES('".$val."','".$num."');";
-				mysqli_query($GLOBALS['conn'],$inserts);
+		else {
+			$sql = "SELECT IFNULL(max(id),0) as maxid FROM reastud;";
+			$result = mysqli_query($GLOBALS['conn'],$sql);
+			
+			if ($row = mysqli_fetch_assoc($result)) {
+				$num = $row['maxid'];
 			}
-			$insertstd = "Update studentinfo set reastudid = ".$num.
-			" where stdcode=".$GLOBALS['stdnum'].";";
-			mysqli_query($GLOBALS['conn'],$insertstd);
+			
+			$num += 1;
+			
+			$insert = "INSERT INTO reastud(hearabout,other,hearaboutv) 
+			VALUES('".$hearaboutcou."','".$otherreasonstate."','".$other."');";
+			
+			if(mysqli_query($GLOBALS['conn'],$insert)) {
+				//Save List
+				foreach($reasonqual as $val) {
+					$inserts ="INSERT INTO reastudlist(descrp,reasid)
+					VALUES('".$val."','".$num."');";
+					mysqli_query($GLOBALS['conn'],$inserts);
+				}
+				$insertstd = "Update studentinfo set reastudid = ".$num.
+				" where stdcode=".$GLOBALS['stdnum'].";";
+				mysqli_query($GLOBALS['conn'],$insertstd);
+			}
 			curempstatus();
 		}
 	}
@@ -692,8 +710,6 @@
 			" where stdcode=".$GLOBALS['stdnum'].";";
 			mysqli_query($GLOBALS['conn'],$insertstd);
 		}
-		
-		header("Location: ../evidence.php");
 	}
 	
 ?>

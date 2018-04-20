@@ -4,18 +4,16 @@
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
 	}
+	include_once 'menuwithquerystr.php';
 ?>
 
 <div style="width:25%;">
-	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 
+	<button class="w3-button w3-blueh w3-hover-green w3-xlarge w3-hide-large" 
 	onclick="w3_open()">&#9776;</button>
-	<?php
-	 include_once 'menuwithquerystr.php';
-	?>
 </div>
 
 <div class="w3-main" style="margin-left:220px; margin-top:16px; margin-top:16px;">
-	<form action="data/send.php" method="POST">
+	<form action="data/send.php" method="POST" onsubmit="return checkform();">
 		<div class="w3-container w3-greyb w3-card-4 w3-padding-large w3-small"
 			style="width:98%; font-family: Arial, Helvetica, sans-serif;">
 			<header class="w3-container w3-blueh w3-tea">
@@ -34,11 +32,13 @@
 					<option value="1">Evidence</option>
 					<option value="2">Reference</option>
 				</select>
+				<label id="lmoduletype" 
+				style="color: red; display:none;">Module is required.</label>
 			</p>
 			<div id="apptypep" style="margin-top:20px; display:none;">
 				<p>
 					<select class="w3-select w3-select-input"
-					style="width:500px;" name="apptype">
+					style="width:500px;" id="apptype" name="apptype">
 						<option value="" disabled selected>Choose your tab</option>
 						<option value="0">Personal Details</option>
 						<option value="1">Residence</option>
@@ -56,6 +56,8 @@
 						<option value="13">Jobseekers Seeking Concession</option>
 						<option value="14">Centrelink Details</option>
 					</select>
+					<label id="lapptype" style="color: red; display:none;">
+					Tab is required.</label>
 				</p>
 			</div>
 			<p style="margin-top:20px;">
@@ -63,13 +65,19 @@
 			class="w3-input w3-border 
 			w3-animate-input"
 			style="width:500px"		
-			name="subject" /></p>
+			name="subject" id="subject" />
+			<label id="lsubject" style="color: red; display:none;">
+			Subject is required.</label>
+			</p>
 			<p style="margin-top:20px;">
 			<label>Comment</label><input type="text" 
 			class="w3-input w3-border 
 			w3-animate-input"
 			style="width:500px"		
-			name="comment" /></p>
+			name="comment" id="comment" />
+			<label id="lcomment" style="color: red; display:none;">
+			Comment is required.</label>
+			</p>
 			<input type="hidden" name="fnm" 
 			<?php 
 				if(isset($_GET['fnm'])) {
@@ -100,8 +108,7 @@
 			/>
 			<button type="submit" name="send" 
 			class="w3-blueh w3-hover-green w3-padding-large
-			w3-border w3-large"
-			style="float:right;">Send</button>
+			w3-border w3-large w3-right">Send</button>
 		</div>
 	</form>
 	
@@ -181,6 +188,61 @@
 				document.getElementById("apptypep").style.display = "block";
 			else
 				document.getElementById("apptypep").style.display = "none";
+		}
+		
+		function checkform() {
+			var r = 0;
+			
+			//Comment
+			if (document.getElementById("comment").value == "") {
+				document.getElementById("lcomment").style.display = "block";
+				document.getElementById("comment").focus();
+				r += 1;
+			}
+			else {
+				document.getElementById("lcomment").style.display = "none";
+			}
+			
+				
+			//Subject
+			if (document.getElementById("subject").value == "") {
+				document.getElementById("lsubject").style.display = "block";
+				document.getElementById("subject").focus();
+				r += 1;
+			}
+			else {
+				document.getElementById("lsubject").style.display = "none";
+			}
+			
+			//Tab
+			if (document.getElementById("moduletype").value == "0") {
+				if (document.getElementById("apptype").value == "") {
+					document.getElementById("lapptype").style.display = "block";
+					document.getElementById("apptype").focus();
+					r += 1;
+				}
+				else {
+					document.getElementById("lapptype").style.display = "none";
+				}
+			}
+			
+			//Module
+			if (document.getElementById("moduletype").value == "") {
+				document.getElementById("lmoduletype").style.display = "block";
+				document.getElementById("moduletype").focus();
+				r += 1;
+			}
+			else {
+				document.getElementById("lmoduletype").style.display = "none";
+			}
+			
+			if(r > 0) {
+				return false;
+			}
+			else {
+				return true;
+			}
+				
 		}
 	</script>
 </div>

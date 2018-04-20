@@ -4,20 +4,18 @@
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
 	}
+	include_once 'menuwithquerystr.php';
 ?>
 
-<div class="w3-main" style="width:25%">
-	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 
+<div style="width:25%">
+	<button class="w3-button w3-blueh w3-hover-green w3-xlarge w3-hide-large" 
 	onclick="w3_open()">&#9776;</button>
-	<?php 
-		include_once 'menuwithquerystr.php';
-	?>
 </div>
 
-<div style="margin-left:220px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;" >
+<div class="w3-main" style="margin-left:220px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;" >
 	<form action="data/uploadrefdt.php" method="POST" enctype="multipart/form-data">
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
-		style="width:26.5%; margin-top:20px;">
+		style="width:50%; margin-top:20px;">
 			<input type='file' id='file' name='file' class="w3-blueh w3-hover-green w3-border"
             style="height: 32px;" />
 			<button type="submit" name="submitupload" 
@@ -69,7 +67,7 @@
 		if (isset($_GET['cnt'])) {
 			$cnt = base64_decode(urldecode($_GET['cnt']));
 			echo "<div class='w3-container w3-card-4 w3-padding-large'
-					style='width:50%; margin-top:20px;'><Label style='color:red'>".$cnt."</Label></div>";
+					style='width:50%; margin-top:20px;'><h3><b>Comment: </b>".$cnt."</h3></div>";
 		}
 	?>
 	

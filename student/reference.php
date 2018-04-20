@@ -4,17 +4,15 @@
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
 	}
+	include_once 'menu.php';
 ?>
 
-<div class="w3-main" style="width:25%">
-	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 
+<div  style="width:25%">
+	<button class="w3-button w3-blueh w3-hover-green w3-xlarge w3-hide-large" 
 	onclick="w3_open()">&#9776;</button>
-		<?php 
-		include_once 'menu.php';
-	?>
 </div>
 
-<div style="margin-left:220px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;" >
+<div class="w3-main" style="margin-left:220px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;" >
 	<form action="data/uploadref.php" method="POST" enctype="multipart/form-data">
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 		style="width:26.5%; margin-top:20px;">

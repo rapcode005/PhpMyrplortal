@@ -13,14 +13,11 @@
 		</script>
 	</head>
 <body>
-
 	<nav class="w3-bar w3-blueh w3-border w3-large" style="font-family: Arial, Helvetica, sans-serif;">
+		<a href='../student/' class="w3-bar-item w3-button w3-blueh w3-hover-green"
+		style="margin-right:55px;">MYRPLPORTAL</a>
 		<?php 
 			if (isset($_SESSION['u_r'])) {			
-				//New Student
-				echo "<a href='studentinfo.php?h=st'
-				class='w3-bar-item w3-button w3-blueh w3-hover-green'>
-				New Student</a>";
 				
 				//Search
 				if (isset($_GET['st']) && !empty($_GET['st'])) {
@@ -52,6 +49,12 @@
 					
 				}
 				
+				//New Student
+				echo "<a href='studentinfo.php?h=st'
+				class='w3-bar-item w3-button w3-blueh w3-hover-green'>
+				New Student</a>";
+				
+				
 				//Logout
 				echo "<form action='../data/logout.php' method='POST' >
 						<button type='submit' name='submitlogout'
@@ -62,10 +65,11 @@
 		?>
 		
 		<!-- Notification -->
-		<div class="w3-dropdown-hover w3-blueh">
-			<button class="w3-button w3-blueh w3-hover-green"><i class='fa fa-bell'><span id="bdnum" class="w3-badge  
-			w3-red " style="position:absolute;"></i></button >
-			<div id="notify" class="w3-dropdown-content w3-bar-block w3-card-4">
+		<div class="w3-dropdown-hover w3-blueh w3-right">
+			<button class="w3-button w3-blueh w3-hover-green">
+			<i class='fa fa-bell'><span id="bdnum" class="badge1"></i>
+			</button >
+			<div id="notify" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0">
 			</div>
 		</div>
 	</nav>
@@ -80,11 +84,9 @@
 					success:function(data) {
 						$('#notify').html(data.notification);
 							if(data.count > 0) {
-								$('#bdnum').html(data.count);
+								//$('#bdnum').html(data.count);
+								$('#bdnum').attr('data-badge',data.count);
 							}
-					},
-					 error: function(XMLHttpRequest, textStatus, errorThrown) {
-						alert(textStatus);
 					}
 				});
 			}

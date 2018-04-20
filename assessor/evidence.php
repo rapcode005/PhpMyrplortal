@@ -4,15 +4,13 @@
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
 	}
+	include_once 'menuwithquerystr.php';
 ?>
 
 
 <div style="width:25%;">
-	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 
+	<button class="w3-button w3-blueh w3-hover-green w3-xlarge w3-hide-large" 
 	onclick="w3_open()">&#9776;</button>
-		<?php
-	 include_once 'menuwithquerystr.php';
-	?>
 </div>
 
 
@@ -61,6 +59,11 @@
 							&v=".$fln."&h=".$h."&ft=".$ft;
 						}
 						
+						//Comment
+						if (isset($_GET['cnt']) && !empty($_GET['cnt'])){
+							$cnt = $_GET['cnt'];
+							$link .= "&cnt=".$cnt;
+						}
 						
 						echo "<td>".$row['filename']."
 						<input type='hidden' name='filename' value='".$row['filename']."'/>
@@ -98,7 +101,7 @@
 			$notifyid = $_GET['nid'];
 			
 			echo "<div class='w3-container w3-card-4 w3-padding-large'
-					style='width:50%; margin-top:20px;'><p><h3>".$cnt."</h3></p>";
+					style='width:50%; margin-top:20px;'><p><b>Comment: </b><h3>".$cnt."</h3></p>";
 			//button update
 			echo "<a 
 			class='w3-blueh w3-hover-green w3-padding-large
@@ -114,7 +117,7 @@
 
 
 <div class="w3-container w3-white w3-card-4 w3-padding-large" 
-style="margin-left:220px; margin-top:16px; width:40%;" >
+style="margin-left:220px; margin-top:20px; width:40%;" >
 	<?php
 		if(isset($_GET['v']) && isset($_GET['fnm']) && 
 			isset($_GET['gnm']) && isset($_GET['ptid']) && 

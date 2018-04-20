@@ -4,14 +4,12 @@
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
 	}
+	include_once 'menuwithquerystr.php';
 ?>
 
 <div style="width:25%;">
-	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 
+	<button class="w3-button w3-blueh w3-hover-green w3-xlarge w3-hide-large" 
 	onclick="w3_open()">&#9776;</button>
-	<?php
-	 include_once 'menuwithquerystr.php';
-	?>
 </div>
 	
 <div  class="w3-main" style="margin-left:220px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;">
@@ -117,7 +115,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><h3>".$cnt."</h3></p>";
+					echo "<p><h3><b>Comment: </b>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -212,7 +210,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><h3>".$cnt."</h3></p>";
+					echo "<p><h3><b>Comment: </b>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -304,7 +302,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><h3>".$cnt."</h3></p>";
+					echo "<p><h3><b>Comment: </b>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -390,7 +388,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><h3>".$cnt."</h3></p>";
+					echo "<p><h3><b>Comment: </b>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -475,7 +473,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><h3>".$cnt."</h3></p>";
+					echo "<p><h3><b>Comment: </b>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -583,7 +581,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><h3>".$cnt."</h3></p>";
+					echo "<p><h3><b>Comment: </b>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -672,7 +670,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><h3>".$cnt."</h3></p>";
+					echo "<p><h3><b>Comment: </b>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -771,7 +769,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><h3>".$cnt."</h3></p>";
+					echo "<p><h3><b>Comment: </b>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -882,7 +880,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><h3>".$cnt."</h3></p>";
+					echo "<p><h3><b>Comment: </b>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -962,7 +960,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><h3>".$cnt."</h3></p>";
+					echo "<p><h3><b>Comment: </b>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -1058,7 +1056,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><h3>".$cnt."</h3></p>";
+					echo "<p><h3><b>Comment: </b>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -1149,7 +1147,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><h3>".$cnt."</h3></p>";
+					echo "<p><h3><b>Comment: </b>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -1224,7 +1222,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><h3>".$cnt."</h3></p>";
+					echo "<p><h3><b>Comment: </b>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -1334,7 +1332,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><h3>".$cnt."</h3></p>";
+					echo "<p><h3><b>Comment: </b>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large
@@ -1527,7 +1525,7 @@
 					
 					$notifyid = $_GET['nid'];
 					
-					echo "<p><h3>".$cnt."</h3></p>";
+					echo "<p><h3><b>Comment: </b>".$cnt."</h3></p>";
 					//button update
 					echo "<a 
 					class='w3-blueh w3-hover-green w3-padding-large

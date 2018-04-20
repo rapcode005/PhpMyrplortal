@@ -373,7 +373,17 @@
 			
 			}
 			else {
-			
+				
+				//Check previous values
+				if ($stdlang == "Australia")
+					$stdstatep = "";
+				
+				if ($stdrsttype != "Visa Type")
+					$stdvisatype = "";
+				
+				if($stdenghome != "Yes, Specify")
+					$stdspecify = "";
+				
 				$update = "UPDATE languages SET cntbrn='$stdlang',cntbrnother='$stdstatep',
 				rsdnttype='$stdrsttype',rsdnttypeother='$stdvisatype',languages='$stdenghome',
 				abtor='$stdabotors',engwell='$stdwelleng',languagesother='$stdspecify'
@@ -440,7 +450,18 @@
 				
 			}
 			else {
-			
+				
+				//Check for previous values
+				if ($stddisabiint == 0) {
+					$stdindicate = "";
+					$stdadjustment = "";
+					$stdotherdis = "";
+				}
+				else {
+					if ($stdindicat != "Other")
+						$stdotherdis = "";
+				}
+				
 				$update = "UPDATE indlearnneeds SET disabimpr=".$stddisabiint.",disyes='$stdindicate',
 				disother='$stdotherdis',disadjust='$stdadjustment'
 				WHERE id=".$id.";";
@@ -463,7 +484,7 @@
 		if (isset($_GET["scsscomp"]))
 			$scsscomp = mysqli_real_escape_string($GLOBALS['conn'], $_GET["scsscomp"]);
 		else
-			$scsscomp = "NULL";
+			$scsscomp = "";
 		
 		//Check if values are empty
 		if (empty($stdhgcomschlvl) && empty($stdyearcomp) && empty($stdseclvl) &&
@@ -508,6 +529,10 @@
 			}
 			else {
 				
+				//Check for previous values
+				if ($stdsuccessqualint == 0)
+					$scsscomp = "";
+				
 				$update = "UPDATE education SET highschool='$stdhgcomschlvl',year='$stdyearcomp',
 				snd=".$stdseclvlint.",success=".$stdsuccessqualint.",successyes='".$scsscomp."'
 				WHERE id=".$id.";";
@@ -533,7 +558,7 @@
 		if (isset($_GET["hearaboutcou"]))
 			$hearaboutcou = mysqli_real_escape_string($GLOBALS['conn'],$_GET["hearaboutcou"]);
 		else
-			$hearaboutcou = "NULL";
+			$hearaboutcou = "";
 		
 		$advertisementwhe= mysqli_real_escape_string($GLOBALS['conn'],
 		$_GET['advertisementwhe']);
@@ -573,7 +598,7 @@
 				$other = $otherhear;
 			}
 			else {
-				$other = "NULL";
+				$other = "";
 			}
 			
 			
