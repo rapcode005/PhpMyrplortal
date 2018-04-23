@@ -65,11 +65,11 @@
 					$updatenotify = "UPDATE notification SET updateduserid=".$userid." 
 					WHERE id = ".$notifyid;
 					if(mysqli_query($GLOBALS['conn'],$updatenotify)) {
-						header("Location: ../evidencedt.php?".$urlquery."&s=success");
+						header("Location: ../evidencedt.php?".$urlquery."&s=successupload");
 					}
 				}
 				else {
-					header("Location: ../evidencedt.php?".$urlquery."&s=success");
+					header("Location: ../evidencedt.php?".$urlquery."&s=successupload");
 				}
 				
 				
@@ -77,11 +77,11 @@
 				
 			}
 			else {
-				header("Location: ../evidencedt.php?".$urlquery."&error=upload");;
+				header("Location: ../evidencedt.php?".$urlquery."&s=errorupload");;
 			}
 		}
 		else {
-			header("Location: ../evidencedt.php?".$urlquery."&selecterror=please_select");
+			header("Location: ../evidencedt.php?".$urlquery."&s=please_select");
 		}
 					
 	}

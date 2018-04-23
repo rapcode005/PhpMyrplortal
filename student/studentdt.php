@@ -11,245 +11,239 @@
 		w3-hover-green w3-hide-large" 
 		onclick="w3_open()">&#9776;</button>
 </div>
+<form action="data/update.php" method="GET">
+<div class="w3-bottom">
+	<div class="w3-display-bottomright w3-margin"
+		style="font-family: Arial, Helvetica, sans-serif;">
+		<?php
+			if (!isset($_GET['cnt'])) {
+				echo "<button type='submit' name='submitupdate' 
+				class='w3-blueh w3-hover-green w3-padding-large
+				w3-border w3-large'
+				>Save</button>";
+			}				
+		?>
+	</div>
+</div>
 
-<div class="w3-main w3-small" style="margin-top:16px; 
-	margin-left:220px; font-family: Arial, Helvetica, sans-serif;">
-	<form action="data/update.php" method="GET">
+<div class="w3-main w3-container w3-small" style="margin-top:20px; 
+	margin-left:200px; font-family: Arial, Helvetica, sans-serif;">
+
 		
 		<?php
-		
-			if (isset($_GET['s'])) {
-				echo "<h3>The proccess is successfully.</h3>";
-			}
-		
+			include_once '../link/message/prosucca.php';
 		?>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:99%;">
-			<header class="w3-container w3-blueh w3-tea">
+		<div class="w3-greyb w3-card-4">
+			
+			<header class="w3-container w3-blueh">
 				<span id="perdt"><h3>Personal Details</h3></span>
 			</header>
 			
-			<?php 
-				if (isset($_GET['ptid'])) {
-					
-					$ptid = base64_decode(urldecode($_GET['ptid']));
-					
-					$sqldata = "SELECT
-									b.id as perid,
-									b.code as code,
-									b.fname as fname,
-									b.gname as gname,
-									b.pname as pname,
-									b.brhday as brhday,
-									b.age as age,
-									a.stdcourse as stdcourse
-								FROM studentinfo a 
-					INNER JOIN personaldt b on a.stdcode = b.id 
-					WHERE a.id = ".$ptid;
-					
-					
-					//Session value for personaldt
-					$_SESSION['stdid'] = $ptid;
-					
-					//Comment
-					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-						$_GET['nv'] == "perdt") {
-						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3><b>Comment:</b>".$cnt."</h3>";
-					}
-					
-					$result = mysqli_query($conn, $sqldata);
-					
-					while ($row = mysqli_fetch_assoc($result)) {
+			<div class="w3-container">
+				<?php 
+					if (isset($_GET['ptid'])) {
 						
-						echo "<p style='margin-top:20px;'>
-						<select class='w3-select w3-select-input w3-animate-input'
-						style='width:200px;' name='optcourse'>";
+						$ptid = base64_decode(urldecode($_GET['ptid']));
 						
-						//Load List of Course
-						$sqlcourse = "SELECT code,descrp FROM courselist";
-						$resultco = mysqli_query($conn,$sqlcourse);
-						while($rowcr = mysqli_fetch_assoc($resultco)) {
-							if ($row['stdcourse'] == $rowcr['code']) {
-								echo "<option value='".$rowcr['code']."'
-								selected>".$rowcr['descrp']."</option>";
-							}
-							else {
-								echo "<option value='".$rowcr['code']."'
-								>".$rowcr['descrp']."</option>";
-							}
-						}
-					
-						echo "</select></p>";
+						$sqldata = "SELECT
+										b.id as perid,
+										b.code as code,
+										b.fname as fname,
+										b.gname as gname,
+										b.pname as pname,
+										b.brhday as brhday,
+										b.age as age,
+										a.stdcourse as stdcourse
+									FROM studentinfo a 
+						INNER JOIN personaldt b on a.stdcode = b.id 
+						WHERE a.id = ".$ptid;
 						
-						echo "<p style='margin-top:20px;'>
-						<label>USI</label><input type='text'
-						class='w3-input w3-border w3-animate-input'
-						style='width:200px'name='stdcode' 
-						value='".$row['code']."'></input></p>
-						<p style='margin-top:20px;'>
-						<label>Family Name</label><input type='text' 
-						class='w3-input w3-border w3-animate-input' \
-						style='width:200px'	name='stdfname'
-						value='".$row['fname']."'/></p>
-						<p style='margin-top:20px;'>
-						<label>Given Name</label><input type='text' 
-						class='w3-input w3-border w3-animate-input'
-						style='width:200px'	name='stdgname' 
-						value='".$row['gname']."'/></p>
-						<p style='margin-top:20px;'>
-						<label>Preffered Name</label><input type='text'
-						class='w3-input w3-border w3-animate-input'
-						style='width:200px'	name='stdpname' 
-						value='".$row['pname']."'/></p>
-						<p style='margin-top:20px;'>
-						<label>Birthday</label><input type='date'
-						class='w3-input w3-border w3-animate-input'
-						style='width:200px'	name='stdbth'		
-						value=".$row['brhday']." /></p>
-						<p style='margin-top:20px;'>
-						<label>Age</label><input type='number'
-						class='w3-input w3-border'
-						style='width:70px'	name='stdage' 
-						value='".$row['age']."'  /></p>";
 						
 						//Session value for personaldt
-						$_SESSION['stdcode'] = $row['code'];
-						$_SESSION['stdfname'] = $row['fname'];
-						$_SESSION['stdgname'] = $row['gname'];
-						$_SESSION['perid'] = $row['perid'];
+						$_SESSION['stdid'] = $ptid;
 						
-						//Saving
-						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-							$_GET['nv'] == "perdt") {
-							echo "<button type='submit' name='submitupdate' 
-								class='w3-blueh w3-hover-green w3-padding-large
-								w3-border w3-large'
-								>Save</button>";
+						//Comment
+						if (isset($_GET['nv']) && $_GET['nv'] == "perdt") {
+							include_once '../link/message/commentst.php';
 						}
+											
+						$result = mysqli_query($conn, $sqldata);
 						
+						while ($row = mysqli_fetch_assoc($result)) {
+							
+							echo "<p>
+							<select class='w3-select w3-select-input w3-animate-input'
+							style='width:200px;' name='optcourse'>";
+							
+							//Load List of Course
+							$sqlcourse = "SELECT code,descrp FROM courselist";
+							$resultco = mysqli_query($conn,$sqlcourse);
+							while($rowcr = mysqli_fetch_assoc($resultco)) {
+								if ($row['stdcourse'] == $rowcr['code']) {
+									echo "<option value='".$rowcr['code']."'
+									selected>".$rowcr['descrp']."</option>";
+								}
+								else {
+									echo "<option value='".$rowcr['code']."'
+									>".$rowcr['descrp']."</option>";
+								}
+							}
+						
+							echo "</select></p>";
+							
+							echo "<p>
+							<label>USI</label><input type='text'
+							class='w3-input w3-border w3-animate-input'
+							style='width:200px'name='stdcode' 
+							value='".$row['code']."'></input></p>
+							<p>
+							<label>Family Name</label><input type='text' 
+							class='w3-input w3-border w3-animate-input' \
+							style='width:200px'	name='stdfname'
+							value='".$row['fname']."'/></p>
+							<p>
+							<label>Given Name</label><input type='text' 
+							class='w3-input w3-border w3-animate-input'
+							style='width:200px'	name='stdgname' 
+							value='".$row['gname']."'/></p>
+							<p>
+							<label>Preffered Name</label><input type='text'
+							class='w3-input w3-border w3-animate-input'
+							style='width:200px'	name='stdpname' 
+							value='".$row['pname']."'/></p>
+							<p>
+							<label>Birthday</label><input type='date'
+							class='w3-input w3-border w3-animate-input'
+							style='width:200px'	name='stdbth'		
+							value=".$row['brhday']." /></p>
+							<p>
+							<label>Age</label><input type='number'
+							class='w3-input w3-border'
+							style='width:70px'	name='stdage' 
+							value='".$row['age']."'  /></p>";
+							
+							//Session value for personaldt
+							$_SESSION['stdcode'] = $row['code'];
+							$_SESSION['stdfname'] = $row['fname'];
+							$_SESSION['stdgname'] = $row['gname'];
+							$_SESSION['perid'] = $row['perid'];
+													
+						}
 					}
-				}
-			?>
-			
+				?>
+			</div>
+						
 		</div>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:99%; margin-top:20px;" >
-			<header class="w3-container w3-blueh w3-tea">
+		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
+		
+			<header class="w3-container w3-blueh">
 				<span id="resd"><h3>Residence</h3></span>
 			</header>
 			
-			<?php 
-				if (isset($_GET['ptid'])) {
-					
-					$ptid = base64_decode(urldecode($_GET['ptid']));
-					
-					$sqldata = "SELECT 
-									b.id as resdid, 
-									b.building,
-									b.flat,
-									b.Street,
-									b.Suburb,
-									b.State,
-									b.postalcode
-								FROM studentinfo a 
-					INNER JOIN residence b on a.rid = b.id 
-					WHERE a.id = ".$ptid;
-					
-					$result = mysqli_query($conn, $sqldata);
-					$resultCheck = mysqli_num_rows($result);
+			<div class="w3-container">
+				<?php 
+					if (isset($_GET['ptid'])) {
 						
-					if ($resultCheck > 0) {
+						$ptid = base64_decode(urldecode($_GET['ptid']));
+						
+						$sqldata = "SELECT 
+										b.id as resdid, 
+										b.building,
+										b.flat,
+										b.Street,
+										b.Suburb,
+										b.State,
+										b.postalcode
+									FROM studentinfo a 
+						INNER JOIN residence b on a.rid = b.id 
+						WHERE a.id = ".$ptid;
+						
+						$result = mysqli_query($conn, $sqldata);
+						$resultCheck = mysqli_num_rows($result);
 							
-						$rowresd = mysqli_fetch_assoc($result);
-						//For Saving Residence
-						$_SESSION['resdid'] = $rowresd['resdid'];	
+						if ($resultCheck > 0) {
+								
+							$rowresd = mysqli_fetch_assoc($result);
+							//For Saving Residence
+							$_SESSION['resdid'] = $rowresd['resdid'];	
+						}
 					}
-				}
+					
+					//Comment
+					if (isset($_GET['nv']) && $_GET['nv'] == "resd") {
+						include_once '../link/message/commentst.php';
+					}
+						
+				?>
 				
-				//Comment
-				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-					$_GET['nv'] == "resd") {
-					$cnt = base64_decode(urldecode($_GET['cnt']));
-					echo "<h3><b>Comment:</b>".$cnt."</h3>";
-				}
-			?>
-			
-			<p style="margin-top:20px;">
-			<label>Building/Property Name</label><input type="text" 
-			class="w3-input w3-border w3-animate-input"
-			style="width:200px"	name="stdbuildr" 
-			<?php
-				if (!empty($rowresd)) {
-					echo "value='".$rowresd['building']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Flat/Unit details</label><input type="text" 
-			class="w3-input w3-border w3-animate-input"
-			style="width:200px"	name="stdflastr" 
-			<?php
-				if (!empty($rowresd)) {
-					echo "value='".$rowresd['flat']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Street/Lot number</label><input type="text" 
-			class="w3-input w3-border w3-animate-input"
-			style="width:200px"	name="stdstrnumr"
-			<?php
-				if (!empty($rowresd)) {
-					echo "value='".$rowresd['Street']."'";
-				}
-			?>			/></p>
-			<p style="margin-top:20px;">
-			<label>Suburb/Locality/Town</label><input type="text" 
-			class="w3-input w3-border w3-animate-input"
-			style="width:200px"	name="stdsltr" 
-			<?php
-				if (!empty($rowresd)) {
-					echo "value='".$rowresd['Suburb']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>State</label><input type="text" 
-			class="w3-input w3-border w3-animate-input"
-			style="width:200px"	name="stdstater" 
-			<?php
-				if (!empty($rowresd)) {
-					echo "value='".$rowresd['State']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Postal Code</label><input type="text" 
-			class="w3-input w3-border w3-animate-input"
-			style="width:200px"	name="stdptlr" 
-			<?php
-				if (!empty($rowresd)) {
-					echo "value='".$rowresd['postalcode']."'";
-				}
-			?>/></p>
-			
-			<?php
-				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-					$_GET['nv'] == "resd") {
-					echo "<button type='submit' name='submitupdate' 
-						class='w3-blueh w3-hover-green w3-padding-large
-						w3-border w3-large'
-						>Save</button>";
-				}
-			?>
+				<p>
+				<label>Building/Property Name</label><input type="text" 
+				class="w3-input w3-border w3-animate-input"
+				style="width:200px"	name="stdbuildr" 
+				<?php
+					if (!empty($rowresd)) {
+						echo "value='".$rowresd['building']."'";
+					}
+				?>/></p>
+				<p>
+				<label>Flat/Unit details</label><input type="text" 
+				class="w3-input w3-border w3-animate-input"
+				style="width:200px"	name="stdflastr" 
+				<?php
+					if (!empty($rowresd)) {
+						echo "value='".$rowresd['flat']."'";
+					}
+				?>/></p>
+				<p>
+				<label>Street/Lot number</label><input type="text" 
+				class="w3-input w3-border w3-animate-input"
+				style="width:200px"	name="stdstrnumr"
+				<?php
+					if (!empty($rowresd)) {
+						echo "value='".$rowresd['Street']."'";
+					}
+				?>			/></p>
+				<p>
+				<label>Suburb/Locality/Town</label><input type="text" 
+				class="w3-input w3-border w3-animate-input"
+				style="width:200px"	name="stdsltr" 
+				<?php
+					if (!empty($rowresd)) {
+						echo "value='".$rowresd['Suburb']."'";
+					}
+				?>/></p>
+				<p>
+				<label>State</label><input type="text" 
+				class="w3-input w3-border w3-animate-input"
+				style="width:200px"	name="stdstater" 
+				<?php
+					if (!empty($rowresd)) {
+						echo "value='".$rowresd['State']."'";
+					}
+				?>/></p>
+				<p>
+				<label>Postal Code</label><input type="text" 
+				class="w3-input w3-border w3-animate-input"
+				style="width:200px"	name="stdptlr" 
+				<?php
+					if (!empty($rowresd)) {
+						echo "value='".$rowresd['postalcode']."'";
+					}
+				?>/></p>
+				
+			</div>
 			
 		</div>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:99%; margin-top:20px;" >
-			<header class="w3-container w3-blueh w3-tea">
+		<div class="w3-greyb w3-card-4" style="margin-top:20px;" >
+		
+			<header class="w3-container w3-blueh">
 				<span id="ptadd"><h3>Postal Address</h3></span>
 			</header>
 			
+			<div class="w3-container">
 				<?php 
 					if (isset($_GET['ptid'])) {
 						
@@ -270,40 +264,39 @@
 						$result = mysqli_query($conn, $sqldata);
 						$resultCheck = mysqli_num_rows($result);
 						
-						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-							$_GET['nv'] == "ptadd") {
-							$cnt = base64_decode(urldecode($_GET['cnt']));
-							echo "<h3><b>Comment:</b>".$cnt."</h3>";
+						//Comment
+						if (isset($_GET['nv']) && $_GET['nv'] == "ptadd") {
+							include_once '../link/message/commentst.php';
 						}
 						
 						if($resultCheck > 0) {
 							$row = mysqli_fetch_assoc($result);
-							echo "<p style='margin-top:20px;'>
+							echo "<p>
 							<label>Building/Property Name</label><input type='text' 
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdbuildp' 
 							value='".$row['building']."' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Flat/Unit details</label><input type='text' 
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdflastp' 
 							value='".$row['flat']."'/></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Street/Lot number</label><input type='text' 
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdstrnump' 
 							value='".$row['Street']."' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Suburb/Locality/Town</label><input type='text' 
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdsltp'
 							value='".$row['Suburb']."' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>State</label><input type='text' 
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='statept' 
 							value='".$row['State']."' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Postal Code</label><input type='text' 
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdptlp' 
@@ -314,36 +307,36 @@
 							
 						}
 						else {
-							echo "<p style='margin-top:20px;'>
+							echo "<p>
 							<label>Building/Property Name</label><input type='text' 
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'		
 							name='stdbuildp'/></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Flat/Unit details</label><input type='text' 
 							class='w3-input w3-border 
 							w3-animate-input'
 							style='width:200px'		
 							name='stdflastp' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Street/Lot number</label><input type='text' 
 							class='w3-input w3-border 
 							w3-animate-input'
 							style='width:200px'		
 							name='stdstrnump' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Suburb/Locality/Town</label><input type='text' 
 							class='w3-input w3-border 
 							w3-animate-input'
 							style='width:200px'		
 							name='stdsltp' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>State</label><input type='text' 
 							class='w3-input w3-border 
 							w3-animate-input'
 							style='width:200px'		
 							name='statept' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Postal Code</label><input type='text' 
 							class='w3-input w3-border 
 							w3-animate-input'
@@ -354,36 +347,36 @@
 					}
 					else {
 						
-						echo "<p style='margin-top:20px;'>
+						echo "<p>
 						<label>Building/Property Name</label><input type='text' 
 						class='w3-input w3-border w3-animate-input'
 						style='width:200px'		
 						name='stdbuildp'/></p>
-						<p style='margin-top:20px;'>
+						<p>
 						<label>Flat/Unit details</label><input type='text' 
 						class='w3-input w3-border 
 						w3-animate-input'
 						style='width:200px'		
 						name='stdflastp' /></p>
-						<p style='margin-top:20px;'>
+						<p>
 						<label>Street/Lot number</label><input type='text' 
 						class='w3-input w3-border 
 						w3-animate-input'
 						style='width:200px'		
 						name='stdstrnump' /></p>
-						<p style='margin-top:20px;'>
+						<p>
 						<label>Suburb/Locality/Town</label><input type='text' 
 						class='w3-input w3-border 
 						w3-animate-input'
 						style='width:200px'		
 						name='stdsltp' /></p>
-						<p style='margin-top:20px;'>
+						<p>
 						<label>State</label><input type='text' 
 						class='w3-input w3-border 
 						w3-animate-input'
 						style='width:200px'		
 						name='statept' /></p>
-						<p style='margin-top:20px;'>
+						<p>
 						<label>Postal Code</label><input type='text' 
 						class='w3-input w3-border 
 						w3-animate-input'
@@ -391,24 +384,18 @@
 						name='stdptlp' /></p>";
 					}
 					
-					//Saving update
-					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-						$_GET['nv'] == "ptadd") {
-						echo "<button type='submit' name='submitupdate' 
-							class='w3-blueh w3-hover-green w3-padding-large
-							w3-border w3-large'
-							>Save</button>";
-					}
 				?>
+			</div>			
 			
 		</div>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:99%; margin-top:20px;">
-			<header class="w3-container w3-blueh w3-tea">
+		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
+	
+			<header class="w3-container w3-blueh">
 				<span id="phncntdt"><h3>Phone and Contact details</h3></span>
 			</header>
 			
+			<div class="w3-container">
 				<?php 
 					if (isset($_GET['ptid'])) {
 						
@@ -426,34 +413,32 @@
 						
 						$result = mysqli_query($conn, $sqldata);
 						$resultCheck = mysqli_num_rows($result);
-						
+										
 						//Comment
-						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-							$_GET['nv'] == "phncntdt") {
-							$cnt = base64_decode(urldecode($_GET['cnt']));
-							echo "<h3><b>Comment:</b>".$cnt."</h3>";
+						if (isset($_GET['nv']) && $_GET['nv'] == "phncntdt") {
+							include_once '../link/message/commentst.php';
 						}
 						
 						if($resultCheck > 0) {
 							
 							$row = mysqli_fetch_assoc($result);
 							
-							echo "<p style='margin-top:20px;'>
+							echo "<p>
 							<label>Home</label><input type='number'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdhome' 
 							value='".$row['homeph']."' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Work</label><input type='number'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdwork'
 							value='".$row['workph']."' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Mobile</label><input type='number'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdmobile' 
 							value='".$row['mobile']."' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Email</label><input type='email'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdemail' 
@@ -465,19 +450,19 @@
 						}
 						else {
 							
-							echo "<p style='margin-top:20px;'>
+							echo "<p>
 							<label>Home</label><input type='number'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdhome' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Work</label><input type='number'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdwork' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Mobile</label><input type='number'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdmobile' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Email</label><input type='email'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdemail' /></p>";
@@ -486,43 +471,34 @@
 					}
 					else {
 						
-						echo "<p style='margin-top:20px;'>
+						echo "<p>
 						<label>Home</label><input type='number'
 						class='w3-input w3-border w3-animate-input'
 						style='width:200px'	name='stdhome' /></p>
-						<p style='margin-top:20px;'>
+						<p>
 						<label>Work</label><input type='number'
 						class='w3-input w3-border w3-animate-input'
 						style='width:200px'	name='stdwork' /></p>
-						<p style='margin-top:20px;'>
+						<p>
 						<label>Mobile</label><input type='number'
 						class='w3-input w3-border w3-animate-input'
 						style='width:200px'	name='stdmobile' /></p>
-						<p style='margin-top:20px;'>
+						<p>
 						<label>Email</label><input type='email'
 						class='w3-input w3-border w3-animate-input'
 						style='width:200px'	name='stdemail' /></p>";
 						
 					}
-					
-					//Saving update
-					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-						$_GET['nv'] == "phncntdt") {
-						echo "<button type='submit' name='submitupdate' 
-							class='w3-blueh w3-hover-green w3-padding-large
-							w3-border w3-large'
-							>Save</button>";
-					}
 				?>
-			
+			</div>
 		</div>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:99%; margin-top:20px;" >
-			<header class="w3-container w3-blueh w3-tea">
+		<div class="w3-greyb w3-card-4" style="margin-top:20px;" >
+			<header class="w3-container w3-blueh">
 				<span id="emgcnt"><h3>Emegency Contact</h3></span>
 			</header>
 			
+			<div class="w3-container">
 				<?php 
 					if (isset($_GET['ptid'])) {
 						
@@ -540,34 +516,32 @@
 						
 						$result = mysqli_query($conn, $sqldata);
 						$resultCheck = mysqli_num_rows($result);
-						
+										
 						//Comment
-						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-							$_GET['nv'] == "emgcnt") {
-							$cnt = base64_decode(urldecode($_GET['cnt']));
-							echo "<h3><b>Comment:</b>".$cnt."</h3>";
+						if (isset($_GET['nv']) && $_GET['nv'] == "emgcnt") {
+							include_once '../link/message/commentst.php';
 						}
 						
 						if ($resultCheck > 0) {
 							
 							$row = mysqli_fetch_assoc($result);
 							
-							echo "<p style='margin-top:20px;'>
+							echo "<p>
 							<label>Home</label><input type='number'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdhomee'
 							value='".$row['homeph']."' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Work</label><input type='number'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdworke'
 							value='".$row['workph']."' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Mobile</label><input type='number'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdmobilee' 
 							value='".$row['mobile']."' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Email</label><input type='email'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px' name='stdemaile' 
@@ -579,19 +553,19 @@
 						}
 						else {
 							
-							echo "<p style='margin-top:20px;'>
+							echo "<p>
 							<label>Home</label><input type='number'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdhomee' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Work</label><input type='number'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdworke' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Mobile</label><input type='number'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px'	name='stdmobilee' /></p>
-							<p style='margin-top:20px;'>
+							<p>
 							<label>Email</label><input type='email'
 							class='w3-input w3-border w3-animate-input'
 							style='width:200px' name='stdemaile' /></p>";
@@ -600,41 +574,31 @@
 					}
 					else {
 						
-						echo "<p style='margin-top:20px;'>
+						echo "<p>
 						<label>Home</label><input type='number'
 						class='w3-input w3-border w3-animate-input'
 						style='width:200px'	name='stdhomee' /></p>
-						<p style='margin-top:20px;'>
+						<p>
 						<label>Work</label><input type='number'
 						class='w3-input w3-border w3-animate-input'
 						style='width:200px'	name='stdworke' /></p>
-						<p style='margin-top:20px;'>
+						<p>
 						<label>Mobile</label><input type='number'
 						class='w3-input w3-border w3-animate-input'
 						style='width:200px'	name='stdmobilee' /></p>
-						<p style='margin-top:20px;'>
+						<p>
 						<label>Email</label><input type='email'
 						class='w3-input w3-border w3-animate-input'
 						style='width:200px' name='stdemaile' /></p>";
 						
 					}
-					
-					//Saving update
-					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-						$_GET['nv'] == "emgcnt") {
-						echo "<button type='submit' name='submitupdate' 
-							class='w3-blueh w3-hover-green w3-padding-large
-							w3-border w3-large'
-							>Save</button>";
-					}
-					
-				?>
-				
+										
+				?>			
+			</div>	
 		</div>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:99%; margin-top:20px;">
-			<header class="w3-container w3-blueh w3-tea">
+		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
+			<header class="w3-container w3-blueh">
 				<span id="lngnculdv"><h3>Language and Cultural Diversity</h3></span>
 			</header>
 			
@@ -661,12 +625,10 @@
 						$resultCheck = mysqli_num_rows($result);
 						
 						//Comment
-						if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-							$_GET['nv'] == "lngnculdv") {
-							$cnt = base64_decode(urldecode($_GET['cnt']));
-							echo "<h3><b>Comment:</b>".$cnt."</h3>";
+						if (isset($_GET['nv']) && $_GET['nv'] == "lngnculdv") {
+							include_once '../link/message/commentst.php';
 						}
-						
+					
 						if ($resultCheck > 0) {
 							
 							$rowlang = mysqli_fetch_assoc($result);
@@ -676,9 +638,8 @@
 					}
 				?>
 			
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-			style="margin-top:20px;">
-				<label>In which country were you born?<label>
+			<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
+				<label>In which country were you born?</label>
 				<p><input class="w3-radio" type="radio" name="stdlang" value="Australia"  
 				onclick="w3_hideother()" 
 				<?php 
@@ -710,8 +671,7 @@
 				?> /></p>
 			</div>
 			
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-			style="margin-top:20px;">
+			<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
 				<label>Resident Type</label>
 				<p><input class="w3-radio" type="radio" name="stdrsttype" value="Australian Citizen"  
 				onclick="w3_hideothervisa()" <?php 
@@ -756,8 +716,7 @@
 				?>/></p>
 			</div>
 			
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-			style="margin-top:20px;">
+			<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
 				<label>Languages</label>
 				<p><input class="w3-radio" type="radio" name="stdenghome" value="No, English Only"  
 				onclick="w3_hideotherlang()" <?php 
@@ -788,9 +747,8 @@
 				?>></input>
 			</div>
 			
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-			style="margin-top:20px;">
-				<label>How well do you speak in English?<label>
+			<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
+				<label>How well do you speak in English?</label>
 				<p><input class="w3-radio" type="radio" name="stdwelleng" 
 				value="Very Well" <?php 
 					if ($rowlang['engwell']=="Very Well") {
@@ -821,9 +779,8 @@
 				<label>Not at all</label></p>
 			</div>
 			
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-				style="margin-top:20px;">
-				<label>Are you of Aboriginal or Torres Strait Islander origin?<label>
+			<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
+				<label>Are you of Aboriginal or Torres Strait Islander origin?</label>
 				<p><input class="w3-radio" type="radio" name="stdabotors" value="No" 
 				<?php 
 					if ($rowlang['abtor']=="No") {
@@ -847,22 +804,12 @@
 				<label>Yes - Torres Strait Islander</label></p>
 			</div>
 			
-			<?php
-				//Saving update
-				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-					$_GET['nv'] == "lngnculdv") {
-					echo "<button type='submit' name='submitupdate' 
-						class='w3-blueh w3-hover-green w3-padding-large
-						w3-border w3-large'
-						>Save</button>";
-				}
-			?>
-			
+			<div class="w3-container w3-margin">
+			</div>			
 		</div>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:99%; margin-top:20px;">
-			<header class="w3-container w3-blueh w3-tea">
+		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
+			<header class="w3-container w3-blueh">
 				<span id="indlnneeds"><h3>Individual Learning Needs</h3></span>
 			</header>
 			
@@ -893,17 +840,14 @@
 					}
 					
 					//Comment
-					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-						$_GET['nv'] == "indlnneeds") {
-						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3><b>Comment:</b>".$cnt."</h3>";
+					if (isset($_GET['nv']) && $_GET['nv'] == "indlnneeds") {
+						include_once '../link/message/commentst.php';
 					}
 				}
 			?>
 			
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-				style="margin-top:20px;">
-				<label>Do you consider yourself to have a disability, Impairment or long-term condition?<label>
+			<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
+				<label>Do you consider yourself to have a disability, Impairment or long-term condition?</label>
 				<p><input class="w3-radio" type="radio" name="stddisabi" value="Yes" onclick="w3_showdisability()" 
 				<?php 
 					if (isset($rowindln['disabimpr']) && 
@@ -931,8 +875,9 @@
 							echo "style='display:none; margin-top:20px;'";
 						}
 					?>>
-				<div class="w3-container w3-white w3-card-4 w3-padding-large">
-					<label>If yes, please indicate(You may indicate more than one)?<label>
+				<div class="w3-container w3-white w3-card-4 w3-padding-large
+					w3-margin-top w3-margin-right w3-margin-left">
+					<label>If yes, please indicate(You may indicate more than one)?</label>
 					<p><input class="w3-radio" type="radio" name="stdindicate" value="Vision" onclick="w3_hideotherdisability()"
 					<?php 
 						if (!empty($rowindln) && $rowindln['disyes']== "Vision") {
@@ -1009,33 +954,28 @@
 						}
 						?>	/></p>
 				</div>
-				<p style="margin-top:20px;">
-				<label>Adjustment<label>
-				<input type="text" class="w3-input w3-border w3-animate-input "
-				style="width:200px;"name="stdadjustment" id="stdadjustment"
-				<?php 
-					if (!empty($rowindln['disadjust'])) {
-						echo "Value='".$rowindln['disadjust']."'";
-					}
-				?> /></p>
 				
-				<?php
-					//Saving update
-					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-						$_GET['nv'] == "indlnneeds") {
-						echo "<button type='submit' name='submitupdate' 
-							class='w3-blueh w3-hover-green w3-padding-large
-							w3-border w3-large'
-							>Save</button>";
-					}
-				?>
+				<div class="w3-container">
+					<p>
+					<label>Adjustment</label>
+					<input type="text" class="w3-input w3-border w3-animate-input "
+					style="width:200px;"name="stdadjustment" id="stdadjustment"
+					<?php 
+						if (!empty($rowindln['disadjust'])) {
+							echo "Value='".$rowindln['disadjust']."'";
+						}
+					?> /></p>
+				</div>
+				
+			</div>
+			
+			<div class="w3-container w3-margin-right w3-margin-left">
 			</div>
 			
 		</div>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:99%; margin-top:20px;">
-			<header class="w3-container w3-blueh w3-tea">
+		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
+			<header class="w3-container w3-blueh">
 				<span id="edu"><h3>Education</h3></span>
 			</header>
 			
@@ -1066,19 +1006,18 @@
 						$_SESSION['eduid'] = $rowedu['eduid'];
 					}
 					
+					
 					//Comment
-					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-						$_GET['nv'] == "edu") {
-						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3><b>Comment:</b>".$cnt."</h3>";
+					if (isset($_GET['nv']) && $_GET['nv'] == "edu") {
+						include_once '../link/message/commentst.php';
 					}
 					
 				}
 			?>
 			
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-				style="margin-top:20px;">
-				<label>Highest Completed School Level<label>
+			<div class="w3-container w3-white w3-card-4 w3-padding-large 
+			w3-margin-top w3-margin-right w3-margin-left">
+				<label>Highest Completed School Level</label>
 				<p><input class="w3-radio" type="radio" name="stdhgcomschlvl" value="Year 12 or Equivalent" 
 				<?php 
 					if (!empty($rowedu) && $rowedu['highschool']== "Year 12 or Equivalent") {
@@ -1122,16 +1061,20 @@
 				?>/>
 				<label>Never Attended School</label></p>
 			</div>
-			<p style="margin-top:20px;"><label>In which Year did you complete that level</label>
-			<input type="number"class="w3-input w3-border w3-animate-input" 
-			style="width:200px"	name="stdyearcomp" 
-			<?php 
-				if (!empty($rowedu['year'])) {
-						echo "Value='".$rowedu['year']."'";
-				}
-			?>/> </p>
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-				style="margin-top:20px;">
+			
+			<div class="w3-container">
+				<p><label>In which Year did you complete that level</label>
+				<input type="number"class="w3-input w3-border w3-animate-input" 
+				style="width:200px"	name="stdyearcomp" 
+				<?php 
+					if (!empty($rowedu['year'])) {
+							echo "Value='".$rowedu['year']."'";
+					}
+				?>/> </p>
+			</div>
+			
+			<div class="w3-container w3-white w3-card-4 w3-padding-large 
+			w3-margin-right w3-margin-left w3-margin-bottom">
 				<label>Are you still attending secondary level?</label>
 				<p><input class="w3-radio" type="radio" name="stdseclvl" value="Yes" 
 				<?php 
@@ -1148,9 +1091,10 @@
 				?> />
 				<label>No</label></p>
 			</div>
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-				style="margin-top:20px;">
-				<label>Have you successfully completed any of the following qualification?<label>
+			
+			<div class="w3-container w3-white w3-card-4 w3-padding-large 
+			w3-margin-right w3-margin-left w3-margin-bottom">
+				<label>Have you successfully completed any of the following qualification?</label>
 				<p><input class="w3-radio" type="radio" name="stdsuccessqual" value="Yes" onclick="w3_showqualcomp()"
 				<?php 
 					if (!empty($rowedu) && $rowedu['success'] == 1) {
@@ -1167,89 +1111,81 @@
 				<label>No</label></p>
 			</div>
 			
-			<div id="qualsuccomp" class="w3-container w3-white w3-card-4 w3-padding-large"
-				<?php 
-					if (!empty($rowedu) && $rowedu['success'] == 1) {
-						echo "style='margin-top:20px;'";
-					}
-					else {
-						echo "style='display:none; margin-top:20px;'";
-					}
-				?> >
-				<p><input class="w3-radio" type="radio" id="scsscomp1"  name="scsscomp" value="Bachelor Degree or Higher Degree Level" 
-				<?php 
-					if (!empty($rowedu) && $rowedu['successyes']== "Bachelor Degree or Higher Degree Level") {
-						echo "Checked";
-					}
-				?>/>
-				<label>Bachelor Degree or Higher Degree Level</label></p>
-				<p><input class="w3-radio" type="radio" id="scsscomp2"  name="scsscomp" value="Advanced Diploma or Assiociate Degree Level"  
-				<?php 
-					if (!empty($rowedu) && $rowedu['successyes']== "Advanced Diploma or Assiociate Degree Level") {
-						echo "Checked";
-					}
-				?>/>
-				<label>Advanced Diploma or Assiociate Degree Level</label></p>
-				<p><input class="w3-radio" type="radio" id="scsscomp3"  name="scsscomp" value="Diploma (or associate diploma)"  
-				<?php 
-					if (!empty($rowedu) && $rowedu['successyes']== "Diploma (or associate diploma)") {
-						echo "Checked";
-					}
-				?>/>
-				<label>Diploma (or associate diploma)</label></p>
-				<p><input class="w3-radio" type="radio" id="scsscomp4"  name="scsscomp" value="Certificate IV"  
-				<?php 
-					if (!empty($rowedu) && $rowedu['successyes']== "Certificate IV") {
-						echo "Checked";
-					}
-				?>/>
-				<label>Certificate IV</label></p>
-				<p><input class="w3-radio" type="radio" id="scsscomp5"  name="scsscomp" value="Certificate III"  
-				<?php 
-					if (!empty($rowedu) && $rowedu['successyes']== "Certificate III") {
-						echo "Checked";
-					}
-				?>/>
-				<label>Certificate III</label></p>
-				<p><input class="w3-radio" type="radio" id="scsscomp6"  name="scsscomp" value="Certificate II"  
-				<?php 
-					if (!empty($rowedu) && $rowedu['successyes']== "Certificate II") {
-						echo "Checked";
-					}
-				?>/>
-				<label>Certificate II</label></p>
-				<p><input class="w3-radio" type="radio" id="scsscomp7"  name="scsscomp" value="Certificate I"  
-				<?php 
-					if (!empty($rowedu) && $rowedu['successyes']== "Certificate I") {
-						echo "Checked";
-					}
-				?>/>
-				<label>Certificate I</label></p>
-				<p><input class="w3-radio" type="radio" id="scsscomp8"  name="scsscomp" value="Certificates other than the above"  
-				<?php 
-					if (!empty($rowedu) && $rowedu['successyes']== "Certificates other than the above") {
-						echo "Checked";
-					}
-				?>/>
-				<label>Certificates other than the above</label></p>
+			<div id="qualsuccomp" <?php 
+						if (!empty($rowedu) && $rowedu['success'] == 1) {
+							echo "style='margin-top:20px;'";
+						}
+						else {
+							echo "style='display:none; margin-top:20px;'";
+						}
+					?> >
+				<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
+					<p><input class="w3-radio" type="radio" id="scsscomp1"  name="scsscomp" value="Bachelor Degree or Higher Degree Level" 
+					<?php 
+						if (!empty($rowedu) && $rowedu['successyes']== "Bachelor Degree or Higher Degree Level") {
+							echo "Checked";
+						}
+					?>/>
+					<label>Bachelor Degree or Higher Degree Level</label></p>
+					<p><input class="w3-radio" type="radio" id="scsscomp2"  name="scsscomp" value="Advanced Diploma or Assiociate Degree Level"  
+					<?php 
+						if (!empty($rowedu) && $rowedu['successyes']== "Advanced Diploma or Assiociate Degree Level") {
+							echo "Checked";
+						}
+					?>/>
+					<label>Advanced Diploma or Assiociate Degree Level</label></p>
+					<p><input class="w3-radio" type="radio" id="scsscomp3"  name="scsscomp" value="Diploma (or associate diploma)"  
+					<?php 
+						if (!empty($rowedu) && $rowedu['successyes']== "Diploma (or associate diploma)") {
+							echo "Checked";
+						}
+					?>/>
+					<label>Diploma (or associate diploma)</label></p>
+					<p><input class="w3-radio" type="radio" id="scsscomp4"  name="scsscomp" value="Certificate IV"  
+					<?php 
+						if (!empty($rowedu) && $rowedu['successyes']== "Certificate IV") {
+							echo "Checked";
+						}
+					?>/>
+					<label>Certificate IV</label></p>
+					<p><input class="w3-radio" type="radio" id="scsscomp5"  name="scsscomp" value="Certificate III"  
+					<?php 
+						if (!empty($rowedu) && $rowedu['successyes']== "Certificate III") {
+							echo "Checked";
+						}
+					?>/>
+					<label>Certificate III</label></p>
+					<p><input class="w3-radio" type="radio" id="scsscomp6"  name="scsscomp" value="Certificate II"  
+					<?php 
+						if (!empty($rowedu) && $rowedu['successyes']== "Certificate II") {
+							echo "Checked";
+						}
+					?>/>
+					<label>Certificate II</label></p>
+					<p><input class="w3-radio" type="radio" id="scsscomp7"  name="scsscomp" value="Certificate I"  
+					<?php 
+						if (!empty($rowedu) && $rowedu['successyes']== "Certificate I") {
+							echo "Checked";
+						}
+					?>/>
+					<label>Certificate I</label></p>
+					<p><input class="w3-radio" type="radio" id="scsscomp8"  name="scsscomp" value="Certificates other than the above"  
+					<?php 
+						if (!empty($rowedu) && $rowedu['successyes']== "Certificates other than the above") {
+							echo "Checked";
+						}
+					?>/>
+					<label>Certificates other than the above</label></p>
+				</div>
 			</div>
 			
-			<?php
-				//Saving update
-				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-					$_GET['nv'] == "edu") {
-					echo "<button type='submit' name='submitupdate' 
-						class='w3-blueh w3-hover-green w3-padding-large
-						w3-border w3-large'
-						>Save</button>";
-				}
-			?>
+			<div class="w3-container w3-margin">
+			</div>
 			
 		</div>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:99%; margin-top:20px;">
-			<header class="w3-container w3-blueh w3-tea">
+		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
+			<header class="w3-container w3-blueh">
 				<span id="refstudy"><h3>Reason for study</h3></span>
 			</header>
 			
@@ -1290,19 +1226,17 @@
 						}
 						
 					}
-					
+								
 					//Comment
-					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-						$_GET['nv'] == "refstudy") {
-						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3><b>Comment:</b>".$cnt."</h3>";
+					if (isset($_GET['nv']) && $_GET['nv'] == "refstudy") {
+						include_once '../link/message/commentst.php';
 					}
+					
 				}
 			?>
 			
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-				style="margin-top:20px;">
-				<p><label>Which best describes your reasons for enrolling in the qualification?<label></p>
+			<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
+				<p><label>Which best describes your reasons for enrolling in the qualification?</label></p>
 				<p><input class="w3-check" type="checkbox"  name="reasonqual[]" value="To get a Job"
 				<?php 
 					if (!empty($rowrealist) && in_array("To get a Job",$rowrealist)) {
@@ -1389,8 +1323,7 @@
 			
 			</div>
 			
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-				style="margin-top:20px;">
+			<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
 				<label>How did you hear about this course?</label>
 				<p><input class="w3-radio" type="radio" name="hearaboutcou" value="Advertisement - where" 
 				onclick="w3_showadvertisemen()" 
@@ -1460,22 +1393,12 @@
 				?>/>
 			</div>
 			
-			<?php
-				//Saving update
-				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-					$_GET['nv'] == "refstudy") {
-					echo "<button type='submit' name='submitupdate' 
-						class='w3-blueh w3-hover-green w3-padding-large
-						w3-border w3-large'
-						>Save</button>";
-				}
-			?>
-			
+			<div class="w3-container w3-margin">
+			</div>
 		</div>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:99%; margin-top:20px;">
-			<header class="w3-container w3-blueh w3-tea">
+		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
+			<header class="w3-container w3-blueh">
 				<span id="currempst"><h3>Current Employment Status</h3></span>
 			</header>
 			
@@ -1502,19 +1425,16 @@
 						$_SESSION['curempidc'] = $rowrstatus['curempidc'];
 						
 					}
-					
+										
 					//Comment
-					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-						$_GET['nv'] == "currempst") {
-						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3><b>Comment:</b>".$cnt."</h3>";
+					if (isset($_GET['nv']) && $_GET['nv'] == "currempst") {
+						include_once '../link/message/commentst.php';
 					}
 					
 				}
 			?>
 			
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-				style="margin-top:20px;">
+			<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
 				<label>Employment Status</label>
 				<p><input class="w3-radio" type="radio" name="stdcurempsts" value="Full Time" 
 				<?php 
@@ -1573,8 +1493,8 @@
 				?> />
 				<label>Not employed. not seeking employment</label></p>
 			</div>
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-				style="margin-top:20px;">
+			
+			<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
 				<label>Registered for unemployment benefits with centrelink</label>
 				<p><input class="w3-radio" type="radio" name="stdbencen" value="Yes"
 				<?php 
@@ -1592,23 +1512,12 @@
 				<label>No</label></p>
 			</div>
 			
-			<?php
-				//Saving update
-				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-					$_GET['nv'] == "currempst") {
-					echo "<button type='submit' name='submitupdate' 
-						class='w3-blueh w3-hover-green w3-padding-large
-						w3-border w3-large'
-						>Save</button>";
-				}
-			?>
-			
+			<div class="w3-container w3-margin">
+			</div>
 		</div>
 		
-		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:99%; margin-top:20px;">
-			<header class="w3-container w3-blueh w3-tea">
+		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
+			<header class="w3-container w3-blueh">
 				<span id="empdt"><h3>Employer Details</h3></span>
 			</header>
 			
@@ -1640,92 +1549,80 @@
 						$_SESSION['empdtid'] = $rowempdt['empdtid'];
 					}
 					
+					
 					//Comment
-					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-						$_GET['nv'] == "empdt") {
-						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3><b>Comment:</b>".$cnt."</h3>";
+					if (isset($_GET['nv']) && $_GET['nv'] == "empdt") {
+						include_once '../link/message/commentst.php';
 					}
 					
 				}
 			?>
-			
-			<p style="margin-top:20px;">
-			<label>Company Name</label><input type="text" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"		
-			name="empcomname" 
-			<?php 
-				if(!empty($rowempdt)) {
-					echo "Value='".$rowempdt['empcomname']."'";
-				}
-			?> /></p>
-			<p style="margin-top:20px;">
-			<label>Contact Name</label><input type="text" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"		
-			name="empcntname" 
-			<?php 
-				if(!empty($rowempdt)) {
-					echo "Value='".$rowempdt['empcntname']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Address</label><input type="text" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"		
-			name="empaddr" 
-			<?php 
-				if(!empty($rowempdt)) {
-					echo "Value='".$rowempdt['empaddress']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Suburb</label><input type="text" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"		
-			name="empsuburb" 
-			<?php 
-				if(!empty($rowempdt)) {
-					echo "Value='".$rowempdt['empsub']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Phone</label><input type="number" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"		
-			name="empphone" 
-			<?php 
-				if(!empty($rowempdt)) {
-					echo "Value='".$rowempdt['emphone']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Email</label><input type="email" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"		
-			name="empemail" 
-			<?php 
-				if(!empty($rowempdt)) {
-					echo "Value='".$rowempdt['empemail']."'";
-				}
-			?>/></p>
-			
-			<?php
-				//Saving update
-				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-					$_GET['nv'] == "empdt") {
-					echo "<button type='submit' name='submitupdate' 
-						class='w3-blueh w3-hover-green w3-padding-large
-						w3-border w3-large'
-						>Save</button>";
-				}
-			?>
+			<div class="w3-container">
+				<p>
+				<label>Company Name</label><input type="text" 
+				class="w3-input w3-border w3-animate-input "
+				style="width:200px"		
+				name="empcomname" 
+				<?php 
+					if(!empty($rowempdt)) {
+						echo "Value='".$rowempdt['empcomname']."'";
+					}
+				?> /></p>
+				<p>
+				<label>Contact Name</label><input type="text" 
+				class="w3-input w3-border w3-animate-input "
+				style="width:200px"		
+				name="empcntname" 
+				<?php 
+					if(!empty($rowempdt)) {
+						echo "Value='".$rowempdt['empcntname']."'";
+					}
+				?>/></p>
+				<p>
+				<label>Address</label><input type="text" 
+				class="w3-input w3-border w3-animate-input "
+				style="width:200px"		
+				name="empaddr" 
+				<?php 
+					if(!empty($rowempdt)) {
+						echo "Value='".$rowempdt['empaddress']."'";
+					}
+				?>/></p>
+				<p>
+				<label>Suburb</label><input type="text" 
+				class="w3-input w3-border w3-animate-input "
+				style="width:200px"		
+				name="empsuburb" 
+				<?php 
+					if(!empty($rowempdt)) {
+						echo "Value='".$rowempdt['empsub']."'";
+					}
+				?>/></p>
+				<p>
+				<label>Phone</label><input type="number" 
+				class="w3-input w3-border w3-animate-input "
+				style="width:200px"		
+				name="empphone" 
+				<?php 
+					if(!empty($rowempdt)) {
+						echo "Value='".$rowempdt['emphone']."'";
+					}
+				?>/></p>
+				<p>
+				<label>Email</label><input type="email" 
+				class="w3-input w3-border w3-animate-input "
+				style="width:200px"		
+				name="empemail" 
+				<?php 
+					if(!empty($rowempdt)) {
+						echo "Value='".$rowempdt['empemail']."'";
+					}
+				?>/></p>			
+			</div>	
 			
 		</div>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:99%; margin-top:20px;">
+		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
 				<span id="appntr"><h3>Apprenticeships and Traineeships</h3></span>
 			</header>
@@ -1755,19 +1652,17 @@
 						//For Saving
 						$_SESSION['apptid'] = $rowappren['apptid'];
 					}
-					
+								
 					//Comment
-					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-						$_GET['nv'] == "appntr") {
-						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3><b>Comment:</b>".$cnt."</h3>";
+					if (isset($_GET['nv']) && $_GET['nv'] == "appntr") {
+						include_once '../link/message/commentst.php';
 					}
 				}
 			?>
 			
 			
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-				style="margin-top:20px;">
+			<div class="w3-container w3-white w3-card-4 w3-padding-large 
+			w3-margin-top w3-margin-left w3-margin-right">
 				<label>Part of apprenticeships and traineeships</label>
 				<p><input class="w3-radio" type="radio" name="apprentrain" value="Yes"  
 				<?php 
@@ -1784,50 +1679,41 @@
 				?>/>
 				<label>No</label></p>
 			</div>
-			<p style="margin-top:20px;">
-			<label>Start Date</label><input type="date" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"	name="strdateemp" 
-			<?php 
-				if(!empty($rowappren)) {
-					echo "Value=".$rowappren['appresdate'];
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Job Title</label><input type="text" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"	name="empjobtitle" 
-			<?php 
-				if(!empty($rowappren)) {
-					echo "Value='".$rowappren['appretitle']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Hours per week</label><input type="text" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"	name="emphrperweek" 
-			<?php 
-				if(!empty($rowappren)) {
-					echo "Value='".$rowappren['hrsperweek']."'";
-				}
-			?>/></p>
 			
-			<?php
-				//Saving update
-				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-					$_GET['nv'] == "appntr") {
-					echo "<button type='submit' name='submitupdate' 
-						class='w3-blueh w3-hover-green w3-padding-large
-						w3-border w3-large'
-						>Save</button>";
-				}
-			?>
+			<div class="w3-container">
+				<p>
+				<label>Start Date</label><input type="date" 
+				class="w3-input w3-border w3-animate-input "
+				style="width:200px"	name="strdateemp" 
+				<?php 
+					if(!empty($rowappren)) {
+						echo "Value=".$rowappren['appresdate'];
+					}
+				?>/></p>
+				<p>
+				<label>Job Title</label><input type="text" 
+				class="w3-input w3-border w3-animate-input "
+				style="width:200px"	name="empjobtitle" 
+				<?php 
+					if(!empty($rowappren)) {
+						echo "Value='".$rowappren['appretitle']."'";
+					}
+				?>/></p>
+				<p>
+				<label>Hours per week</label><input type="text" 
+				class="w3-input w3-border w3-animate-input "
+				style="width:200px"	name="emphrperweek" 
+				<?php 
+					if(!empty($rowappren)) {
+						echo "Value='".$rowappren['hrsperweek']."'";
+					}
+				?>/></p>
+			</div>	
 			
 		</div>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:99%; margin-top:20px;">
-			<header class="w3-container w3-blueh w3-tea">
+		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
+			<header class="w3-container w3-blueh">
 				<span id="recogpr"><h3>Recognition of Prior Learning/Credit</h3></span>
 			</header>
 			
@@ -1853,18 +1739,15 @@
 						//For Saving
 						$_SESSION['recogid'] = $rowrecogpr['recogid'];
 					}
-					
+						
 					//Comment
-					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-						$_GET['nv'] == "recogpr") {
-						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3><b>Comment:</b>".$cnt."</h3>";
+					if (isset($_GET['nv']) && $_GET['nv'] == "recogpr") {
+						include_once '../link/message/commentst.php';
 					}
 				}
 			?>
 			
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-				style="margin-top:20px;">
+			<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
 				<label>RPL or credit transfer</label>
 				<p><input class="w3-radio" type="radio" name="recgprlrcr" value="Yes"  
 				<?php 
@@ -1882,22 +1765,13 @@
 				<label>No</label></p>
 			</div>
 			
-			<?php
-				//Saving update
-				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-					$_GET['nv'] == "recogpr") {
-					echo "<button type='submit' name='submitupdate' 
-						class='w3-blueh w3-hover-green w3-padding-large
-						w3-border w3-large'
-						>Save</button>";
-				}
-			?>
+			<div class="w3-container w3-margin">
+			</div>
 			
 		</div>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:99%; margin-top:20px;">
-			<header class="w3-container w3-blueh w3-tea">
+		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
+			<header class="w3-container w3-blueh">
 				<span id="jobseek"><h3>Jobseekers Seeking Concession</h3></span>
 			</header>
 			
@@ -1932,71 +1806,72 @@
 					}
 					
 					//Comment
-					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-						$_GET['nv'] == "jobseek") {
-						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3><b>Comment:</b>".$cnt."</h3>";
+					if (isset($_GET['nv']) && $_GET['nv'] == "jobseek") {
+						include_once '../link/message/commentst.php';
 					}
 					
 				}
 			?>
 			
-			<p style="margin-top:20px;">
-			<label>Job Search Agency</label><input type="text" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"	name="jobsrchagen" 
-			<?php 
-				if(!empty($rowjobseekers)) {
-					echo "Value='".$rowjobseekers['jbseekagen']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Employment Co-ordinator's Name</label><input type="text" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"	name="emocorname" 
-			<?php 
-				if(!empty($rowjobseekers)) {
-					echo "Value='".$rowjobseekers['empcoorname']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Suburb</label><input type="text" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"	name="jobskrsuburb" 
-			<?php 
-				if(!empty($rowjobseekers)) {
-					echo "Value='".$rowjobseekers['jobseeksur']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Landline</label><input type="number" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"	name="jobskrlandline" 
-			<?php 
-				if(!empty($rowjobseekers)) {
-					echo "Value='".$rowjobseekers['landline']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Mobile</label><input type="number" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"	name="jobskrmobile" 
-			<?php 
-				if(!empty($rowjobseekers)) {
-					echo "Value='".$rowjobseekers['jobseeknobile']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Start Date</label><input type="date" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"	name="jobskremail" 
-			<?php 
-				if(!empty($rowjobseekers)) {
-					echo "Value=".$rowjobseekers['jobseekstrdte'];
-				}
-			?>/></p>
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-				style="margin-top:20px;">
+			<div class="w3-container">
+				<p>
+				<label>Job Search Agency</label><input type="text" 
+				class="w3-input w3-border w3-animate-input "
+				style="width:200px"	name="jobsrchagen" 
+				<?php 
+					if(!empty($rowjobseekers)) {
+						echo "Value='".$rowjobseekers['jbseekagen']."'";
+					}
+				?>/></p>
+				<p>
+				<label>Employment Co-ordinator's Name</label><input type="text" 
+				class="w3-input w3-border w3-animate-input "
+				style="width:200px"	name="emocorname" 
+				<?php 
+					if(!empty($rowjobseekers)) {
+						echo "Value='".$rowjobseekers['empcoorname']."'";
+					}
+				?>/></p>
+				<p>
+				<label>Suburb</label><input type="text" 
+				class="w3-input w3-border w3-animate-input "
+				style="width:200px"	name="jobskrsuburb" 
+				<?php 
+					if(!empty($rowjobseekers)) {
+						echo "Value='".$rowjobseekers['jobseeksur']."'";
+					}
+				?>/></p>
+				<p>
+				<label>Landline</label><input type="number" 
+				class="w3-input w3-border w3-animate-input "
+				style="width:200px"	name="jobskrlandline" 
+				<?php 
+					if(!empty($rowjobseekers)) {
+						echo "Value='".$rowjobseekers['landline']."'";
+					}
+				?>/></p>
+				<p>
+				<label>Mobile</label><input type="number" 
+				class="w3-input w3-border w3-animate-input "
+				style="width:200px"	name="jobskrmobile" 
+				<?php 
+					if(!empty($rowjobseekers)) {
+						echo "Value='".$rowjobseekers['jobseeknobile']."'";
+					}
+				?>/></p>
+				<p>
+				<label>Start Date</label><input type="date" 
+				class="w3-input w3-border w3-animate-input "
+				style="width:200px"	name="jobskremail" 
+				<?php 
+					if(!empty($rowjobseekers)) {
+						echo "Value=".$rowjobseekers['jobseekstrdte'];
+					}
+				?>/></p>
+			</div>
+			
+			<div class="w3-container w3-white w3-card-4 w3-padding-large 
+				w3-margin-bottom w3-margin-left w3-margin-right">
 				<label>JSA Client Group</label>
 				<p><input class="w3-radio" type="radio" name="jbaclient" value="Youth at risk"  
 				<?php 
@@ -2020,8 +1895,8 @@
 				?>/>
 				<label>Carer/Parent</label></p>
 			</div>
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-				style="margin-top:20px;">
+			
+			<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
 				<label>Job Search Agency Fees</label>
 				<p><input class="w3-radio" type="radio" name="jbsrcagencypart" value="Yes"onclick="w3_showcoursefee()"
 				<?php 
@@ -2039,111 +1914,110 @@
 				<label>No</label></p>
 			</div>
 			
-			<?php
-				//Saving update
-				if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-					$_GET['nv'] == "jobseek") {
-					echo "<button type='submit' name='submitupdate' 
-						class='w3-blueh w3-hover-green w3-padding-large
-						w3-border w3-large'
-						>Save</button>";
-				}
-			?>
-			
-		</div>
-		
-		<div id="coursefee" class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			<?php 
-				if(!empty($rowjobseekers) && $rowjobseekers['jobsearchfee']== 1) {
-					echo "style='width:99%; margin-top:20px;'";
-				}
-				else {
-					echo "style='width:99%; margin-top:20px; display:none;'";
-				}
-			?>>
-			<header class="w3-container w3-blueh w3-tea">
-				<h3>Course Fee</h3>
-			</header>
-			
-			<?php 
-				if (isset($_GET['ptid'])) {
-					
-					$ptid = base64_decode(urldecode($_GET['ptid']));
-					
-					$sqldata = "SELECT
-									b.id as coursefid,
-									b.paytype,
-									b.stdname,
-									b.thrdrepname,
-									b.thrdinvoice,
-									b.crdtype,
-									b.crdnum
-								FROM studentinfo a 
-					INNER JOIN coursefee b on a.courseid = b.id 
-					WHERE a.id = ".$ptid;
-					
-					$result = mysqli_query($conn, $sqldata);
-					$resultCheck = mysqli_num_rows($result);
-					
-					
-					if ($resultCheck > 0) {
-						
-						$rowcoursefee = mysqli_fetch_assoc($result);
-						//For Saving
-						$_SESSION['coursefid'] = $rowcoursefee['coursefid'];
-					}
-					
-				}
-			?>
-			
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-				style="margin-top:20px;">
-				<label>Payment Type</label>
-				<p><input class="w3-radio" type="radio" name="paymenttype" value="Student - Full Payment"
-				<?php 
-					if(!empty($rowcoursefee) && $rowcoursefee['paytype']=="Student - Full Payment") {
-						echo "Checked";
-					}
-				?>/>
-				<label>Student - Full Payment</label></p>
-				<p><input class="w3-radio" type="radio" name="paymenttype" value="Third Party - Full Payment"  
-				<?php 
-					if(!empty($rowcoursefee) && $rowcoursefee['paytype']=="Third Party - Full Payment") {
-						echo "Checked";
-					}
-				?>/>
-				<label>Third Party - Full Payment</label></p>
+			<div class="w3-container w3-margin">
 			</div>
-			<p style="margin-top:20px;">
-			<label>Student Name</label><input type="text" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"	name="stdnamefee" 
-			<?php 
-				if(!empty($rowcoursefee)) {
-					echo "Value='".$rowcoursefee['stdname']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Third Party Representative Name</label><input type="text" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"	name="thrdpartrep" 
-			<?php 
-				if(!empty($rowcoursefee)) {
-					echo "Value='".$rowcoursefee['thrdrepname']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Third, the invoice is to be made out to</label><input type="text" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"	name="thrdparinv" 
-			<?php 
-				if(!empty($rowcoursefee)) {
-					echo "Value='".$rowcoursefee['thrdinvoice']."'";
-				}
-			?>/></p>
+			
 		</div>
 		
-		<div id="creditcard" class="w3-container w3-greyb w3-card-4 w3-padding-large"
+		<div id="coursefee" 
+			<?php 
+				if(!empty($rowjobseekers) && $rowjobseekers['jobsearchfee']== 1) {
+					echo "";
+				}
+				else {
+					echo "style='display:none;'";
+				}
+			?>>
+			<div class="w3-greyb w3-card-4" style="margin-top:20px;">
+				<header class="w3-container w3-blueh">
+					<h3>Course Fee</h3>
+				</header>
+				
+				<?php 
+					if (isset($_GET['ptid'])) {
+						
+						$ptid = base64_decode(urldecode($_GET['ptid']));
+						
+						$sqldata = "SELECT
+										b.id as coursefid,
+										b.paytype,
+										b.stdname,
+										b.thrdrepname,
+										b.thrdinvoice,
+										b.crdtype,
+										b.crdnum
+									FROM studentinfo a 
+						INNER JOIN coursefee b on a.courseid = b.id 
+						WHERE a.id = ".$ptid;
+						
+						$result = mysqli_query($conn, $sqldata);
+						$resultCheck = mysqli_num_rows($result);
+						
+						
+						if ($resultCheck > 0) {
+							
+							$rowcoursefee = mysqli_fetch_assoc($result);
+							//For Saving
+							$_SESSION['coursefid'] = $rowcoursefee['coursefid'];
+						}
+						
+					}
+				?>
+				
+				<div class="w3-container w3-white w3-card-4 w3-padding-large 
+					w3-margin-top w3-margin-left w3-margin-right">
+					<label>Payment Type</label>
+					<p><input class="w3-radio" type="radio" name="paymenttype" value="Student - Full Payment"
+					<?php 
+						if(!empty($rowcoursefee) && $rowcoursefee['paytype']=="Student - Full Payment") {
+							echo "Checked";
+						}
+					?>/>
+					<label>Student - Full Payment</label></p>
+					<p><input class="w3-radio" type="radio" name="paymenttype" value="Third Party - Full Payment"  
+					<?php 
+						if(!empty($rowcoursefee) && $rowcoursefee['paytype']=="Third Party - Full Payment") {
+							echo "Checked";
+						}
+					?>/>
+					<label>Third Party - Full Payment</label></p>
+				</div>
+				
+				<div class="w3-container">
+					<p>
+					<label>Student Name</label><input type="text" 
+					class="w3-input w3-border w3-animate-input "
+					style="width:200px"	name="stdnamefee" 
+					<?php 
+						if(!empty($rowcoursefee)) {
+							echo "Value='".$rowcoursefee['stdname']."'";
+						}
+					?>/></p>
+					<p>
+					<label>Third Party Representative Name</label><input type="text" 
+					class="w3-input w3-border w3-animate-input "
+					style="width:200px"	name="thrdpartrep" 
+					<?php 
+						if(!empty($rowcoursefee)) {
+							echo "Value='".$rowcoursefee['thrdrepname']."'";
+						}
+					?>/></p>
+					<p>
+					<label>Third, the invoice is to be made out to</label><input type="text" 
+					class="w3-input w3-border w3-animate-input "
+					style="width:200px"	name="thrdparinv" 
+					<?php 
+						if(!empty($rowcoursefee)) {
+							echo "Value='".$rowcoursefee['thrdinvoice']."'";
+						}
+					?>/></p>
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<div id="creditcard" 
 			<?php 
 				if(!empty($rowjobseekers) && $rowjobseekers['jobsearchfee']== 1) {
 					echo "style='width:99%; margin-top:20px;'";
@@ -2152,32 +2026,37 @@
 					echo "style='width:99%; margin-top:20px; display:none;'";
 				}
 			?>>
-			<header class="w3-container w3-blueh w3-tea">
-				<h3>Credit Card</h3>
-			</header>
-			<p style="margin-top:20px;">
-			<label>Card Type</label><input type="text" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"	name="crdtype" 
-			<?php 
-				if(!empty($rowcoursefee)) {
-					echo "Value='".$rowcoursefee['crdtype']."'";
-				}
-			?>/></p>
-			<p style="margin-top:20px;">
-			<label>Card Number</label><input type="number" 
-			class="w3-input w3-border w3-animate-input "
-			style="width:200px"	name="crdnum" 
-			<?php 
-				if(!empty($rowcoursefee)) {
-					echo "Value='".$rowcoursefee['crdnum']."'";
-				}
-			?>/></p>
+			<div class="w3-greyb w3-card-4" style="margin-top:20px;">
+				<header class="w3-container w3-blueh">
+					<h3>Credit Card</h3>
+				</header>
+				
+				<div class="w3-container">
+					<p>
+					<label>Card Type</label><input type="text" 
+					class="w3-input w3-border w3-animate-input "
+					style="width:200px"	name="crdtype" 
+					<?php 
+						if(!empty($rowcoursefee)) {
+							echo "Value='".$rowcoursefee['crdtype']."'";
+						}
+					?>/></p>
+					<p>
+					<label>Card Number</label><input type="number" 
+					class="w3-input w3-border w3-animate-input "
+					style="width:200px"	name="crdnum" 
+					<?php 
+						if(!empty($rowcoursefee)) {
+							echo "Value='".$rowcoursefee['crdnum']."'";
+						}
+					?>/></p>
+				</div>
+				
+			</div>
 		</div>
 		
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large"
-			style="width:99%; margin-top:20px;">
-			<header class="w3-container w3-blueh w3-tea">
+		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
+			<header class="w3-container w3-blueh">
 				<span id="centdt"><h3>Centrelink Details</h3></span>
 			</header>
 			
@@ -2206,19 +2085,16 @@
 						//For Saving
 						$_SESSION['centid'] = $rowcentrelink['centid'];
 					}
-					
+										
 					//Comment
-					if (isset($_GET['nv']) && isset($_GET['cnt']) &&
-						$_GET['nv'] == "centdt") {
-						$cnt = base64_decode(urldecode($_GET['cnt']));
-						echo "<h3><b>Comment:</b>".$cnt."</h3>";
+					if (isset($_GET['nv']) && $_GET['nv'] == "centdt") {
+						include_once '../link/message/commentst.php';
 					}
 					
 				}
 			?>
 			
-			<div class="w3-container w3-white w3-card-4 w3-padding-large"
-			style="margin-top:20px;">
+			<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
 				<label>Registred Centrelink Allowances</label>
 				<p><input class="w3-radio" type="radio" name="regcenallow" value="Yes" onclick="w3_showreg()"
 				<?php 
@@ -2235,6 +2111,7 @@
 				?>/>
 				<label>No</label></p>
 			</div>
+			
 			<div id="regiscentre" 
 				<?php 
 					if(!empty($rowcentrelink) && $rowcentrelink['cntrallow']== 1) {
@@ -2244,7 +2121,8 @@
 						echo "style='margin-top:20px; display:none;'";
 					}
 				?> >
-				<div class="w3-container w3-white w3-card-4 w3-padding-large">
+				<div class="w3-container w3-white w3-card-4 w3-padding-large 
+					w3-margin-top w3-margin-left w3-margin-right">
 					<label>Allowances</label>
 					<p><input class="w3-radio" type="radio" name="allowyes" value="Newstart Allowance"   
 					<?php 
@@ -2289,33 +2167,34 @@
 					?>/>
 					<label>Parent Payment (partnered)</label></p>
 				</div>
-				<p style="margin-top:20px;">
-				<label>Reference Number</label><input type="number" 
-				class="w3-input w3-border w3-animate-input "
-				style="width:200px"	name="refnum" 
-				<?php 
-					if(!empty($rowcentrelink)) {
-						echo "Value='".$rowcentrelink['refnum']."'";
-					}
-				?>/></p>
-				<p style="margin-top:20px;">
-				<label>VET Number</label><input type="number" 
-				class="w3-input w3-border w3-animate-input "
-				style="width:200px"	name="vetnum" 
-				<?php 
-					if(!empty($rowcentrelink)) {
-						echo "Value='".$rowcentrelink['vetnum']."'";
-					}
-				?>/></p>
+				
+				<div class="w3-container">
+					<p>
+					<label>Reference Number</label><input type="number" 
+					class="w3-input w3-border w3-animate-input "
+					style="width:200px"	name="refnum" 
+					<?php 
+						if(!empty($rowcentrelink)) {
+							echo "Value='".$rowcentrelink['refnum']."'";
+						}
+					?>/></p>
+					<p>
+					<label>VET Number</label><input type="number" 
+					class="w3-input w3-border w3-animate-input "
+					style="width:200px"	name="vetnum"  
+					<?php 
+						if(!empty($rowcentrelink)) {
+							echo "Value='".$rowcentrelink['vetnum']."'";
+						}
+					?>></input></p>
+				</div>
+				
 			</div>
-		</div>
-		
-		<div class="w3-container w3-white w3-padding-large"
-			style="width:99%; margin-top:20px; font-family: Arial, Helvetica, sans-serif;">
-			<button type="submit" name="submitupdate" 
-			class="w3-blueh w3-hover-green w3-padding-large
-			w3-border w3-large"
-			style="float:right;">Save</button>
+			
+			<div class="w3-container w3-margin-bottom
+			w3-margin-left w3-margin-right">
+			</div>
+			
 		</div>
 		
 		<?php
@@ -2324,12 +2203,9 @@
 				echo "<input type='hidden' value='".$_GET['n']."' name='n' />";
 				echo "<input type='hidden' value='".$_GET['nid']."' name='nid' />";
 			}
-		?>
-		
-	</form>
-		
+		?>		
 </div>
-
+</form>
 <script>
 	function w3_open() {
 		document.getElementById("mySidebar").style.display = "block";
@@ -2420,3 +2296,5 @@
 		document.getElementById("regiscentre").style.display = "none";
 	}
 </script>
+</body>
+</html> 

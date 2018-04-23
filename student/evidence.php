@@ -4,14 +4,12 @@
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
 	}
+	include_once 'menu.php';
 ?>
 
 <div  style="width:25%">
 	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 
 	onclick="w3_open()">&#9776;</button>
-	<?php 
-		include_once 'menu.php';
-	?>
 </div>
 
 
@@ -36,15 +34,7 @@
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 		style="width:50%; margin-top:20px;">
 		<?php
-			if(isset($_GET['selecterror'])) {
-				echo "<h3 style='color: red'>Select a file before upload.</h3>";
-			}
-			elseif (isset($_GET['s'])) {
-				echo "<h3>The file has been successfully uploaded.</h3>";
-			}
-			elseif (isset($_GET['sr'])) {
-				echo "<h3>The file has been successfully removed.</h3>";
-			}
+			include_once '../link/message/prosucca.php';
 		?>
 			<table class="w3-table-all">
 				<thead>

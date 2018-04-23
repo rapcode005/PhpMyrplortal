@@ -27,11 +27,11 @@
 				$search = $_GET['st'];
 				
 				$sql = "SELECT b.code,b.fname,b.gname,c.descrp,
-				b.brhday,b.age,a.id FROM studentinfo a 
-				LEFT JOIN personaldt b on a.stdcode = b.id 
-				LEFT JOIN courselist c on a.stdcourse = c.code
-				WHERE MATCH(fname, gname,b.code) 
-				AGAINST('".$search."' IN NATURAL LANGUAGE MODE) Order by a.id";
+					b.brhday,b.age,a.id FROM studentinfo a 
+					LEFT JOIN personaldt b on a.stdcode = b.id 
+					LEFT JOIN courselist c on a.stdcourse = c.code
+					WHERE MATCH(fname,gname,b.code) 
+					AGAINST('".$search."' in boolean mode) > 0 Order by a.id";
 				
 			}
 			else {

@@ -56,20 +56,20 @@
 					$updatenotify = "UPDATE notification SET updateduserid=".$userid." 
 					WHERE id = ".$notifyid;
 					if(mysqli_query($GLOBALS['conn'],$updatenotify)) {
-						header("Location: ../referencedt.php?".$urlquery."&s=success");
+						header("Location: ../referencedt.php?".$urlquery."&s=successupload");
 					}
 				}
 				else {
-					header("Location: ../referencedt.php?".$urlquery."&s=success");
+					header("Location: ../referencedt.php?".$urlquery."&s=successupload");
 				}
 				
 			}
 			else {
-				header("Location: ../referencedt.php?".$urlquery."&error=upload");;
+				header("Location: ../referencedt.php?".$urlquery."&s=errorupload");;
 			}
 		}
 		else {
-			header("Location: ../referencedt.php?".$urlquery."&selecterror=please_select");
+			header("Location: ../referencedt.php?".$urlquery."&s=please_select");
 		}
 					
 	}

@@ -38,16 +38,16 @@
 				VALUES('".$fileName."','".$_SESSION['stdid']."')";
 				mysqli_query($conn,$insert);
 				
-				header("Location: ../reference.php?h=".$h."s=success");
+				header("Location: ../reference.php?h=".$h."s=successupload");
 				
 				
 			}
 			else {
-				header("Location: ../reference.php?h=".$h."&error=upload");;
+				header("Location: ../reference.php?h=".$h."&s=errorupload");;
 			}
 		}
 		else {
-			header("Location: ../reference.php?selecterror=please_select&h=".$h);
+			header("Location: ../reference.php?s=please_select&h=".$h);
 		}
 					
 	}

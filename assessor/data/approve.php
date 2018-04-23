@@ -9,12 +9,28 @@
 	$linkfn = $_GET['fnm'];
 	$linkgn = $_GET['gnm'];
 	$linkid = $_GET['ptid'];
-	$querystr = "ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st";
+	
 	
 	
 	$update = "UPDATE notification SET status = 1
 	WHERE id =".$nid;
 	
 	if (mysqli_query($conn, $update)) {
-		header("Location: ../studentinfo.php?".$querystr."&success");
+		if (isset($_GET['h'])) {
+			$h = $_GET['h'];
+			switch ($h) {
+				case "st":
+					$querystr = "ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st";
+					header("Location: ../studentinfo.php?".$querystr."&s=approve");
+					break;
+				case "rf":
+					$querystr = "ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=rf";
+					header("Location: ../reference.php?".$querystr."&s=approve");
+					break;
+				case "ev":
+					$querystr = "ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=ev";
+					header("Location: ../evidence.php?".$querystr."&s=approve");
+					break;
+			}
+		}	
 	}

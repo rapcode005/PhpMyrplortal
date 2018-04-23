@@ -12,104 +12,113 @@
 	onclick="w3_open()">&#9776;</button>
 </div>
 
-<div class="w3-main" style="margin-left:220px; margin-top:16px; margin-top:16px;">
+<div class="w3-main w3-container w3-small" 
+style="margin-top:20px; margin-left:200px; 
+font-family: Arial, Helvetica, sans-serif;">
 	<form action="data/send.php" method="POST" onsubmit="return checkform();">
-		<div class="w3-container w3-greyb w3-card-4 w3-padding-large w3-small"
+		<div class="w3-greyb w3-card-4"
 			style="width:98%; font-family: Arial, Helvetica, sans-serif;">
-			<header class="w3-container w3-blueh w3-tea">
+			
+			<header class="w3-container w3-blueh">
 				<h3>New Request</h3>
 			</header>
 			<?php
-				if (isset($_GET['success'])) {
-					echo "<h3>The request has been successfully processed.</h3>";
-				}
+				include_once '../link/message/prosucca.php';
 			?>
-			<p style="margin-top:20px;"  onchange="leaveChange()">
-				<select class="w3-select w3-select-input"
-				style="width:500px;" id="moduletype" name="moduletype">
-					<option value="" disabled selected>Choose your module</option>
-					<option value="0">Application Form</option>
-					<option value="1">Evidence</option>
-					<option value="2">Reference</option>
-				</select>
-				<label id="lmoduletype" 
-				style="color: red; display:none;">Module is required.</label>
-			</p>
-			<div id="apptypep" style="margin-top:20px; display:none;">
-				<p>
+			
+			<div class="w3-container"> 
+				<p onchange="leaveChange()">
 					<select class="w3-select w3-select-input"
-					style="width:500px;" id="apptype" name="apptype">
-						<option value="" disabled selected>Choose your tab</option>
-						<option value="0">Personal Details</option>
-						<option value="1">Residence</option>
-						<option value="2">Postal Address</option>
-						<option value="3">Phone and Contact details</option>
-						<option value="4">Emegency Contact</option>
-						<option value="5">Language and Cultural Diversity</option>
-						<option value="6">Individual Learning Needs</option>
-						<option value="7">Education</option>
-						<option value="8">Reason for study</option>
-						<option value="9">Current Employment Status</option>
-						<option value="10">Employer Details</option>
-						<option value="11">Apprenticeships and Traineeships</option>
-						<option value="12">Recognition of Prior Learning/Credit</option>
-						<option value="13">Jobseekers Seeking Concession</option>
-						<option value="14">Centrelink Details</option>
+					style="width:500px;" id="moduletype" name="moduletype">
+						<option value="" disabled selected>Choose your module</option>
+						<option value="0">Application Form</option>
+						<option value="1">Evidence</option>
+						<option value="2">Reference</option>
 					</select>
-					<label id="lapptype" style="color: red; display:none;">
-					Tab is required.</label>
+					<label id="lmoduletype" 
+					style="color: red; display:none;">Module is required.</label>
 				</p>
+				<div id="apptypep" style="display:none;">
+					<p>
+						<select class="w3-select w3-select-input"
+						style="width:500px;" id="apptype" name="apptype">
+							<option value="" disabled selected>Choose your tab</option>
+							<option value="0">Personal Details</option>
+							<option value="1">Residence</option>
+							<option value="2">Postal Address</option>
+							<option value="3">Phone and Contact details</option>
+							<option value="4">Emegency Contact</option>
+							<option value="5">Language and Cultural Diversity</option>
+							<option value="6">Individual Learning Needs</option>
+							<option value="7">Education</option>
+							<option value="8">Reason for study</option>
+							<option value="9">Current Employment Status</option>
+							<option value="10">Employer Details</option>
+							<option value="11">Apprenticeships and Traineeships</option>
+							<option value="12">Recognition of Prior Learning/Credit</option>
+							<option value="13">Jobseekers Seeking Concession</option>
+							<option value="14">Centrelink Details</option>
+						</select>
+						<label id="lapptype" style="color: red; display:none;">
+						Tab is required.</label>
+					</p>
+				</div>
+				<p>
+				<label>Subject</label><input type="text" 
+				class="w3-input w3-border 
+				w3-animate-input"
+				style="width:500px"		
+				name="subject" id="subject" />
+				<label id="lsubject" style="color: red; display:none;">
+				Subject is required.</label>
+				</p>
+				<p>
+				<label>Comment</label><input type="text" 
+				class="w3-input w3-border 
+				w3-animate-input"
+				style="width:500px"		
+				name="comment" id="comment" />
+				<label id="lcomment" style="color: red; display:none;">
+				Comment is required.</label>
+				</p>
+				<input type="hidden" name="fnm" 
+				<?php 
+					if(isset($_GET['fnm'])) {
+						echo "Value='".$_GET['fnm']."'";	
+					}
+				?>
+				/>
+				<input type="hidden" name="gnm" 
+				<?php 
+					if(isset($_GET['gnm'])) {
+						echo "Value='".$_GET['gnm']."'";	
+					}
+				?>
+				/>
+				<input type="hidden" name="ptid" 
+				<?php 
+					if(isset($_GET['ptid'])) {
+						echo "Value='".$_GET['ptid']."'";	
+					}
+				?>
+				/>
+				<input type="hidden" name="h" 
+				<?php 
+					if(isset($_GET['h'])) {
+						echo "Value='".$_GET['h']."'";	
+					}
+				?>
+				/>
+				<button type="submit" name="send" 
+				class="w3-blueh w3-hover-green w3-padding-large
+				w3-border w3-large w3-right">Send</button>
 			</div>
-			<p style="margin-top:20px;">
-			<label>Subject</label><input type="text" 
-			class="w3-input w3-border 
-			w3-animate-input"
-			style="width:500px"		
-			name="subject" id="subject" />
-			<label id="lsubject" style="color: red; display:none;">
-			Subject is required.</label>
-			</p>
-			<p style="margin-top:20px;">
-			<label>Comment</label><input type="text" 
-			class="w3-input w3-border 
-			w3-animate-input"
-			style="width:500px"		
-			name="comment" id="comment" />
-			<label id="lcomment" style="color: red; display:none;">
-			Comment is required.</label>
-			</p>
-			<input type="hidden" name="fnm" 
-			<?php 
-				if(isset($_GET['fnm'])) {
-					echo "Value='".$_GET['fnm']."'";	
-				}
-			?>
-			/>
-			<input type="hidden" name="gnm" 
-			<?php 
-				if(isset($_GET['gnm'])) {
-					echo "Value='".$_GET['gnm']."'";	
-				}
-			?>
-			/>
-			<input type="hidden" name="ptid" 
-			<?php 
-				if(isset($_GET['ptid'])) {
-					echo "Value='".$_GET['ptid']."'";	
-				}
-			?>
-			/>
-			<input type="hidden" name="h" 
-			<?php 
-				if(isset($_GET['h'])) {
-					echo "Value='".$_GET['h']."'";	
-				}
-			?>
-			/>
-			<button type="submit" name="send" 
-			class="w3-blueh w3-hover-green w3-padding-large
-			w3-border w3-large w3-right">Send</button>
+			
+			<div class="w3-container w3-margin">
+			</div>
+			
 		</div>
+		
 	</form>
 	
 	<div class="w3-container w3-white w3-card-4 w3-padding-large"

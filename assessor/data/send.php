@@ -33,10 +33,7 @@
 								
 		if(mysqli_query($conn,$insert)){
 		
-			header("Location: ../request.php?success=success&".$urlquery);
+			header("Location: ../request.php?s=requestsuccess&".$urlquery);
 		
-		}
-		else
-			echo $insert;
-		
+		}		
 	}

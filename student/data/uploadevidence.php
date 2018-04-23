@@ -47,16 +47,16 @@
 				VALUES('".$fileName."','".$filetypes."','".$_SESSION['stdid']."')";
 				mysqli_query($conn,$insert);
 				
-				header("Location: ../evidence.php?h=".$h."s=success");
+				header("Location: ../evidence.php?h=".$h."s=successupload");
 				
 				
 			}
 			else {
-				header("Location: ../evidence.php?error=upload&h=".$h);;
+				header("Location: ../evidence.php?s=errorupload&h=".$h);;
 			}
 		}
 		else {
-			header("Location: ../evidence.php?selecterror=please_select&h=".$h);
+			header("Location: ../evidence.php?s=please_select&h=".$h);
 		}
 					
 	}

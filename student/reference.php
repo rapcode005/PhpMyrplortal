@@ -33,15 +33,7 @@
 	<div class="w3-container w3-white w3-card-4 w3-padding-large"
 	style="width:50%; margin-top:20px; font-family: Arial, Helvetica, sans-serif;">
 		<?php
-			if(isset($_GET['selecterror'])) {
-				echo "<h3 style='color: red'>Select a file before upload.</h3>";
-			}
-			elseif (isset($_GET['s'])) {
-				echo "<h3>The file has been successfully uploaded.</h3>";
-			}
-			elseif (isset($_GET['sr'])) {
-				echo "<h3>The file has been successfully removed.</h3>";
-			}
+			include_once '../link/message/prosucca.php';
 		?>
 		<table class="w3-table-all">
 			<thead>
