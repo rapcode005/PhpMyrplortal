@@ -22,7 +22,7 @@
 			include_once '../link/message/prosucca.php';
 		?>
 	
-		<table class="w3-table-all">
+		<table class="w3-table-all w3-small">
 			<thead>
 				<tr class="w3-blueh">
 					<th>File Name</th>
@@ -30,7 +30,7 @@
 					<th>Display</th>
 				</tr>
 			</thead>
-			<tbody class="w3-small">
+			<tbody>
 			<?php					
 				if(isset($_GET['ptid']) && isset($_GET['h']) && 
 					isset($_GET['fnm']) && isset($_GET['gnm'])) {
@@ -73,7 +73,7 @@
 						echo "<td>".$row['filename']."
 						<input type='hidden' name='filename' value='".$row['filename']."'/>
 						</td><td>".$row['filetype']."</td><td>
-						<a href='".$link."' class='w3-blueh w3-hover-green w3-padding-large w3-border'>Show
+						<a href='".$link."' class='w3-blueh w3-hover-green w3-padding w3-border'>Show
 						</a>";
 						
 						//Student ID

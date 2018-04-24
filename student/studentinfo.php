@@ -29,7 +29,7 @@
 	
 	<div id="pt" class="w3-greyb w3-card-4">
 		<header class="w3-container w3-blueh w3-tea">
-			<span id="perdt"><h3>Personal Details</h3></span>
+			<span id="perdt"><H4>Personal Details</H4></span>
 		</header>
 		
 		<div class="w3-container">
@@ -82,7 +82,7 @@
 			class="w3-input w3-border 
 			w3-animate-input"
 			style="width:200px"		
-			name="stdbth" id="stdbth"  />
+			name="stdbth" id="stdbth" onblur="w3_compute_age(this.value)"  />
 			<label id="lstdbth" style="color: red; display:none;">Birthday is required.</label></p>
 			<p>
 			<label>Age</label><input type="number"
@@ -97,7 +97,7 @@
 	<div class="w3-greyb w3-card-4" style="margin-top:20px;" >
 	
 		<header class="w3-container w3-blueh">
-			<h3>Residence</h3>
+			<H4>Residence</H4>
 		</header>
 		
 		<div class="w3-container">
@@ -143,7 +143,7 @@
 		
 	<div class="w3-greyb w3-card-4" style="margin-top:20px;" >
 		<header class="w3-container w3-blueh">
-			<h3>Postal Address</h3>
+			<H4>Postal Address</H4>
 		</header>
 		
 		<div class="w3-container">
@@ -190,7 +190,7 @@
 	<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 	
 		<header class="w3-container w3-blueh">
-			<h3>Phone and Contact details</h3>
+			<H4>Phone and Contact details</H4>
 		</header>
 		
 		<div class="w3-container">
@@ -225,7 +225,7 @@
 	<div class="w3-greyb w3-card-4" style="margin-top:20px;" >
 	
 		<header class="w3-container w3-blueh">
-			<h3>Emegency Contact</h3>
+			<H4>Emegency Contact</H4>
 		</header>
 		
 		<div class="w3-container">
@@ -255,7 +255,7 @@
 		
 	<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 		<header class="w3-container w3-blueh">
-			<h3>Language and Cultural Diversity</h3>
+			<H4>Language and Cultural Diversity</H4>
 		</header>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
@@ -340,7 +340,7 @@
 	<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 	
 		<header class="w3-container w3-blueh">
-			<h3>Individual Learning Needs</h3>
+			<H4>Individual Learning Needs</H4>
 		</header>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
@@ -401,7 +401,7 @@
 		
 	<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 		<header class="w3-container w3-blueh">
-			<h3>Education</h3>
+			<H4>Education</H4>
 		</header>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large 
@@ -475,7 +475,7 @@
 	<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 	
 		<header class="w3-container w3-blueh">
-			<h3>Reason for study</h3>
+			<H4>Reason for study</H4>
 		</header>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
@@ -553,7 +553,7 @@
 		
 	<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 		<header class="w3-container w3-blueh">
-			<h3>Current Employment Status</h3>
+			<H4>Current Employment Status</H4>
 		</header>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
@@ -592,7 +592,7 @@
 	<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 	
 		<header class="w3-container w3-blueh">
-			<h3>Employer Details</h3>
+			<H4>Employer Details</H4>
 		</header>
 		
 		<div class="w3-container">
@@ -633,7 +633,7 @@
 	<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 	
 		<header class="w3-container w3-blueh">
-			<h3>Apprenticeships and Traineeships</h3>
+			<H4>Apprenticeships and Traineeships</H4>
 		</header>
 		
 		<div class="w3-container w3-white w3-card-4 w3-padding-large 
@@ -667,7 +667,7 @@
 	
 	<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 		<header class="w3-container w3-blueh">
-			<h3>Recognition of Prior Learning/Credit</h3>
+			<H4>Recognition of Prior Learning/Credit</H4>
 		</header>
 		<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
 			<label>RPL or credit transfer</label>
@@ -685,7 +685,7 @@
 	<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 	
 		<header class="w3-container w3-blueh">
-			<h3>Jobseekers Seeking Concession</h3>
+			<H4>Jobseekers Seeking Concession</H4>
 		</header>
 		
 		<div class="w3-container">
@@ -751,7 +751,7 @@
 	
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<h3>Course Fee</h3>
+				<H4>Course Fee</H4>
 			</header>
 			<div class="w3-container w3-white w3-card-4 w3-padding-large 
 			w3-margin-top w3-margin-left w3-margin-right">
@@ -786,7 +786,7 @@
 	<div id="creditcard" style="display:none;">
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<h3>Credit Card</h3>
+				<H4>Credit Card</H4>
 			</header>
 			<div class="w3-container">
 				<p>
@@ -805,7 +805,7 @@
 		
 	<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 		<header class="w3-container w3-blueh">
-			<h3>Centrelink Details</h3>
+			<H4>Centrelink Details</H4>
 		</header>
 		<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
 			<label>Registred Centrelink Allowances</label>
@@ -1022,4 +1022,12 @@
 		
 	}
 	
+	function w3_compute_age(birthday) {
+		var bday = new Date(birthday);
+		var ageDifMs = Date.now() - bday.getTime();;
+		var ageDifMs = Date.now() - bday.getTime();
+		var ageDate = new Date(ageDifMs); // miliseconds from epoch
+		document.getElementById("stdage").value =
+		Math.abs(ageDate.getUTCFullYear() - 1970);
+	}
 </script>

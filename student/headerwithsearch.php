@@ -15,7 +15,7 @@
 <body>
 	<nav class="w3-bar w3-blueh w3-border w3-large" style="font-family: Arial, Helvetica, sans-serif;">
 		<a href='../student/' class="w3-bar-item w3-button w3-blueh w3-hover-green"
-		style="margin-right:55px;">MYRPLPORTAL</a>
+		style="margin-right:51px;">MYRPLPORTAL</a>
 		<?php 
 			if (isset($_SESSION['u_r'])) {			
 				

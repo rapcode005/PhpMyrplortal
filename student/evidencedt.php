@@ -81,7 +81,7 @@
 		
 			<table class="w3-table-all">
 				<thead>
-					<tr class="w3-blueh">
+					<tr class="w3-blueh w3-small">
 						<th>File Name</th>
 						<th>File Type</th>
 						<th>Remove</th>
@@ -108,7 +108,7 @@
 								<input type='hidden' name='filename' value='".$row['filename']."'/>
 								</td><td>".$row['filetype']."</td><td>
 								<button type='submit' name='submit' 
-								class='w3-blueh w3-hover-green w3-padding-large w3-border' 
+								class='w3-blueh w3-hover-green w3-padding w3-border' 
 								value=".$row['id'].">Remove
 								</button>";
 								

@@ -36,7 +36,7 @@
 		<?php
 			include_once '../link/message/prosucca.php';
 		?>
-			<table class="w3-table-all">
+			<table class="w3-table-all w3-small">
 				<thead>
 					<tr class="w3-blueh">
 						<th>File Name</th>
@@ -44,7 +44,7 @@
 						<th>Remove</th>
 					</tr>
 				</thead>
-				<tbody class="w3-small"> 
+				<tbody> 
 					<form action='data/removefile.php' method='POST'>
 					<?php
 						if(isset($_SESSION['stdid'])) {
@@ -61,7 +61,7 @@
 								<input type='hidden' name='filename' value='".$row['filename']."'/>
 								</td><td>".$row['filetype']."</td><td>
 								<button type='submit' name='submit' 
-								class='w3-blueh w3-hover-green w3-padding-large w3-border' 
+								class='w3-blueh w3-hover-green w3-padding w3-border' 
 								value=".$row['id'].">Remove
 								</button>";
 								

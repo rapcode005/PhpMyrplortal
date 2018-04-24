@@ -136,7 +136,7 @@
 </script>
 <table class="w3-table-all" style="font-family: Arial, Helvetica, sans-serif; margin-top:20px;">
 	<thead>
-		<tr class="w3-blueh">
+		<tr class="w3-blueh w3-small">
 			<th>Username</th>
 			<th>Firstname</th>
 			<th>Lastname</th>

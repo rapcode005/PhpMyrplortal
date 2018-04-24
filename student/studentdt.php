@@ -37,7 +37,7 @@
 		<div class="w3-greyb w3-card-4">
 			
 			<header class="w3-container w3-blueh">
-				<span id="perdt"><h3>Personal Details</h3></span>
+				<span id="perdt"><h4>Personal Details</h4></span>
 			</header>
 			
 			<div class="w3-container">
@@ -115,12 +115,14 @@
 							<p>
 							<label>Birthday</label><input type='date'
 							class='w3-input w3-border w3-animate-input'
-							style='width:200px'	name='stdbth'		
+							style='width:200px'	
+							onblur='w3_compute_age(this.value)'
+							name='stdbth'		
 							value=".$row['brhday']." /></p>
 							<p>
 							<label>Age</label><input type='number'
-							class='w3-input w3-border'
-							style='width:70px'	name='stdage' 
+							class='w3-input w3-border' 
+							style='width:70px' id='stdage' name='stdage' 
 							value='".$row['age']."'  /></p>";
 							
 							//Session value for personaldt
@@ -139,7 +141,7 @@
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 		
 			<header class="w3-container w3-blueh">
-				<span id="resd"><h3>Residence</h3></span>
+				<span id="resd"><H4>Residence</H4></span>
 			</header>
 			
 			<div class="w3-container">
@@ -240,7 +242,7 @@
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;" >
 		
 			<header class="w3-container w3-blueh">
-				<span id="ptadd"><h3>Postal Address</h3></span>
+				<span id="ptadd"><H4>Postal Address</H4></span>
 			</header>
 			
 			<div class="w3-container">
@@ -392,7 +394,7 @@
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 	
 			<header class="w3-container w3-blueh">
-				<span id="phncntdt"><h3>Phone and Contact details</h3></span>
+				<span id="phncntdt"><H4>Phone and Contact details</H4></span>
 			</header>
 			
 			<div class="w3-container">
@@ -495,7 +497,7 @@
 		
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;" >
 			<header class="w3-container w3-blueh">
-				<span id="emgcnt"><h3>Emegency Contact</h3></span>
+				<span id="emgcnt"><H4>Emegency Contact</H4></span>
 			</header>
 			
 			<div class="w3-container">
@@ -599,7 +601,7 @@
 		
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="lngnculdv"><h3>Language and Cultural Diversity</h3></span>
+				<span id="lngnculdv"><H4>Language and Cultural Diversity</H4></span>
 			</header>
 			
 				<?php 
@@ -810,7 +812,7 @@
 		
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="indlnneeds"><h3>Individual Learning Needs</h3></span>
+				<span id="indlnneeds"><H4>Individual Learning Needs</H4></span>
 			</header>
 			
 			<?php 
@@ -976,7 +978,7 @@
 		
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="edu"><h3>Education</h3></span>
+				<span id="edu"><H4>Education</H4></span>
 			</header>
 			
 			<?php 
@@ -1186,7 +1188,7 @@
 		
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="refstudy"><h3>Reason for study</h3></span>
+				<span id="refstudy"><H4>Reason for study</H4></span>
 			</header>
 			
 			<?php 
@@ -1399,7 +1401,7 @@
 		
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="currempst"><h3>Current Employment Status</h3></span>
+				<span id="currempst"><H4>Current Employment Status</H4></span>
 			</header>
 			
 			<?php 
@@ -1518,7 +1520,7 @@
 		
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="empdt"><h3>Employer Details</h3></span>
+				<span id="empdt"><H4>Employer Details</H4></span>
 			</header>
 			
 			<?php 
@@ -1624,7 +1626,7 @@
 		
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="appntr"><h3>Apprenticeships and Traineeships</h3></span>
+				<span id="appntr"><H4>Apprenticeships and Traineeships</H4></span>
 			</header>
 			
 			<?php 
@@ -1714,7 +1716,7 @@
 		
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="recogpr"><h3>Recognition of Prior Learning/Credit</h3></span>
+				<span id="recogpr"><H4>Recognition of Prior Learning/Credit</H4></span>
 			</header>
 			
 			<?php 
@@ -1772,7 +1774,7 @@
 		
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="jobseek"><h3>Jobseekers Seeking Concession</h3></span>
+				<span id="jobseek"><H4>Jobseekers Seeking Concession</H4></span>
 			</header>
 			
 			<?php 
@@ -1930,7 +1932,7 @@
 			?>>
 			<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 				<header class="w3-container w3-blueh">
-					<h3>Course Fee</h3>
+					<H4>Course Fee</H4>
 				</header>
 				
 				<?php 
@@ -2028,7 +2030,7 @@
 			?>>
 			<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 				<header class="w3-container w3-blueh">
-					<h3>Credit Card</h3>
+					<H4>Credit Card</H4>
 				</header>
 				
 				<div class="w3-container">
@@ -2057,7 +2059,7 @@
 		
 		<div class="w3-greyb w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="centdt"><h3>Centrelink Details</h3></span>
+				<span id="centdt"><H4>Centrelink Details</H4></span>
 			</header>
 			
 			<?php 
@@ -2294,6 +2296,15 @@
 	}
 	function w3_hidereg() {
 		document.getElementById("regiscentre").style.display = "none";
+	}
+	
+	function w3_compute_age(birthday) {
+		var bday = new Date(birthday);
+		var ageDifMs = Date.now() - bday.getTime();;
+		var ageDifMs = Date.now() - bday.getTime();
+		var ageDate = new Date(ageDifMs); // miliseconds from epoch
+		document.getElementById("stdage").value =
+		Math.abs(ageDate.getUTCFullYear() - 1970);
 	}
 </script>
 </body>

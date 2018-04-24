@@ -21,14 +21,14 @@
 			include_once '../link/message/prosucca.php';
 		?>
 		
-		<table class="w3-table-all">
+		<table class="w3-table-all w3-small">
 			<thead>
 				<tr class="w3-blueh">
 					<th>File Name</th>
 					<th>Display</th>
 				</tr>
 			</thead>
-			<tbody class="w3-small">
+			<tbody>
 			<?php
 				include_once '../data/dbh.php';
 				
@@ -71,7 +71,7 @@
 						
 						echo "<td><label>".$row['filename']."</label>
 						<input type='hidden' name='fileref' value='".$row['filename']."'/>
-						</td><td><a href='".$link."' class='w3-blueh w3-hover-green w3-padding-large w3-border'>Show
+						</td><td><a href='".$link."' class='w3-blueh w3-hover-green w3-padding w3-border'>Show
 						</a>";
 						
 						

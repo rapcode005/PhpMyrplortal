@@ -20,7 +20,7 @@ font-family: Arial, Helvetica, sans-serif;">
 			style="width:98%; font-family: Arial, Helvetica, sans-serif;">
 			
 			<header class="w3-container w3-blueh">
-				<h3>New Request</h3>
+				<h4>New Request</h4>
 			</header>
 			<?php
 				include_once '../link/message/prosucca.php';
@@ -121,10 +121,10 @@ font-family: Arial, Helvetica, sans-serif;">
 		
 	</form>
 	
-	<div class="w3-container w3-white w3-card-4 w3-padding-large"
+	<div class="w3-container w3-white w3-card-4"
 			style="width:98%; margin-top:20px; font-family: Arial, Helvetica, sans-serif">
 			
-		<table class="w3-table-all">
+		<table class="w3-table-all w3-small">
 			<thead>
 				<tr class="w3-blueh">
 					<th>Module</th>
@@ -135,7 +135,7 @@ font-family: Arial, Helvetica, sans-serif;">
 					<th>Updated By</th>
 				</tr>
 			</thead>
-			<tbody class="w3-small">
+			<tbody>
 			<?php
 				
 				include_once '../data/dbh.php';

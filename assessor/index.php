@@ -4,7 +4,9 @@
 		header("Location: ../");
 	}
 ?>
-	<table style="margin-top:20px; font-family: Arial, Helvetica, sans-serif;" class="w3-table-all">
+	<table style="margin-top:20px; 
+	font-family: Arial, Helvetica, sans-serif;" 
+	class="w3-table-all w3-small">
 		<thead>
 			<tr class="w3-blueh">
 				<th>USI</th>
@@ -15,7 +17,7 @@
 				<th>Show Details</th>
 			</tr>
 		</thead>
-		<tbody class="w3-small">
+		<tbody>
 			<?php
 						
 				include_once '../data/dbh.php';
@@ -89,7 +91,7 @@
 						echo "<tr>";
 						echo "<td>".$row['code']."</td><td>".$row['fname']."</td><td>".$row['gname']."</td><td>"
 						.$row['descrp']."</td><td>".date_format($date,"F d, Y")."</td><td><a 
-						class='w3-blueh w3-hover-green w3-padding-large w3-border' 
+						class='w3-blueh w3-hover-green w3-padding w3-border' 
 						href='studentinfo.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st'>Summary</a></td>
 						</tr>";
 						
@@ -121,16 +123,16 @@
 			
 			if ($totalpages > 10) {
 				
-				$next = "<a href='../assessor/?p=".($p+1).$st."' class='w3-button w3-hover-green'>&raquo;</a>";
-				$previous = "<a href='../assessor/?p=".($p-1).$st."' class='w3-button w3-hover-green'>&laquo;</a>";
+				$next = "<a href='../assessor/?p=".($p+1).$st."' class='w3-button w3-hover-green w3-small'>&raquo;</a>";
+				$previous = "<a href='../assessor/?p=".($p-1).$st."' class='w3-button w3-hover-green w3-small'>&laquo;</a>";
 				$page = $p;
 				
 				if ($p == 0 || $p == 1) {
-					$previous = "<a class='w3-button w3-hover-green w3-disabled'>&laquo;</a>";
+					$previous = "<a class='w3-button w3-hover-green w3-disabled w3-small'>&laquo;</a>";
 					$page = 1;
 				}
 				if ($p >= $totalpages) {
-					$next = "<a class='w3-button w3-hover-green 3-disabled'>&raquo;</a>";
+					$next = "<a class='w3-button w3-hover-green 3-disabled w3-small'>&raquo;</a>";
 				}
 				
 				if (($p + 10) <= $totalpages)
@@ -139,15 +141,15 @@
 					$totalpagesnum = $totalpages;
 			}
 			else {
-				$previous = "<a href='../assessor/?p=".($p-1).$st."' class='w3-button w3-hover-green'>&laquo;</a>";
-				$next = "<a href='../assessor/?p=".($p+1).$st."' class='w3-button w3-hover-green'>&raquo;</a>";
+				$previous = "<a href='../assessor/?p=".($p-1).$st."' class='w3-button w3-hover-green w3-small'>&laquo;</a>";
+				$next = "<a href='../assessor/?p=".($p+1).$st."' class='w3-button w3-hover-green w3-small'>&raquo;</a>";
 				
 				if ($p == 0 || $p == 1) {
-					$previous = "<a class='w3-button w3-hover-green w3-disabled'>&laquo;</a>";
+					$previous = "<a class='w3-button w3-hover-green w3-disabled w3-small'>&laquo;</a>";
 					$page = 1;
 				}
 				if ($p >= $totalpages) {
-					$next = "<a class='w3-button w3-hover-green w3-disabled'>&raquo;</a>";
+					$next = "<a class='w3-button w3-hover-green w3-disabled w3-small'>&raquo;</a>";
 				}
 				
 				$page = 1;
@@ -159,15 +161,15 @@
 			echo "<div class='w3-center' style='margin-top:20px;'>";
 			
 			if($page >= 4) {
-				$pagelink .= "<a href='../assessor/?p=1".$st."' class='w3-button w3-hover-green'>1</a>";
-				$pagelink .= "<a class='w3-button w3-hover-green w3-disabled'>...</a>";
+				$pagelink .= "<a href='../assessor/?p=1".$st."' class='w3-button w3-hover-green w3-small'>1</a>";
+				$pagelink .= "<a class='w3-button w3-hover-green w3-disabled w3-small'>...</a>";
 			}
 			
 			for ($i=$page; $i<=$totalpagesnum; $i++) {
 				if($p == $i) 
-					$pagelink .= "<a class='w3-button w3-hover-green w3-green w3-disabled'>".$i."</a>";  
+					$pagelink .= "<a class='w3-button w3-hover-green w3-green w3-disabled w3-small'>".$i."</a>";  
 				else
-					$pagelink .= "<a href='../assessor/?p=".$i.$st."' class='w3-button w3-hover-green'>".$i."</a>";
+					$pagelink .= "<a href='../assessor/?p=".$i.$st."' class='w3-button w3-hover-green w3-small'>".$i."</a>";
 			}
 			echo $pagelink.$next."</div></div>";
 		}

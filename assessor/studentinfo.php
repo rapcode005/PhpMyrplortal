@@ -22,7 +22,7 @@
 		
 		<div class="w3-white w3-card-4">
 			<header class="w3-container w3-blueh">
-				<span id="perdt"><h3>Personal Details</h3></span>
+				<span id="perdt"><h4>Personal Details</h4></span>
 			</header>
 			
 			<?php 
@@ -75,7 +75,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "USI"; ?></td>
 							<td><?php if (isset($rowrpd['code'])) { echo $rowrpd['code']; } ?></td>
@@ -124,7 +124,7 @@
 		
 		<div class="w3-white w3-card-4" style="margin-top:20px;" >
 			<header class="w3-container w3-blueh">
-				<span id="resd"><h3>Residence</h3></span>
+				<span id="resd"><h4>Residence</h4></span>
 			</header>
 			
 			<?php 
@@ -164,7 +164,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "Building"; ?></td>
 							<td><?php if (isset($rowresd['building'])) { echo $rowresd['building']; } ?></td>
@@ -206,7 +206,7 @@
 		
 		<div class="w3-white w3-card-4" style="margin-top:20px;" >
 			<header class="w3-container w3-blueh">
-				<span id="ptadd"><h3>Postal Address</h3></span>
+				<span id="ptadd"><h4>Postal Address</h4></span>
 			</header>
 			
 				<?php 
@@ -244,7 +244,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "Building"; ?></td>
 							<td><?php if (isset($rowposadd['building'])) { echo $rowposadd['building']; } ?></td>
@@ -285,7 +285,7 @@
 		
 		<div class="w3-white w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="phncntdt"><h3>Phone and Contact details</h3></span>
+				<span id="phncntdt"><h4>Phone and Contact details</h4></span>
 			</header>
 			
 				<?php 
@@ -325,7 +325,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "Home"; ?></td>
 							<td><?php if (isset($rowphcnt['homeph'])) { echo $rowphcnt['homeph']; } ?></td>
@@ -358,7 +358,7 @@
 		
 		<div class="w3-white w3-card-4" style="margin-top:20px;" >
 			<header class="w3-container w3-blueh">
-				<span id="emgcnt"><h3>Emergency Contact</h3></span>
+				<span id="emgcnt"><h4>Emergency Contact</h4></span>
 			</header>
 				<?php 
 					if (isset($_GET['ptid'])) {
@@ -397,7 +397,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "Home"; ?></td>
 							<td><?php if (isset($rowemeg['homeph'])) { echo $rowemeg['homeph']; } ?></td>
@@ -430,7 +430,7 @@
 		
 		<div class="w3-white w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="lngnculdv"><h3>Language and Cultural Diversity</h3></span>
+				<span id="lngnculdv"><h4>Language and Cultural Diversity</h4></span>
 			</header>
 			
 				<?php 
@@ -473,7 +473,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "In which country were you born?"; ?></td>
 							<td><?php if (isset($rowlang['cntbrn'])) { 
@@ -524,7 +524,7 @@
 		
 		<div class="w3-white w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="indlnneeds"><h3>Individual Learning Needs</h3></span>
+				<span id="indlnneeds"><h4>Individual Learning Needs</h4></span>
 			</header>
 			
 			<?php 
@@ -562,7 +562,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "Do you consider yourself to have a disability, Impairment or long-term condition?"; ?></td>
 							<td><?php if (isset($rowindln['disabimpr'])) { 
@@ -599,7 +599,7 @@
 		
 		<div class="w3-white w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="edu"><h3>Education</h3></span>
+				<span id="edu"><h4>Education</h4></span>
 			</header>
 			<?php 
 				if (isset($_GET['ptid'])) {
@@ -637,7 +637,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "Highest Completed School Level"; ?></td>
 							<td><?php if (isset($rowedu['highschool'])) { echo $rowedu['highschool']; } ?></td>
@@ -683,7 +683,7 @@
 		
 		<div class="w3-white w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="refstudy"><h3>Reason for study</h3></span>
+				<span id="refstudy"><h4>Reason for study</h4></span>
 			</header>
 			
 			<div class="w3-container w3-margin-bottom w3-margin-top">
@@ -733,7 +733,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "Which best describes your reasons for enrolling in the qualification?"; ?></td>
 							<td>
@@ -781,7 +781,7 @@
 		
 		<div class="w3-white w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="currempst"><h3>Current Employment Status</h3></span>
+				<span id="currempst"><h4>Current Employment Status</h4></span>
 			</header>
 			
 			<?php 
@@ -817,7 +817,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "Employment Status"; ?></td>
 							<td><?php if (isset($rowrstatus['empstatus'])) { echo $rowrstatus['empstatus']; } ?></td>
@@ -848,7 +848,7 @@
 		
 		<div class="w3-white w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="empdt"><h3>Employer Details</h3></span>
+				<span id="empdt"><h4>Employer Details</h4></span>
 			</header>
 			
 			<?php 
@@ -888,7 +888,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 					<tr>
 							<td><?php echo "Company Name"; ?></td>
 							<td><?php if (isset($rowempdt['empcomname'])) { echo $rowempdt['empcomname']; } ?></td>
@@ -929,7 +929,7 @@
 		
 		<div class="w3-white w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="appntr"><h3>Apprenticeships and Traineeships</h3></span>
+				<span id="appntr"><h4>Apprenticeships and Traineeships</h4></span>
 			</header>
 			
 			<?php 
@@ -968,7 +968,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "Part of apprenticeships and traineeships"; ?></td>
 							<td><?php if (isset($rowappren['appres'])) { 
@@ -1006,7 +1006,7 @@
 		
 		<div class="w3-white w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh w3-tea">
-				<span id="recogpr"><h3>Recognition of Prior Learning/Credit</h3></span>
+				<span id="recogpr"><h4>Recognition of Prior Learning/Credit</h4></span>
 			</header>
 			
 			<?php 
@@ -1041,7 +1041,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "RPL or credit transfer"; ?></td>
 							<td><?php if (isset($rowrecogpr['recog'])) { 
@@ -1066,7 +1066,7 @@
 		
 		<div class="w3-white w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="jobseek"><h3>Jobseekers Seeking Concession</h3></span>
+				<span id="jobseek"><h4>Jobseekers Seeking Concession</h4></span>
 			</header>
 			
 			<?php 
@@ -1108,7 +1108,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "Job Search Agency"; ?></td>
 							<td><?php if (isset($rowjobseekers['jbseekagen'])) { echo $rowjobseekers['jbseekagen']; } ?></td>
@@ -1170,7 +1170,7 @@
 				}
 			?>>
 			<header class="w3-container w3-blueh w3-tea">
-				<h3>Course Fee</h3>
+				<h4>Course Fee</h4>
 			</header>
 			
 			<?php 
@@ -1210,7 +1210,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "Payment Type"; ?></td>
 							<td><?php if (isset($rowcoursefee['paytype'])) { echo $rowcoursefee['paytype']; } ?></td>
@@ -1244,7 +1244,7 @@
 				}
 			?>>
 			<header class="w3-container w3-blueh">
-				<h3>Credit Card</h3>
+				<h4>Credit Card</h4>
 			</header>
 			<div class="w3-container w3-margin-bottom w3-margin-top">
 				<table class="w3-table-all w3-card-4">
@@ -1254,7 +1254,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "Card Type"; ?></td>
 							<td><?php if (isset($rowcoursefee['crdtype'])) { echo $rowcoursefee['crdtype']; } ?></td>
@@ -1272,7 +1272,7 @@
 		
 		<div class="w3-white w3-card-4" style="margin-top:20px;">
 			<header class="w3-container w3-blueh">
-				<span id="centdt"><h3>Centrelink Details</h3></span>
+				<span id="centdt"><h4>Centrelink Details</h4></span>
 			</header>
 			
 			<?php 
@@ -1310,7 +1310,7 @@
 							<th>Value</th>
 						</tr>
 					</thead>
-					<tbody class="w3-small">
+					<tbody>
 						<tr>
 							<td><?php echo "Job Search Agency Fees"; ?></td>
 							<td><?php if (isset($rowcentrelink['cntrallow'])) { 

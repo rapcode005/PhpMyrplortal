@@ -12,14 +12,16 @@
 	onclick="w3_open()">&#9776;</button>
 </div>
 
-<div class="w3-main" style="margin-left:220px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;" >
+<div class="w3-main" 
+style="margin-left:220px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;" >
 	<form action="data/uploadrefdt.php" method="POST" enctype="multipart/form-data">
 		<div class="w3-container w3-white w3-card-4 w3-padding-large"
 		style="width:50%; margin-top:20px;">
-			<input type='file' id='file' name='file' class="w3-blueh w3-hover-green w3-border"
-            style="height: 32px;" />
+			<input type='file' id='file' name='file' 
+			class="w3-blueh w3-hover-green w3-border w3-small"
+            />
 			<button type="submit" name="submitupload" 
-			class="w3-blueh w3-hover-green 
+			class="w3-blueh w3-hover-green w3-small
 			w3-border w3-padding-small">Upload</button>
 			<input type="hidden" name="fnm" 
 			<?php 
@@ -72,14 +74,14 @@
 		<?php
 			include_once '../link/message/prosucca.php';
 		?>
-		<table class="w3-table-all" >
+		<table class="w3-table-all w3-small">
 			<thead>
 				<tr class="w3-blueh">
 					<th>File Name</th>
 					<th>Remove</th>
 				</tr>
 			</thead>
-			<tbody class="w3-small"> 
+			<tbody> 
 				<form action='data/removerefdt.php' method='POST'>
 				<?php
 					include_once '../data/dbh.php';
@@ -101,7 +103,7 @@
 							echo "<td><label>".$row['filename']."</label>
 							<input type='hidden' name='fileref' value='".$row['filename']."'/>
 							</td><td><button type='submit' name='submit' 
-							class='w3-blueh w3-hover-green w3-padding-large w3-border' 
+							class='w3-blueh w3-hover-green w3-padding w3-border' 
 							value=".$row['id'].">Remove
 							</button>";
 							
