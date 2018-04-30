@@ -272,7 +272,7 @@
 		if ($_POST['stdsuccessqual'] == "Yes") {
 			$stdsuccessqual = 1;
 			$stdqualsuccomp = mysqli_real_escape_string($GLOBALS['conn'], 
-			$_POST['stdqualsuccomp']);
+			$_POST['scsscomp']);
 		}
 		elseif ($_POST['stdsuccessqual'] == "No") {
 			$stdsuccessqual = 0;

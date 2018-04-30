@@ -4,6 +4,9 @@
 		header("Location: ../");
 	}
 ?>
+<br><br>
+<div class="w3-container">
+	<p>
 	<table style="margin-top:20px; 
 	font-family: Arial, Helvetica, sans-serif;" 
 	class="w3-table-all w3-small">
@@ -101,7 +104,9 @@
 			?>
 		</tbody>
 	</table>
-		<?php
+	</p>
+	<p>
+	<?php
 		if (isset($_GET['st']) && !empty($_GET['st'])) {
 			
 			$sqlcount = "SELECT COUNT(a.id) as count FROM studentinfo a
@@ -156,9 +161,9 @@
 				$totalpagesnum = $totalpages;
 			}
 			
-			$pagelink = "<div class='w3-bar w3-medium w3-border'>".$previous;
+			$pagelink = "<div class='w3-small'>".$previous;
 			
-			echo "<div class='w3-center' style='margin-top:20px;'>";
+			//echo "<div class='w3-center' style='margin-top:20px;'>";
 			
 			if($page >= 4) {
 				$pagelink .= "<a href='../assessor/?p=1".$st."' class='w3-button w3-hover-green w3-small'>1</a>";
@@ -171,9 +176,11 @@
 				else
 					$pagelink .= "<a href='../assessor/?p=".$i.$st."' class='w3-button w3-hover-green w3-small'>".$i."</a>";
 			}
-			echo $pagelink.$next."</div></div>";
+			echo $pagelink.$next."</div>";
 		}
 	?>
+	</p>
+</div>
 <?php
 	include_once '../footer.php';
 ?>

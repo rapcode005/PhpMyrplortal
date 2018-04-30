@@ -47,7 +47,7 @@
 				VALUES('".$fileName."','".$filetypes."','".$_SESSION['stdid']."')";
 				mysqli_query($conn,$insert);
 				
-				header("Location: ../evidence.php?h=".$h."s=successupload");
+				header("Location: ../evidence.php?h=".$h."&s=successupload");
 				
 				
 			}

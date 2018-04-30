@@ -7,10 +7,6 @@
 	unset($_SESSION['stdid']);
 	include_once 'menu.php';
 ?>
-<div style="width:25%">
-	<button class="w3-button w3-blueh w3-hover-green w3-xlarge w3-hide-large" 
-	onclick="w3_open()">&#9776;</button>
-</div>
 
 <form action="data/save.php" method="POST" onsubmit="return checkform();">
 <div class="w3-bottom">
@@ -23,9 +19,15 @@
 	</div>	
 </div>	
 
-<div class="w3-main w3-container w3-small" style="margin-top:20px; 
-	margin-left:200px; font-family: Arial, Helvetica, sans-serif;">
+<br><br>
 
+<div class="w3-main w3-container w3-small" style="margin-top:16px; 
+	margin-left:200px; font-family: Arial, Helvetica, sans-serif;">
+	
+	<div style="width:25%;">
+		<button class="w3-button w3-blueh w3-hover-green w3-xlarge w3-hide-large" 
+		onclick="return w3_open();">&#9776;</button>
+	</div>
 	
 	<div id="pt" class="w3-greyb w3-card-4">
 		<header class="w3-container w3-blueh w3-tea">
@@ -447,21 +449,21 @@
 		<div id="qualsuccomp" style="display:none;" >
 		
 			<div class="w3-container w3-white w3-card-4 w3-padding-large w3-margin">
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Bachelor Degree or Higher Degree Level" />
+				<p><input class="w3-radio" type="radio" name="scsscomp" value="Bachelor Degree or Higher Degree Level" />
 				<label>Bachelor Degree or Higher Degree Level</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Advanced Diploma or Assiociate Degree Level"  />
+				<p><input class="w3-radio" type="radio" name="scsscomp" value="Advanced Diploma or Assiociate Degree Level"  />
 				<label>Advanced Diploma or Assiociate Degree Level</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Diploma (or associate diploma)"  />
+				<p><input class="w3-radio" type="radio" name="scsscomp" value="Diploma (or associate diploma)"  />
 				<label>Diploma (or associate diploma)</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate IV"  />
+				<p><input class="w3-radio" type="radio" name="scsscomp" value="Certificate IV"  />
 				<label>Certificate IV</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate III"  />
+				<p><input class="w3-radio" type="radio" name="scsscomp" value="Certificate III"  />
 				<label>Certificate III</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate II"  />
+				<p><input class="w3-radio" type="radio" name="scsscomp" value="Certificate II"  />
 				<label>Certificate II</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificate I"  />
+				<p><input class="w3-radio" type="radio" name="scsscomp" value="Certificate I"  />
 				<label>Certificate I</label></p>
-				<p><input class="w3-radio" type="radio" name="stdqualsuccomp" value="Certificates other than the above"  />
+				<p><input class="w3-radio" type="radio" name="scsscomp" value="Certificates other than the above"  />
 				<label>Certificates other than the above</label></p>
 			</div>
 			
@@ -860,9 +862,11 @@
 <script>
 	function w3_open() {
 		document.getElementById("mySidebar").style.display = "block";
+		return false;
 	}
 	function w3_close() {
 		document.getElementById("mySidebar").style.display = "none";
+		return false;
 	}
 	function w3_showother() {
 		document.getElementById("stdstatep").style.display = "block";

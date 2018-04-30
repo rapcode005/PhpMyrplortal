@@ -21,5 +21,8 @@ if (isset($_GET['s'])) {
 		case "requestsuccess":
 			echo "<h6>The request has been successfully processed.</h6>";
 			break;
+		case "successstudent":
+			echo "<h6>Student has successfully added.</h6>";
+			break;
 	}
 }

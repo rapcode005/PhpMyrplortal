@@ -1,27 +1,29 @@
 <?php 
-	include_once 'headerwithsearchhome.php';
+	session_start();
+	ob_start();
 	include_once '../data/dbh.php';
 	if (isset($_SESSION['uid']) == false) {
 		header("Location: ../index.php");
 	}
-	include_once 'menuwithquerystr.php';
 ?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>MYRPLPORTAL</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="../link/css/style.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../link/css/w3.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+<body>
+
 
 <br><br>
 	
 <div class="w3-main w3-container w3-small" style="margin-top:16px; 
 	margin-left:200px; font-family: Arial, Helvetica, sans-serif;">
 	
-		<div style="width:25%;margin-bottom:5px;">
-			<button class="w3-button w3-blueh w3-xlarge
-				w3-hover-green w3-hide-large" 
-				onclick="w3_open()">&#9776;</button>
-		</div>
-		
-		<?php
-			include_once '../link/message/prosucca.php';
-		?>
-		
 		<form action="data/update.php" method="GET">
 		<div class="w3-white w3-card-4">
 			<header class="w3-container w3-blueh">
@@ -1354,94 +1356,3 @@
 	</form>
 		
 </div>
-
-<script>
-	function w3_open() {
-		document.getElementById("mySidebar").style.display = "block";
-	}
-	function w3_close() {
-		document.getElementById("mySidebar").style.display = "none";
-	}
-	function w3_showother() {
-		document.getElementById("stdstatep").style.display = "block";
-	}
-	function w3_hideother() {
-		document.getElementById("stdstatep").style.display = "none";
-	}
-	function w3_hideothervisa() {
-		document.getElementById("stdvisatype").style.display = "none";
-	}
-	function w3_showothervisa() {
-		document.getElementById("stdvisatype").style.display = "block";
-	}
-	function w3_showotherlang() {
-		document.getElementById("stdspecify").style.display = "block";
-	}
-	function w3_hideotherlang() {
-		document.getElementById("stdspecify").style.display = "none";
-	}
-	function w3_showdisability() {
-		document.getElementById("disabilityYes").style.display = "block";
-	}
-	function w3_hidedisability() {
-		document.getElementById("disabilityYes").style.display = "none";
-	}
-	function w3_showotherdisability() {
-		document.getElementById("stdotherdis").style.display = "block";
-	}
-	function w3_hideotherdisability() {
-		document.getElementById("stdotherdis").style.display = "none";
-	}
-	function w3_hidequalcomp() {
-		document.getElementById("qualsuccomp").style.display = "none";
-	}
-	function w3_showqualcomp() {
-		document.getElementById("qualsuccomp").style.display = "block";
-	}
-	function w3_showotherreason() {
-		if (document.getElementById("otherreasonstate").style.display == "none")
-			document.getElementById("otherreasonstate").style.display = "block";
-		else
-			document.getElementById("otherreasonstate").style.display = "none";
-	}
-	function w3_showadvertisemen() {
-		document.getElementById("advertisementwhe").style.display = "block";
-		document.getElementById("otherhear").style.display = "none";
-		document.getElementById("wordofmout").style.display = "none";
-	}
-	function w3_showwordof() {
-		document.getElementById("wordofmout").style.display = "block";
-		document.getElementById("otherhear").style.display = "none";;
-		document.getElementById("advertisementwhe").style.display = "none";
-	}
-	function w3_showotherhear() {
-		document.getElementById("otherhear").style.display = "block";
-		document.getElementById("advertisementwhe").style.display = "none";
-		document.getElementById("wordofmout").style.display = "none";;
-	}
-	function w3_showwebsite() {
-		document.getElementById("otherhear").style.display = "none";
-		document.getElementById("advertisementwhe").style.display = "none";
-		document.getElementById("wordofmout").style.display = "none";;
-	}
-	function w3_hideemployer() {
-		document.getElementById("employerdetails").style.display = "none";
-	}
-	function w3_showemployer() {
-		document.getElementById("employerdetails").style.display = "block";
-	}
-	function w3_showcoursefee() {
-		document.getElementById("coursefee").style.display = "block";
-		document.getElementById("creditcard").style.display = "block";
-	}
-	function w3_hidecoursefee() {
-		document.getElementById("coursefee").style.display = "none";
-		document.getElementById("creditcard").style.display = "none";
-	}
-	function w3_showreg() {
-		document.getElementById("regiscentre").style.display = "block";
-	}
-	function w3_hidereg() {
-		document.getElementById("regiscentre").style.display = "none";
-	}
-</script>

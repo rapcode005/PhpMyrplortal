@@ -5,6 +5,7 @@
 <html>
 	<head>
 		<title>MYRPLPORTAL</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="../link/css/style.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="../link/css/w3.css">
@@ -13,30 +14,35 @@
 		</script>
 	</head>
 <body>
-
-	<nav class="w3-bar w3-blueh w3-border w3-large"
-	style="font-family: Arial, Helvetica, sans-serif;">
-		<a href='../student/' class="w3-bar-item w3-button w3-blueh w3-hover-green">
-		MYRPLPORTAL</a>
-		<?php 
-			if (isset($_SESSION['u_r'])) {
-				echo "<form action='../data/logout.php' method='POST' >
-				<button type='submit' name='submitlogout'
-				class='w3-bar-item w3-button w3-button w3-blueh w3-hover-green
-				w3-right'>
-				Logout</button>
-				</form>";
-			}
-		?>
-		<!-- Notification -->
-		<div class="w3-dropdown-hover w3-blueh w3-right">
-			<button class="w3-button w3-blueh w3-hover-green">
-			<i class='fa fa-bell'><span id="bdnum" class="badge1"></i>
-			</button >
-			<div id="notify" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0">
+	<div class="w3-top">
+		<div class="w3-bar w3-blueh w3-border w3-large"
+		style="font-family: Arial, Helvetica, sans-serif;">
+			
+			<!-- Home -->
+			<a href='../student/' class="w3-bar-item w3-button 
+			w3-blueh w3-hover-green" title="Home">
+			<i class="fa fa-arrow-left">
+			</i></a> 
+			
+			<!-- Logout -->
+			<form action="../data/logout.php" method="POST" >
+					<button type='submit' name="submitlogout"
+					class="w3-bar-item w3-button w3-button w3-blueh w3-hover-green
+					w3-right" title="Logout">
+					<i class="fa fa-sign-out"></i></button>
+			</form>
+			
+			<!-- Notification -->
+			<div class="w3-dropdown-hover w3-blueh w3-right">
+				<button class="w3-button w3-blueh w3-hover-green">
+				<i class='fa fa-bell'><span id="bdnum" class="badge1"></i>
+				</button >
+				<div id="notify" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0">
+				</div>
 			</div>
 		</div>
-	</nav>
+		
+	</div>
 	<script>
 		$(document).ready(function(){
 			function load_unseen_notification() {

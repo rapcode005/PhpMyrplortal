@@ -7,90 +7,91 @@
 	include_once 'menuwithquerystr.php';
 ?>
 
-<div  style="width:25%;">
-	<button class="w3-button w3-blueh w3-hover-green w3-teal w3-xlarge w3-hide-large" 
-	onclick="w3_open()">&#9776;</button>
+<BR><br>
+<div class="w3-main w3-container" style="margin-left:200px; 
+	margin-top:16px; font-family: Arial, Helvetica, sans-serif;" >
 
-</div>
-
-<div class="w3-main" style="margin-left:220px; margin-top:16px; margin-top:16px; font-family: Arial, Helvetica, sans-serif;" >	
-	<div class="w3-container w3-white w3-card-4 w3-padding-large"
-	style="width:50%; margin-top:16px;">
-	
-		<?php
-			include_once '../link/message/prosucca.php';
-		?>
-		
-		<table class="w3-table-all w3-small">
-			<thead>
-				<tr class="w3-blueh">
-					<th>File Name</th>
-					<th>Display</th>
-				</tr>
-			</thead>
-			<tbody>
-			<?php
-				include_once '../data/dbh.php';
-				
-				if (isset($_GET['ptid']) && isset($_GET['h']) &&
-				isset($_GET['fnm']) && isset($_GET['gnm']))
-				{	
-					//decode
-					$ptid = base64_decode(urldecode($_GET['ptid']));
-					
-					$h = $_GET['h'];
-					
-					$sql = "SELECT filename,id FROM reference
-					WHERE stuid='".$ptid."'";
-						
-					$result = mysqli_query($conn, $sql);
-					
-					while ($row = mysqli_fetch_assoc($result)) {
-						
-						$fln = urlencode(base64_encode($row['filename']));
-						
-						//href
-						if (isset($_GET['n']) && isset($_GET['nid'])) {
-							$n = $_GET['n'];
-							$nid = $_GET['nid'];
-							$link =  "reference.php?ptid=".$_GET['ptid']."&fnm=".$_GET['fnm']."&gnm=".$_GET['gnm']." 
-							&v=".$fln."&h=".$h."&nid=".$nid."&n=".$n;
-						}
-						else {
-							$link = "reference.php?ptid=".$_GET['ptid']."&fnm=".$_GET['fnm']."&gnm=".$_GET['gnm']." 
-							&v=".$fln."&h=".$h;
-						}
-						
-						//Comment
-						if (isset($_GET['cnt']) && !empty($_GET['cnt'])){
-							$cnt = $_GET['cnt'];
-							$link .= "&cnt=".$cnt;
-						}
-						
-						echo "<tr>";
-						
-						echo "<td><label>".$row['filename']."</label>
-						<input type='hidden' name='fileref' value='".$row['filename']."'/>
-						</td><td><a href='".$link."' class='w3-blueh w3-hover-green w3-padding w3-border'>Show
-						</a>";
-						
-						
-						echo "</td></tr>";
-					
-					}
-				}
-			?>
-			</tbody>
-		</table>
+	<div style="width:25%;margin-bottom:5px;">
+		<button class="w3-button w3-blueh w3-hover-green  w3-xlarge w3-hide-large" 
+		onclick="w3_open()">&#9776;</button>
 	</div>
-	
-	<?php
-		include_once '../link/message/commentrfa.php';
-	?>
-	
-	<div class="w3-container w3-white w3-card-4 w3-padding-large" 
-	style="margin-top:20px; width:98%; height:100%;" >
-	<embed width="100%"   <?php
+		
+	<div class="w3-white w3-card-4">
+		<p>
+			<?php
+				include_once '../link/message/prosucca.php';
+			?>
+		</p>
+		<p>
+			<table class="w3-table-all w3-small">
+				<thead>
+					<tr class="w3-blueh">
+						<th>File Name</th>
+						<th>Display</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+						include_once '../data/dbh.php';
+						
+						if (isset($_GET['ptid']) && isset($_GET['h']) &&
+						isset($_GET['fnm']) && isset($_GET['gnm']))
+						{	
+							//decode
+							$ptid = base64_decode(urldecode($_GET['ptid']));
+							
+							$h = $_GET['h'];
+							
+							$sql = "SELECT filename,id FROM reference
+							WHERE stuid='".$ptid."'";
+								
+							$result = mysqli_query($conn, $sql);
+							
+							while ($row = mysqli_fetch_assoc($result)) {
+								
+								$fln = urlencode(base64_encode($row['filename']));
+								
+								//href
+								if (isset($_GET['n']) && isset($_GET['nid'])) {
+									$n = $_GET['n'];
+									$nid = $_GET['nid'];
+									$link =  "reference.php?ptid=".$_GET['ptid']."&fnm=".$_GET['fnm']."&gnm=".$_GET['gnm']." 
+									&v=".$fln."&h=".$h."&nid=".$nid."&n=".$n;
+								}
+								else {
+									$link = "reference.php?ptid=".$_GET['ptid']."&fnm=".$_GET['fnm']."&gnm=".$_GET['gnm']." 
+									&v=".$fln."&h=".$h;
+								}
+								
+								//Comment
+								if (isset($_GET['cnt']) && !empty($_GET['cnt'])){
+									$cnt = $_GET['cnt'];
+									$link .= "&cnt=".$cnt;
+								}
+								
+								echo "<tr>";
+								
+								echo "<td><label>".$row['filename']."</label>
+								<input type='hidden' name='fileref' value='".$row['filename']."'/>
+								</td><td><a href='".$link."' class='w3-blueh w3-hover-green w3-padding w3-border'>Show
+								</a>";
+								
+								
+								echo "</td></tr>";
+							
+							}
+						}
+					?>
+				</tbody>
+			</table>
+		</p>
+		<p>
+			<?php
+				include_once '../link/message/commentrfa.php';
+			?>
+		</p>
+		<p>
+			<embed width="100%"  <?php
 							if(isset($_GET['v']) && isset($_GET['fnm']) && 
 								isset($_GET['gnm']) && isset($_GET['ptid'])) {
 								//decode
@@ -104,10 +105,18 @@
 								echo "src='../reference/".$folder."/".$v."'";
 							}
 							?>	height="2100px" name="viewfile" />
+		</p>
 	</div>
 	
 </div>
-
+<script>
+	function w3_open() {
+			document.getElementById("mySidebar").style.display = "block";
+	}
+	function w3_close() {
+		document.getElementById("mySidebar").style.display = "none";
+	}
+</script>
 
 
 

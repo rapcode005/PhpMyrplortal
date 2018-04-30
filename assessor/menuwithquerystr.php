@@ -1,6 +1,7 @@
-<div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-greyb w3-large" 
-	style="width:200px; font-family: Arial, Helvetica, sans-serif;" id="mySidebar">
-	<button class="w3-bar-item w3-button w3-hide-large" onclick="w3_close()">Close &times;</button>
+<div class="w3-sidebar w3-bar-block w3-collapse w3-card w3-greyc w3-large" 
+	style="width:200px; font-family: Arial, Helvetica, sans-serif;
+	margin-top:46px;" id="mySidebar">
+	<button class="w3-bar-item w3-button w3-hide-large w3-hover-green" onclick="w3_close()">Close &times;</button>
 	<?php
 		if(isset($_GET['ptid']) && isset($_GET['fnm'])
 			&& isset($_GET['gnm']) && isset($_GET['h']) ) {

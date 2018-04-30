@@ -2,113 +2,22 @@
 
 /* My Code */
 a {
-	text-decoration: none;
+  text-decoration: none;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
 }
+
 
 body {
-	background-color: #fff;
+background: #fff; /* fallback for old browsers #8DC26F "Roboto", sans-serif*/
+  background: -webkit-linear-gradient(right, #f1f1f1, #fff);
+  background: -moz-linear-gradient(right,#f1f1f1, #fff);
+  background: -o-linear-gradient(right, #f1f1f1, #fff);
+  background: linear-gradient(to left,#f1f1f1, #fff);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
 }
-
-
-.main-wrapper {
-	display: flex;
-	flex-flow: column wrap;
-	align-items: center;
-	justify-content: center;
-}
-
-.flex-container {
-	display: flex;
-	flex-flow: row wrap;
-}
-
-.container {
-	width: 100px;
-	margin: 0;
-	display: flex;
-	flex-direction: column;
-	padding: 10px;
-	align-items: center;
-	justify-content: center;
-}
-
-
-.container {
-	margin: 0 auto;
-	width: 100%;
-}
-
-.flex-sidebar {
-	display: flex;
-	flex-flow: column wrap;
-	padding: 10px;
-}
-
-.flex-sidebar img{
-	width: 60px;
-	padding: 10px;
-	align: center;
-}
-
-/* index/login.php*/
-.login-form {
-	margin: 0 auto;
-	padding: 300px;
-}
-
-.login-form input {
-	width: 100%;
-	height: 40px;
-	padding: 0px 5%;
-	margin-bottom: 10px;
-	border: none;
-	background-color: #f1f1f1;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 25px;
-	color: #111;
-	line-height: 40px;
-}
-
-.login-form button {
-	display: block;
-	width: 30%;
-	margin: 0 auto;
-	height: 40px;
-	border: none;
-	background-color: #ccc;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 16px;
-	color: #111;
-	cursor: pointer;
-}
-
-.login-form button:hover {
-	background-color: #f1f1f1;
-	color: #00000;
-}
-
-
-/*AddNewUser*/
-.newuser-form {
-	width: 14%;
-	padding: 5px;
-	align-items: flex-start;
-}
-
-.newuser-form button:hover {
-	background-color: #fff;
-}
-
-.btnsignup {
-	display: block;
-	width: 10%;
-}
-
-/*input*/
-.txtbox {
-	width: 250px;
-}
-
 
 /*style*/
 .badge1 {
@@ -128,3 +37,9 @@ body {
    border-radius:50%;
    box-shadow:0 0 1px #333;
 }
+
+button {
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+}
+
