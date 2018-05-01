@@ -1,7 +1,7 @@
 <?php	
 	if(isset($_SESSION['u_r'])) {
 		if ($_SESSION['u_r'] == "admin") {
-			header("Location: admin/");
+			header("Location: user/");
 		}
 		elseif ($_SESSION['u_r'] == "agent") {
 			header("Location: student/");

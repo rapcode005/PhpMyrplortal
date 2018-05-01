@@ -28,6 +28,12 @@
 					<tr class="w3-blueh">
 						<th>File Name</th>
 						<th>Display</th>
+						<?php 
+							if (isset($_SESSION['u_r']) &&
+							$_SESSION['u_r'] =="admin") {
+								echo "<th>Download</th>";
+							}
+						?>
 					</tr>
 				</thead>
 				<tbody>
@@ -77,7 +83,29 @@
 								</a>";
 								
 								
-								echo "</td></tr>";
+								echo "</td>";
+								
+								//download
+								if (isset($_SESSION['u_r']) && 
+								$_SESSION['u_r'] =="admin") {
+									
+									//Decode
+									$id = base64_decode(urldecode($_GET['ptid']));
+									$fn = base64_decode(urldecode($_GET['fnm']));
+									$gn = base64_decode(urldecode($_GET['gnm']));
+									
+									
+									$url = "../reference/".$fn.$gn.$id."/".
+									$row['filename'];
+									
+									echo "<td><a href='".$url."' class=
+									'w3-blueh w3-hover-green w3-padding w3-border' 
+									download
+									>Download
+									</a></td>";
+								}
+								
+								echo "</tr>";
 							
 							}
 						}

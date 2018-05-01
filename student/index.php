@@ -37,7 +37,8 @@
 						LEFT JOIN personaldt b on a.stdcode = b.id 
 						LEFT JOIN courselist c on a.stdcourse = c.code
 						WHERE MATCH(fname,gname,b.code) 
-						AGAINST('".$search."' in boolean mode) > 0 Order by a.id";
+						AGAINST('".$search."' in boolean mode) > 0
+						and userid=".$_SESSION['u_id']." Order by a.id";
 					
 				}
 				else {
@@ -45,7 +46,8 @@
 					$sql = "SELECT b.code,b.fname as fname,b.gname as gname,c.descrp as descrp,
 					b.brhday as brhday,b.age as age,a.id FROM studentinfo a 
 					LEFT JOIN personaldt b on a.stdcode = b.id 
-					LEFT JOIN courselist c on a.stdcourse = c.code Order by a.id";
+					LEFT JOIN courselist c on a.stdcourse = c.code 
+					where userid=".$_SESSION['u_id']." Order by a.id";
 					
 				}
 				
@@ -116,12 +118,14 @@
 				
 				$sqlcount = "SELECT COUNT(a.id) as count FROM studentinfo a
 					LEFT JOIN personaldt b on a.stdcode = b.id WHERE MATCH(fname,gname,b.code) 
-					AGAINST('".$search."' IN NATURAL LANGUAGE MODE)";
+					AGAINST('".$search."' IN NATURAL LANGUAGE MODE) and
+					userid=".$_SESSION['u_id'];
 				
 				$st = "&st=".$search;
 			}
 			else {
-				$sqlcount = "SELECT COUNT(id) as count FROM studentinfo";
+				$sqlcount = "SELECT COUNT(id) as count FROM studentinfo
+				where userid=".$_SESSION['u_id'];
 				$st = "";
 			}
 			$result = mysqli_query($conn, $sqlcount);
@@ -133,16 +137,16 @@
 				
 				if ($totalpages > 10) {
 					
-					$next = "<a href='../student/?p=".($p+1).$st."' class='w3-button w3-hover-green w3-small'>&raquo;</a>";
-					$previous = "<a href='../student/?p=".($p-1).$st."' class='w3-button w3-hover-green w3-small'>&laquo;</a>";
+					$next = "<a href='../student/?p=".($p+1).$st."' class='w3-button w3-hover-green w3-small w3-border'>&raquo;</a>";
+					$previous = "<a href='../student/?p=".($p-1).$st."' class='w3-button w3-hover-green w3-small w3-border'>&laquo;</a>";
 					$page = $p;
 									
 					if ($p == 0 || $p == 1) {
-						$previous = "<a class='w3-button w3-hover-green w3-disabled w3-small'>&laquo;</a>";
+						$previous = "<a class='w3-button w3-hover-green w3-disabled w3-small w3-border'>&laquo;</a>";
 						$page = 1;
 					}
 					if ($p >= $totalpages) {
-						$next = "<a class='w3-button w3-hover-green w3-disabled w3-small'>&raquo;</a>";
+						$next = "<a class='w3-button w3-hover-green w3-disabled w3-small w3-border'>&raquo;</a>";
 					}
 					
 					if (($p + 10) <= $totalpages)
@@ -152,15 +156,15 @@
 				}
 				else {
 					
-					$previous = "<a href='../student/?p=".($p-1).$st."' class='w3-button w3-hover-green w3-small'>&laquo;</a>";
-					$next = "<a href='../student/?p=".($p+1).$st."' class='w3-button w3-hover-green w3-small'>&raquo;</a>";
+					$previous = "<a href='../student/?p=".($p-1).$st."' class='w3-button w3-hover-green w3-small w3-border'>&laquo;</a>";
+					$next = "<a href='../student/?p=".($p+1).$st."' class='w3-button w3-hover-green w3-small w3-border'>&raquo;</a>";
 					
 					if ($p == 0 || $p == 1) {
-						$previous = "<a class='w3-button w3-hover-green w3-disabled w3-small'>&laquo;</a>";
+						$previous = "<a class='w3-button w3-hover-green w3-disabled w3-small w3-border'>&laquo;</a>";
 						$page = 1;
 					}
 					if ($p >= $totalpages) {
-						$next = "<a class='w3-button w3-hover-green w3-disabled w3-small'>&raquo;</a>";
+						$next = "<a class='w3-button w3-hover-green w3-disabled w3-small w3-border'>&raquo;</a>";
 					}
 					
 					$page = 1;
@@ -170,15 +174,15 @@
 				$pagelink = "<div class='w3-small'>".$previous;
 				
 				if($page >= 4) {
-					$pagelink .= "<a href='../student/?p=1".$st."' class='w3-button w3-hover-green w3-small'>1</a>";
-					$pagelink .= "<a class='w3-button w3-hover-green w3-disabled w3-small'>...</a>";
+					$pagelink .= "<a href='../student/?p=1".$st."' class='w3-button w3-hover-green w3-small w3-border'>1</a>";
+					$pagelink .= "<a class='w3-button w3-hover-green w3-disabled w3-small w3-border'>...</a>";
 				}
 				
 				for ($i=$page; $i<=$totalpagesnum; $i++) {
 					if($p == $i) 
-						$pagelink .= "<a class='w3-button w3-hover-green w3-green w3-disabled w3-small'>".$i."</a>";  
+						$pagelink .= "<a class='w3-button w3-hover-green w3-green w3-disabled w3-small w3-border'>".$i."</a>";  
 					else
-						$pagelink .= "<a href='../student/?p=".$i.$st."' class='w3-button w3-hover-green w3-small'>".$i."</a>";
+						$pagelink .= "<a href='../student/?p=".$i.$st."' class='w3-button w3-hover-green w3-small w3-border'>".$i."</a>";
 				}
 				echo $pagelink.$next."</div>";
 			}

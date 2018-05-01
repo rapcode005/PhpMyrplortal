@@ -21,11 +21,20 @@
 	style="font-family: Arial, Helvetica, sans-serif;">
 		
 		<!-- Home -->
-		<label class="w3-bar-item w3-blueh" 
+		<a href='../assessor/' class="
+		w3-hover-green w3-bar-item w3-blueh" 
 		style="font-family: Arial, Helvetica, sans-serif;">
-		MYRPLPORTAL</label>
+		MYRPLPORTAL</a>
 		
-
+		<!-- Switch admin page -->
+		<?php
+			if (isset($_SESSION['u_r']) && $_SESSION['u_r'] =="admin") {
+				echo "<a href='../user/'
+				class='w3-bar-item w3-button w3-hover-green w3-blueh'>
+				Switch to User Page</a>";
+			}
+		?>
+		
 		<!-- Logout -->
 		<form action="../data/logout.php" method="POST" >
 			<button type="submit" name="submitlogout"
@@ -50,7 +59,7 @@
 			class="w3-bar-item w3-button w3-blueh w3-hover-green w3-right"
 			value="search" title="Search">
 			<i class="fa fa-search"></i></button>
-			<input type="text" name="st" style="width:150px;"
+			<input type="text" name="st" 
 			class="w3-bar-item w3-input w4-grayh w3-right"
 			<?php 
 				if (isset($_GET['st']) && !empty($_GET['st'])) {
@@ -61,7 +70,7 @@
 				
 				}
 			?>
-			placeholder="Student..">
+			placeholder="Search Student..">
 		</form>
 		
 	</div>

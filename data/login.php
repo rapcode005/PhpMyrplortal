@@ -39,7 +39,7 @@
 						$_SESSION['uid'] = $row['username'];
 						$_SESSION['u_r'] = $row['userrole'];
 						if ($row['userrole'] == "admin") {
-							header("Location: ../admin/");
+							header("Location: ../user/");
 						}
 						elseif ($row['userrole'] == "agent") {
 							header("Location: ../student/");

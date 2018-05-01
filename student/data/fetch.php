@@ -1,15 +1,13 @@
 <?php
+	session_start();
 	include_once '../../data/dbh.php';
-		/*
-		if ($_POST['view'] != "") {
-			$update = "UPDATE notification SET status = 1 WHERE status=0";
-   			mysqli_query($con, $update);
-		}
-		*/	
+	
 	$query = "SELECT a.id,a.subject,a.type,a.typeapp,a.comment,a.stuid,c.fname,c.gname 
 			FROM notification a LEFT JOIN studentinfo b on a.stuid = b.id
 			INNER JOIN personaldt c on b.stdcode = 
-			c.id WHERE a.status=0 and (a.updateduserid IS NULL OR a.updateduserid = '');";
+			c.id WHERE a.status=0 and 
+			(a.updateduserid IS NULL OR a.updateduserid = '') and
+			b.userid=".$_SESSION['u_id'].";";
 			
 	$result = mysqli_query($conn, $query);
 	$output = (string) NULL;
@@ -73,7 +71,10 @@
 		$output = "<a class='w3-bar-item w3-button w3-hover-green'>No Notification Found</a>";
 	}
 	
-	$count = "SELECT count(id) as id FROM notification WHERE status=0 and (updateduserid IS NULL OR updateduserid = '');";
+	$count = "SELECT count(a.id) as id FROM notification a
+	left join studentinfo b on a.stuid = b.id
+	WHERE a.status=0 and (a.updateduserid IS NULL OR a.updateduserid = '')
+	and b.userid=".$_SESSION['u_id'].";";
 	$result_query = mysqli_query($conn, $count);
 
 	if ($tcount = mysqli_fetch_assoc($result_query)) {

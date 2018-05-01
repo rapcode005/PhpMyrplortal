@@ -41,13 +41,20 @@
 				</div>
 			</div>
 			
-			<!-- Search -->
+
+			<!-- New Student -->
+			<a href="studentinfo.php?h=st"
+				class="w3-bar-item w3-button w3-blueh w3-hover-green w3-right"
+				title="Add Student" >
+				<i class="fa fa-user-plus"></i></a>
+				
+				<!-- Search -->
 			<form action="../student/" method="GET" >
 				<button type="submit" 
 				class="w3-bar-item w3-button w3-blueh w3-hover-green w3-right"
 				value="search" title="Search">
 				<i class="fa fa-search"></i></button>
-				<input type="text" name="st" style="width:150px;"
+				<input type="text" name="st"
 				class="w3-bar-item w3-input w3-right"
 				<?php 
 					if (isset($_GET['st']) && !empty($_GET['st'])) {
@@ -58,14 +65,9 @@
 					
 					}
 				?>
-				placeholder="Student..">
+				placeholder="Search Student..">
 			</form>
 			
-			<!-- New Student -->
-			<a href="studentinfo.php?h=st"
-				class="w3-bar-item w3-button w3-blueh w3-hover-green w3-right"
-				title="Add Student" >
-				<i class="fa fa-user-plus"></i></a>
 		</div>
 	</div>
 	<script>

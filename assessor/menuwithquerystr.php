@@ -4,7 +4,7 @@
 	<button class="w3-bar-item w3-button w3-hide-large w3-hover-green" onclick="w3_close()">Close &times;</button>
 	<?php
 		if(isset($_GET['ptid']) && isset($_GET['fnm'])
-			&& isset($_GET['gnm']) && isset($_GET['h']) ) {
+			&& isset($_GET['gnm']) && isset($_GET['h'])) {
 			
 			//id
 			$id = base64_decode(urldecode($_GET['ptid']));
@@ -24,6 +24,7 @@
 			$rf = "<a href='reference.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=rf' class='w3-bar-item w3-button w3-hover-green'>Reference</a>";
 			$ev = "<a href='evidence.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=ev' class='w3-bar-item w3-button w3-hover-green'>Evidence</a>";
 			$rq = "<a href='request.php?ptid=".$iden."&fnm=".$fnen."&gnm=".$gnen."&h=rq' class='w3-bar-item w3-button w3-hover-green'>Request</a>";
+
 			
 			if ($h == "st") {
 				$st = "<a class='w3-bar-item w3-button w3-hover-green w3-green w3-disabled'>Application Form</a>";

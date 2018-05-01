@@ -3,9 +3,10 @@
 	session_start();
 	if (isset($_POST['submitsave'])) {
 		
-		
+		include_once '../../link/code/fpdf.php';
 		//Personal
 		personaldt();
+		CreatePDF();
 		$linkid = urlencode(base64_encode($GLOBALS['stdnum']));
 		$linkfn = urlencode(base64_encode($_POST['stdfname']));
 		$linkgn = urlencode(base64_encode($_POST['stdgname']));
@@ -37,8 +38,9 @@
 		
 		if(mysqli_query($GLOBALS['conn'],$insert)){
 			//Insert into studentinfo table
-			$insertstd = "INSERT INTO studentinfo(stdcode,stdcourse)
-			VALUES('".$GLOBALS['stdnum']."','".$course."');";
+			$insertstd = "INSERT INTO studentinfo(stdcode,stdcourse,userid)
+			VALUES('".$GLOBALS['stdnum']."','".$course."',".
+			$_SESSION['u_id'].");";
 			mysqli_query($GLOBALS['conn'],$insertstd);
 			
 			//Save studid, familyname, givenname, studcode
@@ -664,6 +666,8 @@
 		}
 	}
 	
+	
+	
 	function centrelink() {
 		if (isset($_POST['regcenallow'])) { 
 			if ($_POST['regcenallow'] == "Yes") {
@@ -712,4 +716,255 @@
 		}
 	}
 	
+	function CheckforGET($title) {
+		if (!empty($_POST[$title])) {
+			return $_POST[$title];
+		}
+		else {
+			return "";
+		}
+	}
+	
+	function CheckforOther($title,$otherword,$other) {
+		if ($title != $otherword) {
+			return $title;
+		}
+		else {
+			return $other;
+		}
+	}
+	
+	function CreatePDF() {
+		
+		class PDF extends FPDF {
+			// Page header
+			function Header()
+			{
+				// Arial bold 15
+				$this->SetFont('Arial','B',15);
+				// Move to the right
+				$this->Cell(72);
+				// Title
+				$this->Cell(50,10,'Application Form',1,0,'C');
+				// Line break
+				$this->Ln(20);
+			}
+			
+			function Headertitle($title)
+			{
+				// Arial bold 15
+				$this->SetFont('Arial','B',12);
+				// Title
+				$this->Cell(30,6,$title,0);
+				// Line break
+				$this->Ln();
+			}
+			
+			// Page footer
+			function Footer()
+			{
+				// Position at 1.5 cm from bottom
+				$this->SetY(-15);
+				// Arial italic 8
+				$this->SetFont('Arial','I',8);
+				// Page number
+				$this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+			}
+			
+			// Simple Alignment
+			function Alignment($title,$value) {
+				$this->SetFont('Arial','',10);
+				$this->Cell(80,6,$title,0);
+				$this->Cell(80,6,$value,0); 
+				$this->Ln();
+			}
+		}
+
+		//File Location
+		$foldername = $_SESSION['stdfname'].$_SESSION['stdgname'].$_SESSION['stdid'];
+		$folder = "../../appformstudent/".$foldername."/";
+		
+		if (!file_exists($folder)) {
+			mkdir($folder, 0777, true);
+		}
+		
+		$pdf = new PDF();
+		$pdf->AliasNbPages();
+		$pdf->AddPage();
+		$pdf->SetFont('Times','',12);
+		
+		//Print Details		
+		$pdf->Headertitle('Personal Details');
+		$pdf->Alignment('USI:',$_POST['stdcode']);
+		$pdf->Alignment('Name:',$_POST['stdgname'].' '.$_POST['stdfname']);
+		$pdf->Alignment('Preffered Name:',$_POST['stdpname']);
+		$pdf->Alignment('Course:',$_POST['optcourse']);
+		$pdf->Alignment('Birthday:',$_POST['stdbth']);
+		$pdf->Alignment('Age:',$_POST['stdage']);
+		$pdf->Ln(5);
+		
+		$pdf->Headertitle('Residence');
+		$pdf->Alignment('Building/Property Name:',$_POST['stdbuildr']);
+		$pdf->Alignment('Flat/Unit details:',$_POST['stdflastr']);
+		$pdf->Alignment('Street/Lot number:',$_POST['stdstrnumr']);
+		$pdf->Alignment('Suburb/Locality/Town: ',$_POST['stdstater']);
+		$pdf->Alignment('Postal Code: ',$_POST['stdptlr']);
+        $pdf->Ln(5);
+		
+		$pdf->Headertitle('Postal Address');
+		$pdf->Alignment('Building/Property Name:',$_POST['stdbuildp']);
+		$pdf->Alignment('Flat/Unit details:',$_POST['stdflastp']);
+		$pdf->Alignment('Street/Lot number:',$_POST['stdstrnump']);
+		$pdf->Alignment('Suburb/Locality/Town: ',$_POST['stdsltp']);
+		$pdf->Alignment('Postal Code: ',$_POST['stdptlp']);
+		$pdf->Ln(5);
+		
+		$pdf->Headertitle('Phone and Contact details');
+		$pdf->Alignment('Home:',$_POST['stdhome']);
+		$pdf->Alignment('Work:',$_POST['stdwork']);
+		$pdf->Alignment('Mobile:',$_POST['stdmobile']);
+		$pdf->Alignment('Email: ',$_POST['stdemail']);
+		$pdf->Ln(5);
+		
+		$pdf->Headertitle('Emegency Contact');
+		$pdf->Alignment('Home:',$_POST['stdhomee']);
+		$pdf->Alignment('Work:',$_POST['stdworke']);
+		$pdf->Alignment('Mobile:',$_POST['stdmobilee']);
+		$pdf->Alignment('Email: ',$_POST['stdemaile']);
+		$pdf->Ln(5);
+		
+		$pdf->Headertitle('Language and Cultural Diversity');
+		
+		$country = CheckforOther(CheckforGET('stdlang'),
+		"Other",CheckforGET('stdstatep'));
+		
+		$languages = CheckforOther(CheckforGET('stdenghome'),
+		"Yes, Specify",CheckforGET('stdspecify'));
+		
+		$pdf->Alignment('Birthplace:',$country);
+		$pdf->Alignment('Languages:',$languages);
+		$pdf->Alignment('English:',CheckforGET('stdwelleng'));
+		$pdf->Alignment('Aboriginal/Torres Strait Islander origin: ',
+		CheckforGET('stdabotors'));
+		$pdf->Ln(5);
+		
+		$pdf->Headertitle('Individual Learning Needs');	
+		
+		$dis = CheckforGET('stddisabi');
+		
+		$pdf->Alignment('Disability, Impairment or long-term condition:',$dis);
+		
+		if ($dis == "Yes") {
+			$indicate = CheckforOther(CheckforGET('stdindicate'),"Other",
+			CheckforGET('stdotherdis'));
+			$pdf->Alignment('Indicate:',$dis);
+			$pdf->Alignment('Adjustment:',CheckforGET('stdadjustment'));
+		}
+		$pdf->Ln(5);
+		
+		$pdf->Headertitle('Education');	
+		$pdf->Alignment('Highest Completed School Level:',CheckforGET('stdhgcomschlvl'));
+		$pdf->Alignment('Year Completed:',CheckforGET('stdyearcomp'));
+		$sclvl = CheckforGET('stdsuccessqual');
+		$pdf->Alignment('Secondary level:',$sclvl);
+		if ($sclvl == "Yes") 
+			$pdf->Alignment('Indicate:',CheckforGET('scsscomp'));
+		$pdf->Ln(5);
+		
+		$pdf->Headertitle('Reason for study');
+		if (isset($_POST["reasonqual"]))
+			$reasonqual = $_POST["reasonqual"];
+		else
+			$reasonqual = array();
+		
+		$f = 1;
+		foreach($reasonqual as $val) {
+			if ($f == 1) {
+				$pdf->Alignment('List of reasons:',$val);
+				$f = 0;
+			}
+			else {
+				if ($val == "Other reason")
+					$pdf->Alignment('',CheckforGET('otherreasonstate'));
+				else
+					$pdf->Alignment('',$val);
+			}
+				
+		}
+		
+		$hearabout = CheckforGET('hearaboutcou');
+		
+		if ($hearabout == "Advertisement - where")
+			$hearf = $hearabout.": ".CheckforGET('advertisementwhe');
+		elseif ($hearabout == "Word of mouth - who")
+			$hearf = $hearabout.": ".CheckforGET('wordofmout');
+		elseif ($hearabout == "Other")
+			$hearf = CheckforGET('otherhear');
+		else
+			$hearf = $hearabout;
+
+		$pdf->Alignment('Hear about this course:',$hearf);
+		$pdf->Ln(5);
+		
+		$pdf->Headertitle('Current Employment Status');
+		$pdf->Alignment('Employment Status:',CheckforGET('stdcurempsts'));
+		$pdf->Alignment('Unemployment benefits with centrelink:'
+		,CheckforGET('stdbencen'));
+		$pdf->Ln(5);
+		
+		$pdf->Headertitle('Employer Details');
+		$pdf->Alignment('Company Name:',CheckforGET('empcomname'));
+		$pdf->Alignment('Contact Name:',CheckforGET('empcntname'));
+		$pdf->Alignment('Address:',CheckforGET('empaddr'));
+		$pdf->Alignment('Suburb:',CheckforGET('empsuburb'));
+		$pdf->Alignment('Phone:',CheckforGET('empphone'));
+		$pdf->Alignment('Email:',CheckforGET('empemail'));
+		$pdf->Ln(5);
+		
+		$pdf->Headertitle('Apprenticeships and Traineeships');
+		$pdf->Alignment('Apprenticeships and Traineeships:',CheckforGET('apprentrain'));
+		$pdf->Alignment('Start Date:',CheckforGET('strdateemp'));
+		$pdf->Alignment('Job Title',CheckforGET('empjobtitle'));
+		$pdf->Alignment('Hours per week:',CheckforGET('emphrperweek'));
+		$pdf->Ln(5);
+		
+		$pdf->Headertitle('Recognition of Prior Learning/Credit');
+		$pdf->Alignment('RPL or credit transfer:',CheckforGET('recgprlrcr'));
+		$pdf->Ln(5);
+		
+		$pdf->Headertitle('Jobseekers Seeking Concession');
+		$pdf->Alignment('Job Search Agency:',CheckforGET('jobsrchagen'));
+		$pdf->Alignment("Employment Co-ordinator's Name:",CheckforGET('emocorname'));
+		$pdf->Alignment('Suburb:',CheckforGET('jobskrsuburb'));
+		$pdf->Alignment('Landline:',CheckforGET('jobskrlandline'));
+		$pdf->Alignment('Mobile:',CheckforGET('jobskrmobile'));
+		$pdf->Alignment('Start Date:',CheckforGET('jobskremail'));
+		$pdf->Alignment('JSA Client Group:',CheckforGET('jbaclient'));
+		$jobfee = CheckforGET('jbsrcagencypart');
+		$pdf->Alignment('Job Search Agency Fees:',$jobfee);
+		$pdf->Ln(5);
+		
+		$pdf->Headertitle('Course Fee');
+		$pdf->Alignment('Payment Type:',CheckforGET('paymenttype'));
+		$pdf->Alignment('Student Name:',CheckforGET('stdnamefee'));
+		$pdf->Alignment('Third Party Representative Name:',
+		CheckforGET('thrdpartrep'));
+		$pdf->Alignment('Third, the invoice is to be made out to:',
+		CheckforGET('thrdparinv'));
+		$pdf->Ln(5);
+		$pdf->Headertitle('Credit Card');
+		$pdf->Alignment('Card Type:',CheckforGET('crdtype'));
+		$pdf->Alignment('Card Number:',CheckforGET('crdnum'));
+		$pdf->Ln(5);
+		
+		$pdf->Headertitle('Centrelink Details');
+		$allow = CheckforGET('regcenallow');
+		$pdf->Alignment('Centrelink Allowances:',$allow);
+		$pdf->Alignment('Allowances:',CheckforGET('allowyes'));
+		$pdf->Alignment('Reference Number:',CheckforGET('refnum'));
+		$pdf->Alignment('VET Number:',CheckforGET('vetnum'));
+		$pdf->Ln(5);
+		
+		$pdf->Output('F',$folder."appform.pdf");
+	}
 ?>

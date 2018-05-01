@@ -44,33 +44,25 @@
 				title="Add Student" >
 				<i class="fa fa-user-plus"></i></a>
 			
-			<!-- Search -->
-			<button type="submit" id="searchid" 
-				class="w3-bar-item w3-button w3-blueh w3-hover-green w3-right"
-				value="search" title="Search Student"
-				onclick="SearchBar();" >
-				<i id="searchic" class="fa fa-search"></i></button>
+			<!-- Search -->	
+			<form action="../student/" method="GET" >
+				<button type="submit" id="searchv"
+				class="w3-bar-item w3-button w3-blueh 
+				w3-hover-green w3-right"
+				value="search" title="Search">
+				<i class="fa fa-search"></i></button>
+				<input type="text" name="st"
+				class="w3-bar-item w3-input w3-right"
+				<?php 
+					if (isset($_GET['st']) && !empty($_GET['st'])) {
 					
-			<div id="divform" style="display:none;">
-				<form action="../student/" method="GET" >
-					<button type="submit" id="searchv"
-					class="w3-bar-item w3-button w3-blueh 
-					w3-hover-green w3-right"
-					value="search" title="Search">
-					<i class="fa fa-search"></i></button>
-					<input type="text" name="st"
-					class="w3-bar-item w3-input w3-right"
-					<?php 
-						if (isset($_GET['st']) && !empty($_GET['st'])) {
+						$search = $_GET['st'];
 						
-							$search = $_GET['st'];
-							
-							echo "Value='".$search,"' ";
-						
-						}
-					?>>
-				</form>
-			</div>
+						echo "Value='".$search,"' ";
+					
+					}
+				?> placeholder="Search Student..">
+			</form>
 			
 		</div>
 	</div>
@@ -112,23 +104,4 @@
 			
 		});
 		
-		function SearchBar() {
-			var btn = document.getElementById("searchid");
-			var divform = document.getElementById("divform");
-			var searchic = document.getElementById("searchic");
-			var searchid = document.getElementById("searchid");
-			
-			if (btn.value == "search") {
-				btn.value = "close";
-				divform.style.display="block";
-				searchic.classList.remove("fa-search");
-				searchic.classList.add("fa-close");
-			}
-			else {
-				btn.value = "search";
-				divform.style.display="none";
-				searchic.classList.remove("fa-close");
-				searchic.classList.add("fa-search");
-			}
-		}
 	</script>

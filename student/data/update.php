@@ -5,11 +5,11 @@
 		
 		include_once '../../link/code/fpdf.php';
 		//Personal
-		//personaldt();
-		//curempstatus();
+		personaldt();
+		curempstatus();
 		CreatePDF();
 		
-		/*	
+		
 		//Notification
 		$linkid = urlencode(base64_encode($_SESSION['stdid']));
 		$linkfn = urlencode(base64_encode($_GET['stdfname']));
@@ -27,7 +27,7 @@
 		}
 		else {
 			header("Location: ../studentdt.php?".$querystr."&s=success");
-		}*/
+		}
 	}
 	
 	/*phpinfo();*/
@@ -1258,7 +1258,7 @@
 		$f = 1;
 		foreach($reasonqual as $val) {
 			if ($f == 1) {
-				$pdf->Alignment('List of reason:',$val);
+				$pdf->Alignment('List of reasons:',$val);
 				$f = 0;
 			}
 			else {
@@ -1322,32 +1322,27 @@
 		$pdf->Alignment('Job Search Agency Fees:',$jobfee);
 		$pdf->Ln(5);
 		
-		if ($jobfee == "Yes") {
-			$pdf->Headertitle('Course Fee');
-			$pdf->Alignment('Payment Type:',CheckforGET('paymenttype'));
-			$pdf->Alignment('Student Name:',CheckforGET('stdnamefee'));
-			$pdf->Alignment('Third Party Representative Name:',
-			CheckforGET('thrdpartrep'));
-			$pdf->Alignment('Third, the invoice is to be made out to:',
-			CheckforGET('thrdparinv'));
-			$pdf->Ln(5);
-			$pdf->Headertitle('Credit Card');
-			$pdf->Alignment('Card Type:',CheckforGET('crdtype'));
-			$pdf->Alignment('Card Number:',CheckforGET('crdnum'));
-			$pdf->Ln(5);
-		}
+		$pdf->Headertitle('Course Fee');
+		$pdf->Alignment('Payment Type:',CheckforGET('paymenttype'));
+		$pdf->Alignment('Student Name:',CheckforGET('stdnamefee'));
+		$pdf->Alignment('Third Party Representative Name:',
+		CheckforGET('thrdpartrep'));
+		$pdf->Alignment('Third, the invoice is to be made out to:',
+		CheckforGET('thrdparinv'));
+		$pdf->Ln(5);
+		$pdf->Headertitle('Credit Card');
+		$pdf->Alignment('Card Type:',CheckforGET('crdtype'));
+		$pdf->Alignment('Card Number:',CheckforGET('crdnum'));
+		$pdf->Ln(5);
 		
 		$pdf->Headertitle('Centrelink Details');
 		$allow = CheckforGET('regcenallow');
-		$pdf->Alignment('Centrelink Allowances:',$allow);
-		if ($allow == "Yes") {
-			$pdf->Alignment('Allowances:',CheckforGET('allowyes'));
-			$pdf->Alignment('Reference Number:',CheckforGET('refnum'));
-			$pdf->Alignment('VET Number:',CheckforGET('vetnum'));
-		}
+		$pdf->Alignment('Centrelink Allowances:',$allow);{
+		$pdf->Alignment('Allowances:',CheckforGET('allowyes'));
+		$pdf->Alignment('Reference Number:',CheckforGET('refnum'));
+		$pdf->Alignment('VET Number:',CheckforGET('vetnum'));
 		$pdf->Ln(5);
 		
-		$pdf->Output();
-		//$pdf->Output('F',$folder."appform.pdf");
+		$pdf->Output('F',$folder."appform.pdf");
 	}
 ?>
