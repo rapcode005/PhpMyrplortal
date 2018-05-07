@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>MYRPLPORTAL</title>
+		<title>Edit Student Details</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="../link/css/style.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -19,55 +19,64 @@
 			
 			<!-- Home -->
 			<a href='../student/' class="w3-bar-item w3-button 
-			w3-blueh w3-hover-green" title="Home">
+			w3-blueh w3-hover-blueh w3-hover-green" title="Home">
 			<i class="fa fa-arrow-left">
 			</i></a> 
+			
+			<button class="w3-button w3-blueh 
+					w3-hover-green w3-hide-large w3-right" 
+					onclick="return baropen();">&#9776;</button>
+			
+			<div id="barmenu" 
+			class="w3-collapse w3-right w3-large w3-sidebar">
 
-			
-			<!-- Logout -->
-			<form action="../data/logout.php" method="POST" >
-				<button type="submit" name="submitlogout"
-				class="w3-bar-item w3-button
-				w3-blueh w3-hover-green w3-right" title="Logout" >
-				<i class="fa fa-sign-out"></i></button>
-			</form>			
-			
-			<!-- Notification -->
-			<div class="w3-dropdown-hover w3-blueh w3-right">
-				<button class="w3-button w3-blueh w3-hover-green">
-				<i class='fa fa-bell'><span id="bdnum" class="badge1"></i>
-				</button >
-				<div id="notify" class="w3-dropdown-content w3-bar-block w3-card-4" style="right:0">
-				</div>
-			</div>
-			
-
-			<!-- New Student -->
-			<a href="studentinfo.php?h=st"
-				class="w3-bar-item w3-button w3-blueh w3-hover-green w3-right"
-				title="Add Student" >
-				<i class="fa fa-user-plus"></i></a>
+				<button class="w3-button w3-blueh 
+				w3-hover-green w3-hide-large w3-right" 
+				onclick="return barclose();">&#9776;</button>
 				
-				<!-- Search -->
-			<form action="../student/" method="GET" >
-				<button type="submit" 
-				class="w3-bar-item w3-button w3-blueh w3-hover-green w3-right"
-				value="search" title="Search">
-				<i class="fa fa-search"></i></button>
-				<input type="text" name="st"
-				class="w3-bar-item w3-input w3-right"
-				<?php 
-					if (isset($_GET['st']) && !empty($_GET['st'])) {
+					<!-- Logout -->
+					<form action="../data/logout.php" method="POST" >
+						<button type="submit" name="submitlogout"
+						class="w3-bar-item w3-button 
+						w3-blueh w3-hover-green w3-right" 
+						title="Logout" >
+						<i class="fa fa-sign-out"></i></button>
+					</form>			
 					
-						$search = $_GET['st'];
+					<!-- Notification -->
+					<div class="w3-dropdown-hover w3-blueh w3-right">
+						<button class="w3-button w3-blueh w3-hover-green">
+						<i class='fa fa-bell'><span id="bdnum" class="badge1"></i>
+						</button >
+						<div id="notify" class="w3-dropdown-content w3-bar-block w3-card-4" 
+						style="right:0; position:fixed;">
+						</div>
+					</div>
+					
+					<!-- New Student -->
+					<a href="studentinfo.php?h=st"
+						class="w3-bar-item w3-button w3-blueh w3-hover-green w3-right"
+						title="Add Student" >
+						<i class="fa fa-user-plus"></i></a>
+				
+					<!-- Search -->	
+				<form action="../student/" method="GET" >
+					<input type="text" name="st" 
+					class="w3-bar-item w3-input" 
+					title="Press enter to search."
+					<?php 
+						if (isset($_GET['st']) && !empty($_GET['st'])) {
 						
-						echo "Value='".$search,"' ";
-					
-					}
-				?>
-				placeholder="Search Student..">
-			</form>
-			
+							$search = $_GET['st'];
+							
+							echo "Value='".$search,"' ";
+						
+						}
+					?> placeholder="Search Student.." />
+				</form>
+									
+			</div>
+	
 		</div>
 	</div>
 	<script>
@@ -106,4 +115,12 @@
 			}, 5000);
 			
 		});
+		function baropen() {
+			document.getElementById("barmenu").style.display = "block";
+			return false;
+		}
+		function barclose() {
+			document.getElementById("barmenu").style.display = "none";
+			return false;
+		}
 	</script>

@@ -118,8 +118,8 @@ font-family: Arial, Helvetica, sans-serif;">
 					?>
 					/><p>
 					<button type="submit" name="send" 
-					class="w3-blueh w3-hover-green w3-padding-large
-					w3-border w3-large w3-right">Send</button>
+					class="w3-blueh w3-hover-green w3-padding
+					w3-border w3-right">Send</button>
 					</p>
 				</form>
 			</p>

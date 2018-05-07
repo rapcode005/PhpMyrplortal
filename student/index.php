@@ -6,7 +6,7 @@
 	}
 ?>
 <br><br>
-<div class="w3-container">
+<div class="w3-main w3-container">
 	<p>
 		<?php
 			include_once '../link/message/prosucca.php';
@@ -100,7 +100,7 @@
 						echo "<tr>";
 						echo "<td>".$row['code']."</td><td>".$row['fname']."</td><td>".$row['gname']."</td><td>"
 						.$row['descrp']."</td><td>".date_format($date,"F d, Y")."</td><td><a 
-						class='w3-blueh w3-hover-green w3-padding w3-border' 
+						class='w3-blueh w3-hover-green w3-padding w3-border'  title='View the details'
 						href='studentdt.php?ptid=".$linkid."&fnm=".$linkfn."&gnm=".$linkgn."&h=st'>Summary</a></td>
 						</tr>";
 					}

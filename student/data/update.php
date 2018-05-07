@@ -1160,11 +1160,18 @@
 
 		//File Location
 		$foldername = $_SESSION['stdfname'].$_SESSION['stdgname'].$_SESSION['stdid'];
-		$folder = "../../appformstudent/".$foldername."/";
 		
-		if (!file_exists($folder)) {
-			mkdir($folder, 0777, true);
+		$folderlist = array("appformstudent","evidence","reference");
+		
+		foreach($folderlist as $appfolder) {
+			$folder = "../../".$appfolder."/".$foldername."/";
+		
+			if (!file_exists($folder)) {
+				mkdir($folder, 0777, true);
+			}
 		}
+		
+		$folder = "../../appformstudent/".$foldername."/";
 		
 		$pdf = new PDF();
 		$pdf->AliasNbPages();
@@ -1337,7 +1344,7 @@
 		
 		$pdf->Headertitle('Centrelink Details');
 		$allow = CheckforGET('regcenallow');
-		$pdf->Alignment('Centrelink Allowances:',$allow);{
+		$pdf->Alignment('Centrelink Allowances:',$allow);
 		$pdf->Alignment('Allowances:',CheckforGET('allowyes'));
 		$pdf->Alignment('Reference Number:',CheckforGET('refnum'));
 		$pdf->Alignment('VET Number:',CheckforGET('vetnum'));
@@ -1345,4 +1352,3 @@
 		
 		$pdf->Output('F',$folder."appform.pdf");
 	}
-?>

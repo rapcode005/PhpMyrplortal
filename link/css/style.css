@@ -43,3 +43,63 @@ button {
   transition: all 0.3 ease;
 }
 
+.searchtext {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    /*background-image: url('searchicon.png');*/
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.searchtext:focus {
+    width: 100%;
+}
+
+#barmenu {
+	width:324px;
+	right:0px;
+	height:42.5px;	
+}
+
+#barmenu input {
+	width:170px;
+}
+
+#barmenua {
+	width:270px;
+	right:0px;
+	height:42.5px;	
+}
+
+#barmenua input {
+	width:170px;
+}
+
+#barmenuu {
+	width:272px;
+	right:0px;
+	height:42.5px;	
+}
+
+#barmenuu input {
+	width:170px;
+}
+
+@media (max-width:993px) {
+	#barmenu {
+		width:370px!important;
+	}
+	#barmenua {
+		width:320px!important;
+	}
+	#barmenuu {
+		width:320px!important;
+	}
+}

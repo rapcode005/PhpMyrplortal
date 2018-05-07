@@ -7,6 +7,31 @@
 	include_once 'menuwithquerystr.php';
 ?>
 
+<!-- Download Button -->
+<div class="w3-bottom">
+	<div class="w3-display-bottomright w3-margin"
+		style="font-family: Arial, Helvetica, sans-serif;">
+		<?php
+			if (isset($_SESSION['u_r']) &&
+				$_SESSION['u_r'] =="admin") {
+					
+				//Decode
+				$id = base64_decode(urldecode($_GET['ptid']));
+				$fn = base64_decode(urldecode($_GET['fnm']));
+				$gn = base64_decode(urldecode($_GET['gnm']));	
+					
+				$url = "../appformstudent/".$fn.$gn.$id."/appform.pdf";
+				
+				echo "<a href='".$url."'
+				class='w3-blueh w3-hover-green w3-padding-large
+				w3-border w3-large' download
+				>Download</a>";
+				
+			}				
+		?>
+	</div>
+</div>
+
 <br><br>
 	
 <div class="w3-main w3-container w3-small" style="margin-top:16px; 

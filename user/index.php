@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>MYRPLPORTAL</title>
+		<title>Browse List of Users</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="../link/css/style.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -18,8 +18,7 @@
 	</head>
 <body>
 
-<header>
-	<div class="w3-top">
+<div class="w3-top">
 		<div class="w3-bar w3-blueh w3-border w3-large w3-mobile" 
 		style="font-family: Arial, Helvetica, sans-serif;">
 			
@@ -31,49 +30,56 @@
 			<!-- Switch student page -->
 			<?php
 				if (isset($_SESSION['u_r']) && $_SESSION['u_r'] =="admin") {
-					echo "<a href='../assessor/'
+					echo "<a href='../assessor/' title='Switch to Student Page'
 					class='w3-bar-item w3-button w3-hover-green w3-blueh'>
-					Switch to Student Page</a>";
+					Student Page</a>";
 				}
 			?>
 			
-			<!-- Logout -->
-			<form action='../data/logout.php' method='POST' >
-					<button type='submit' name='submitlogout'
-					class='w3-bar-item w3-button w3-button 
-					w3-blueh w3-hover-green w3-right' title='Logout'>
-					<i class='fa fa-sign-out'></i></button>
-			</form>
+
+			<button class="w3-button w3-blueh 
+				w3-hover-green w3-hide-large w3-right" 
+				onclick="return baropen();">&#9776;</button>
 			
-			<!-- New User -->
-			<button onclick="myFunction('signup')" type='submit'
-					class='w3-bar-item w3-button w3-blueh w3-hover-green w3-right'
-					title="Add User">
-			<i class="fa fa-user-plus"></i></button>
-			
-			<!-- Search -->	
-			<form action="../user/" method="GET" >
-				<button type="submit"
-				class="w3-bar-item w3-button w3-blueh 
-				w3-hover-green w3-right"
-				value="search" title="Search">
-				<i class="fa fa-search"></i></button>
-				<input type="text" name="st"
-				class="w3-bar-item w3-input w3-right"
-				<?php 
-					if (isset($_GET['st']) && !empty($_GET['st'])) {
+			<div id="barmenuu"
+			class="w3-collapse w3-large w3-sidebar ">
+				
+				<button class="w3-button w3-blueh 
+				w3-hover-green w3-hide-large w3-right" 
+				onclick="return barclose();">&#9776;</button>
+				
+				<!-- Logout -->
+				<form action='../data/logout.php' method='POST' >
+						<button type='submit' name='submitlogout'
+						class='w3-bar-item w3-button w3-button 
+						w3-blueh w3-hover-green w3-right' title='Logout'>
+						<i class='fa fa-sign-out'></i></button>
+				</form>
 					
-						$search = $_GET['st'];
+				<!-- New User -->
+				<button onclick="myFunction('signup')" type='submit'
+						class='w3-bar-item w3-button w3-blueh w3-hover-green w3-right'
+						title="Add User">
+				<i class="fa fa-user-plus"></i></button>
+				
+				<!-- Search -->	
+				<form action="../user/" method="GET" >
+					
+					<input type="text" name="st"
+					class="w3-bar-item w3-input" 
+					<?php 
+						if (isset($_GET['st']) && !empty($_GET['st'])) {
 						
-						echo "Value='".$search,"' ";
-					
-					}
-				?> placeholder="Search User..">
-			</form>
-			
+							$search = $_GET['st'];
+							
+							echo "Value='".$search,"' ";
+						
+						}
+					?> placeholder="Search User..">
+				</form>
+			</div>
 		</div>
 	</div>
-</header>
 <br><br>
 <div class="w3-container" 
 style="font-family: Arial, Helvetica, sans-serif;">
@@ -178,6 +184,14 @@ style="font-family: Arial, Helvetica, sans-serif;">
 		} else { 
 			x.className = x.className.replace(" w3-show", "");
 		}
+	}
+	function baropen() {
+		document.getElementById("barmenuu").style.display = "block";
+		return false;
+	}
+	function barclose() {
+		document.getElementById("barmenuu").style.display = "none";
+		return false;
 	}
 </script>
 </p>

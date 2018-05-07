@@ -782,11 +782,17 @@
 
 		//File Location
 		$foldername = $_SESSION['stdfname'].$_SESSION['stdgname'].$_SESSION['stdid'];
-		$folder = "../../appformstudent/".$foldername."/";
+		$folderlist = array("appformstudent","evidence","reference");
 		
-		if (!file_exists($folder)) {
-			mkdir($folder, 0777, true);
+		foreach($folderlist as $appfolder) {
+			$folder = "../../".$appfolder."/".$foldername."/";
+		
+			if (!file_exists($folder)) {
+				mkdir($folder, 0777, true);
+			}
 		}
+		
+		$folder = "../../appformstudent/".$foldername."/";
 		
 		$pdf = new PDF();
 		$pdf->AliasNbPages();
